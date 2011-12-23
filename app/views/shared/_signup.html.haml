@@ -1,0 +1,29 @@
+.five.columns#home_usp
+  %h2 
+    You train your clients - we'll manage them.
+
+  %ul 
+    %li Easily manage client bookings
+    %li Track and monitor client progress
+    %li Keep and reuse all your workouts 
+    %li Retain clients like never before
+
+.one.columns 
+
+.five.columns#home_signup
+  %h3
+    Start in minutes
+      
+    = simple_form_for @user do |f|
+
+      = f.error_notification
+
+      = f.input :username, :label => false, :placeholder => "User name", :maxlength => 30, :required => true
+
+      = f.input :email, :label => false, :placeholder => "Email", :required => true
+
+      = f.input :password, :label => false, :placeholder => "Password", :required => true
+
+      = f.input :password_confirmation, :label => false, :placeholder => "Password confirmation", :required => true
+
+      = f.button :submit, "Sign up free!", :class => "a medium"

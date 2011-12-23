@@ -1,0 +1,75 @@
+//
+// inputs
+//
+
+.simple_form #new_user {
+	background: black;
+}
+
+.simple_form input .button {
+	margin-left: 50px;
+}
+
+.simple_form .input {
+	padding: 7.5px 7.5px 7.5px 0px;
+}
+
+.simple_form .input #user_username  {
+	padding: 0.5em 0 0.5em 0.5em;
+}
+
+.simple_form .input #user_email  {
+	padding: 0.5em 0 0.5em 0.5em;
+}
+
+.simple_form .input #user_password  {
+	padding: 0.5em 0 0.5em 0.5em;
+}
+
+.simple_form .input #user_password_confirmation  {
+	padding: 0.5em 0 0.5em 0.5em;
+	margin-bottom: 10px;
+}
+
+input.signin_input {
+	padding: 0.2em;
+	margin: 1px;
+	float: left;
+	vertical-align: bottom;
+}
+
+//
+// buttons
+//
+
+input.button.a.small {
+	float: right;
+	background: #064780;
+	display: block;
+	height: 28px;
+	&:hover {
+		background: #c2d8ea;
+		color: #064780;
+	}
+}
+
+input.button.a.medium {
+	float: left;
+	background: #064780;
+	display: block;
+	margin-bottom: 2em;
+	&:hover {
+		background: #c2d8ea;
+		color: #064780;
+	}
+}
+
+a.signout {
+	float: right;
+	margin-top: 4em;
+	padding: 0 2em 0 2em;
+	&:hover {
+		background: #c2d8ea;
+		color: #ededf4;
+	}
+}

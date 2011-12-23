@@ -1,6 +1,11 @@
 Fitafy::Application.routes.draw do
+
+  resource :users#, :only => [:new, :create, :edit, :destroy]
+  resource :user_sessions#, :only => [:new, :create, :destroy] 
   
-    
+  match 'signin', :to => "user_sessions#new"
+  match 'signout', :to => "user_sessions#destroy"
+  
   get "pages/home"
   root :to => 'pages#home'
   

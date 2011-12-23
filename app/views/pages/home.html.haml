@@ -2,14 +2,9 @@
 
 .twelve.columns#home
 
-  -#.one.columns
+  - if current_user
+    Yo yo I'm a current user mon
 
-  .five.columns#home_usp
-    %h2 
-      You train your clients &amp; we'll manage them.
+  - else
+    = render 'shared/signup'
 
-    %ul 
-      %li Easily manage client bookings
-      %li Track and monitor client progress
-      %li Keep and reuse all your workouts 
-      %li Retain clients like never before

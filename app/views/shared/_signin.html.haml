@@ -1,0 +1,9 @@
+= simple_form_for @user_session do |f|
+
+  = f.error_notification
+
+  = f.input :username, :label => false, :placeholder => "User name", :required => true, :input_html => {:size => 15, :class => "signin_input"}
+
+  = f.input :password, :label => false, :placeholder => "Password", :required => true, :input_html => {:size => 15, :class => "signin_input"}
+
+  = f.button :submit, "Sign in", :class => "a small"

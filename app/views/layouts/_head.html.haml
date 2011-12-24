@@ -15,13 +15,13 @@
 -# Mobile viewport optimized: j.mp/bplateviewport
 %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }/
 
-= stylesheet_link_tag    "application"
-= javascript_include_tag "application"
+/ = stylesheet_link_tag    "application"
+/ = javascript_include_tag "application"
 
 -# Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons
 
--# Pass in a stylesheet_partial to render inside your head
-- if local_assigns[:stylesheet_partial]
-  = render :partial => local_assigns[:stylesheet_partial]
+/ -# Pass in a stylesheet_partial to render inside your head
+/ - if local_assigns[:stylesheet_partial]
+/   = render :partial => local_assigns[:stylesheet_partial]
 
 = csrf_meta_tag

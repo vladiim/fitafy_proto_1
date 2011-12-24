@@ -1,13 +1,12 @@
 footer {
+	background: #ededf4;
+	display: block;
+	height: 200px;
+	border-top: 7px solid #064780;
 	text-align: center;
 	margin: 20px auto 0 auto;
-	padding: 5px;
-}
-
-#footer a {
-	color: #064780;
-	&:hover {
-		background: #064780;
-		color: #c2d8ea;
+	.copyright {
+		padding-top: 1em;
 	}
 }
+

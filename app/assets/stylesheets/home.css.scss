@@ -19,24 +19,34 @@
 }
 
 
-h2 {
-	color: white;
+#home_usp h2 {
+	color: #ededf4;
 	padding-bottom: 0.5em;
 }
 
-h3 {
-	color: white;
+#home_usp h3 {
+	color: #ededf4;
 	padding: 0.5em 0 0 0;
 }
 
 #home_usp ul li {
-	color: white;
+	color: #ededf4;
 	list-style-type: circle;
 	list-style-position: inside;
 	padding-left: 1em;
 }
 
+#home_usp p {
+	color: #ededf4;
+	padding: 0.5em;
+}
+
 #home_signup {
 	background: hsla(0, 0, 0, 0.5);
 	padding-left: 1em;
+}
+
+#signup {
+	padding: 0.3em 0;
+	color: #ededf4;
 }

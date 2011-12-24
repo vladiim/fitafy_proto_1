@@ -6,4 +6,6 @@
 
   = f.input :password, :label => false, :placeholder => "Password", :required => true, :input_html => {:size => 15, :class => "signin_input"}
 
+  = link_to "Forgot password?", new_password_reset_path
+
   = f.button :submit, "Sign in", :class => "a small"

@@ -7,6 +7,7 @@ class UserMailer < ActionMailer::Base
   #
   #   en.user_mailer.password_reset.subject
   #
+  
   def password_reset(user)
     @email_link = edit_password_reset_url(user.perishable_token)
     sent_on       Time.now

@@ -1,4 +1,35 @@
+.simple_form #new_user {
+	background: black;
+}
 
- // Place all the styles related to the user controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.simple_form input .button {
+	margin-left: 50px;
+}
+
+.simple_form .input {
+	padding: 7.5px 7.5px 7.5px 0px;
+}
+
+.simple_form .input #user_username  {
+	padding: 0.5em 0 0.5em 0.5em;
+}
+
+.simple_form .input #user_email  {
+	padding: 0.5em 0 0.5em 0.5em;
+}
+
+.simple_form .input #user_password  {
+	padding: 0.5em 0 0.5em 0.5em;
+}
+
+.simple_form .input #user_password_confirmation  {
+	padding: 0.5em 0 0.5em 0.5em;
+	margin-bottom: 10px;
+}
+
+input.signin_input {
+	padding: 0.2em;
+	margin: 1px;
+	float: left;
+	vertical-align: bottom;
+}

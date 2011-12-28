@@ -1,3 +1,53 @@
-// Place all the styles related to the user_session controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// New
+
+#new_user_session {
+}
+
+#user_session_new_user_name {
+	margin: 30px 0 0 100px;
+	position: absolute;
+	padding: 0;
+	display: block;
+}
+
+#user_session_username {
+	padding: 4px;
+	font-size: 10px;
+	border-radius: 5px;	
+	display: inline-block;
+}
+
+#user_session_new_password {
+	margin: 30px 0 0 200px;
+	position: absolute;
+	padding: 0;
+	display: block;
+}
+
+
+#user_session_password {
+	padding: 4px;
+	font-size: 10px;
+	border-radius: 5px;	
+	display: inline-block;	
+}
+
+#user_session_new_submit {
+	margin: 35px 0 0 300px;
+	position: absolute;
+	padding: 0;
+	display: block;
+	.button.a.small {
+		padding: 0 10px 0 10px;
+	}
+}
+
+#forgot_password {
+	margin: 60px 0 0 205px;
+	position: absolute;
+	padding: 0;
+	display: block;
+	a {
+		font-size: 8px;
+	}
+}

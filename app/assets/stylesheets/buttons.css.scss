@@ -1,0 +1,31 @@
+input.button.a.small {
+	float: right;
+	background: #064780;
+	display: block;
+	height: 28px;
+	&:hover {
+		background: #c2d8ea;
+		color: #064780;
+	}
+}
+
+input.button.a.medium {
+	float: left;
+	background: #064780;
+	display: block;
+	margin-bottom: 2em;
+	&:hover {
+		background: #c2d8ea;
+		color: #064780;
+	}
+}
+
+a.signout {
+	float: right;
+	margin-top: 4em;
+	padding: 0 2em 0 2em;
+	&:hover {
+		background: #c2d8ea;
+		color: #ededf4;
+	}
+}

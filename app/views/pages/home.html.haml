@@ -3,7 +3,7 @@
 .twelve.columns#home
 
   - if current_user
-    Yo yo I'm a current user mon
+    = render 'shared/signed_in'
 
   - else
     .five.columns#home_usp

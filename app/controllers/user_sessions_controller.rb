@@ -6,15 +6,12 @@ class UserSessionsController < ApplicationController
 
   def create
     @user_session = UserSession.new(params[:user_session])
-    if @user_session.save 
-      UserSession.create @user # reason https://github.com/binarylogic/authlogic/issues/262#issuecomment-1804988
+    if @user_session.save  
       flash[:notice] = "Welcome back!"
-      redirect_to root_path
-    elsif @user_session.nil?
-      logger.debug "user_sessions is:" + @user_sessions.inspect
     else
-      render :new
+      flash[:error] = "Wrong email/password combination"
     end
+    redirect_to root_path
   end
 
   def destroy

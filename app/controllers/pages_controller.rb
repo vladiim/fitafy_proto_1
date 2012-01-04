@@ -3,11 +3,7 @@ class PagesController < ApplicationController
   
   def home
     @user = User.new
-    if current_user
-      @user_session = UserSession.find
-    else
-      @user_session = UserSession.new(params[:user_session])
-    end
+    @user_session = UserSession.new
   end
   
   protected

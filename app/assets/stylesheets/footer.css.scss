@@ -1,8 +1,10 @@
+@import "mixins";
+
 footer {
-	background: #ededf4;
+	background: $light_gray;
 	display: block;
 	height: 200px;
-	border-top: 7px solid #064780;
+	border-top: $fat_blue_border;
 	text-align: center;
 	margin: 20px auto 0 auto;
 	.copyright {

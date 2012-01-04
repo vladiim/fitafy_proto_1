@@ -1,22 +1,24 @@
+@import "mixins";
+
 input.button.a.small {
 	float: right;
-	background: #064780;
+	background: $dark_blue;
 	display: block;
 	height: 28px;
 	&:hover {
-		background: #c2d8ea;
-		color: #064780;
+		background: $gray_blue;
+		color: $dark_blue;
 	}
 }
 
 input.button.a.medium {
 	float: left;
-	background: #064780;
+	background: $dark_blue;
 	display: block;
 	margin-bottom: 2em;
 	&:hover {
-		background: #c2d8ea;
-		color: #064780;
+		background: $gray_blue;
+		color: $dark_blue;
 	}
 }
 
@@ -25,7 +27,7 @@ a.signout {
 	margin-top: 4em;
 	padding: 0 2em 0 2em;
 	&:hover {
-		background: #c2d8ea;
-		color: #ededf4;
+		background: $gray_blue;
+		color: $dark_blue;
 	}
 }

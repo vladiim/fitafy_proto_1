@@ -1,5 +1,6 @@
-#navigation {
-	background: #ededf4;
-	border-bottom: 7px solid #064780;
-}
+@import "mixins";
 
+#navigation {
+	background: $light_gray;
+	border-bottom: $fat_blue_border;
+}

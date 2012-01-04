@@ -1,7 +1,11 @@
-a {
-	color: #064780;
+@import "mixins";
+
+// LINKS
+
+ a{
+	color: $dark_blue;
 	&:hover {
-		background: #064780;
-		color: #c2d8ea;
+		background: $dark_blue;
+		color: $gray_blue;
 	}
 }

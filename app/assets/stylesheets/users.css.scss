@@ -1,3 +1,5 @@
+$sign_in_input: 0.5em 0 0.5em 0.5em;
+
 .simple_form #new_user {
 	background: black;
 }
@@ -11,19 +13,19 @@
 }
 
 .simple_form .input #user_username  {
-	padding: 0.5em 0 0.5em 0.5em;
+	padding: $sign_in_input;
 }
 
 .simple_form .input #user_email  {
-	padding: 0.5em 0 0.5em 0.5em;
+	padding: $sign_in_input;
 }
 
 .simple_form .input #user_password  {
-	padding: 0.5em 0 0.5em 0.5em;
+	padding: $sign_in_input;
 }
 
 .simple_form .input #user_password_confirmation  {
-	padding: 0.5em 0 0.5em 0.5em;
+	padding: $sign_in_input;
 	margin-bottom: 10px;
 }
 

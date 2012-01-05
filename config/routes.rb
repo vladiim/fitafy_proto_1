@@ -1,6 +1,6 @@
 Fitafy::Application.routes.draw do
 
-  resources :users, :only => [:new, :create, :edit, :destroy]
+  resources :users
   resources :user_sessions, :only => [:new, :create, :destroy] 
   resources :password_resets
   

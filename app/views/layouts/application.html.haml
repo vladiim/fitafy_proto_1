@@ -15,16 +15,19 @@
         .row
           .twelve.columns
             .one.columns
-      
-            .ten.columns
-              = render 'layouts/flashes'
+            
+            - if current_user
+              .ten.columns#main_background
+                = render 'layouts/flashes'
+                = yield
 
-            .ten.columns
-              =yield
+            - else
+              .ten.columns#sign_in_background
+                = render 'layouts/flashes'
+                = yield
 	
   %footer.container
     =render 'layouts/footer'
 	
-  -# = render 'layouts/javascripts'
 %br
 = debug(params) if Rails.env.development?

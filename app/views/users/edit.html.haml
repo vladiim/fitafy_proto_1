@@ -1,2 +1,16 @@
-%h1 User#edit
-%p Find me in app/views/user/edit.html.haml
+%h3#edit_user
+  Edit your profile
+     
+  = simple_form_for current_user do |f|
+
+    = f.error_notification
+
+    = f.input :username
+
+    = f.input :email
+
+    = f.input :password
+
+    = f.input :password_confirmation
+
+    = f.button :submit, "Update Details", :class => "a medium"

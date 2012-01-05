@@ -4,6 +4,19 @@
       .one.columns
       .four.columns
         = link_to logo, root_path
-    
-      .five.columns
-        = render 'shared/signin_signout'
+      
+      .six.columns
+        - if current_user
+          #account_signin
+            = link_to "My Account", edit_user_path(current_user)
+            |  
+            = link_to "Sign out", signout_path
+          %nav#main_nav
+            %ul
+              %li= link_to "Clients", "#"
+              %li= link_to "Bookings", "#"
+              %li= link_to "Workouts", "#"
+              %li= link_to "Contact", "#"
+
+        - else 
+          = render 'shared/signin'

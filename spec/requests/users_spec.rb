@@ -26,7 +26,18 @@ describe "Signups" do
     click_link "Sign out"
     current_path.should eq(root_path)
     page.should have_content("Start in minutes")
+    page.should have_content("Start in minutes")
     integration_sign_in(@trainer)
     page.should_not have_content("Start in minutes")
+  end
+  
+  it "can edit user details" do
+    integration_sign_up(@trainer)
+    click_link("My Account")
+    current_path.should eq(edit_user_path(@trainer))
+    fill_in "email", :with => "new_email@email.com"
+    click_button("Update Details")
+    current_path.should eq(edit_user_path(@trainer))
+    page.should have_content("Your details have been updated")
   end
 end

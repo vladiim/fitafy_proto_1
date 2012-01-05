@@ -1,13 +1,14 @@
 .row#homebreak
 
-.twelve.columns#home
+.twelve.columns
 
   - if current_user
     = render 'shared/signed_in'
 
   - else
-    .five.columns#home_usp
-      = render 'shared/home_usp'
+    #sign_in
+      .five.columns#home_usp
+        = render 'shared/home_usp'
 
-    .four.columns#home_signup
-      = render 'shared/signup'
+      .four.columns#home_signup
+        = render 'shared/signup'

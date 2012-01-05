@@ -1,6 +1,4 @@
-$base-font-family: unquote('sans-serif');  // default font-family
-
-$base-font-size: 16px;  // default font-size for YUI fonts
+@import "mixins";
 
 body h1 h2 h3 h4 h5 h6 p ul li {
 	font-family: Helvetica, Verdana, Arial, sans-serif;

@@ -1,0 +1,13 @@
+.three.columns
+  %table
+    %tr
+      %h4#user_side= current_user.username
+
+    %tr#clients_side
+      %td=link_to "Clients: number", "#"
+
+    %tr#bookings_side
+      %td=link_to "Bookings: number", "#"
+
+    %tr#workouts_side
+      %td=link_to "Workouts: number", "#"

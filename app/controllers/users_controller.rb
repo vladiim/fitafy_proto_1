@@ -13,8 +13,19 @@ class UsersController < ApplicationController
       render :new
     end
   end
-
+  
   def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      flash[:success] = "Your details have been updated"
+      redirect_to edit_user_path(current_user)
+    else
+      render :new
+    end
   end
 
   def destroy

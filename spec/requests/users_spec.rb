@@ -31,7 +31,7 @@ describe "Signups" do
     page.should_not have_content("Start in minutes")
   end
   
-  it "can edit user details" do
+  it "can edit my details" do
     integration_sign_up(@trainer)
     click_link("My Account")
     current_path.should eq(edit_user_path(@trainer))

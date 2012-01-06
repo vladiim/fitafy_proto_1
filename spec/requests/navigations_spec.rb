@@ -3,7 +3,8 @@ require 'spec_helper'
 describe "Navigations" do
   
   before (:each) do
-    @trainer = Factory(:user)
+    @trainer = Factory.build(:user)
+    @trainer.save_without_session_maintenance
     integration_sign_in(@trainer)
   end
   

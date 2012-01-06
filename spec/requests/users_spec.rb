@@ -4,16 +4,18 @@ describe "Signups" do
   
   before(:each) do
     @trainer = Factory.build(:user)
+    @trainer.save_without_session_maintenance
   end
   
   it "signs up as a new trainer from the homepage" do
-    integration_sign_up(@trainer)
+    integration_sign_in(@trainer)
     page.should have_content("Welcome")
     current_path.should eq(root_path)
   end
   
   it "incorrectly signs a user in" do
-    visit root_path
+    integration_sign_in(@trainer)
+    click_link "Sign out"
     fill_in "user_session_username", :with => "wrong"
     fill_in "user_session_password", :with => "wrong_again"
     click_button("Sign in")
@@ -22,22 +24,21 @@ describe "Signups" do
   end
   
   it "signs out then back in" do
-    integration_sign_up(@trainer)
+    integration_sign_in(@trainer)
     click_link "Sign out"
     current_path.should eq(root_path)
-    page.should have_content("Start in minutes")
     page.should have_content("Start in minutes")
     integration_sign_in(@trainer)
     page.should_not have_content("Start in minutes")
   end
   
   it "can edit my details" do
-    integration_sign_up(@trainer)
+    integration_sign_in(@trainer)
     click_link("My Account")
-    # current_path.should eq(edit_user_path(@trainer)) this fails in Rspec but works in the browser
+    current_path.should eq(edit_user_path(@trainer)) 
     fill_in "user_email", :with => "new_email@email.com"
     click_button("Update Details")
-    # current_path.should eq(edit_user_path(@trainer))
+    current_path.should eq(edit_user_path(@trainer))
     page.should have_content("Your details have been updated")
   end
 end

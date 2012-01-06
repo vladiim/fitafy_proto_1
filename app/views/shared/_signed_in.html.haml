@@ -1,4 +1,13 @@
 .nine.columns
-  Yo yo i'm in
+  %h4#title Create a booking
+
+.three.columns
+  %h6 Client
+
+  = simple_form_for current_user.relationships.build(:client => params[:user]) do |f|
+    
+    = f.error.notification    
+
+    = f.input :email
 
 = render "shared/user_side"

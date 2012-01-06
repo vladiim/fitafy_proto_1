@@ -15,4 +15,5 @@ module UserMacros
     fill_in "user_session_password", :with => user.password
     click_button("Sign in")
   end
+  
 end

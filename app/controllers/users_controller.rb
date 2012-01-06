@@ -2,10 +2,12 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    @user_session = UserSession.new
   end
   
   def create
     @user = User.new(params[:user])
+    @user_session = UserSession.new
     if @user.save      
       flash[:success] = "Welcome to fitafy!"
       redirect_to root_path

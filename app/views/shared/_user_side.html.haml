@@ -11,4 +11,4 @@
     %td=link_to "Bookings: number", "#"
 
   %tr#workouts_side
-    %td=link_to "Workouts: number", "#"
+    %td=link_to "Workouts: #{@user.workouts.count}", workouts_path(@user)

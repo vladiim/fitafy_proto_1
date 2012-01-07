@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   
   has_many :workouts, :dependent => :destroy
   
+  has_many :exercises, :dependent => :destroy
+  
   def train!(client)
     relationships.create!(:client_id => client.id)
   end

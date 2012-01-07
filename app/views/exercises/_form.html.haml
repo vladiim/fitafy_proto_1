@@ -1,0 +1,6 @@
+= simple_form_for @exercise do |f|
+  - f.error_notification
+  = f.input :title, :input_html => {:size => 50}, :placeholder => "Barbell Bench Press"
+  = f.input :description, :as => :text, :input_html => { :rows => 5 }, :placeholder => "Lie flat on the bench with the feet firmly pressing into the floor. Place your grip on the bar slightly wider than shoulder width. Remove the bar from the supports."
+
+  = f.button :submit, "#{@title}", :class => "a blue button"

@@ -13,3 +13,9 @@ Factory.define :workout do |workout|
   workout.sequence(:description) { |n| "#{n} Not for the feignt hearted" }
   workout.association :user
 end
+
+Factory.define :exercise do |exercise|
+  exercise.sequence(:title) { |n| "#{n} Bench Press"}
+  exercise.sequence(:description) { |n| "#{n} Do da bench press with your pectorials!!!" }
+  exercise.association :user
+end

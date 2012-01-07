@@ -36,4 +36,13 @@ describe User do
       Workout.find_by_id(@workout.id).should be_nil
     end
   end
+  
+  describe "exercises" do
+    
+    it "user should have an exercise attribute" do
+      @trainer.should respond_to(:exercises)
+    end
+    
+    it "should only allow admin users to create and update exercises" 
+  end
 end

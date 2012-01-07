@@ -15,6 +15,6 @@ describe "UserSideBars" do
     page.should have_content("#{@trainer.username}")
     page.should have_css("a", :text => "Clients: #{@trainer.training.count}")    
     page.should have_css("a", :text => "Bookings:")    
-    page.should have_css("a", :text => "Workouts:")                    
+    page.should have_css("a", :text => "Workouts: #{@trainer.workouts.count}")                    
   end
 end

@@ -10,6 +10,7 @@ Fitafy::Application.routes.draw do
   resources :password_resets
   resources :relationships, :only => [:create, :destroy]
   resources :workouts
+  resources :exercises
   
   match 'signin', :to => "user_sessions#new"
   match 'signout', :to => "user_sessions#destroy"

@@ -19,7 +19,7 @@ describe "Clients" do
     page.should have_content("Client removed")
   end
   
-  it "views a list of the trainers clients" do
+  it "views a list of the trainer's clients" do
     @trainer.train!(@client)     
     integration_sign_in(@trainer)    
     current_path.should eq(root_path)   

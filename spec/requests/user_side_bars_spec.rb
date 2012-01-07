@@ -4,7 +4,7 @@ describe "UserSideBars" do
   
   before(:each) do
     @trainer = Factory.build(:user)
-    @client = Factory(:user)
+    @client = Factory.build(:user)
     @trainer.save_without_session_maintenance
     @client.save_without_session_maintenance
     @trainer.train!(@client)

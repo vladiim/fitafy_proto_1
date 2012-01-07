@@ -1,3 +1,5 @@
+- @user ||= current_user
+
 .container
   .row
     .twelve.columns
@@ -8,12 +10,12 @@
       .six.columns
         - if current_user
           #account_signin
-            = link_to "My Account", edit_user_path(current_user)
+            = link_to "My Account", edit_user_path(@user)
             |  
             = link_to "Sign out", signout_path
           %nav#main_nav
             %ul
-              %li= link_to "Clients", "#"
+              %li= link_to "Clients", training_user_path(@user)
               %li= link_to "Bookings", "#"
               %li= link_to "Workouts", "#"
               %li= link_to "Contact", "#"

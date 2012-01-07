@@ -16,4 +16,9 @@ describe "Navigations" do
     page.should have_css("a", :text => "My Account")
     page.should have_css("a", :text => "Sign out")                
   end
+  
+  it "should lead to the right pages" do
+    click_link("Clients")
+    current_path.should eq(training_user_path(@trainer))
+  end
 end

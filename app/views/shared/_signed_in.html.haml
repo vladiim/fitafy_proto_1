@@ -3,8 +3,8 @@
 .three.columns
   %h6 Client
 
-  / = simple_form_for current_user.relationships.build(:client => params[:user]) do |f|
-  /   
-  /   = f.error.notification    
+  / = simple_form_for @booking do |f|
   / 
-  /   = f.input :email
+  /     = f.error_notification
+  / 
+  /     = f.input :clients, "Current clients", :collection => @user.training

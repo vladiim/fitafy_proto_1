@@ -1,0 +1,8 @@
+%ul
+  %li
+    %h6= link_to "#{workout.title}", workout_path(workout)
+    = link_to "Create Booking", "#"
+    |
+    = link_to "x Exercises", "#"
+    |
+    = link_to "Delete Workout", workout_path(workout), :method => :delete, :alert => "Are you sure you want to delete this workout?"

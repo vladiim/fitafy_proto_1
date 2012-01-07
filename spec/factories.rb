@@ -7,3 +7,9 @@ Factory.define :user do |user|
    user.password "password"
    user.password_confirmation "password"
 end
+
+Factory.define :workout do |workout|
+  workout.sequence(:title) { |n| "#{n} Da heaps Hardcore Workout"}
+  workout.sequence(:description) { |n| "#{n} Not for the feignt hearted" }
+  workout.association :user
+end

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :reverse_relationships, :class_name => "Relationship", :foreign_key => "client_id", :dependent => :destroy
   has_many :trained_by, :through => :reverse_relationships, :source => :trainer
   
+  has_many :workouts, :dependent => :destroy
+  
   def train!(client)
     relationships.create!(:client_id => client.id)
   end

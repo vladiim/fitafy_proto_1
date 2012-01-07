@@ -9,8 +9,7 @@ describe "Clients" do
   end
   
   it "trains! and untrains! a client who is in the system" do
-    integration_sign_in(@trainer)
-    page.should have_content("Create a booking")
+    integration_sign_in(@trainer) 
     visit user_path(@client)
     page.should have_content("#{@client.username}")    
     click_button("Add client")

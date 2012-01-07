@@ -1,0 +1,6 @@
+= simple_form_for @workout do |f|
+  - f.error_notification
+  = f.input :title, :input_html => {:size => 50}, :placeholder => "The Big Bad Workout"
+  = f.input :description, :as => :text, :input_html => { :rows => 5 }, :placeholder => "Not for the feint-hearted... heavy, sweaty, meaty, wolfy!"
+
+  = f.button :submit, "#{@title}", :class => "a blue button"

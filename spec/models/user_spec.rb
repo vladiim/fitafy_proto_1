@@ -8,16 +8,32 @@ describe User do
     @trainer.train!(@client)
   end
   
-  it "should be training? a trained! @client" do
-    @trainer.should be_training(@client)
+  describe "trainer and client relationships" do
+    
+    it "should be training? a trained! @client" do
+      @trainer.should be_training(@client)
+    end
+
+    it "should not be training? an untrained! client" do
+      @trainer.untrain!(@client)
+      @trainer.should_not be_training(@client)
+    end
+
+    it "clients should be trained_by a trainer" do
+      @client.should be_trained_by(@trainer)
+    end    
   end
   
-  it "should not be training? an untrained! client" do
-    @trainer.untrain!(@client)
-    @trainer.should_not be_training(@client)
-  end
-  
-  it "clients should be trained_by a trainer" do
-    @client.should be_trained_by(@trainer)
+  describe "workouts" do
+    
+    it "should have a workouts attribute" do
+      @trainer.should respond_to(:workouts)
+    end
+    
+    it "should destroy a workout if the user is destroyed" do
+      @workout = Factory(:workout, :user => @trainer)
+      @trainer.destroy
+      Workout.find_by_id(@workout.id).should be_nil
+    end
   end
 end

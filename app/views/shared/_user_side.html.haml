@@ -12,3 +12,6 @@
 
   %tr#workouts_side
     %td=link_to "Workouts: #{@user.workouts.count}", workouts_path(@user)
+
+  %tr#exercises_side
+    %td=link_to "Exercises: #{Exercise.count}", exercises_path

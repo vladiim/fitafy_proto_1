@@ -1,2 +1,7 @@
-%h1 Excercises#show
-%p Find me in app/views/excercises/show.html.haml
+%h4 
+  = @exercise.title
+
+= link_to "Edit Exercise", edit_exercise_path(@exercise)
+
+%p
+  = @exercise.description

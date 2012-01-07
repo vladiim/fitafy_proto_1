@@ -1,2 +1,5 @@
-%h1 Excercises#index
-%p Find me in app/views/excercises/index.html.haml
+%h4 Exercises
+
+= link_to "Create Exercise", new_exercise_path
+
+= render @exercises

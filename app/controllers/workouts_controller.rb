@@ -21,8 +21,8 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    @title = "Workout"
     @workout = current_user.workouts.find(params[:id])
+    @title = "#{@workout.title}"
   end
 
   def edit

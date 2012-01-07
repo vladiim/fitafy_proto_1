@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111221090152) do
+ActiveRecord::Schema.define(:version => 20120106050616) do
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "trainer_id"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["client_id"], :name => "index_relationships_on_client_id"
+  add_index "relationships", ["trainer_id", "client_id"], :name => "index_relationships_on_trainer_id_and_client_id", :unique => true
+  add_index "relationships", ["trainer_id"], :name => "index_relationships_on_trainer_id"
 
   create_table "users", :force => true do |t|
     t.string   "username",          :null => false

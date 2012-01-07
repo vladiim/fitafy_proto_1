@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     @user_session = UserSession.new
   end
   
+  def show
+    @user = User.find(params[:id])
+  end
+    
   def create
     @user = User.new(params[:user])
     @user_session = UserSession.new
@@ -32,5 +36,16 @@ class UsersController < ApplicationController
 
   def destroy
   end
-
+  
+  def training
+    @title = "Clients"
+    @user = User.find(params[:id])
+    @clients = @user.training.paginate(:page => params[:page], :per_page => 10)
+  end
+  
+  def trained_by
+    @title = "Trainers"
+    @user = User.find(params[:id])
+    @trainers = @user.trained_by.paginate(:page => params[:page], :per_page => 10)
+  end
 end

@@ -18,8 +18,11 @@
             
             - if current_user
               .ten.columns#main_background
-                = render 'layouts/flashes'
-                = yield
+                .nine.columns
+                  = render 'layouts/flashes'
+                  = yield
+                .three.columns
+                  = render 'shared/user_side'
 
             - else
               .ten.columns#sign_in_background

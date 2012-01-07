@@ -1,13 +1,14 @@
-.three.columns
-  %table
-    %tr
-      %h4#user_side= current_user.username
+- @user ||= current_user
 
-    %tr#clients_side
-      %td=link_to "Clients: number", "#"
+%table
+  %tr
+    %h4#user_side= @user.username
 
-    %tr#bookings_side
-      %td=link_to "Bookings: number", "#"
+  %tr#clients_side
+    %td=link_to "Clients: #{@user.training.count}", training_user_path(@user)
 
-    %tr#workouts_side
-      %td=link_to "Workouts: number", "#"
+  %tr#bookings_side
+    %td=link_to "Bookings: number", "#"
+
+  %tr#workouts_side
+    %td=link_to "Workouts: number", "#"

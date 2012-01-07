@@ -1,0 +1,12 @@
+%h4 Clients
+
+- if @clients.empty?
+  %p 
+    You have no clients yet
+    = link_to "Add some", "#"  
+
+- else
+  = will_paginate @clients
+  %table
+    = render @clients
+  = will_paginate @clients

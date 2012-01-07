@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_filter :auth_url if Rails.env.production?
   
   def home
-    @user = User.new
+    @user = User.new if current_user.nil?
     @user_session = UserSession.new
   end
   

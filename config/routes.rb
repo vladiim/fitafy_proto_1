@@ -1,8 +1,14 @@
 Fitafy::Application.routes.draw do
 
-  resources :users
+  resources :users do
+    member do
+      get :training, :trained_by
+    end
+  end
+  
   resources :user_sessions, :only => [:new, :create, :destroy] 
   resources :password_resets
+  resources :relationships, :only => [:create, :destroy]
   
   match 'signin', :to => "user_sessions#new"
   match 'signout', :to => "user_sessions#destroy"

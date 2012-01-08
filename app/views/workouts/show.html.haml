@@ -5,3 +5,7 @@
 
 %p
   = @workout.description
+
+%p
+  - @workout.exercises.each do |exercise|
+    = exercise.title

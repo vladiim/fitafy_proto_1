@@ -8,8 +8,7 @@ describe "Workouts" do
     integration_sign_in(@trainer)
     @workout_title = "Da heaps Hardcore Workout"
     @workout_description = "Not for the feignt hearted"
-    @excercise_title = "Squats"
-    @excercise_description = "Go up and down with a weight on your back"
+    @exercise = Factory(:exercise, :user_id => @trainer.id)    
   end
   
   it "creates a new workout and adds and excercise" do
@@ -18,13 +17,12 @@ describe "Workouts" do
     click_link("Create Workout")
     fill_in "workout_title", :with => @workout_title
     fill_in "workout_description", :with => @workout_description
-    # fill_in "excercise_title", :with => @excercise_title
-    # fill_in "excercise_description", :with => @excercise_description    
-    # click_link("Add excercise")
+    check("#{@exercise.title}") 
     click_button("Create Workout")
     page.should have_content("New workout added!")
     current_path.should eq(workouts_path)
-    page.should have_css("a", :text => "#{@workout_title}")
+    click_link("#{@workout_title}")
+    page.should have_content("#{@exercise.title}")
   end
   
   describe "does stuff with a created workout" do

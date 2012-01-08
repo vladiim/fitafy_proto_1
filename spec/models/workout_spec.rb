@@ -9,22 +9,35 @@ describe Workout do
     }
   end
   
-  describe "user associations" do
+  describe "associations" do
     
     before(:each) do
       @workout = @trainer.workouts.create(@attr)
     end
     
-    it "workouts should respond to the user attribute" do
-      @workout.should respond_to(:user)
-    end
+    describe "user associations" do
     
-    it "should have the right associated user" do
-      @workout.user_id.should eq(@trainer.id)
-      @workout.user.should eq(@trainer)
+      it "workouts should respond to the user attribute" do
+        @workout.should respond_to(:user)
+      end
+    
+      it "should have the right associated user" do
+        @workout.user_id.should eq(@trainer.id)
+        @workout.user.should eq(@trainer)
+      end
+    end
+  
+    describe "exercise associations" do
+      
+      before(:each) do
+        @exercise = Factory(:exercise, :user_id => @trainer.id)
+      end
+      
+      it "should have an exercises attribute" do
+        @workout.should respond_to(:exercises)
+      end
     end
   end
-  
   describe "validations" do
     
     it "should require a user_id" do

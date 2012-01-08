@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120107200747) do
+ActiveRecord::Schema.define(:version => 20120108001643) do
 
   create_table "exercises", :force => true do |t|
     t.integer  "user_id"
@@ -24,6 +24,11 @@ ActiveRecord::Schema.define(:version => 20120107200747) do
   add_index "exercises", ["title"], :name => "index_exercises_on_title"
   add_index "exercises", ["user_id", "title"], :name => "index_exercises_on_user_id_and_title"
   add_index "exercises", ["user_id"], :name => "index_exercises_on_user_id"
+
+  create_table "exercises_workouts", :id => false, :force => true do |t|
+    t.integer "workout_id"
+    t.integer "exercise_id"
+  end
 
   create_table "relationships", :force => true do |t|
     t.integer  "trainer_id"

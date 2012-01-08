@@ -39,5 +39,16 @@ describe Exercise do
     end
   end    
   
-  it "should have creation validations!!!!!"
+  describe "validations" do
+    
+    it "should validate the presence of a title" do
+      @exercise = @trainer.exercises.create(@attr.merge(:title => ""))
+      @exercise.should be_invalid
+    end
+    
+    it "should validate the presence of a description" do
+      @exercise = @trainer.exercises.create(@attr.merge(:description => ""))
+      @exercise.should be_invalid
+    end
+  end
 end

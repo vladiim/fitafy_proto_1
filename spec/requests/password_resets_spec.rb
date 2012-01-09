@@ -3,8 +3,7 @@ require 'spec_helper'
 describe "Password Resets" do
   
   before(:each) do
-    @trainer = Factory.build(:user)
-    @trainer.save_without_session_maintenance
+    @trainer = new_trainer
     forgot_password(@trainer)
   end
   

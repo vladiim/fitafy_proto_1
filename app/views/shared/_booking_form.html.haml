@@ -1,0 +1,18 @@
+= simple_form_for @booking do |f|
+  = f.error_notification
+  
+  .three.columns 
+    = f.association :client, :collection => @user.training.collect{ |c| c.username }, :prompt => "Select current client"
+
+  .three.columns
+    = f.association :workout, :collection => @user.workouts.collect{ |w| w.title }, :prompt => "Select a workout"
+
+  .three.columns
+    = f.input :date_time, :input_html => { :maxlength => 10 }, :label => "Booking Details"
+
+  .row
+    .six.columns
+      = f.input :message, :as => :text
+    
+    .three.columns
+      = f.button :submit, "#{@title}"

@@ -3,10 +3,8 @@ require 'spec_helper'
 describe "UserSideBars" do
   
   before(:each) do
-    @trainer = Factory.build(:user)
-    @client = Factory.build(:user)
-    @trainer.save_without_session_maintenance
-    @client.save_without_session_maintenance
+    @trainer = new_trainer
+    @client = new_client
     @trainer.train!(@client)
     integration_sign_in(@trainer)
   end

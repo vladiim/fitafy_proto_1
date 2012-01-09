@@ -15,4 +15,16 @@ module UserMacros
     fill_in "user_session_password", :with => user.password
     click_button("Sign in")
   end
+  
+  def new_trainer
+    trainer = Factory.build(:user)
+    trainer.save_without_session_maintenance
+    trainer
+  end
+  
+  def new_client
+    client = Factory.build(:user)    
+    client.save_without_session_maintenance
+    client    
+  end
 end

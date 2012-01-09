@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe "Excerses" do
   before(:each) do
-    @trainer = Factory.build(:user)
-    @trainer.save_without_session_maintenance
+    @trainer = new_trainer
     integration_sign_in(@trainer)
     @exercise_title = "Dumbell Shoulder Press"
     @exercise_description = "Get two dumbells and press!"

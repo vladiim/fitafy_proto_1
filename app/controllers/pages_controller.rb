@@ -5,7 +5,9 @@ class PagesController < ApplicationController
     if current_user.nil?
       @user = User.new 
     else
+      @title = "Create Booking"
       @user = current_user
+      @booking = current_user.bookings.new
     end
     @user_session = UserSession.new
   end

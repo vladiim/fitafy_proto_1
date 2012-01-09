@@ -4,6 +4,7 @@ describe Workout do
   
   before(:each) do
     @trainer = Factory(:user)
+    @client = Factory(:user)
     @attr = { :title => "Workout 1",
               :description => "Workout Description"
     }
@@ -37,7 +38,19 @@ describe Workout do
         @workout.should respond_to(:exercises)
       end
     end
+    
+    describe "bookings associations" do
+      
+      before(:each) do
+        @booking = Factory(:booking, :trainer_id => @trainer.id, :client_id => @client.id)
+      end
+      
+      it "should have a booking attribute" do
+        @workout.should respond_to(:bookings)
+      end
+    end
   end
+  
   describe "validations" do
     
     it "should require a user_id" do

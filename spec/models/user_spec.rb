@@ -45,4 +45,11 @@ describe User do
     
     it "should only allow admin users to create and update exercises" 
   end
+  
+  describe "bookings" do
+    
+    it "should have a bookings method" do
+      @trainer.should respond_to(:bookings)
+    end
+  end
 end

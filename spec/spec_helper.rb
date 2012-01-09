@@ -39,8 +39,8 @@ Spork.prefork do
     config.infer_base_class_for_anonymous_controllers = false
 
     config.include(UserMacros)
-    
-    config.include(MailerMacros)    
+    config.include(MailerMacros) 
+    config.include(BookingMacros)   
   end
 end
 

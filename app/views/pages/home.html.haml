@@ -3,7 +3,8 @@
 .twelve.columns
 
   - if current_user
-    = render 'shared/signed_in'
+    %h4#title Create a booking
+    = render 'shared/booking_form'
 
   - else
     #sign_in

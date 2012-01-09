@@ -1,5 +1,10 @@
 class WorkoutsController < ApplicationController
-  
+
+  def index
+    @title = "Workouts"    
+    @workouts = current_user.workouts.all
+  end
+    
   def new
     @title = "Create Workout"
     @workout = current_user.workouts.new
@@ -13,11 +18,6 @@ class WorkoutsController < ApplicationController
     else
       render :new
     end
-  end
-  
-  def index
-    @title = "Workouts"    
-    @workouts = current_user.workouts.all
   end
 
   def show

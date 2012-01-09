@@ -3,8 +3,7 @@ require 'spec_helper'
 describe "Signups" do
   
   before(:each) do
-    @trainer = Factory.build(:user)
-    @trainer.save_without_session_maintenance
+    @trainer = new_trainer
   end
   
   it "signs up as a new trainer from the homepage" do

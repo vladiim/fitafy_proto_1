@@ -19,3 +19,11 @@ Factory.define :exercise do |exercise|
   exercise.sequence(:description) { |n| "#{n} Do da bench press with your pectorials!!!" }
   exercise.association :user
 end
+
+Factory.define :booking do |booking|
+  booking.sequence(:date_time) { |n| "#{n}.days.from_now" }
+  booking.association :trainer
+  booking.association :client
+  booking.association :workout
+  booking.sequence(:message) { |n| "#{n} message" }
+end

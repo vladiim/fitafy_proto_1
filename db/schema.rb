@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120108001643) do
+ActiveRecord::Schema.define(:version => 20120108090157) do
+
+  create_table "bookings", :force => true do |t|
+    t.integer  "trainer_id"
+    t.integer  "client_id"
+    t.datetime "date_time"
+    t.integer  "workout_id"
+    t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bookings", ["client_id"], :name => "index_bookings_on_client_id"
+  add_index "bookings", ["date_time"], :name => "index_bookings_on_date_time"
+  add_index "bookings", ["trainer_id"], :name => "index_bookings_on_trainer_id"
+  add_index "bookings", ["workout_id"], :name => "index_bookings_on_workout_id"
 
   create_table "exercises", :force => true do |t|
     t.integer  "user_id"

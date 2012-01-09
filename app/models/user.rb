@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   
   has_many :exercises, :dependent => :destroy
   
+  has_many :bookings, :foreign_key => "trainer_id"
+    
   def train!(client)
     relationships.create!(:client_id => client.id)
   end

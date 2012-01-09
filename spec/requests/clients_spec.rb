@@ -2,10 +2,8 @@ require 'spec_helper'
 
 describe "Clients" do
   before(:each) do
-    @trainer = Factory.build(:user)
-    @client = Factory.build(:user)
-    @trainer.save_without_session_maintenance
-    @client.save_without_session_maintenance
+    @trainer = new_trainer
+    @client = new_client
   end
   
   it "trains! and untrains! a client who is in the system" do

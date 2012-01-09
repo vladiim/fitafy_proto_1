@@ -3,8 +3,7 @@ require 'spec_helper'
 describe "Workouts" do
   
   before(:each) do
-    @trainer = Factory.build(:user)
-    @trainer.save_without_session_maintenance
+    @trainer = new_trainer
     integration_sign_in(@trainer)
     @workout_title = "Da heaps Hardcore Workout"
     @workout_description = "Not for the feignt hearted"

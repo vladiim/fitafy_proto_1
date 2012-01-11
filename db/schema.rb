@@ -16,7 +16,8 @@ ActiveRecord::Schema.define(:version => 20120108090157) do
   create_table "bookings", :force => true do |t|
     t.integer  "trainer_id"
     t.integer  "client_id"
-    t.datetime "date_time"
+    t.date     "wo_date"
+    t.time     "wo_time"
     t.integer  "workout_id"
     t.string   "message"
     t.datetime "created_at"
@@ -24,8 +25,9 @@ ActiveRecord::Schema.define(:version => 20120108090157) do
   end
 
   add_index "bookings", ["client_id"], :name => "index_bookings_on_client_id"
-  add_index "bookings", ["date_time"], :name => "index_bookings_on_date_time"
   add_index "bookings", ["trainer_id"], :name => "index_bookings_on_trainer_id"
+  add_index "bookings", ["wo_date"], :name => "index_bookings_on_wo_date"
+  add_index "bookings", ["wo_time"], :name => "index_bookings_on_wo_time"
   add_index "bookings", ["workout_id"], :name => "index_bookings_on_workout_id"
 
   create_table "exercises", :force => true do |t|

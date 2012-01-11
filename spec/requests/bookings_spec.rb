@@ -17,7 +17,7 @@ describe "Bookings" do
     page.should have_css("label", :text => "Client")
     select("#{@client.username}", :from => "booking_client_id")
     select("#{@workout.title}", :from => "booking_workout_id")
-    select("#{@month}", :from => "booking_date_time_2i")    
+    # select("#{@month}", :from => "booking_wo_date")    
     # check("Alive")
     click_button("Create Booking")
     page.should have_content("Booking created!")

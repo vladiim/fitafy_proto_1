@@ -8,7 +8,8 @@
     = f.association :workout, :collection => @user.workouts.collect{ |w| w.title }, :prompt => "Select a workout"
 
   .three.columns
-    = f.input :date_time, :input_html => { :maxlength => 10 }, :label => "Booking Details"
+    = f.input :wo_date, :input_html => { :maxlength => 10 }, :label => "Booking Date", :label => "Booking Date"
+    = f.input :wo_time, :label => "Booking Time"  
 
   .row
     .six.columns

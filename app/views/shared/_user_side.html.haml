@@ -1,17 +1,16 @@
 - @user ||= current_user
 
 %table
-  %tr
-    %h4#user_side= @user.username
+  %h4#user_side= @user.username
 
   %tr#clients_side
     %td=link_to "Clients: #{@user.training.count}", training_user_path(@user)
 
   %tr#bookings_side
-    %td=link_to "Bookings: number", "#"
+    %td=link_to "Bookings: #{@user.bookings.count}", bookings_path
 
   %tr#workouts_side
-    %td=link_to "Workouts: #{@user.workouts.count}", workouts_path(@user)
+    %td=link_to "Workouts: #{@user.workouts.count}", workouts_path
 
   %tr#exercises_side
     %td=link_to "Exercises: #{Exercise.count}", exercises_path

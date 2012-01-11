@@ -1,6 +1,7 @@
 %ul
   %li
-    %h6= link_to "#{booking.date_time.to_s(:booking_title)}", booking_path(booking)
+    %h6= link_to "Booking on #{booking.wo_date.to_s(:booking_date)} at #{booking.wo_time.to_s(:booking_time)}", booking_path(booking)
+
     = link_to "Create Booking", "#"
     |
     / = link_to "#{booking.workouts}", "#"

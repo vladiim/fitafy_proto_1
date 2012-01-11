@@ -1,7 +1,7 @@
-%h4= @booking.date_time.to_s(:booking_title)
+%h4= "Booking on #{booking_date(@booking)} at #{booking_time(@booking)}"
 
 %p
-  With <client here>
+  With client_username_here
 
 =link_to "Edit Booking", edit_booking_path(@booking)
 

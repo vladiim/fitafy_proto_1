@@ -21,7 +21,7 @@ Factory.define :exercise do |exercise|
 end
 
 Factory.define :booking do |booking|
-  booking.sequence(:date_time) { |n| "#{n}.days.from_now" }
+  booking.sequence(:wo_date) { |n| "#{n}.days.from_now" }
   booking.association :trainer
   booking.association :client
   booking.association :workout

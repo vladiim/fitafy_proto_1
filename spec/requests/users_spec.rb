@@ -14,7 +14,7 @@ describe "Signups" do
   
   it "incorrectly signs a user in" do
     integration_sign_in(@trainer)
-    click_link "Sign out"
+    click_link "Sign Out"
     fill_in "user_session_username", :with => "wrong"
     fill_in "user_session_password", :with => "wrong_again"
     click_button("Sign in")
@@ -24,7 +24,7 @@ describe "Signups" do
   
   it "signs out then back in" do
     integration_sign_in(@trainer)
-    click_link "Sign out"
+    click_link "Sign Out"
     current_path.should eq(root_path)
     page.should have_content("Start in minutes")
     integration_sign_in(@trainer)

@@ -13,7 +13,7 @@ describe "Navigations" do
     page.should have_css("a", :text => "Workouts")
     page.should have_css("a", :text => "Contact")
     page.should have_css("a", :text => "My Account")
-    page.should have_css("a", :text => "Sign out")                
+    page.should have_css("a", :text => "Sign Out")                
   end
   
   it "should lead to the right pages" do
@@ -26,7 +26,7 @@ describe "Navigations" do
     click_link("My Account")
     current_path.should eq(edit_user_path(@trainer))    
     click_link("Clients: 0")
-    current_path.should eq(clients_path)
+    current_path.should eq(training_user_path(@trainer))
     click_link("Bookings: 0")
     current_path.should eq(bookings_path)
     click_link("Workouts: 0")

@@ -1,5 +1,15 @@
 @import "mixins";
 
+input.button {
+	background: $dark_blue;
+	display: block;
+	margin: 0.5em;
+	&:hover {
+		background: $gray_blue;
+		color: $dark_blue;
+	}
+}
+
 input.button.a.small {
 	float: right;
 	background: $dark_blue;

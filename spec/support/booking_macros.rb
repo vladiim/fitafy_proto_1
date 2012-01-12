@@ -7,4 +7,9 @@ module BookingMacros
     select("#{client.username}", :from => "booking_client_id")  
     click_button("Create Booking")
   end
+  
+  def sign_in_visit_booking(trainer, booking)
+    integration_sign_in(trainer)      
+    visit booking_path(booking)      
+  end
 end

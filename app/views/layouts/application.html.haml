@@ -8,26 +8,24 @@
 
 %body
   
-  %section{ :class => "#{controller.controller_name}" }
-	
-    #main{ :role => 'main' }
-      .container
-        .row
-          .twelve.columns
-            .one.columns
-            
-            - if current_user
-              .ten.columns#main_background
-                .nine.columns
-                  = render 'layouts/flashes'
-                  = yield
-                .three.columns
-                  = render 'shared/user_side'
-
-            - else
-              .ten.columns#sign_in_background
-                = render 'layouts/flashes'
+  %section#main{ :role => 'main',:class => "#{controller.controller_name}" }
+    .container
+      .row
+        .twelve.columns
+          .one.columns
+          
+          - if current_user
+            %section.ten.columns#main_background
+              = render 'layouts/flashes'
+              .eight.columns
                 = yield
+              %aside.three.columns#user_side
+                = render 'shared/user_side'
+      
+          - else
+            = render 'layouts/flashes'
+            .ten.columns#sign_in_background
+              = yield
 	
   %footer.container
     =render 'layouts/footer'

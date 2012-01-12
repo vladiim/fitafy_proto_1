@@ -42,7 +42,7 @@ describe Workout do
     describe "bookings associations" do
       
       before(:each) do
-        @booking = Factory(:booking, :trainer_id => @trainer.id, :client_id => @client.id)
+        @booking = Factory(:booking, :trainer_id => @trainer.id, :client_id => @client.id, :wo_date => 1.week.from_now)
       end
       
       it "should have a booking attribute" do

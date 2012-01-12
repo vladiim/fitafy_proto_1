@@ -1,5 +1,11 @@
 @import "mixins";
 
+a#logo {
+	&:hover {
+		background: $see_through;
+	}
+}
+
 #navigation {
 	background: $light_gray;
 	border-bottom: $fat_blue_border;

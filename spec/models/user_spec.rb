@@ -43,7 +43,6 @@ describe User do
       @trainer.should respond_to(:exercises)
     end
     
-    it "should only allow admin users to create and update exercises" 
   end
   
   describe "bookings" do

@@ -12,8 +12,9 @@ class BookingsController < ApplicationController
   end
 
   def create
+    @title = "Create Booking"    
     @user = current_user
-    @booking = @user.bookings.create!(params[:booking])
+    @booking = @user.bookings.new(params[:booking])
     if @booking.save
       flash[:success] = "Booking created!"
       redirect_to booking_path(@booking)

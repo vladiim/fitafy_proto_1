@@ -1,7 +1,8 @@
-%h2= "Booking on #{booking_date(@booking)} at booking time"
+%h2= "Booking - #{@booking.booking_date}"
 
-%p
-  With client_username_here
+%p= "At #{@booking.booking_time}"
+
+%p With - client here
 
 =link_to "Edit Booking", edit_booking_path(@booking)
 

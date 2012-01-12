@@ -1,7 +1,7 @@
 - @user ||= current_user
 
-%table
-  %h4#user_side= @user.username
+%table#user_side_table
+  %h2= @user.username
 
   %tr#clients_side
     %td=link_to "Clients: #{@user.training.count}", training_user_path(@user)

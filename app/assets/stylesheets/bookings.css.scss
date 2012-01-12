@@ -3,6 +3,8 @@
 #booking_form {
 	background: $gray_blue;
 	padding: 1.5em;
+//	@include rounded_edge1;
+	border: solid 5px $dark_blue;	
 }
 
 textarea#booking_message {

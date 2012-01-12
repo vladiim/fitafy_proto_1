@@ -1,5 +1,9 @@
 @import "mixins";
 
+table#user_side_table {
+	width: 120px;
+}
+
 #clients_side {
 	background: $light_gray;
 }

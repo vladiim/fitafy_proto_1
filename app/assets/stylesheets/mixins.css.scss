@@ -7,3 +7,14 @@
 	-webkit-box-shadow: 0 5px 20px 0.5px black;
 	box-shadow:         0 5px 20px 0.5px black;
 }
+
+@mixin text_shadow1 {
+	text-shadow: -1px 1px 2.5px $light_gray;
+}
+
+@mixin rounded_edge1 {
+	-khtml-border-radius: 35px;
+	-moz-border-radius: 35px;
+	-webkit-border-radius: 35px;
+	border-radius: 35px;
+}

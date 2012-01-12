@@ -5,7 +5,7 @@ input.button {
 	display: block;
 	margin: 0.5em;
 	&:hover {
-		background: $gray_blue;
+		background: $light_gray;
 		color: $dark_blue;
 	}
 }
@@ -16,7 +16,7 @@ input.button.a.small {
 	display: block;
 	height: 28px;
 	&:hover {
-		background: $gray_blue;
+		background: $light_gray;
 		color: $dark_blue;
 	}
 }
@@ -27,7 +27,7 @@ input.button.a.medium {
 	display: block;
 	margin-bottom: 2em;
 	&:hover {
-		background: $gray_blue;
+		background: $light_gray;
 		color: $dark_blue;
 	}
 }

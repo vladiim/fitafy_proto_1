@@ -12,6 +12,10 @@
 	text-shadow: -1px 1px 2.5px $light_gray;
 }
 
+@mixin text_shadow2 {
+	text-shadow: -1px 1px 2.5px $dark_blue;
+}
+
 @mixin rounded_edge1 {
 	-khtml-border-radius: 35px;
 	-moz-border-radius: 35px;

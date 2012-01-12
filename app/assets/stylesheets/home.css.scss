@@ -14,24 +14,26 @@
 
 
 #home_usp h2 {
-	color: #ededf4;
+	color: $light_gray;
+	@include text_shadow2;	
 	padding-bottom: 0.5em;
 }
 
-#home_usp h3 {
-	color: #ededf4;
-	padding: 0.5em 0 0 0;
+h2#signup {
+	color: $light_gray;
+	@include text_shadow2;
+	padding-bottom: 0.5em;
 }
 
 #home_usp ul li {
-	color: #ededf4;
+	color: $light_gray;
 	list-style-type: circle;
 	list-style-position: inside;
 	padding-left: 1em;
 }
 
 #home_usp p {
-	color: #ededf4;
+	color: $light_gray;
 	padding: 0.5em;
 }
 

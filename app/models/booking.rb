@@ -7,5 +7,12 @@ class Booking < ActiveRecord::Base
   validates_presence_of :trainer_id, :on => :create, :message => "can't be blank"
   validates_presence_of :client_id, :on => :create, :message => "can't be blank"
   validates_presence_of :wo_date, :on => :create, :message => "can't be blank"
+
+  def booking_date
+    self.wo_date.strftime("%A %e %b")
+  end
   
+  def booking_time
+    self.wo_time.strftime("%I:%M %p")
+  end  
 end

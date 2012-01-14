@@ -1,11 +1,12 @@
 class ExercisesController < ApplicationController
-  
+    
   def index
+    @title = "Exercises"
     @exercises = Exercise.all
   end
 
   def new
-    @title = "Add New Exercise"
+    @title = "Create New Exercise"
     @exercise = current_user.exercises.new
   end
 

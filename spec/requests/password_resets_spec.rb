@@ -4,10 +4,10 @@ describe "Password Resets" do
   
   before(:each) do
     @trainer = new_trainer
-    forgot_password(@trainer)
   end
   
   it "sends an email with a link to reset the password" do
+    forgot_password(@trainer)    
     page.should have_content("Instructions to reset your password have been sent")
     last_email.to.should include(@trainer.email)
   end

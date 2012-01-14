@@ -1,7 +1,8 @@
 @import "mixins";
 
 table#user_side_table {
-	width: 120px;
+	width: 180px;
+	@include fat_border1;
 }
 
 #clients_side {
@@ -10,4 +11,11 @@ table#user_side_table {
 
 #workouts_side {
 	background: $light_gray;
+}
+
+a#user_side_username {
+	&:hover {
+		background: none;
+		color: $dark_blue;
+	}
 }

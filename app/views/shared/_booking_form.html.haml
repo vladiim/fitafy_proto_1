@@ -1,23 +1,21 @@
-#booking_form
+= simple_form_for @booking do |f|
 
-  = simple_form_for @booking do |f|
+  = f.error_notification
   
-    = f.error_notification
+  .row#booking_top_of_form
+    .three.columns#booking_form_client
+      = f.association :client, :collection => @user.training.collect{ |c| c.username }, :prompt => "Select client"
     
-    .row#booking_top_of_form
-      .three.columns#booking_form_client
-        = f.association :client, :collection => @user.training.collect{ |c| c.username }, :prompt => "Select client"
-      
-      .three.columns#booking_form_workout
-        = f.association :workout, :collection => @user.workouts.collect{ |w| w.title }, :prompt => "Select workout"
-      
-      .three.columns#booking_form_date
-        = f.input :wo_date, :as => :string, :input_html => { :class => 'date_picker' }, :label => "Date"
-        = f.input :wo_time, :label => "Booking Time"
-  
-    .row#booking_bottom_of_form
-      .six.columns
-        = f.input :message, :as => :text
-      
-      .three.columns
-        = f.button :submit, "#{@title}", :id => 'booking_submit' 
+    .three.columns#booking_form_workout
+      = f.association :workout, :collection => @user.workouts.collect{ |w| w.title }, :prompt => "Select workout"
+    
+    .three.columns#booking_form_date
+      = f.input :wo_date, :as => :string, :input_html => { :class => 'date_picker' }, :label => "Date"
+      = f.input :wo_time, :label => "Booking Time"
+
+  .row#booking_bottom_of_form
+    .six.columns
+      = f.input :message, :as => :text
+    
+    .three.columns
+      = f.button :submit, "#{@title}", :id => 'booking_submit' 

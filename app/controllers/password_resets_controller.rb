@@ -2,6 +2,7 @@ class PasswordResetsController < ApplicationController
   before_filter :load_user_using_perishable_token, :only => [:edit, :update]
   
   def new
+    @title = "Reset Password"
     @user_session = UserSession.new    
     render :new
   end

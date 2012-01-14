@@ -10,7 +10,7 @@ namespace :db do
 end
 
 def make_users
-  User.create!(:username => "Trainer",
+  User.create!(:username => "nipolic",
                :email => "trainer@email.com",
                :password => "password", 
                :password_confirmation => "password"
@@ -46,8 +46,10 @@ end
 def make_bookings
   users = User.all
   trainer = users.first 
-  clients = users[1..30]
-  clients.each do |client|
-    trainer.bookings.create(:client => client, :wo_date => 1.week.from_now, :wo_time => Time.now)
+  clients = users[2..30]
+  clients.each do |client, n|
+    n = 1
+    trainer.bookings.create(:client_id => client.id, :wo_date => n.days.from_now, :wo_time => n.hour.from_now)
+    n += 1
   end
 end

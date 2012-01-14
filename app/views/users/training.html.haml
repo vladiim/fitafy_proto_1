@@ -1,5 +1,3 @@
-%h4 Clients
-
 - if @clients.empty?
   %p 
     You have no clients yet
@@ -7,6 +5,7 @@
 
 - else
   = will_paginate @clients
+  %br
   %table
     = render @clients
   = will_paginate @clients

@@ -33,7 +33,7 @@ describe "Workouts" do
     it "visits a workout page" do
       visit workouts_path
       click_link("#{@workout.title}")
-      page.should have_css("h4", :text => "#{@workout.title}")
+      page.should have_css("h2", :text => "#{@workout.title}")
       page.should have_content("#{@workout.description}")
     end
     

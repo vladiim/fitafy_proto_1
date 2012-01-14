@@ -1,7 +1,8 @@
-%h2 Bookings
-
-= will_paginate @bookings
+/ - calendar_for @bookings do |calendar|
+/   / = calendar.head('mon', 'tue', 'wed', 'thur', 'fri', 'sat', 'sun')
+/   - calendar.day(:day_method => :wo_date) do |date, bookings|
+/     = date.day
+/     - bookings.each do |booking|
+/       = booking.client.username
 
 = render @bookings
-
-= will_paginate @bookings

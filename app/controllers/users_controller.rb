@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @title = @user.username
   end
     
   def create
@@ -21,6 +22,7 @@ class UsersController < ApplicationController
   end
   
   def edit
+    @title = "Update Profile"
     @user = current_user
   end
 

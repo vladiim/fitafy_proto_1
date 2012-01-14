@@ -1,7 +1,5 @@
 @import "colors";
 
-@import "layouts";
-
 @mixin glow1 {
 	-moz-box-shadow:    0 5px 20px 0.5px black;
 	-webkit-box-shadow: 0 5px 20px 0.5px black;
@@ -16,9 +14,19 @@
 	text-shadow: -1px 1px 2.5px $dark_blue;
 }
 
+@mixin fat_border1 {
+	border: solid 5px $dark_blue;
+}
+
 @mixin rounded_edge1 {
 	-khtml-border-radius: 35px;
 	-moz-border-radius: 35px;
 	-webkit-border-radius: 35px;
 	border-radius: 35px;
 }
+
+$fat_blue_border: 7px solid #064780;
+
+$base-line-height: 1.231;  // default line-height for YUI fonts
+
+$list-left-margin: 2em;  // left margin for ul an ol

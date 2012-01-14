@@ -27,15 +27,23 @@ describe "Bookings" do
   describe "does stuff with an exsisting booking" do
     
     before(:each) do
-      # integration_new_booking(@trainer, @client) need some testing majic for this to work 
-      @booking = @trainer.bookings.create(:client => @client, :workout => @workout, :wo_date => 1.week.from_now)      
+      @booking = @trainer.bookings.create(:client => @client, :workout => @workout, :wo_date => 1.day.from_now, :wo_time => Time.now)      
     end
     
     it "edits a booking from the booking page" do
       sign_in_visit_booking(@trainer, @booking)      
       click_link("Edit Booking")
       select("#{@new_workout.title}", :from => "booking_workout_id")
-      click_button("Update Booking")
+      click_button("Edit Booking")
+      page.should have_content("Booking updated")
+    end
+
+    it "edits a booking from the index page" do
+      integration_sign_in(@trainer)      
+      click_link("Bookings")
+      click_link("#{@booking.client.username}")
+      select("#{@new_workout.title}", :from => "booking_workout_id")
+      click_button("Edit Booking")
       page.should have_content("Booking updated")
     end
 

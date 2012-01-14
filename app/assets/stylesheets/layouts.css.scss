@@ -1,7 +1,7 @@
-// LAYOUT
+@import "mixins";
 
-$fat_blue_border: 7px solid #064780;
-
-$base-line-height: 1.231;  // default line-height for YUI fonts
-
-$list-left-margin: 2em;  // left margin for ul an ol
+#main_content {
+	background: $gray_blue;
+	padding: 1.5em;
+	@include fat_border1;
+}

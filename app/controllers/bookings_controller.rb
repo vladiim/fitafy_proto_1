@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   
   def index
     @title = "Bookings"
-    @bookings = current_user.bookings.paginate(:page => params[:page], :per_page => 10)
+    @bookings = current_user.bookings.all 
   end
   
   def new
@@ -11,8 +11,7 @@ class BookingsController < ApplicationController
     @booking = @user.bookings.new
   end
 
-  def create
-    @title = "Create Booking"    
+  def create 
     @user = current_user
     @booking = @user.bookings.new(params[:booking])
     if @booking.save
@@ -25,11 +24,13 @@ class BookingsController < ApplicationController
 
   def show
     @user = current_user
-    @booking = @user.bookings.find(params[:id])  
+    @booking = @user.bookings.find(params[:id]) 
+    @client = User.find(@booking.client_id)
+    @title = "Booking for: #{@client.username}"    
   end
 
   def edit
-    @title = "Update Booking"
+    @title = "Edit Booking"
     @user = current_user
     @booking = @user.bookings.find(params[:id])
   end

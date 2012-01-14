@@ -1,13 +1,10 @@
-.twelve.columns
+- if current_user
+  = render 'shared/booking_form'
 
-  - if current_user
-    %h2#title Create a booking
-    = render 'shared/booking_form'
+- else
+  #sign_in
+    .five.columns#home_usp
+      = render 'shared/home_usp'
 
-  - else
-    #sign_in
-      .five.columns#home_usp
-        = render 'shared/home_usp'
-
-      .four.columns#home_signup
-        = render 'shared/signup'
+    .four.columns#home_signup
+      = render 'shared/signup'

@@ -3,8 +3,7 @@
 .twelve.colums#sign_in
    
   .five.columns#home_usp
-    %h2
-      Reset your password
+    %h2= @title
 
     %p
       Just give us a valid user email and we'll send you instructions on how to reset it 
@@ -14,4 +13,4 @@
 
       = email_field_tag :email, params[:email], :placeholder => "Email", :size => 30, :id => "forgot_password_link_email"
 
-      = submit_tag "Update password", :class => "a medium button"
+      = submit_tag @title, :class => "a medium button", :id => "submit_reset_password"

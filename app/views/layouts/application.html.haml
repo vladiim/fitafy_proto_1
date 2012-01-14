@@ -17,8 +17,9 @@
           - if current_user
             %section.ten.columns#main_background
               = render 'layouts/flashes'
-              .eight.columns
-                = yield
+              .seven.columns
+                %h2#content_title= @title
+                #main_content= yield
               .three.columns#user_side
                 = render 'shared/user_side'
       

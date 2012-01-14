@@ -41,6 +41,7 @@ Spork.prefork do
     config.include(UserMacros)
     config.include(MailerMacros) 
     config.include(BookingMacros)   
+    config.include(ExerciseMacros)   
   end
 end
 

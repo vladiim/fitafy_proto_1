@@ -1,7 +1,9 @@
 %ul
   %li
     %h6= link_to "#{exercise.title}", exercise_path(exercise)
-    = link_to "Add To Workout", "#"
+    = link_to "Edit Exercise", edit_exercise_path(exercise)
+    |
+    = link_to "Add to Workout", "#"
     |
     = link_to "Create Booking", "#"
     |

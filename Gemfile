@@ -11,6 +11,7 @@ gem 'authlogic'
 gem 'will_paginate'
 gem 'simple_form'
 gem 'faker'
+gem 'table_builder'
 
 # Gems used only for assets and not required
 # in production environments by default.

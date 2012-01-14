@@ -42,7 +42,7 @@ describe "Workouts" do
       visit workout_path(@workout)
       click_link("Edit Workout")
       fill_in "workout_title", :with => @new_title
-      click_button("Update Workout")
+      click_button("Edit Workout")
       current_path.should eq(workout_path(@workout))
       page.should have_content("Workout updated!")
     end

@@ -44,12 +44,9 @@ def make_workouts
 end
 
 def make_bookings
-  users = User.all
-  trainer = users.first 
-  clients = users[2..30]
-  clients.each do |client, n|
-    n = 1
-    trainer.bookings.create(:client_id => client.id, :wo_date => n.days.from_now, :wo_time => n.hour.from_now)
+  trainer = User.first 
+  30.times do |n|
     n += 1
+    trainer.bookings.create(:client_id => n, :wo_date => n.days.from_now, :wo_time => n.hours.from_now)
   end
 end

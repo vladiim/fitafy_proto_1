@@ -26,7 +26,7 @@ class WorkoutsController < ApplicationController
   end
 
   def edit
-    @title = "Update Workout"
+    @title = "Edit Workout"
     @workout = current_user.workouts.find(params[:id])
   end
 
@@ -46,5 +46,4 @@ class WorkoutsController < ApplicationController
     flash[:success] = "Workout deleted"
     redirect_to workouts_path
   end
-
 end

@@ -10,12 +10,12 @@
       = f.association :workout, :collection => @user.workouts.collect{ |w| w.title }, :prompt => "Select workout"
     
     .three.columns#booking_form_date
-      = f.input :wo_date, :as => :string, :input_html => { :class => 'date_picker' }, :label => "Date"
-      = f.input :wo_time, :label => "Booking Time"
+      = f.input :wo_date, :as => :string, :input_html => { :class => 'date_picker' }, :label => "Date", :start_date => Time.now
+      = f.input :wo_time, :label => "Time", :time_separator => ""
 
   .row#booking_bottom_of_form
-    .six.columns
+    .five.columns
       = f.input :message, :as => :text
     
-    .three.columns
-      = f.button :submit, "#{@title}", :id => 'booking_submit' 
+    .four.columns
+      = f.button :submit, "#{@title}", :id => 'booking_submit', :class => "a small button"

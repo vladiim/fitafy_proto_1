@@ -1,5 +1,13 @@
 @import "mixins";
 
+#booking_form_client {
+	padding-right: 1.5em;
+}
+
+#booking_form_workout {
+	padding-right: 1.5em;
+}
+
 textarea#booking_message {
 	width: 200px;
 	height: 40px;
@@ -10,7 +18,9 @@ label#booking_label {
 }
 
 #booking_submit {
-	margin: 25px 20px;
+	position: absolute;
+	margin: 25px 0 0 100px;
+	padding: 0 15px;
 }
 
 #booking_bottom_of_form {
@@ -31,4 +41,9 @@ select#booking_client_id {
 
 #booking_form_date {
 	padding-left: 2em;
+}
+
+#booking_wo_time_5i {
+	position:absolute;
+	margin: -24.5px 0 0 60px;
 }

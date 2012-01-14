@@ -5,11 +5,11 @@ table#user_side_table {
 	@include fat_border1;
 }
 
-#clients_side {
-	background: $light_gray;
+tr:nth-child(odd) {
+	background: $gray_blue;
 }
 
-#workouts_side {
+tr:nth-child(even) {
 	background: $light_gray;
 }
 

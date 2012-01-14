@@ -27,4 +27,8 @@ describe "Clients" do
     page.should have_css("a", :text => "x Completed Bookings")     
     page.should have_css("a", :text => "x Uncompleted Bookings")     
   end
+  
+  it "adds a new client to the system" do
+    
+  end
 end

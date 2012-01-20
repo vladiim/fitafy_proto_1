@@ -13,16 +13,25 @@ def make_users
   User.create!(:username => "nipolic",
                :email => "trainer@email.com",
                :password => "password", 
-               :password_confirmation => "password"
+               :password_confirmation => "password",
+               :role => "trainer_role"
+  )
+  User.create!(:username => "admin",
+               :email => "admin@email.com",
+               :password => "password", 
+               :password_confirmation => "password",
+               :role => "trainer_role",
+               :admin => true
   )
   50.times do |n|
-    c_username = Faker::Name.first_name 
-    c_email = Faker::Internet.email
+    c_username = Faker::Name.first_name
+    c_email = "#{c_username}@email.com"
     password = "password"
     User.create!(:username => c_username,
                  :email => c_email,
                  :password => password,
-                 :password_confirmation => password
+                 :password_confirmation => password,
+                 :role => "client_role"
     )
   end
   

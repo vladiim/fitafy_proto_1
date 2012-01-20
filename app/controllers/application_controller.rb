@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user_session, :current_user
   
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Sorry! You can't access that page"
+    redirect_to root_url
+  end
+  
   private
    
     def current_user_session

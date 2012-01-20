@@ -87,6 +87,8 @@ SimpleForm.setup do |config|
 
   # Default size for text inputs.
   config.default_input_size = 30
+  
+  # config.form_class = nil 
 
   # When false, do not use translations for labels, hints or placeholders.
   # config.translate = true

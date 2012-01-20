@@ -1,13 +1,13 @@
-= simple_form_for @booking do |f|
+= simple_form_for @booking, :html => { :class => "custom" } do |f|
 
   = f.error_notification
-  
+
   .row#booking_top_of_form
     .three.columns#booking_form_client
-      = f.association :client, :collection => @user.training.collect{ |c| c.username }, :prompt => "Select client"
+      = f.association :client, :collection => current_user.training.collect { |c| [c.username, c.id] }, :prompt => "Select client"
     
     .three.columns#booking_form_workout
-      = f.association :workout, :collection => @user.workouts.collect{ |w| w.title }, :prompt => "Select workout"
+      = f.association :workout, :collection => @user.workouts.collect { |w| w.title }, :prompt => "Select workout"
     
     .three.columns#booking_form_date
       = f.input :wo_date, :as => :string, :input_html => { :class => 'date_picker' }, :label => "Date", :start_date => Time.now

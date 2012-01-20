@@ -51,4 +51,20 @@ describe User do
       @trainer.should respond_to(:bookings)
     end
   end
+  
+  describe "roles" do
+    
+    it "should have an admin attribute" do
+      @trainer.should respond_to(:admin)
+    end
+    
+    it "should default admin to false" do
+      @trainer.should_not be_admin
+    end
+    
+    it "should be able to change the user's admin status with toggle" do
+      @trainer.toggle!(:admin)
+      @trainer.should be_admin
+    end
+  end
 end

@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   
   def index
     @title = "Bookings"
-    @bookings = current_user.bookings.all 
+    @bookings = current_user.bookings.paginate(:page => params[:page], :per_page => 10) 
   end
   
   def new

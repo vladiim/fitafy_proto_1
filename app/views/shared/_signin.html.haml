@@ -1,6 +1,8 @@
 = simple_form_for @user_session do |f|
 
   = f.error_notification
+
+  / = f.input :role, :as => :hidden, :input_html => { :value => "trainer_role" }
   
   #user_session_new_user_name
     = f.input :username, :label => false, :placeholder => "User name", :required => true, :input_html => {:size => 15}

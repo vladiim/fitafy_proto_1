@@ -1,6 +1,7 @@
-= link_to "Edit Exercise", edit_exercise_path(@exercise)
+- if can? :update, @exercise
+  = link_to "Edit Exercise", edit_exercise_path(@exercise)
 
 %br
 %br
-%p
-  = @exercise.description
+
+%p= @exercise.description

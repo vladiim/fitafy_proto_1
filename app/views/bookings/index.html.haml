@@ -1,8 +1,24 @@
-- calendar_for @bookings do |calendar|
-  / = calendar.head('mon', 'tue', 'wed', 'thur', 'fri', 'sat', 'sun')
-  - calendar.day(:day_method => :wo_date) do |date, bookings|
-    = date.day
-    - bookings.each do |booking|
-      = booking.client.username
+/ - calendar_for @bookings do |calendar|
+/   / = calendar.head('mon', 'tue', 'wed', 'thur', 'fri', 'sat', 'sun')
+/   - calendar.day(:day_method => :wo_date) do |date, bookings|
+/     = date.day
+/     - bookings.each do |booking|
+/       = booking.client.username
 
-= render @bookings
+- if @bookings.empty?
+  %p
+    You have no bookings
+    = link_to "add some", root_path
+
+-else
+  
+  = link_to "Create New Booking", root_path
+
+  %br
+  %br
+
+  = will_paginate @bookings
+  %br
+
+  = render @bookings
+  = will_paginate @bookings

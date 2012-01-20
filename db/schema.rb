@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120108090157) do
+ActiveRecord::Schema.define(:version => 20120114101637) do
 
   create_table "bookings", :force => true do |t|
     t.integer  "trainer_id"
@@ -59,14 +59,16 @@ ActiveRecord::Schema.define(:version => 20120108090157) do
   add_index "relationships", ["trainer_id"], :name => "index_relationships_on_trainer_id"
 
   create_table "users", :force => true do |t|
-    t.string   "username",          :null => false
-    t.string   "email",             :null => false
-    t.string   "crypted_password",  :null => false
-    t.string   "password_salt",     :null => false
+    t.string   "username"
+    t.string   "email",                                :null => false
+    t.string   "crypted_password"
+    t.string   "password_salt"
     t.string   "persistence_token"
     t.string   "perishable_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role",                                 :null => false
+    t.boolean  "admin",             :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

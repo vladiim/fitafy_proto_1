@@ -12,7 +12,9 @@ class User < ActiveRecord::Base
   has_many :exercises, :dependent => :destroy
   
   has_many :bookings, :foreign_key => "trainer_id"
-    
+  
+  ROLES = %w[trainer_role client_role invited_role]
+   
   def train!(client)
     relationships.create!(:client_id => client.id)
   end
@@ -33,5 +35,8 @@ class User < ActiveRecord::Base
     reset_perishable_token!
     UserMailer.password_reset(self).deliver
   end
-    
+  
+  def role_symbols
+    [role.to_sym]
+  end
 end

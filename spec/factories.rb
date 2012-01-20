@@ -1,11 +1,12 @@
 require "authlogic/test_case"
 include Authlogic::TestCase
 
-Factory.define :user do |user|
-   user.sequence(:username)  { |n| "test_user_#{n}"}
-   user.sequence(:email)  { |n| "test_user_#{n}@email.com"}   
-   user.password "password"
-   user.password_confirmation "password"
+Factory.define :user do |trainer|
+   trainer.sequence(:username)  { |n| "test_user_#{n}"}
+   trainer.sequence(:email)  { |n| "test_user_#{n}@email.com"}   
+   trainer.password "password"
+   trainer.password_confirmation "password"
+   trainer.role "trainer_role"
 end
 
 Factory.define :workout do |workout|
@@ -21,9 +22,9 @@ Factory.define :exercise do |exercise|
 end
 
 Factory.define :booking do |booking|
-  booking.sequence(:wo_date) { |n| "#{n}.days.from_now" }
-  booking.association :trainer
-  booking.association :client
+  booking.trainer { |t| t.association(:user) }
+  booking.client { |c| c.association(:user) }    
+  booking.wo_date 3.days.from_now
   booking.association :workout
-  booking.sequence(:message) { |n| "#{n} message" }
+  booking.sequence(:message) { |n| "#{n} message for the #{n}th time broooo" }
 end

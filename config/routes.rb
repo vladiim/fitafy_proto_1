@@ -1,17 +1,5 @@
 Fitafy::Application.routes.draw do
 
-  get "bookings/new"
-
-  get "bookings/create"
-
-  get "bookings/show"
-
-  get "bookings/edit"
-
-  get "bookings/update"
-
-  get "bookings/destroy"
-
   resources :users do
     member do
       get :training, :trained_by

@@ -10,6 +10,7 @@ describe "Signups" do
     integration_sign_in(@trainer)
     page.should have_content("Welcome")
     current_path.should eq(root_path)
+    @trainer.role.should eq("trainer_role")
   end
   
   it "incorrectly signs a user in" do

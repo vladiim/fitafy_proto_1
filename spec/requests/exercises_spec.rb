@@ -2,23 +2,24 @@ require 'spec_helper'
 
 describe "Excerses" do
   before(:each) do
-    @trainer = new_trainer
+    @admin = new_admin
   end
   
   it "creates a new excercise only as an admin user" do
-    create_exercise(@trainer)
+    create_exercise(@admin)
     page.should have_content("New exercise added!")
-    current_path.should eq(exercises_path)
+    visit exercises_path
     page.should have_css("a", :text => "#{@exercise_title}")
   end
   
-  describe "does stuff with a created workout" do
+  describe "does stuff with a created exercise" do
     
     before(:each) do
-      @exercise = Factory(:exercise, :user_id => @trainer.id)
+      @trainer = new_trainer      
+      @exercise = Factory(:exercise, :user_id => @admin.id)
     end
     
-    it "visits an exercise page" do
+    it "visits an exercise page as a trainer" do
       integration_sign_in(@trainer)
       visit exercises_path
       click_link("#{@exercise.title}")
@@ -26,9 +27,9 @@ describe "Excerses" do
       page.should have_content("#{@exercise.description}")
     end
     
-    it "edits an exercise" do
+    it "edits an exercise as an admin" do
       @new_title = "Bench Prooos"
-      integration_sign_in(@trainer)
+      integration_sign_in(@admin)
       visit exercises_path
       click_link("Edit Exercise")
       fill_in "exercise_title", :with => @new_title
@@ -39,12 +40,23 @@ describe "Excerses" do
       current_path.should eq(edit_exercise_path(@exercise))
     end
     
-    it "deletes an exercise" do
-      integration_sign_in(@trainer)      
+    it "can't edit an exercise as a trainer" do
+      integration_sign_in(@trainer)
+      visit edit_exercise_path(@exercise)
+      page.should have_content("Sorry! You can't access that page")
+    end
+    
+    it "deletes an exercise as an admin" do
+      integration_sign_in(@admin)      
       visit exercises_path
       click_link("Delete Exercise")
       page.should have_content("Exercise deleted")
-      # page.should_not have_content("#{@exercise.title}") test not passing but working in browser???
     end
+
+    it "can't delete an exercise as a trainer" # do
+    #   integration_sign_in(@trainer)      
+    #   delete exercise_path(@exercise)
+    #   page.should have_content("Sorry! You can't access that page")      
+    # end
   end  
 end

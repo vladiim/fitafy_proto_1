@@ -18,13 +18,22 @@ module UserMacros
   
   def new_trainer
     trainer = Factory.build(:user)
+    trainer.role = "trainer_role"
     trainer.save_without_session_maintenance
     trainer
   end
   
   def new_client
-    client = Factory.build(:user)    
+    client = Factory.build(:user) 
+    client.role = "client_role"   
     client.save_without_session_maintenance
     client    
+  end
+  
+  def new_admin
+    admin = Factory.build(:user)
+    admin.save_without_session_maintenance    
+    admin.toggle!(:admin)
+    admin
   end
 end

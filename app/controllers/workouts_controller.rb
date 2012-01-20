@@ -2,7 +2,7 @@ class WorkoutsController < ApplicationController
 
   def index
     @title = "Workouts"    
-    @workouts = current_user.workouts.all
+    @workouts = current_user.workouts.paginate(:page => params[:page], :per_page => 10)
   end
     
   def new

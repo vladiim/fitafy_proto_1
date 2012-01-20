@@ -11,6 +11,19 @@ describe Ability do
     @booking = Factory(:booking, :trainer => @admin)
   end
   
+  describe "guest" do
+    
+    before(:each) do
+      @guest = nil
+      @guest_ability = Ability.new(@guest)      
+    end
+    
+    it "should be able to create a new user" do
+      @guest_ability.should be_able_to(:create, User)
+    end
+    
+  end
+  
   describe "admin" do
     
     before(:each) do

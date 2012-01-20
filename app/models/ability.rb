@@ -9,8 +9,13 @@ class Ability
        trainer_rules if @user.role == "trainer_role"
        client_rules if @user.role == "client_role"
     else
-      User.new
+      @guest = User.new
+      guest_rules
     end
+  end
+  
+  def guest_rules
+    can :create, User
   end
   
   def admin_rules

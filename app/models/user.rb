@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  
+  attr_accessbile :username, :email, :password, :password_confirmation, :role
+  
   acts_as_authentic 
   
   has_many :relationships, :foreign_key => "trainer_id", :dependent => :destroy

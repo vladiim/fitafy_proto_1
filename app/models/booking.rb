@@ -1,5 +1,7 @@
 class Booking < ActiveRecord::Base
   
+  attr_accessible :client_id, :wo_date, :wo_time, :workout_id, :message
+  
   belongs_to :trainer, :class_name => "User"
   belongs_to :client, :class_name => "User"
   belongs_to :workout, :class_name => "Workout", :foreign_key => "workout_id"

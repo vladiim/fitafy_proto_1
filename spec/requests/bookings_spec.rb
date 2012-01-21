@@ -20,14 +20,14 @@ describe "Bookings" do
     # check("Alive")
     # click_button("Create Booking")
     lambda do # selenium to select a jquery date until then use this shithouse test
-      @trainer.bookings.create(:client => @client, :workout => @workout, :wo_date => 1.week.from_now)
+      @trainer.bookings.create(:client_id => @client.id, :workout => @workout, :wo_date => 1.week.from_now)
     end.should change(Booking, :count).by(1)
   end
   
   describe "does stuff with an exsisting booking" do
     
     before(:each) do
-      @booking = @trainer.bookings.create(:client => @client, :workout => @workout, :wo_date => 1.day.from_now, :wo_time => Time.now)      
+      @booking = @trainer.bookings.create(:client_id => @client.id, :workout => @workout, :wo_date => 1.day.from_now, :wo_time => Time.now)      
     end
     
     it "edits a booking from the booking page" do

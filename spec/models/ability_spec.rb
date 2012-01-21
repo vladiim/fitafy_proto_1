@@ -50,15 +50,10 @@ describe Ability do
       
       it "should be able to manage it's own account" do
         @trainer_ability.should be_able_to(:manage, @trainer)
-      end
-      
+      end    
     end
     
     describe "exercises" do
-      
-      it "should be able to read exercises" do
-        @trainer_ability.should be_able_to(:read, @exercise)
-      end
 
       it "should be able to manage exercises for themselves" do
         @trainer_ability.should be_able_to(:manage, Factory(:exercise, :user => @trainer))
@@ -71,10 +66,6 @@ describe Ability do
     
     describe "workouts" do
       
-      it "should be able to read workouts" do
-        @trainer_ability.should be_able_to(:read, @workout)
-      end
-
       it "should be able to manage workouts for themselves" do
         @trainer_ability.should be_able_to(:manage, Factory(:workout, :user => @trainer))
       end
@@ -86,17 +77,6 @@ describe Ability do
     
     describe "bookings" do
       
-      # it "should not be able to read other people's bookings" do
-      #   @trainer_ability.should_not be_able_to(:read, @booking)
-      # end
-      # 
-      # it "should be able to manage bookings for themselves" do
-      #   @trainer_ability.should be_able_to(:manage, Factory(:booking, :user => @trainer))
-      # end
-      # 
-      # it "shouldn't be able to manage another trainer's booking" do
-      #   @trainer_ability.should_not be_able_to(:manage, @booking)
-      # end
     end
   end
   
@@ -112,8 +92,6 @@ describe Ability do
       it "should be able to view exercises" do
         @client_ability.should be_able_to(:read, @exercise)
       end
-
-      it "should only be able to view exercises belonging to them"
 
       it "should not be able to create exercises" do
         @client_ability.should_not be_able_to(:create, Exercise)
@@ -133,8 +111,6 @@ describe Ability do
       it "should be able to view workouts" do
         @client_ability.should be_able_to(:read, @workout)
       end
-
-      it "should only be able to view workouts belonging to them"
 
       it "should not be able to create exercises" do
         @client_ability.should_not be_able_to(:create, Workout)

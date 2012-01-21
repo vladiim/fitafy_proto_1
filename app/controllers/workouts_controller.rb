@@ -1,17 +1,19 @@
 class WorkoutsController < ApplicationController
+  load_and_authorize_resource :through => :current_user
 
   def index
-    @title = "Workouts"    
-    @workouts = current_user.workouts.paginate(:page => params[:page], :per_page => 10)
+    @title = "Workouts"        
+    if current_user.workouts.empty?
+      redirect_to new_workout_path 
+      flash[:message] = "You have no workouts, why not make some?" 
+    end
   end
     
   def new
     @title = "Create Workout"
-    @workout = current_user.workouts.new
   end
   
   def create
-    @workout = current_user.workouts.create!(params[:workout])
     if @workout.save
       flash[:success] = "New workout added!"
       redirect_to workouts_path
@@ -21,17 +23,14 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    @workout = current_user.workouts.find(params[:id])
     @title = "#{@workout.title}"
   end
 
   def edit
     @title = "Edit Workout"
-    @workout = current_user.workouts.find(params[:id])
   end
 
   def update
-    @workout = current_user.workouts.find(params[:id])
     if @workout.update_attributes(params[:workout])
       flash[:success] = "Workout updated!"
       redirect_to workout_path(@workout)
@@ -41,7 +40,6 @@ class WorkoutsController < ApplicationController
   end
 
   def destroy
-    @workout = current_user.workouts.find(params[:id])
     @workout.destroy
     flash[:success] = "Workout deleted"
     redirect_to workouts_path

@@ -52,11 +52,5 @@ describe "Excerses" do
       click_link("Delete Exercise")
       page.should have_content("Exercise deleted")
     end
-
-    it "can't delete an exercise as a trainer" # do
-    #   integration_sign_in(@trainer)      
-    #   delete exercise_path(@exercise)
-    #   page.should have_content("Sorry! You can't access that page")      
-    # end
   end  
 end

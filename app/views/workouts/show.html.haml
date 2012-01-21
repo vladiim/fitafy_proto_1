@@ -1,7 +1,12 @@
-= link_to "Edit Workout", edit_workout_path(@workout)
-
-%p= @workout.description
+%p
+  %strong 
+    Description:
+  = @workout.description
 
 %p
-  - @workout.exercises.each do |exercise|
-    = exercise.title
+  = link_to "Create Booking", new_booking_path(:workout => @workout)
+  with this workout
+
+%br
+%br
+= link_to "Edit Workout", edit_workout_path(@workout)

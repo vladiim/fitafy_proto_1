@@ -4,4 +4,4 @@
   = f.input :description, :as => :text, :input_html => { :rows => 5 }, :placeholder => "Not for the feint-hearted... heavy, sweaty, meaty, wolfy!"
   = f.association :exercises, :as => :check_boxes, :collection => Exercise.find_by_title(params[:title])
 
-  = f.button :submit, "#{@title}", :class => "a blue button"
+  = f.button :submit, "#{@title}", :class => "a button"

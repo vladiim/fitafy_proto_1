@@ -7,7 +7,7 @@ describe "Signups" do
   end
   
   it "signs up as a new trainer from the homepage" do
-    integration_sign_in(@trainer)
+    integration_sign_up
     page.should have_content("Welcome")
     current_path.should eq(root_path)
     @trainer.role.should eq("trainer_role")

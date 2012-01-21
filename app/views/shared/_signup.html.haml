@@ -4,8 +4,8 @@
 = simple_form_for @user do |f|
 
   = f.error_notification
-
-
+  
+  = f.input :role, :as => :hidden, :input_html => { :value => "trainer_role" }
 
   = f.input :username, :label => false, :placeholder => "User name", :maxlength => 30, :required => true
 

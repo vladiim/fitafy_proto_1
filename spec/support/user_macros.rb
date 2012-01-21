@@ -1,11 +1,11 @@
 module UserMacros
   
-  def integration_sign_up(user)
+  def integration_sign_up
     visit root_path
-    fill_in "user_username", :with => user.username
-    fill_in "user_email", :with => user.email
-    fill_in "user_password", :with => user.password    
-    fill_in "user_password_confirmation", :with => user.password
+    fill_in "user_username", :with => "test_username"
+    fill_in "user_email", :with => "test_username@email.com"
+    fill_in "user_password", :with => "password"
+    fill_in "user_password_confirmation", :with => "password"
     click_button("Sign up free!")
   end
   

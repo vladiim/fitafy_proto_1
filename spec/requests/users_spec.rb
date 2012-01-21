@@ -13,6 +13,18 @@ describe "Signups" do
     @trainer.role.should eq("trainer_role")
   end
   
+  it "fails to sign up as a new trainer with bad details" do
+    visit root_path
+  end
+  
+  it "signs in then out" do
+    integration_sign_in(@trainer)
+    page.should_not have_content("Start in minutes")
+    click_link "Sign Out"
+    current_path.should eq(root_path)
+    page.should have_content("Start in minutes")
+  end
+  
   it "incorrectly signs a user in" do
     integration_sign_in(@trainer)
     click_link "Sign Out"
@@ -21,15 +33,6 @@ describe "Signups" do
     click_button("Sign in")
     current_path.should eq(root_path)
     page.should have_content("Wrong email")
-  end
-  
-  it "signs out then back in" do
-    integration_sign_in(@trainer)
-    click_link "Sign Out"
-    current_path.should eq(root_path)
-    page.should have_content("Start in minutes")
-    integration_sign_in(@trainer)
-    page.should_not have_content("Start in minutes")
   end
   
   it "can edit my details" do

@@ -40,7 +40,7 @@ end
 def make_relationships
   users = User.all
   trainer = users.first
-  clients = users[1..50]
+  clients = users[3..50]
   clients.each { |client| trainer.train!(client) }
 end
 
@@ -54,8 +54,8 @@ end
 
 def make_bookings
   trainer = User.first 
-  30.times do |n|
-    n += 1
-    trainer.bookings.create(:client_id => n, :wo_date => n.days.from_now, :wo_time => n.hours.from_now)
+  trainer.training.each do |client|
+    n = client.id
+    trainer.bookings.create(:client_id => client.id, :wo_date => n.days.from_now, :wo_time => n.hours.from_now)
   end
 end

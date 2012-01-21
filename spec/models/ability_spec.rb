@@ -42,6 +42,18 @@ describe Ability do
       @trainer_ability = Ability.new(@trainer)
     end
     
+    describe "users" do
+      
+      it "should be able to view users" do
+        @trainer_ability.should be_able_to(:read, User)
+      end
+      
+      it "should be able to manage it's own account" do
+        @trainer_ability.should be_able_to(:manage, @trainer)
+      end
+      
+    end
+    
     describe "exercises" do
       
       it "should be able to read exercises" do

@@ -1,6 +1,6 @@
 class Relationship < ActiveRecord::Base
   
-  attr_accessible :client
+  attr_accessible :client_id
   
   belongs_to :trainer, :class_name => "User"
   belongs_to :client, :class_name => "User"

@@ -5,11 +5,11 @@ table#user_side_table {
 	@include fat_border1;
 }
 
-tr:nth-child(odd) {
+tr#user_side_row:nth-child(odd) {
 	background: $gray_blue;
 }
 
-tr:nth-child(even) {
+tr#user_side_row:nth-child(even) {
 	background: $light_gray;
 }
 

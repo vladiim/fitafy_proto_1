@@ -1,7 +1,12 @@
-- if can? :update, @exercise
-  = link_to "Edit Exercise", edit_exercise_path(@exercise)
+%p
+  %strong Description:
+  = @exercise.description
 
-%br
-%br
-
-%p= @exercise.description
+%p
+  Used in
+  = link_to "#{pluralize(@exercise.workouts.count, 'workouts')}", "#"
+  |
+  = link_to "Create Booking", new_booking_path
+  - if can? :update, @exercise
+    |
+    = link_to "Edit Exercise", edit_exercise_path(@exercise)

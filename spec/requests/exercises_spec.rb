@@ -24,7 +24,7 @@ describe "Excerses" do
       visit exercises_path
       click_link("#{@exercise.title}")
       page.should have_css("h2", :text => "#{@exercise.title}")
-      page.should have_content("#{@exercise.description}")
+      page.should have_content("Description: #{@exercise.description}")
     end
     
     it "edits an exercise as an admin" do

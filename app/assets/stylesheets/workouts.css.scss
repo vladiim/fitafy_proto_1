@@ -1,3 +1,24 @@
 // Place all the styles related to the workouts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'mixins';
+
+table#workout_show_exercises {
+	width: 100%;
+}
+
+tr#workout_show_exercises_title {
+	background: $light_gray;
+	th {
+		color: $dark_blue;
+	}
+}
+
+tr#workout_show_exercises_head {
+	background: $dark_blue;
+	th {
+		color: $gray_blue;
+		font-size: 90%;
+	}
+}

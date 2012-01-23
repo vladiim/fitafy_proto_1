@@ -11,12 +11,13 @@ class WorkoutsController < ApplicationController
     
   def new
     @title = "Create Workout"
+    @body_parts = Exercise::BODY_PARTS.sort
   end
   
   def create
     if @workout.save
       flash[:success] = "New workout added!"
-      redirect_to workouts_path
+      redirect_to workout_path(@workout)
     else
       render :new
     end
@@ -24,13 +25,16 @@ class WorkoutsController < ApplicationController
 
   def show
     @title = "#{@workout.title}"
+    @exercises = @workout.exercises.all
   end
 
   def edit
     @title = "Edit Workout"
+    @body_parts = Exercise::BODY_PARTS.sort    
   end
 
   def update
+    params[:workout][:exercise_ids] ||= []
     if @workout.update_attributes(params[:workout])
       flash[:success] = "Workout updated!"
       redirect_to workout_path(@workout)

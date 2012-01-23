@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
   
-  attr_accessible :title, :description
+  attr_accessible :title, :description, :exercise_ids
   
   belongs_to :user
   

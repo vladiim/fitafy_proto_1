@@ -4,8 +4,9 @@ namespace :db do
     Rake::Task['db:reset'].invoke
     make_users
     make_relationships
-    make_workouts
     make_bookings
+    make_exercises
+    make_workouts    
   end
 end
 
@@ -34,7 +35,6 @@ def make_users
                  :role => "client_role"
     )
   end
-  
 end
 
 def make_relationships
@@ -44,18 +44,57 @@ def make_relationships
   clients.each { |client| trainer.train!(client) }
 end
 
-def make_workouts
-  users = User.all
-  trainer = users.first
-  20.times.each do |n|
-    trainer.workouts.create(:title => "#{n} workout", :description => Faker::Lorem.sentence(3))
-  end
-end
-
 def make_bookings
   trainer = User.first 
   trainer.training.each do |client|
     n = client.id
     trainer.bookings.create(:client_id => client.id, :wo_date => n.days.from_now, :wo_time => n.hours.from_now)
+  end
+end
+
+def make_exercises
+  Exercise.create!( :title => "Shoulder Press",
+                    :description => "This exercise may be performed equally well standing or sitting. Raise the dumbbells to the shoulders. Hold the dumbbells such that the palms are facing forward (same hand position as when using a barbell).",
+                    :body_part => "Shoulder",
+                    :equipment => "Dumbbell",
+                    :cues => "You may inhale or exhale as you raise the dumbbells, opposite while lowering the dumbbells - do not hold your breath. Take 2-3 seconds to raise, and 3-4 seconds to lower the dumbbells. Keep the knees slightly bent and pelvis slightly tucked."
+  )
+  Exercise.create!( :title => "Chin Up",
+                    :description => "Begin from a hanging position on a fixed pull-up bar with your grip slightly wider than shoudler width.",
+                    :body_part => "Back",
+                    :equipment => "Chin up bar",
+                    :cues => "Try using different grips to vary how you work your back and arms. Turn your palms away from you to work more forearm, and turn them toward you to work more biceps."
+  )
+  Exercise.create!( :title => "Dumbbell Bench Press ",
+                    :description => "Grab two dumbbells, sit and then lie flat on a flat bench.",
+                    :body_part => "Chest",
+                    :equipment => "Dumbells Bench",
+                    :cues => "Exhale as you press the dumbbells off chest, inhale as the dumbbells are lowered. Take 2-3 seconds to raise the dumbbells, and 3-4 seconds to lower the dumbbells."
+  )
+  Exercise.create!( :title => "Squat",
+                    :description => "Place the bar just behind the neck on the upper rear shoulders. Slowly sit down until the legs are parallel to the floor.",
+                    :body_part => "Legs",
+                    :equipment => "Barbell Squat-rack",
+                    :cues => "Try not to let the knees bend over the front of the toes. Keep the lower back slightly arched."
+  )
+  Exercise.create!( :title => "tricep cable pushdown",
+                    :description => "Stand with your feet shoulder width apart with your knees slightly bent. Grab the bar and bring your elbows in close to your sides.",
+                    :body_part => "Tricep",
+                    :equipment => "Cable Machine",
+                    :cues => "Keep your elbows stationary to isolate your triceps. Keep your body still to eliminate momentum, and keep your speed controlled."
+  )
+  Exercise.create!( :title => "Bicep Curl",
+                    :description => "Begin from a standing position. Grasp the barbell with a shoulder-width grip, palms facing up. Hold the bar with the arms straight and the bar in front of the waist.",
+                    :body_part => "Bicep",
+                    :equipment => "Barbell",
+                    :cues => "Exhale as you raise the bar, inhale as you lower the bar. Take 2-3 seconds to raise the bar and 3-4 seconds to lower the bar."
+  )
+end
+
+def make_workouts
+  users = User.all
+  trainer = users.first
+  20.times.each do |n|
+    trainer.workouts.create(:title => "#{n} workout", :description => Faker::Lorem.sentence(3), )
   end
 end

@@ -17,7 +17,6 @@ describe "Workouts" do
     fill_in "workout_description", :with => @workout_description
     click_button("Create Workout")
     page.should have_content("New workout added!")
-    current_path.should eq(workouts_path)
     page.should have_content("#{@workout_title}")
   end
   
@@ -50,6 +49,28 @@ describe "Workouts" do
       page.should have_content("You have no workouts")
     end
     
-    it "creates a booking from the workout page" 
+    describe "workouts with exercises" do
+      
+      before(:each) do
+        @exercise = Factory(:exercise)
+      end
+      
+      it "adds an exercise to the workout" do
+        visit new_workout_path
+        fill_in"workout_title", with: @workout_title
+        fill_in"workout_description", with: @workout_description        
+        check("workout_exercise_ids_")
+        click_button("Create Workout")
+        page.should have_content("New workout added!")        
+        page.should have_content(@exercise.title)
+      end
+      
+      it "displays the exercise on the workout page" do
+        click_link("Sign Out")
+        new_workout(@trainer, @exercise)
+        page.should have_css("a", :text => @exercise.title)
+        page.should have_content(@exercise.body_part)
+      end
+    end    
   end  
 end

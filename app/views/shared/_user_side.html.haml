@@ -1,14 +1,14 @@
 %table#user_side_table
   %h2= link_to "#{current_user.username}", edit_user_path(current_user), :id => "user_side_username"
 
-  %tr#clients_side
+  %tr#user_side_row
     %td=link_to "Clients: #{current_user.training.count}", training_user_path(current_user)
 
-  %tr#bookings_side
+  %tr#user_side_row
     %td=link_to "Bookings: #{current_user.bookings.count}", bookings_path
 
-  %tr#workouts_side
+  %tr#user_side_row
     %td=link_to "Workouts: #{current_user.workouts.count}", workouts_path
 
-  %tr#exercises_side
+  %tr#user_side_row
     %td=link_to "Exercises: #{Exercise.count}", exercises_path

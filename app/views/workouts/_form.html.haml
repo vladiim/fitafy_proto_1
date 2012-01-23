@@ -1,7 +1,11 @@
 = simple_form_for @workout do |f|
-  - f.error_notification
-  = f.input :title, :input_html => {:size => 50}, :placeholder => "The Big Bad Workout"
-  = f.input :description, :as => :text, :input_html => { :rows => 5 }, :placeholder => "Not for the feint-hearted... heavy, sweaty, meaty, wolfy!"
-  = f.association :exercises, :as => :check_boxes, :collection => Exercise.find_by_title(params[:title])
 
+  - f.error_notification
+
+  = f.input :title, :input_html => {:size => 50}, :placeholder => "The Big Bad Workout"
+
+  = f.input :description, :as => :text, :input_html => { :rows => 5 }, :placeholder => "Not for the feint-hearted... heavy, sweaty, meaty, wolfy!"
+  
+  = render 'shared/exercises'
+  
   = f.button :submit, "#{@title}", :class => "a button"

@@ -1,0 +1,11 @@
+%ul.nav-bar
+
+  - @body_parts.each do |body_part|
+
+    %li{:class => "has-flyout"}
+      %a{href: "#"} 
+        = body_part
+        .flyout.small
+          - for exercise in Exercise.where(body_part: "#{body_part}")
+            = check_box_tag "workout[exercise_ids][]", exercise.id
+            = exercise.title

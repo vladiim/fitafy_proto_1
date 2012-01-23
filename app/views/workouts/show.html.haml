@@ -1,12 +1,27 @@
 %p
-  %strong 
-    Description:
+  %strong Description:
   = @workout.description
 
 %p
+  Used in
+  = link_to "#{pluralize(@workout.bookings.count, 'bookings')}", "#"
+  |
   = link_to "Create Booking", new_booking_path(:workout => @workout)
-  with this workout
+  |
+  = link_to "Edit Workout", edit_workout_path(@workout)
 
-%br
-%br
-= link_to "Edit Workout", edit_workout_path(@workout)
+- unless @exercises.empty?
+  %table#workout_show_exercises
+    %thead
+      %tr#workout_show_exercises_title
+        %th Exercises
+        %th
+      %tr#workout_show_exercises_head
+        %th Title
+        %th Body Part
+  
+    - @exercises.each do |exercise|
+      %tbody
+        %tr
+          %td= link_to "#{exercise.title.slice(0,1).capitalize + exercise.title.slice(1..-1)}", exercise_path(exercise)
+          %td= exercise.body_part.slice(0,1).capitalize + exercise.body_part.slice(1..-1)

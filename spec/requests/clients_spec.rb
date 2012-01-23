@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "Clients" do
+  
   before(:each) do
     @trainer = new_trainer
     @client = new_client
@@ -16,19 +17,28 @@ describe "Clients" do
     page.should have_content("Client removed")
   end
   
-  it "views a list of the trainer's clients" do
-    @trainer.train!(@client)     
-    integration_sign_in(@trainer)    
-    current_path.should eq(root_path)   
-    click_link("Clients: #{@trainer.training.count}")
-    current_path.should eq(training_user_path(@trainer))
-    page.should have_css("a", :text => "#{@client.username}")   
-    page.should have_css("a", :text => "Create Booking")    
-    page.should have_css("a", :text => "x Completed Bookings")     
-    page.should have_css("a", :text => "x Uncompleted Bookings")     
+  it "adds a new client to the system" do
+
   end
   
-  it "adds a new client to the system" do
+  describe "exsisting client" do
     
+    before(:each) do
+      @trainer.train!(@client)
+    end
+    
+    it "views a list of the trainer's clients" do  
+      integration_sign_in(@trainer)    
+      click_link("Clients: #{@trainer.training.count}")
+      current_path.should eq(training_user_path(@trainer))
+      page.should have_css("a", :text => "#{@client.username}")     
+    end
+
+    it "creates a booking with a client from their index page" do
+      integration_sign_in(@trainer)    
+      click_link("Clients: #{@trainer.training.count}")
+      click_link("Create Booking")
+      page.select('Client').should have_value("#{@client.title}")
+    end
   end
 end

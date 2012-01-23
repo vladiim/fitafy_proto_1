@@ -3,14 +3,23 @@
   = f.error_notification
 
   .row#booking_top_of_form
-    .three.columns#booking_form_client
-      = f.association :client, :collection => current_user.training.collect { |c| [c.username, c.id] }, :prompt => "Select client"
+    .four.columns#booking_form_client
+      - if @client
+        = f.association :client, :collection => current_user.training.collect { |c| [c.username, c.id] }, :selected => @client.username
+      - else
+        = f.association :client, :collection => current_user.training.collect { |c| [c.username, c.id] }, :prompt => "Select client"
     
-    .three.columns#booking_form_workout
-      = f.association :workout, :collection => @user.workouts.collect { |w| w.title }, :prompt => "Select workout"
-    
-    .three.columns#booking_form_date
+    .four.columns#booking_form_workout
+      / - if @workout
+      /   = f.association :workout, :collection => current_user.workouts.collect { |w| w.title }, :selected => @workout.title
+      / - else
+      = f.association :workout, :collection => current_user.workouts.collect { |w| w.title }, :prompt => "Select workout"
+
+  .row#booking_middle_of_form
+    .four.columns#booking_form_date
       = f.input :wo_date, :as => :string, :input_html => { :class => 'date_picker' }, :label => "Date", :start_date => Time.now
+
+    .four.columns#booking_form_time
       = f.input :wo_time, :label => "Time", :time_separator => ""
 
   .row#booking_bottom_of_form

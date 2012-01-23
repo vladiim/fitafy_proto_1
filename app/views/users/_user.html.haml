@@ -1,7 +1,7 @@
 %ul
   %li
     %h6= link_to "#{user.username}", user_path(user)
-    = link_to "Create Booking", "#"
+    = link_to "Create Booking", new_booking_path(user: user)
     |
     = link_to "x Completed Bookings", "#"
     |

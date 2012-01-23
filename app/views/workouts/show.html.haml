@@ -5,8 +5,8 @@
 %p
   Used in
   = link_to "#{pluralize(@workout.bookings.count, 'bookings')}", "#"
-  |
-  = link_to "Create Booking", new_booking_path(:workout => @workout)
+  | 
+  = link_to "Create a booking", new_booking_path(workout: @workout)
   |
   = link_to "Edit Workout", edit_workout_path(@workout)
 

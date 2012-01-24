@@ -5,8 +5,8 @@ describe Workout do
   before(:each) do
     @trainer = Factory(:user)
     @client = Factory(:user)
-    @attr = { :title => "Workout 1",
-              :description => "Workout Description"
+    @attr = { title:       "Workout 1",
+              description:  "Workout Description"
     }
   end
   
@@ -42,7 +42,7 @@ describe Workout do
     describe "bookings associations" do
       
       before(:each) do
-        @booking = Factory(:booking, :trainer_id => @trainer.id, :client_id => @client.id, :wo_date => 1.week.from_now)
+        @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, wo_date: 1.week.from_now)
       end
       
       it "should have a booking attribute" do
@@ -58,12 +58,12 @@ describe Workout do
     end
     
     it "should require a title" do
-      @trainer.workouts.build(@attr.merge(:title => "")).should be_invalid
+      @trainer.workouts.build(@attr.merge(title: "")).should be_invalid
     end
     
     it "should have a title under 200 characters long" do
       title = "a" *201
-      @trainer.workouts.build(@attr.merge(:title => title)).should be_invalid
+      @trainer.workouts.build(@attr.merge(title: title)).should be_invalid
     end
   end
 end

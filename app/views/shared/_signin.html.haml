@@ -5,10 +5,10 @@
   / = f.input :role, :as => :hidden, :input_html => { :value => "trainer_role" }
   
   #user_session_new_user_name
-    = f.input :username, :label => false, :placeholder => "User name", :required => true, :input_html => {:size => 15}
+    = f.input :username, :label => false, placeholder: "User name", required: true, input_html: {size: 15}
 
   #user_session_new_password
-    = f.input :password, :label => false, :placeholder => "Password", :required => true, :input_html => {:size => 15}
+    = f.input :password, :label => false, placeholder: "Password", required: true, input_html: {size: 15}
 
   #user_session_new_submit
     = f.button :submit, "Sign in", :class => "a small"

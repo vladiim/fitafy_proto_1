@@ -31,7 +31,7 @@ describe User do
     end
     
     it "should destroy a workout if the user is destroyed" do
-      @workout = Factory(:workout, :user => @trainer)
+      @workout = Factory(:workout, user: @trainer)
       @trainer.destroy
       Workout.find_by_id(@workout.id).should be_nil
     end

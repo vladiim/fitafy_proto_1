@@ -5,8 +5,8 @@ describe "Bookings" do
   before(:each) do
     @trainer = new_trainer
     @client = new_client
-    @workout = Factory(:workout, :user_id => @trainer.id)
-    @new_workout = Factory(:workout, :user_id => @trainer.id)
+    @workout = Factory(:workout, user_id: @trainer.id)
+    @new_workout = Factory(:workout, user_id: @trainer.id)
     @month = "March"
   end
   
@@ -14,26 +14,24 @@ describe "Bookings" do
     visit root_path
     @trainer.train!(@client)
     integration_sign_in(@trainer)
-    page.should have_css("label", :text => "Client")
-    select("#{@client.username}", :from => "booking_client_id")
-    select("#{@workout.title}", :from => "booking_workout_id")
-    # check("Alive")
-    # click_button("Create Booking")
+    page.should have_css("label", text: "Client")
+    select("#{@client.username}", from: "booking_client_id")
+    select("#{@workout.title}", from: "booking_workout_id")
     lambda do # selenium to select a jquery date until then use this shithouse test
-      @trainer.bookings.create(:client_id => @client.id, :workout => @workout, :wo_date => 1.week.from_now)
+      @trainer.bookings.create(client_id: @client.id, workout: @workout, wo_date: 1.week.from_now)
     end.should change(Booking, :count).by(1)
   end
   
   describe "does stuff with an exsisting booking" do
     
     before(:each) do
-      @booking = @trainer.bookings.create(:client_id => @client.id, :workout => @workout, :wo_date => 1.day.from_now, :wo_time => Time.now)      
+      @booking = @trainer.bookings.create(client_id: @client.id, workout: @workout, wo_date: 1.day.from_now, wo_time: Time.now)      
     end
     
     it "edits a booking from the booking page" do
       sign_in_visit_booking(@trainer, @booking)      
       click_link("Edit Booking")
-      select("#{@new_workout.title}", :from => "booking_workout_id")
+      select("#{@new_workout.title}", from: "booking_workout_id")
       click_button("Edit Booking")
       page.should have_content("Booking updated")
     end
@@ -42,7 +40,7 @@ describe "Bookings" do
       integration_sign_in(@trainer)      
       click_link("Bookings")
       click_link("#{@booking.client.username}")
-      select("#{@new_workout.title}", :from => "booking_workout_id")
+      select("#{@new_workout.title}", from: "booking_workout_id")
       click_button("Edit Booking")
       page.should have_content("Booking updated")
     end

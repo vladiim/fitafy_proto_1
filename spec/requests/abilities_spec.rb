@@ -12,8 +12,8 @@ describe "Abilities" do
     
     it "admin should have exercise and shouldn't have contact in their navigation" do
       integration_sign_in(@admin)
-      page.should_not have_css("a", :text => "Contact")
-      page.should have_css("a", :text => "Exercises")
+      page.should_not have_css("a", text: "Contact")
+      page.should have_css("a", text: "Exercises")
     end
     
     it "admin should be able to create exercises" do

@@ -28,8 +28,8 @@ describe "Signups" do
   it "incorrectly signs a user in" do
     integration_sign_in(@trainer)
     click_link "Sign Out"
-    fill_in "user_session_username", :with => "wrong"
-    fill_in "user_session_password", :with => "wrong_again"
+    fill_in "user_session_username", with: "wrong"
+    fill_in "user_session_password", with: "wrong_again"
     click_button("Sign in")
     current_path.should eq(root_path)
     page.should have_content("Wrong email")
@@ -39,7 +39,7 @@ describe "Signups" do
     integration_sign_in(@trainer)
     click_link("My Account")
     current_path.should eq(edit_user_path(@trainer)) 
-    fill_in "user_email", :with => "new_email@email.com"
+    fill_in "user_email", with: "new_email@email.com"
     click_button("Update Profile")
     current_path.should eq(edit_user_path(@trainer))
     page.should have_content("Your details have been updated")
@@ -53,7 +53,7 @@ describe "Signups" do
       current_path.should eq(edit_user_path(@trainer))
       click_link("My Account")
       current_path.should eq(edit_user_path(@trainer))
-      fill_in "user_email", :with => "new_email@email.com"
+      fill_in "user_email", with: "new_email@email.com"
       click_button("Update Profile")
       page.should have_content("Your details have been updated")
     end
@@ -71,7 +71,7 @@ describe "Signups" do
       click_link("Clients")
       click_link(@client.username.to_s)
       current_path.should eq(user_path(@client))
-      page.should have_css("h2", :text => @client.username)
+      page.should have_css("h2", text: @client.username)
     end
   end
 end

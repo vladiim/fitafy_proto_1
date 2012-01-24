@@ -1,5 +1,5 @@
 %table#user_side_table
-  %h2= link_to "#{current_user.username}", edit_user_path(current_user), :id => "user_side_username"
+  %h2= link_to "#{current_user.username}", edit_user_path(current_user), id: "user_side_username"
 
   %tr#user_side_row
     %td=link_to "Clients: #{current_user.training.count}", training_user_path(current_user)

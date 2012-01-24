@@ -5,7 +5,7 @@ describe Relationship do
   before(:each) do
     @trainer = Factory(:user)
     @client = Factory(:user)
-    @relationship = @trainer.relationships.build(:client_id => @client.id)
+    @relationship = @trainer.relationships.build(client_id: @client.id)
   end
   
   it "should create a new relationship" do

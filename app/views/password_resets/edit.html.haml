@@ -13,12 +13,12 @@
 
   .five.columns#home_signup
 
-    = simple_form_for @user, :url => password_reset_path, :method => :put do |f|
+    = simple_form_for @user, url: password_reset_path, method: :put do |f|
 
       = f.error_notification
 
-      = f.input :password, :label => false, :placeholder => "Password", :required => true
+      = f.input :password, label: false, placeholder: "Password", required: true
 
-      = f.input :password_confirmation, :label => false, :placeholder => "Password confirmation", :required => true
+      = f.input :password_confirmation, label: false, placeholder: "Password confirmation", required: true
 
       = f.button :submit, "Reset password", :class => "a medium"

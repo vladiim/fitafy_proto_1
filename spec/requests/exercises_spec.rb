@@ -9,21 +9,21 @@ describe "Excerses" do
     create_exercise(@admin)
     page.should have_content("New exercise added!")
     visit exercises_path
-    page.should have_css("a", :text => "#{@exercise_title}")
+    page.should have_css("a", text: "#{@exercise_title}")
   end
   
   describe "does stuff with a created exercise" do
     
     before(:each) do
       @trainer = new_trainer      
-      @exercise = Factory(:exercise, :user_id => @admin.id)
+      @exercise = Factory(:exercise, user_id: @admin.id)
     end
     
     it "visits an exercise page as a trainer" do
       integration_sign_in(@trainer)
       visit exercises_path
       click_link("#{@exercise.title}")
-      page.should have_css("h2", :text => "#{@exercise.title}")
+      page.should have_css("h2", text: "#{@exercise.title}")
       page.should have_content("Description: #{@exercise.description}")
     end
     
@@ -32,7 +32,7 @@ describe "Excerses" do
       integration_sign_in(@admin)
       visit exercises_path
       click_link("Edit Exercise")
-      fill_in "exercise_title", :with => @new_title
+      fill_in "exercise_title", with: @new_title
       click_button("Update Exercise")
       current_path.should eq(exercise_path(@exercise))
       page.should have_content("Exercise updated!")

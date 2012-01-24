@@ -1,30 +1,27 @@
-= simple_form_for @booking, :html => { :class => "custom" } do |f|
+= simple_form_for @booking, html: { :class => "custom" } do |f|
 
   = f.error_notification
 
   .row#booking_top_of_form
     .four.columns#booking_form_client
-      - if @client
-        = f.association :client, :collection => current_user.training.collect { |c| [c.username, c.id] }, :selected => @client.username
-      - else
-        = f.association :client, :collection => current_user.training.collect { |c| [c.username, c.id] }, :prompt => "Select client"
+      = f.association :client, collection: current_user.training.collect { |c| [c.username, c.id] }, prompt: "Select client"
     
     .four.columns#booking_form_workout
-      / - if @workout
-      /   = f.association :workout, :collection => current_user.workouts.collect { |w| w.title }, :selected => @workout.title
-      / - else
-      = f.association :workout, :collection => current_user.workouts.collect { |w| w.title }, :prompt => "Select workout"
+      - if @workout
+        = f.association :workout, collection: current_user.workouts.collect { |w| w.title }, selected: @workout.title
+      - else
+        = f.association :workout, collection: current_user.workouts.collect { |w| w.title }, prompt: "Select workout"
 
   .row#booking_middle_of_form
     .four.columns#booking_form_date
-      = f.input :wo_date, :as => :string, :input_html => { :class => 'date_picker' }, :label => "Date", :start_date => Time.now
+      = f.input :wo_date, as: :string, input_html: { :class => 'date_picker' }, label: "Date", start_date: Time.now
 
     .four.columns#booking_form_time
-      = f.input :wo_time, :label => "Time", :time_separator => ""
+      = f.input :wo_time, :label => "Time", time_separator: ""
 
   .row#booking_bottom_of_form
     .five.columns
-      = f.input :message, :as => :text
+      = f.input :message, as: :text
     
     .four.columns
-      = f.button :submit, "#{@title}", :id => 'booking_submit', :class => "a small button"
+      = f.button :submit, "#{@title}", id: 'booking_submit', :class => "a small button"

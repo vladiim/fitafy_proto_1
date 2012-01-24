@@ -32,7 +32,7 @@ describe "Navigations" do
   describe "as an experienced trainer" do
     
     before(:each) do
-      @workout = Factory(:workout, :user => @trainer)
+      @workout = Factory(:workout, user: @trainer)
     end
 
     it "should lead to the right pages" do

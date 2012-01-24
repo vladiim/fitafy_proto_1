@@ -4,8 +4,8 @@ describe Exercise do
   before(:each) do
     @trainer = Factory.build(:user)
     @trainer.save_without_session_maintenance
-    @attr = { :title => "Shoulder Press", 
-              :description => "Push da weight man"
+    @attr = { title: "Shoulder Press", 
+              description: "Push da weight man"
     }
   end
   
@@ -30,7 +30,7 @@ describe Exercise do
     describe "workout associations" do
       
       before(:each) do
-        @workout = Factory(:workout, :user_id => @trainer.id)
+        @workout = Factory(:workout, user_id: @trainer.id)
       end
       
       it "should have a workout attribute" do
@@ -42,12 +42,12 @@ describe Exercise do
   describe "validations" do
     
     it "should validate the presence of a title" do
-      @exercise = @trainer.exercises.create(@attr.merge(:title => ""))
+      @exercise = @trainer.exercises.create(@attr.merge(title: ""))
       @exercise.should be_invalid
     end
     
     it "should validate the presence of a description" do
-      @exercise = @trainer.exercises.create(@attr.merge(:description => ""))
+      @exercise = @trainer.exercises.create(@attr.merge(description: ""))
       @exercise.should be_invalid
     end
   end

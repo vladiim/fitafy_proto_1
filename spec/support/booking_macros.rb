@@ -4,7 +4,7 @@ module BookingMacros
     visit root_path
     trainer.train!(client)
     integration_sign_in(trainer)
-    select("#{client.username}", :from => "booking_client_id")  
+    select("#{client.username}", from: "booking_client_id")  
     click_button("Create Booking")
   end
   

@@ -1,8 +1,8 @@
 Fitafy::Application.routes.draw do
   
-  resources :user_sessions, :only => [:new, :create, :destroy] 
+  resources :user_sessions, only: [:new, :create, :destroy] 
   resources :password_resets
-  resources :relationships, :only => [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   resources :workouts
   resources :exercises
   resources :bookings
@@ -13,11 +13,11 @@ Fitafy::Application.routes.draw do
     end
   end
   
-  match 'signin', :to => "user_sessions#new"
-  match 'signout', :to => "user_sessions#destroy"
+  match 'signin', to: "user_sessions#new"
+  match 'signout', to: "user_sessions#destroy"
   
   get "pages/home"
-  root :to => 'pages#home'
+  root to: 'pages#home'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

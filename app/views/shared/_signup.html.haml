@@ -5,14 +5,14 @@
 
   = f.error_notification
   
-  = f.input :role, :as => :hidden, :input_html => { :value => "trainer_role" }
+  = f.input :role, as: :hidden, input_html: { value: "trainer_role" }
 
-  = f.input :username, :label => false, :placeholder => "User name", :maxlength => 30, :required => true
+  = f.input :username, :label => false, placeholder: "User name", maxlength: 30, required: true
 
-  = f.input :email, :label => false, :placeholder => "Email", :required => true
+  = f.input :email, :label => false, placeholder: "Email", required: true
 
-  = f.input :password, :label => false, :placeholder => "Password", :required => true
+  = f.input :password, :label => false, placeholder: "Password", required: true
 
-  = f.input :password_confirmation, :label => false, :placeholder => "Password confirmation", :required => true
+  = f.input :password_confirmation, :label => false, placeholder: "Password confirmation", required: true
 
   = f.button :submit, "Sign up free!", :class => "a medium"

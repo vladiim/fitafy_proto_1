@@ -4,11 +4,11 @@ require "cancan/matchers"
 describe Ability do
   
   before(:each) do
-    @admin = Factory(:user, :admin => true)
-    @user_client = Factory(:user, :role => "client_role")
-    @exercise = Factory(:exercise, :user => @admin)
-    @workout = Factory(:workout, :user => @admin)
-    @booking = Factory(:booking, :trainer => @admin)
+    @admin = Factory(:user, admin: true)
+    @user_client = Factory(:user, role: "client_role")
+    @exercise = Factory(:exercise, user: @admin)
+    @workout = Factory(:workout, user: @admin)
+    @booking = Factory(:booking, trainer: @admin)
   end
   
   describe "guest" do
@@ -38,7 +38,7 @@ describe Ability do
   describe "trainer_role" do
     
     before(:each) do
-      @trainer = Factory(:user, :role => "trainer_role")
+      @trainer = Factory(:user, role: "trainer_role")
       @trainer_ability = Ability.new(@trainer)
     end
     
@@ -56,7 +56,7 @@ describe Ability do
     describe "exercises" do
 
       it "should be able to manage exercises for themselves" do
-        @trainer_ability.should be_able_to(:manage, Factory(:exercise, :user => @trainer))
+        @trainer_ability.should be_able_to(:manage, Factory(:exercise, user: @trainer))
       end
 
       it "shouldn't be able to manage another trainer's exercise" do
@@ -67,7 +67,7 @@ describe Ability do
     describe "workouts" do
       
       it "should be able to manage workouts for themselves" do
-        @trainer_ability.should be_able_to(:manage, Factory(:workout, :user => @trainer))
+        @trainer_ability.should be_able_to(:manage, Factory(:workout, user: @trainer))
       end
 
       it "shouldn't be able to manage another trainer's exercise" do
@@ -83,7 +83,7 @@ describe Ability do
   describe "client_role" do
     
     before(:each) do
-      @client = Factory(:user, :role => "client_role")
+      @client = Factory(:user, role: "client_role")
       @client_ability = Ability.new(@client)
     end
     

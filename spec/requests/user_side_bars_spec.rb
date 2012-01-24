@@ -26,7 +26,7 @@ describe "UserSideBars" do
     before(:each) do
       @client = new_client
       @trainer.train!(@client)
-      @workout = Factory(:workout, :user => @trainer)
+      @workout = Factory(:workout, user: @trainer)
     end
     
     it "should take users to the right path" do

@@ -34,7 +34,7 @@ describe "Workouts" do
     it "edits a workout" do
       @new_title = "New title yo, cause I'm smooth like that"
       visit workout_path(@workout)
-      click_link("Edit Workout")
+      click_link("Edit")
       fill_in "workout_title", with: @new_title
       click_button("Edit Workout")
       page.should have_content("Workout updated!")

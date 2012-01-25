@@ -31,12 +31,12 @@ describe "Excerses" do
       @new_title = "Bench Prooos"
       integration_sign_in(@admin)
       visit exercises_path
-      click_link("Edit Exercise")
+      click_link("Edit")
       fill_in "exercise_title", with: @new_title
       click_button("Update Exercise")
       current_path.should eq(exercise_path(@exercise))
       page.should have_content("Exercise updated!")
-      click_link("Edit Exercise")
+      click_link("Edit")
       current_path.should eq(edit_exercise_path(@exercise))
     end
     
@@ -49,8 +49,29 @@ describe "Excerses" do
     it "deletes an exercise as an admin" do
       integration_sign_in(@admin)      
       visit exercises_path
-      click_link("Delete Exercise")
+      click_link("Delete")
       page.should have_content("Exercise deleted")
+    end
+    
+    describe "exercise.workouts" do
+      
+      before(:each) do
+        @workout = Factory(:workout, exercise_ids: @exercise.id, user: @admin)
+      end
+      
+      it "can see all the workouts associated to an exercise" do
+        integration_sign_in(@admin)
+        click_link("Exercises: ")
+        click_link(@exercise.title)
+        click_link("1 Workout")
+        click_link(@workout.title)
+        page.should have_css("h2", @workout.title)
+        click_link("Exercises: ")
+        click_link("1 Workout")
+        page.should have_content("1 exercise")
+        click_link(@workout.title)
+        page.should have_css("h2", @workout.title)
+      end
     end
   end  
 end

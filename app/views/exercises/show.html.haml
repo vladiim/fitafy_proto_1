@@ -4,9 +4,12 @@
 
 %p
   Used in
-  = link_to "#{pluralize(@exercise.workouts.count, 'workouts')}", "#"
+  = link_to "#{pluralize(@exercise.workouts.count, 'Workout')}", exercise_workouts_path(@exercise, @workouts)
   |
   = link_to "Create Booking", new_booking_path
+  | 
   - if can? :update, @exercise
     |
     = link_to "Edit Exercise", edit_exercise_path(@exercise)
+    |
+    = link_to "Delete Exercise", @exercise, method: :destroy

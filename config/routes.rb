@@ -4,8 +4,11 @@ Fitafy::Application.routes.draw do
   resources :password_resets
   resources :relationships, only: [:create, :destroy]
   resources :workouts
-  resources :exercises
   resources :bookings
+  
+  resources :exercises do
+    resources :workouts, controller: 'exercises/workouts', only: [:index]
+  end 
   
   resources :users do
     member do

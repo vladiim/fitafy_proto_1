@@ -1,1 +1,6 @@
 = render 'shared/train_form'
+
+- if @user.reverse_bookings.empty?
+  0 Bookings
+- else
+  = link_to "#{pluralize(@user.reverse_bookings.count, 'Booking')}", user_reverse_bookings_path(@user)

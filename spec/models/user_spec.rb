@@ -47,9 +47,14 @@ describe User do
   
   describe "bookings" do
     
-    it "should have a bookings method" do
+    it "should have a bookings method for trainers" do
       @trainer.should respond_to(:bookings)
     end
+    
+    it "should have a reverse_bookings method for clients" do
+      @client.should respond_to(:reverse_bookings)
+    end
+    
   end
   
   describe "roles" do

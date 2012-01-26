@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :exercises, :dependent => :destroy
   
   has_many :bookings, :foreign_key => "trainer_id"
+  has_many :reverse_bookings, :class_name => "Booking", :foreign_key => "client_id"
   
   ROLES = %w[trainer_role client_role invited_role]
    

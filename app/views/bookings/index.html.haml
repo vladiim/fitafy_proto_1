@@ -1,10 +1,3 @@
-/ - calendar_for @bookings do |calendar|
-/   / = calendar.head('mon', 'tue', 'wed', 'thur', 'fri', 'sat', 'sun')
-/   - calendar.day(:day_method => :wo_date) do |date, bookings|
-/     = date.day
-/     - bookings.each do |booking|
-/       = booking.client.username
-
 - if @bookings.empty?
   %p
     You have no bookings
@@ -20,5 +13,5 @@
   = will_paginate @bookings
   %br
 
-  = render @bookings
+  = render 'shared/booking'
   = will_paginate @bookings

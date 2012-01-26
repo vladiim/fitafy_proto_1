@@ -25,7 +25,17 @@ describe "Bookings" do
   describe "does stuff with an exsisting booking" do
     
     before(:each) do
-      @booking = @trainer.bookings.create(client_id: @client.id, workout: @workout, wo_date: 1.day.from_now, wo_time: Time.now)      
+      @booking = Factory(:booking, client: @client, trainer: @trainer, wo_time: "05:45")
+    end
+          
+    it "shows the details for the booking" do
+      sign_in_visit_booking(@trainer, @booking)
+      page.should have_content(@booking.booking_date)
+      page.should have_content(@booking.booking_time)
+      page.should have_content(@booking.message)
+      page.should have_css("a", text: @booking.workout.title)
+      click_link("#{@client.username}")
+      page.should have_css("h2", text: @client.username)
     end
     
     it "edits a booking from the booking page" do

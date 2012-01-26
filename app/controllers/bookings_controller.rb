@@ -25,6 +25,8 @@ class BookingsController < ApplicationController
   def show
     @user = current_user
     @booking = @user.bookings.find(params[:id]) 
+    @workout = @booking.workout
+    @exercises = @workout.exercises
     @client = User.find(@booking.client_id)
     @title = "Booking for: #{@client.username}"    
   end

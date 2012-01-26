@@ -1,0 +1,21 @@
+%p
+  %strong Description:
+  = @workout.description
+
+- if @exercises.empty?
+  / add exercises
+-else
+  %table#workout_show_exercises
+    %thead
+      %tr#workout_show_exercises_title
+        %th Exercises
+        %th
+      %tr#workout_show_exercises_head
+        %th Title
+        %th Body Part
+  
+    - @exercises.each do |exercise|
+      %tbody
+        %tr
+          %td= link_to "#{exercise.title.slice(0,1).capitalize + exercise.title.slice(1..-1)}", exercise_path(exercise)
+          %td= exercise.body_part.slice(0,1).capitalize + exercise.body_part.slice(1..-1)

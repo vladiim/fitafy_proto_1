@@ -3,12 +3,15 @@ Fitafy::Application.routes.draw do
   resources :user_sessions, only: [:new, :create, :destroy] 
   resources :password_resets
   resources :relationships, only: [:create, :destroy]
-  resources :workouts
   resources :bookings
   
   resources :exercises do
-    resources :workouts, controller: 'exercises/workouts', only: [:index]
+    resources :workouts, controller: 'exercises/workouts', only: :index
   end 
+  
+  resources :workouts do
+    resources :bookings, controller: 'workouts/bookings', only: :index
+  end
   
   resources :users do
     member do

@@ -4,7 +4,7 @@
 
 %p
   Used in
-  = link_to "#{pluralize(@workout.bookings.count, 'Bookings')}", "#"
+  = link_to "#{pluralize(@workout.bookings.count, 'Booking')}", workout_bookings_path(@workout, @booking)
   | 
   = link_to "Create a Booking", new_booking_path(workout: @workout)
   - if can? :manage, Workout
@@ -13,18 +13,4 @@
     |
     = link_to "Delete", @workout, method: :delete, confirm: "Are you sure you want to delete the workout?"
 
-- unless @exercises.empty?
-  %table#workout_show_exercises
-    %thead
-      %tr#workout_show_exercises_title
-        %th Exercises
-        %th
-      %tr#workout_show_exercises_head
-        %th Title
-        %th Body Part
-  
-    - @exercises.each do |exercise|
-      %tbody
-        %tr
-          %td= link_to "#{exercise.title.slice(0,1).capitalize + exercise.title.slice(1..-1)}", exercise_path(exercise)
-          %td= exercise.body_part.slice(0,1).capitalize + exercise.body_part.slice(1..-1)
+= render 'shared/workout_exercises'

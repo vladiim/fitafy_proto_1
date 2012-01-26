@@ -8,9 +8,9 @@
     
     .four.columns#booking_form_workout
       - if @workout
-        = f.association :workout, collection: current_user.workouts.collect { |w| w.title }, selected: @workout.title
+        = f.association :workout, collection: current_user.workouts.collect { |w| [w.title, w.id] }, selected: @workout.title
       - else
-        = f.association :workout, collection: current_user.workouts.collect { |w| w.title }, prompt: "Select workout"
+        = f.association :workout, collection: current_user.workouts.collect { |w| [w.title, w.id] }, prompt: "Select workout"
 
   .row#booking_middle_of_form
     .four.columns#booking_form_date

@@ -1,8 +1,0 @@
-%ul
-  %li
-    %h6= link_to "Booking on #{booking.booking_date}", booking_path(booking)
-    = "At #{booking.booking_time}"
-    |
-    = link_to "For #{booking.client.username}", edit_booking_path(booking)
-    |
-    = link_to "Delete Booking", booking_path(booking), method: :delete, confirm: "Are you sure you want to delete this booking?"

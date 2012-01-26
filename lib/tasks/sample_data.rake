@@ -4,9 +4,9 @@ namespace :db do
     Rake::Task['db:reset'].invoke
     make_users
     make_relationships
-    make_bookings
     make_exercises
     make_workouts    
+    make_bookings    
   end
 end
 
@@ -26,6 +26,7 @@ def make_users
   )
   50.times do |n|
     c_username = Faker::Name.first_name
+    c_username = "#{c_username}_#{n}"
     c_email = "#{c_username}@email.com"
     password = "password"
     User.create!(username:                c_username,
@@ -38,18 +39,10 @@ def make_users
 end
 
 def make_relationships
+  @trainer = User.first
   users = User.all
-  trainer = users.first
   clients = users[3..50]
-  clients.each { |client| trainer.train!(client) }
-end
-
-def make_bookings
-  trainer = User.first 
-  trainer.training.each do |client|
-    n = client.id
-    trainer.bookings.create(client_id: client.id, wo_date: n.days.from_now, wo_time: n.hours.from_now)
-  end
+  clients.each { |client| @trainer.train!(client) }
 end
 
 def make_exercises
@@ -92,9 +85,19 @@ def make_exercises
 end
 
 def make_workouts
-  users = User.all
-  trainer = users.first
-  20.times.each do |n|
-    trainer.workouts.create(title: "#{n} workout", description: Faker::Lorem.sentence(3), )
+  @trainer = User.first  
+  Exercise.all.each do |exercise|
+    5.times.each do |n|
+      @trainer.workouts.create(title: "#{n} workout", description: Faker::Lorem.sentence(3), exercise_id: exercise.id)
+    end
+  end
+end
+
+def make_bookings
+  @trainer = User.first  
+  @trainer.training.each do |client|
+    n = client.id
+    workout = Workout.first
+    @trainer.bookings.create(client_id: client.id, wo_date: n.days.from_now, wo_time: n.hours.from_now, workout_id: workout.id)
   end
 end

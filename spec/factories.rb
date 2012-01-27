@@ -32,6 +32,12 @@ Factory.define :workout do |workout|
   workout.sequence(:title) { |n| "#{n} Da heaps Hardcore Workout"}
   workout.sequence(:description) { |n| "#{n} Not for the feignt hearted" }
   workout.association(:user, factory: :user)
+  workout.exercises {
+    count = 0
+    Array(1..3).sample.times.map do
+      Factory.create(:exercise, title: "Exercise #{count += 1}")
+    end
+  }
 end
 
 Factory.define :exercise do |exercise|

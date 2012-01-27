@@ -67,5 +67,10 @@ describe Workout do
       title = "a" *201
       @trainer.workouts.build(@attr.merge(title: title)).should be_invalid
     end
+    
+    it "should require an exercise" do
+      @trainer.workouts.build(@attr.merge(exercise_ids: nil)).should be_invalid
+    end
+    
   end
 end

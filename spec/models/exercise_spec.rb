@@ -30,7 +30,7 @@ describe Exercise do
     describe "workout associations" do
       
       before(:each) do
-        @workout = Factory(:workout, user_id: @trainer.id)
+        @workout = Factory(:workout, user: @trainer)
       end
       
       it "should have a workout attribute" do

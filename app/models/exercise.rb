@@ -10,10 +10,14 @@ class Exercise < ActiveRecord::Base
   validates_presence_of :description, :on => :create, :message => "can't be blank"
   
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
+  EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]
   
-  def role_symbols
-    [role.to_sym]
+  def body_parts_symbols
+    [body_parts.to_sym]
   end
   
+  def equipment_symbols
+    [equipment.to_sym]
+  end
 end
 

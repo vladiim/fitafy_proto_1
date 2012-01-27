@@ -1,12 +1,18 @@
 %p
   Used in
-  = link_to "#{pluralize(@workout.bookings.count, 'Booking')}", workout_bookings_path(@workout, @booking)
+  - if @workout.bookings.empty?
+    0 workouts
+  - else
+    = link_to "#{pluralize(@workout.bookings.count, 'Booking')}", workout_bookings_path(@workout, @booking)
   | 
   = link_to "Create a Booking", new_booking_path(workout: @workout)
-  - if can? :manage, Workout
-    |
-    = link_to "Edit", edit_workout_path(@workout)
-    |
-    = link_to "Delete", @workout, method: :delete, confirm: "Are you sure you want to delete the workout?"
+
 
 = render 'shared/workout_exercises'
+
+- if can? :manage, Workout
+  Manage 
+  = "#{@title}:"
+  = link_to "Edit", edit_workout_path(@workout)
+  |
+  = link_to "Delete", @workout, method: :delete, confirm: "Are you sure you want to delete the workout?"

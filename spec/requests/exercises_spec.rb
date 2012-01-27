@@ -17,6 +17,7 @@ describe "Excerses" do
     before(:each) do
       @trainer = new_trainer      
       @exercise = Factory(:exercise, user_id: @admin.id)
+      @workout = @admin.workouts.create!(title: "Testing", exercise_ids: @exercise.id)
     end
     
     it "visits an exercise page as a trainer" do
@@ -25,6 +26,11 @@ describe "Excerses" do
       click_link("#{@exercise.title}")
       page.should have_css("h2", text: "#{@exercise.title}")
       page.should have_content("Description: #{@exercise.description}")
+      page.should have_content(@exercise.body_part)
+      page.should have_content(@exercise.equipment)
+      page.should have_content(@exercise.cues)
+      click_link("1 Workout")
+      page.should have_content(@workout.title)
     end
     
     it "edits an exercise as an admin" do
@@ -54,10 +60,6 @@ describe "Excerses" do
     end
     
     describe "exercise.workouts" do
-      
-      before(:each) do
-        @workout = Factory(:workout, exercise_ids: @exercise.id, user: @admin)
-      end
       
       it "can see all the workouts associated to an exercise" do
         integration_sign_in(@admin)

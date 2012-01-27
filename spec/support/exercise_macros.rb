@@ -6,6 +6,8 @@ module ExerciseMacros
     fill_in "exercise_title", with: "Dumbell Shoulder Press"
     fill_in "exercise_description", with: "Get two dumbells and press!" 
     select("Back", from: "exercise_body_part")
+    select("Dumbells", from: "exercise_equipment")    
+    fill_in "exercise_cues", with: "You gotta remember to do stuff with this workout yo" 
     click_button("Create New Exercise")
   end
   

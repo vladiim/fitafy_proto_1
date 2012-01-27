@@ -6,6 +6,13 @@
 
   = f.input :description, as: :text, input_html: { rows: 5 }, placeholder: "Lie flat on the bench with the feet firmly pressing into the floor. Place your grip on the bar slightly wider than shoulder width. Remove the bar from the supports."
 
-  = f.input :body_part, collection: Exercise::BODY_PARTS, placeholder: "Choose Body Part"
+  .row
+    .four.columns
+      = f.input :body_part, collection: Exercise::BODY_PARTS, prompt: "Select body part"
+    .four.columns
+      = f.input :equipment, collection: Exercise::EQUIPMENT, prompt: "Select equipment"
+  
+  .row
+    = f.input :cues, input_html: { rows: 6 }, placeholder: "Use a wider grip with the elbows perpendicular to the torso to focus on the chest."
 
-  = f.button :submit, "#{@title}", :class => "a button"
+    = f.button :submit, "#{@title}", :class => "a button"

@@ -9,7 +9,7 @@ describe Exercise do
     }
   end
   
-  describe "associations" do
+  describe "created exercise" do
     
     before(:each) do
       @exercise = @trainer.exercises.create(@attr)
@@ -37,18 +37,18 @@ describe Exercise do
         @exercise.should respond_to(:workouts)
       end
     end
+    
+    describe "validations" do
+
+      it "should validate the presence of a title" do
+        @exercise = @trainer.exercises.create(@attr.merge(title: ""))
+        @exercise.should be_invalid
+      end
+
+      it "should validate the presence of a description" do
+        @exercise = @trainer.exercises.create(@attr.merge(description: ""))
+        @exercise.should be_invalid
+      end
+    end
   end    
-  
-  describe "validations" do
-    
-    it "should validate the presence of a title" do
-      @exercise = @trainer.exercises.create(@attr.merge(title: ""))
-      @exercise.should be_invalid
-    end
-    
-    it "should validate the presence of a description" do
-      @exercise = @trainer.exercises.create(@attr.merge(description: ""))
-      @exercise.should be_invalid
-    end
-  end
 end

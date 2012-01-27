@@ -3,13 +3,29 @@
   = @exercise.description
 
 %p
+  %strong Body Part:
+  = @exercise.body_part
+
+%p
+  %strong Equipment:
+  = @exercise.equipment
+
+%p
+  %strong Cues:
+  = @exercise.cues
+
+%p
   Used in
-  = link_to "#{pluralize(@exercise.workouts.count, 'Workout')}", exercise_workouts_path(@exercise, @workouts)
+  - if @exercise.workouts.empty?
+    0 workouts
+  - else
+    = link_to "#{pluralize(@exercise.workouts.count, 'Workout')}", exercise_workouts_path(@exercise, @workouts)
+
   |
   = link_to "Create Booking", new_booking_path
-  | 
+
   - if can? :update, @exercise
     |
-    = link_to "Edit Exercise", edit_exercise_path(@exercise)
+    = link_to "Edit", edit_exercise_path(@exercise)
     |
-    = link_to "Delete Exercise", @exercise, method: :destroy
+    = link_to "Delete", @exercise, method: :destroy

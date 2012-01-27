@@ -1,8 +1,4 @@
 %p
-  %strong Description:
-  = @workout.description
-
-%p
   Used in
   = link_to "#{pluralize(@workout.bookings.count, 'Booking')}", workout_bookings_path(@workout, @booking)
   | 

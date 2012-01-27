@@ -5,6 +5,7 @@ describe "Workouts" do
   before(:each) do
     @trainer = new_trainer
     integration_sign_in(@trainer)
+    @exercise = Factory(:exercise, user_id: @trainer)
     @workout_title = "Da heaps Hardcore Workout"
     @workout_description = "Not for the feignt hearted"
   end
@@ -15,6 +16,7 @@ describe "Workouts" do
     current_path.should eq(new_workout_path)
     fill_in "workout_title", with: @workout_title
     fill_in "workout_description", with: @workout_description
+    check("workout_exercise_ids_")
     click_button("Create Workout")
     page.should have_content("New workout added!")
     page.should have_content("#{@workout_title}")
@@ -23,7 +25,8 @@ describe "Workouts" do
   describe "does stuff with a created workout" do
     
     before(:each) do
-      @workout = Factory(:workout, user_id: @trainer.id)
+      @exercise = Factory(:exercise, user_id: @trainer.id)
+      @workout = Factory(:workout, user_id: @trainer.id, exercise_ids: @exercise.id)
     end
     
     it "visits the workouts page" do
@@ -41,7 +44,7 @@ describe "Workouts" do
     end
     
     it "deletes a workout" do
-      Factory(:workout, user: @trainer)
+      Factory(:workout, user: @trainer, exercise_ids: @exercise.id)
       visit workouts_path
       click_link("Delete Workout")
       page.should have_content("Workout deleted")

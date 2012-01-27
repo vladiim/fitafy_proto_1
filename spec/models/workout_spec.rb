@@ -5,8 +5,10 @@ describe Workout do
   before(:each) do
     @trainer = Factory(:user)
     @client = Factory(:user)
-    @attr = { title:       "Workout 1",
-              description:  "Workout Description"
+    @exercise = Factory(:exercise)
+    @attr = { title:        "Workout 1",
+              description:  "Workout Description",
+              exercise_ids:  @exercise.id
     }
   end
   
@@ -42,7 +44,7 @@ describe Workout do
     describe "bookings associations" do
       
       before(:each) do
-        @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, wo_date: 1.week.from_now)
+        @booking = Factory(:booking, workout_id: @workout.id, trainer_id: @trainer.id, client_id: @client.id, wo_date: 1.week.from_now)
       end
       
       it "should have a booking attribute" do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120121204959) do
+ActiveRecord::Schema.define(:version => 20120127025505) do
 
   create_table "bookings", :force => true do |t|
     t.integer  "trainer_id"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20120121204959) do
     t.date     "wo_date"
     t.time     "wo_time"
     t.integer  "workout_id"
-    t.string   "message"
+    t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -33,12 +33,12 @@ ActiveRecord::Schema.define(:version => 20120121204959) do
   create_table "exercises", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
-    t.string   "description"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "body_part"
     t.string   "equipment"
-    t.string   "cues"
+    t.text     "cues"
   end
 
   add_index "exercises", ["body_part"], :name => "index_exercises_on_body_part"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20120121204959) do
   create_table "workouts", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
-    t.string   "description"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

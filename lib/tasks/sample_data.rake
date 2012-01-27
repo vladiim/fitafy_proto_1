@@ -86,8 +86,8 @@ end
 
 def make_workouts
   @trainer = User.first  
-  5.times.each do |n|
-    @trainer.workouts.create(title: "#{n} workout", description: Faker::Lorem.sentence(3), exercise_id: n)
+  Array(1..5).each do |n|
+    @trainer.workouts.create(title: "#{n} workout", description: Faker::Lorem.sentence(3), exercise_ids: n)
   end
 end
 

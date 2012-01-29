@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "UserSideBars" do
   
   before(:each) do
-    @trainer = new_trainer
+    @trainer = Factory(:user)
     integration_sign_in(@trainer)
   end
   
@@ -24,7 +24,7 @@ describe "UserSideBars" do
   describe "experienced trainer" do
     
     before(:each) do
-      @client = new_client
+      @client = Factory(:client)
       @trainer.train!(@client)
       @workout = Factory(:workout, user: @trainer)
     end

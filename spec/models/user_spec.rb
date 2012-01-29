@@ -4,7 +4,7 @@ describe User do
   
   before(:each) do
     @trainer = Factory(:user)
-    @client = Factory(:user)
+    @client = Factory(:client)
     @trainer.train!(@client)
   end
   

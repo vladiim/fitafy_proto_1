@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Signups" do
   
   before(:each) do
-    @trainer = new_trainer
+    @trainer = Factory(:user)
   end
   
   it "signs up as a new trainer from the homepage" do
@@ -62,7 +62,7 @@ describe "Signups" do
   describe "signed in and dealing with other users" do
     
     before(:each) do
-      @client = new_client
+      @client = Factory(:client)
       @trainer.train!(@client)
     end
     

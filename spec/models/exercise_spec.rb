@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Exercise do
   before(:each) do
-    @trainer = Factory.build(:user)
-    @trainer.save_without_session_maintenance
+    @trainer = Factory(:user)
     @attr = { title: "Shoulder Press", 
               description: "Push da weight man"
     }

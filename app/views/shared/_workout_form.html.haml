@@ -1,0 +1,3 @@
+.workout
+  - simple_fields_for "booking[workout_attributes][]", workout do |workout_form|
+	= workout_form.input :title, as: :collection

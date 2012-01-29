@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Excerses" do
   before(:each) do
-    @admin = new_admin
+    @admin = Factory(:admin)
   end
   
   it "creates a new excercise only as an admin user" do
@@ -15,7 +15,7 @@ describe "Excerses" do
   describe "does stuff with a created exercise" do
     
     before(:each) do
-      @trainer = new_trainer      
+      @trainer = Factory(:user)      
       @exercise = Factory(:exercise, user_id: @admin.id)
       @workout = @admin.workouts.create!(title: "Testing", exercise_ids: @exercise.id)
     end

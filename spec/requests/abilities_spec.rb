@@ -5,7 +5,7 @@ describe "Abilities" do
   describe "admin" do
     
     before(:each) do
-      @admin = new_admin
+      @admin = Factory(:admin)
       @title = "Shoulddddr"
       @description = "Push da shouldrrrr mon!"
     end

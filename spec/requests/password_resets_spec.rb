@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Password Resets" do
   
   before(:each) do
-    @trainer = new_trainer
+    @trainer = Factory(:user)
   end
   
   it "sends an email with a link to reset the password" do

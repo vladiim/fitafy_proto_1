@@ -4,7 +4,7 @@ describe Workout do
   
   before(:each) do
     @trainer = Factory(:user)
-    @client = Factory(:user)
+    @client = Factory(:client)
     @exercise = Factory(:exercise)
     @attr = { title:        "Workout 1",
               description:  "Workout Description",

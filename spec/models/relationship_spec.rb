@@ -4,7 +4,7 @@ describe Relationship do
   
   before(:each) do
     @trainer = Factory(:user)
-    @client = Factory(:user)
+    @client = Factory(:client)
     @relationship = @trainer.relationships.build(client_id: @client.id)
   end
   

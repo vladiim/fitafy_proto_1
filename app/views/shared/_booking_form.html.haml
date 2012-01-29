@@ -5,12 +5,15 @@
   .row#booking_top_of_form
     .four.columns#booking_form_client
       = f.association :client, collection: current_user.training.collect { |c| [c.username, c.id] }, prompt: "Select client"
-    
+
     .four.columns#booking_form_workout
       - if @workout
-        = f.association :workout, collection: current_user.workouts.collect { |w| [w.title, w.id] }, selected: @workout.title
+        = f.association :workout, collection: @workouts, prompt: "Select workout", selected: @workout.title 
       - else
-        = f.association :workout, collection: current_user.workouts.collect { |w| [w.title, w.id] }, prompt: "Select workout"
+        = f.association :workout, collection: @workouts, prompt: "Select workout"
+      %p
+        or
+        = link_to "Create New", new_workout_path
 
   .row#booking_middle_of_form
     .four.columns#booking_form_date

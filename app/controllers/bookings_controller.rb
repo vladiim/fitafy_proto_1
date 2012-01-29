@@ -9,12 +9,12 @@ class BookingsController < ApplicationController
     @title = "Create Booking"
     @booking = current_user.bookings.new
     @workout = Workout.find(params[:workout]) if params[:workout]
+    @workouts = current_user.workouts.collect { |w| [w.title, w.id] }
   end
 
   def create 
-    @user = current_user
-    @booking = @user.bookings.new(params[:booking])
-    if @booking.save
+    @booking = current_user.bookings.new(params[:booking])
+    if @booking.save 
       flash[:success] = "Booking created!"
       redirect_to booking_path(@booking)
     else

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Booking do
   before(:each) do
     @trainer = Factory(:user)
-    @client = Factory(:user)
+    @client = Factory(:client)
     @workout = Factory(:workout)
     @date_time = 1.day.from_now
     @booking = @trainer.bookings.create!(client_id: @client.id, workout_id: @workout.id, wo_date: 1.week.from_now)

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Navigations" do
   
   before (:each) do
-    @trainer = new_trainer
+    @trainer = Factory(:user)
     integration_sign_in(@trainer)
   end
   

@@ -4,8 +4,8 @@ require "cancan/matchers"
 describe Ability do
   
   before(:each) do
-    @admin = Factory(:user, admin: true)
-    @user_client = Factory(:user, role: "client_role")
+    @admin = Factory(:admin)
+    @user_client = Factory(:client)
     @exercise = Factory(:exercise, user: @admin)
     @workout = Factory(:workout, user: @admin)
     @booking = Factory(:booking, trainer: @admin)
@@ -38,7 +38,7 @@ describe Ability do
   describe "trainer_role" do
     
     before(:each) do
-      @trainer = Factory(:user, role: "trainer_role")
+      @trainer = Factory(:user)
       @trainer_ability = Ability.new(@trainer)
     end
     
@@ -83,7 +83,7 @@ describe Ability do
   describe "client_role" do
     
     before(:each) do
-      @client = Factory(:user, role: "client_role")
+      @client = Factory(:client)
       @client_ability = Ability.new(@client)
     end
     

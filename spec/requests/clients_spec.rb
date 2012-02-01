@@ -44,7 +44,7 @@ describe "Clients" do
     describe "client bookings" do
         
       before(:each) do
-        @booking = Factory(:booking, client: @client, trainer: @trainer, wo_time: "12:00", wo_date: 1.day.from_now)
+        @booking = Factory(:booking, client_id: @client.id, trainer_id: @trainer.id, wo_time: "12:00", wo_date: 1.day.from_now)
       end
         
       it "looks at which bookings a client has" do
@@ -52,8 +52,8 @@ describe "Clients" do
         click_link("Clients: 1")
         click_link("1 Booking")
         page.should have_content(@booking.booking_time)
-        click_link("Booking on #{@booking.booking_date}")
-        current_path.should eq(booking_path(@booking))
+        # click_link("Booking on #{@booking.wo_date}")
+        current_path.should eq(user_reverse_bookings_path(@client))
         visit user_path(@client)
         click_link("1 Booking")
         current_path.should eq(user_reverse_bookings_path(@client))

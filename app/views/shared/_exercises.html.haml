@@ -6,6 +6,7 @@
       %a{href: "#"} 
         = body_part
         .flyout.small
+          = hidden_field_tag "workout[exercise_ids][]", nil
           - for exercise in Exercise.where(body_part: "#{body_part}")
-            = check_box_tag "workout[exercise_ids][]", exercise.id
-            = exercise.title
+            = check_box_tag "workout[exercise_ids][]", exercise.id, @workout.exercise_ids.include?(exercise.id), id: dom_id(exercise)
+            = label_tag dom_id(exercise), exercise.title

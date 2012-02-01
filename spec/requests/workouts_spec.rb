@@ -16,7 +16,7 @@ describe "Workouts" do
     current_path.should eq(new_workout_path)
     fill_in "workout_title", with: @workout_title
     fill_in "workout_description", with: @workout_description
-    check("workout_exercise_ids_")
+    check("exercise_#{@exercise.id}")
     click_button("Create Workout")
     page.should have_content("New workout added!")
     page.should have_content("#{@workout_title}")
@@ -61,8 +61,8 @@ describe "Workouts" do
       it "adds an exercise to the workout" do
         visit new_workout_path
         fill_in"workout_title", with: @workout_title
-        fill_in"workout_description", with: @workout_description        
-        check("workout_exercise_ids_")
+        fill_in"workout_description", with: @workout_description               
+        check("exercise_#{@exercise.id}")
         click_button("Create Workout")
         page.should have_content("New workout added!")        
         page.should have_content(@exercise.title)

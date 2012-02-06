@@ -6,7 +6,7 @@ describe Booking do
     @client = Factory(:client)
     @workout = Factory(:workout)
     @date_time = 1.day.from_now
-    @booking = @trainer.bookings.create!(client_id: @client.id, workout_id: @workout.id, wo_date: 1.week.from_now)
+    @booking = @trainer.bookings.create!(client_id: @client.id, workout: @workout, wo_date: 1.week.from_now)
   end
   
   describe "associations" do
@@ -20,17 +20,14 @@ describe Booking do
       it "booking client should be the client" do
         @booking.client.should eq(@client)
       end
+      
     end
     
     describe "workout associations" do
       
       it "booking workout should be the booking" do
-        @booking.workout.should eq(@workout)
+        @booking.workout.id.should eq(@workout.id)
       end
-      
-      # it "should have a booking_details method" do
-      #   @booking.should respond_to(:workout_details)
-      # end
     end
   end
 end

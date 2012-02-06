@@ -44,11 +44,11 @@ describe Workout do
     describe "bookings associations" do
       
       before(:each) do
-        @booking = Factory(:booking, workout_id: @workout.id, trainer_id: @trainer.id, client_id: @client.id, wo_date: 1.week.from_now)
+        @booking = Factory(:booking, workout: @workout, trainer_id: @trainer.id, client_id: @client.id, wo_date: 1.week.from_now)
       end
       
       it "should have a booking attribute" do
-        @workout.should respond_to(:bookings)
+        @workout.should respond_to(:booking)
       end
     end
   end

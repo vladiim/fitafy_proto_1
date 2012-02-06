@@ -54,6 +54,5 @@ Factory.define :booking do |booking|
   booking.client { |c| c.association(:user) }    
   booking.wo_date 3.days.from_now
   booking.wo_time Time.now
-  booking.association(:workout, factory: :workout)
   booking.sequence(:message) { |n| "#{n} message for the #{n}th time broooo" }
 end

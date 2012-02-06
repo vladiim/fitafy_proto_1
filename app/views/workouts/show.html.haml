@@ -1,11 +1,11 @@
 %p
-  Used in
-  - if @workout.bookings.empty?
-    0 workouts
-  - else
-    = link_to "#{pluralize(@workout.bookings.count, 'Booking')}", workout_bookings_path(@workout, @booking)
-  | 
-  = link_to "Create a Booking", new_booking_path(workout: @workout)
+  / Used in
+  / - if @workout.booking?
+  /   0 workouts
+  / - else
+  /   = link_to "#{pluralize(@workout.bookings.count, 'Booking')}", workout_bookings_path(@workout, @booking)
+  / | 
+  / = link_to "Create a Booking", new_booking_path(workout: @workout)
 
 
 = render 'shared/workout_exercises'

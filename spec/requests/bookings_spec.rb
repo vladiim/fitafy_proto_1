@@ -14,27 +14,26 @@ describe "Bookings" do
     visit root_path
     @trainer.train!(@client)
     integration_sign_in(@trainer)
-    page.should have_css("label", text: "Client")
-    select("#{@client.username}", from: "booking_client_id")
-    select("#{@workout.title}", from: "workout_id")
-    lambda do # selenium to select a jquery date until then use this shithouse test
-      @trainer.bookings.create(client_id: @client.id, workout: @workout, wo_date: 1.week.from_now)
-    end.should change(Booking, :count).by(1)
+    page.should have_css("label",   text: "Client")
+    select("#{@client.username}",   from: "booking_client_id")
+    select("#{@workout.title}",     from: "workout_id")
+    fill_in "booking_wo_date",      with: 1.day.from_now
+    click_button "Create Booking"
+    page.should have_content("Booking created")
   end
   
   describe "does stuff with an exsisting booking" do
     
     before(:each) do
-      @booking = Factory(:booking, client: @client, trainer: @trainer, wo_time: "05:45")
+      @booking = Factory(:booking, client: @client, trainer: @trainer, wo_time: "05:45", workout: @workout)
     end
           
     it "shows the details for the booking" do
       sign_in_visit_booking(@trainer, @booking)
-      # page.should have_content(@booking.booking_date)
+      page.should have_content(@booking.booking_date)
       page.should have_content(@booking.booking_time)
-      page.should have_content(@booking.message)
-      # page.should have_css("a", text: @booking.workout.title)
-      click_link("#{@client.username}")
+      page.should have_css("a", text: @booking.workout.title)
+      click_link("#{@client.username.titleize}")
       page.should have_css("h2", text: @client.username)
     end
     
@@ -49,7 +48,7 @@ describe "Bookings" do
     it "edits a booking from the index page" do
       integration_sign_in(@trainer)      
       click_link("Bookings")
-      click_link("#{@booking.client.username}")
+      click_link("#{@booking.client.username.titleize}")
       select("#{@new_workout.title}", from: "workout_id")
       click_button("Edit Booking")
       page.should have_content("Booking updated")

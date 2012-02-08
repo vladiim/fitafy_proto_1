@@ -2,7 +2,7 @@
 
 %p
   %strong Client:
-  = link_to "#{@booking.client.username}", user_path(@booking.client)
+  = link_to "#{@booking.client.username.titleize}", user_path(@booking.client)
 
 - unless @booking.workout.nil?
   %p

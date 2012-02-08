@@ -31,14 +31,14 @@ describe "Clients" do
       integration_sign_in(@trainer)    
       click_link("Clients: #{@trainer.training.count}")
       current_path.should eq(training_user_path(@trainer))
-      page.should have_css("a", text: "#{@client.username}")     
+      page.should have_css("a", text: "#{@client.username.titleize}")     
     end
 
     it "creates a booking with a client from their index page" do
       integration_sign_in(@trainer)    
       click_link("Clients: #{@trainer.training.count}")
       click_link("Create Booking")
-      # page.select('Client').should have_value("#{@client.title}")
+      # page.select('Client').should have_value("#{@client.unsername}")
     end
     
     describe "client bookings" do
@@ -52,7 +52,6 @@ describe "Clients" do
         click_link("Clients: 1")
         click_link("1 Booking")
         page.should have_content(@booking.booking_time)
-        # click_link("Booking on #{@booking.wo_date}")
         current_path.should eq(user_reverse_bookings_path(@client))
         visit user_path(@client)
         click_link("1 Booking")

@@ -17,5 +17,5 @@
     - @exercises.each do |exercise|
       %tbody
         %tr
-          %td= link_to "#{exercise.title.slice(0,1).capitalize + exercise.title.slice(1..-1)}", exercise_path(exercise)
-          %td= exercise.body_part.slice(0,1).capitalize + exercise.body_part.slice(1..-1)
+          %td= link_to "#{exercise.title.titleize}", exercise_path(exercise)
+          %td= exercise.body_part.titleize

@@ -12,7 +12,7 @@
 - else
   / add workout form here
 
-- if @booking.message
+- unless @booking.message.empty?
   %p
     %strong Message:
     = @booking.message

@@ -70,7 +70,22 @@ describe Workout do
     
     it "should require an exercise" do
       @trainer.workouts.build(@attr.merge(exercise_ids: nil)).should be_invalid
+    end    
+  end
+  
+  describe "scopes" do
+    
+    before(:each) do
+      @workout_unique = Factory(:workout, user_id: @trainer, title: "Not unique")
+      @workout_copy = Factory(:workout, user_id: @trainer, title: "Not unique")      
     end
     
+    it "should scope out unique_title" do
+      @trainer.workouts.should respond_to(:unique_title)
+    end
+    
+    it "should only return the unique workout" do
+      @trainer.workouts.unique_title.should_not eq(@workout_copy)
+    end
   end
 end

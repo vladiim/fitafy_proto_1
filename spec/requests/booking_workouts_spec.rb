@@ -14,10 +14,4 @@ describe "BookingWorkouts" do
     sign_in_and_create_booking(@trainer, @client, @workout)
     @trainer.workouts.count.should > first_workout_count
   end
-  
-  it "should only show a workout once in the select dropdown" do
-    sign_in_and_create_booking(@trainer, @client, @workout)
-    visit root_url
-    page.should have_content('test that there is only 1 workout in the selector')
-  end
 end

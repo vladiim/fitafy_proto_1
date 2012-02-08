@@ -1,4 +1,4 @@
-= simple_form_for @booking, html: { :class => "custom" } do |f|
+= simple_form_for @booking do |f|
 
   = f.error_notification
 
@@ -8,7 +8,8 @@
 
     .four.columns#booking_form_workout
       = simple_fields_for :workout do |workout_form|
-        = workout_form.input :id, collection: current_user.workouts.collect { |w| [w.title, w.id] }, label: "Workout", prompt: "Select workout"
+        = workout_form.input :id, collection: current_user.workouts.unique_title, label: "Workout", prompt: "Select workout"
+        / = workout_form.input :id, collection: current_user.workouts.collect { |w| [w.title, w.id] }, label: "Workout", prompt: "Select workout"
 
       / - if @workout
       /   = f.association :workout, collection: @workouts, prompt: "Select workout", selected: @workout.title 

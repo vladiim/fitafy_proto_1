@@ -28,7 +28,6 @@ describe "Bookings" do
       page.should have_content(@booking.booking_time)
       page.should have_css("a", text: @booking.workout.title)
       click_link("#{@client.username.titleize}")
-      page.should have_css("h2", text: @client.username)
     end
     
     it "edits a booking from the booking page" do

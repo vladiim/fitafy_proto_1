@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @title = @user.username
+    @title = @user.username.titleize
   end
     
   def create

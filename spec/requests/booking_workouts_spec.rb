@@ -14,4 +14,15 @@ describe "BookingWorkouts" do
     sign_in_and_create_booking(@trainer, @client, @workout)
     @trainer.workouts.count.should > first_workout_count
   end
+  
+  describe "with a created workout" do
+    before(:each) do
+      sign_in_and_create_booking(@trainer, @client, @workout)      
+    end
+    
+    it "shouldn't show the second workout" do
+      visit root_url
+      options = find(:xpath, '//select[@id="workout_id"]/option[@value]') # .ask_on_stack
+    end
+  end
 end

@@ -15,9 +15,9 @@ class Workout < ActiveRecord::Base
   validates :title, :length => { :maximum => 200 }
   
   # scope :unique_title, select: "DISTINCT title", order: :title
-  scope :unique_title, order(:title)
-                       .select("DISTINCT title")
-                       .select(:id)
+  # scope :unique_title, order(:title)
+  #                      .select("DISTINCT title")
+  #                      .select(:id)
   # scope :unique_title, where: "DISTINCT title"
-
+  scope :unique_title,  select("DISTINCT title").select(:id)
 end

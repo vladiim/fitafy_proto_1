@@ -30,4 +30,39 @@ describe Booking do
       end
     end
   end
+  
+  describe "validations" do
+    
+    before(:each) do
+      @attr = { client:      @client,
+                wo_date:     :tomorrow,
+                wo_time:     Time.now,
+                workout:     @workout
+      }
+    end
+    
+    it "booking must have a trainer_id" do
+      Booking.create(@attr).should be_invalid
+    end
+    
+    it "booking must have a date" do
+      @trainer.bookings.build(@attr.merge(wo_date: "")).should be_invalid
+    end
+    
+    it "doesn't allow bookings in the past" do
+      @trainer.bookings.build(@attr.merge(wo_date: 1.day.ago)).should be_invalid
+    end
+    
+    it "booking must have a time" do
+      @trainer.bookings.build(@attr.merge(wo_time: "")).should be_invalid
+    end
+    
+    it "booking must have a workout" do
+      @trainer.bookings.build(@attr.merge(workout: nil)).should be_invalid
+    end
+    
+    it "booking must have a client" do
+      @trainer.bookings.build(@attr.merge(client: nil)).should be_invalid
+    end
+  end
 end

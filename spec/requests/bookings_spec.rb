@@ -11,14 +11,8 @@ describe "Bookings" do
   end
   
   it "creates a booking" do
-    visit root_path
     @trainer.train!(@client)
-    integration_sign_in(@trainer)
-    page.should have_css("label",   text: "Client")
-    select("#{@client.username}",   from: "booking_client_id")
-    select("#{@workout.title}",     from: "workout_id")
-    fill_in "booking_wo_date",      with: 1.day.from_now
-    click_button "Create Booking"
+    sign_in_and_create_booking(@trainer, @client, @workout)
     page.should have_content("Booking created")
   end
   

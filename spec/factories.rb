@@ -55,4 +55,5 @@ Factory.define :booking do |booking|
   booking.wo_date 3.days.from_now
   booking.wo_time Time.now
   booking.sequence(:message) { |n| "#{n} message for the #{n}th time broooo" }
+  booking.workout(factory: :workout)
 end

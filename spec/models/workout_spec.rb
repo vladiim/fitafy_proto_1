@@ -72,11 +72,4 @@ describe Workout do
       @trainer.workouts.build(@attr.merge(exercise_ids: nil)).should be_invalid
     end    
   end
-  
-  describe "scopes" do
-    
-    it "have a unique_title scope" do
-      @trainer.workouts.should respond_to(:unique_title)
-    end
-  end
 end

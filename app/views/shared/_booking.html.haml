@@ -2,7 +2,7 @@
 
   %ul
     %li
-      %h6= link_to "Booking on #{booking.booking_date}", booking_path(booking)
+      %h6{:datetime => "#{booking.wo_date}#{booking.wo_time}"}= link_to "Booking on #{booking.booking_date}", booking_path(booking)
       = "At #{booking.booking_time}"
       |
       = link_to "For #{booking.client.username.titleize}", edit_booking_path(booking)

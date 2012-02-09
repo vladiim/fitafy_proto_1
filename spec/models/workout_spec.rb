@@ -75,17 +75,8 @@ describe Workout do
   
   describe "scopes" do
     
-    before(:each) do
-      @workout_unique = Factory(:workout, user_id: @trainer, title: "Not unique")
-      @workout_copy = Factory(:workout, user_id: @trainer, title: "Not unique")      
-    end
-    
-    it "should scope out unique_title" do
+    it "have a unique_title scope" do
       @trainer.workouts.should respond_to(:unique_title)
-    end
-    
-    it "should only return the unique workout" do
-      @trainer.workouts.unique_title.should_not eq(@workout_copy)
     end
   end
 end

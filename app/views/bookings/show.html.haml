@@ -1,4 +1,4 @@
-%p=  "On #{@booking.booking_date} " "at #{@booking.booking_time}"
+%p{:datetime => "#{@booking.wo_date}#{@booking.wo_time}"}=  "On #{@booking.booking_date} " "at #{@booking.booking_time}"
 
 %p
   %strong Client:

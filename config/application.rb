@@ -27,7 +27,9 @@ module Fitafy
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
+    # my initial attempt... new approach: allow users to select their timezone
+    # config.time_zone = :isdst
+    # config.active_record.default_timezone = :isdst
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

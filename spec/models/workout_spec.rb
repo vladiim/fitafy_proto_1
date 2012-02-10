@@ -10,13 +10,22 @@ describe Workout do
               description:  "Workout Description",
               exercise_ids:  @exercise.id
     }
+    @workout = Factory(:workout, user_id: @trainer.id)
+  end
+  
+  describe "template" do
+    
+    it "should set a newly created workout as a template" do
+      @workout.template.should be_true
+    end
+    
+    it "should not set a booking's workout as a template" do
+      @booking_workout = Factory(:booking, workout: @workout)
+      @booking_workout.workout.template.should_not be_true
+    end
   end
   
   describe "associations" do
-    
-    before(:each) do
-      @workout = @trainer.workouts.create(@attr)
-    end
     
     describe "user associations" do
     

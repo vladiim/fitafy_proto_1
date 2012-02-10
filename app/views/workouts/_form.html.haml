@@ -1,6 +1,8 @@
 = simple_form_for @workout do |f|
 
   - f.error_notification
+  
+  / = f.input :template, as: :hidden, input_html: { value: true }
 
   = f.input :title, input_html: {size: 50}, placeholder: "The Big Bad Workout"
 

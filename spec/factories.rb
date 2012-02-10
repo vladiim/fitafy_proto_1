@@ -8,14 +8,24 @@ Factory.define :user do |trainer|
   trainer.password_confirmation "password"
   trainer.role "trainer_role"
   trainer.admin false
-  
-  Factory.define :client do |client|
-    client.role "client_role"
-  end
-  
-  Factory.define :admin do |admin|
-    admin.admin true
-  end
+end
+
+Factory.define :client do |client|
+  client.sequence(:username)  { |n| "trainer_#{n}"}
+  client.sequence(:email)  { |n| "trainer_#{n}@email.com"}   
+  client.password "password"
+  client.password_confirmation "password"
+  client.role "client_role"
+  client.admin false
+end
+
+Factory.define :admin do |admin|
+  admin.sequence(:username)  { |n| "trainer_#{n}"}
+  admin.sequence(:email)  { |n| "trainer_#{n}@email.com"}   
+  admin.password "password"
+  admin.password_confirmation "password"
+  admin.role "trainer_role"
+  admin.admin true
 end
 
 Factory.define :exercise do |exercise|

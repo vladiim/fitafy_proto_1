@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
   
-  after_create :manage_template_value
+  # after_create :manage_template_value
   
   attr_accessible :title, :description, :exercise_ids, :booking_id
   
@@ -24,11 +24,11 @@ class Workout < ActiveRecord::Base
   # scope :unique_title,  select("DISTINCT title").select(:id)
   scope :unique_title, select("id, title")
   
-  protected
-  
-    def manage_template_value
-      if !booking_id.nil?
-        self.toggle!(:template) 
-      end
-    end
+  # protected
+  # 
+  #   def manage_template_value
+  #     if !booking_id.nil?
+  #       self.toggle!(:template) 
+  #     end
+  #   end
 end

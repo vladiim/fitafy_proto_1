@@ -11,8 +11,8 @@ Factory.define :user do |trainer|
 end
 
 Factory.define :client do |client|
-  client.sequence(:username)  { |n| "trainer_#{n}"}
-  client.sequence(:email)  { |n| "trainer_#{n}@email.com"}   
+  client.sequence(:username)  { |n| "client_#{n}"}
+  client.sequence(:email)  { |n| "client_#{n}@email.com"}   
   client.password "password"
   client.password_confirmation "password"
   client.role "client_role"
@@ -20,8 +20,8 @@ Factory.define :client do |client|
 end
 
 Factory.define :admin do |admin|
-  admin.sequence(:username)  { |n| "trainer_#{n}"}
-  admin.sequence(:email)  { |n| "trainer_#{n}@email.com"}   
+  admin.sequence(:username)  { |n| "admin_#{n}"}
+  admin.sequence(:email)  { |n| "admin_#{n}@email.com"}   
   admin.password "password"
   admin.password_confirmation "password"
   admin.role "trainer_role"

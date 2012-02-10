@@ -6,8 +6,10 @@ class Exercise < ActiveRecord::Base
   
   has_and_belongs_to_many :workouts
   
-  validates_presence_of :title, :on => :create, :message => "can't be blank"
-  validates_presence_of :description, :on => :create, :message => "can't be blank"
+  validates :title, presence: true #, 
+  #                   uniqueness: { case_sensitive: false }
+                    
+  validates_presence_of :description, message: "can't be blank"
   
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
   EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]

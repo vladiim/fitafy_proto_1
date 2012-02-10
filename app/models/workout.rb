@@ -19,5 +19,6 @@ class Workout < ActiveRecord::Base
   #                      .select("DISTINCT title")
   #                      .select(:id)
   # scope :unique_title, where: "DISTINCT title"
-  scope :unique_title,  select("DISTINCT title").select(:id)
+  # scope :unique_title,  select("DISTINCT title").select(:id)
+  scope :unique_title, select("id, title")
 end

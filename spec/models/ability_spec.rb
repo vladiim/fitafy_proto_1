@@ -8,7 +8,6 @@ describe Ability do
     @user_client = Factory(:client)
     @exercise = Factory(:exercise, user: @admin)
     @workout = Factory(:workout, user: @admin)
-    @booking = Factory(:booking, trainer: @admin)
   end
   
   describe "guest" do

@@ -24,8 +24,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @booking = @user.bookings.find(params[:id]) 
+    @booking = current_user.bookings.find(params[:id]) 
     @workout = @booking.workout
     @exercises = @workout.exercises unless @workout.nil?
     @client = User.find(@booking.client_id)

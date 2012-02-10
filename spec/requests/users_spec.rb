@@ -71,7 +71,6 @@ describe "Signups" do
       click_link("Clients")
       click_link(@client.username.titleize)
       current_path.should eq(user_path(@client))
-      page.should have_css("h2", text: @client.username)
     end
   end
 end

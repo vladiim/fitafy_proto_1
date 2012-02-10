@@ -20,8 +20,13 @@ describe Workout do
     end
     
     it "should not set a booking's workout as a template" do
-      @booking_workout = Factory(:booking, workout: @workout)
-      @booking_workout.workout.template.should_not be_true
+      @booking = Factory(:booking, workout: @workout)
+      @booking.workout.template.should_not be_true
+    end
+    
+    it "should have a scope that returns only templated workouts" do
+      @not_template = Factory(:workout, user_id: @trainer.id, template: false)
+      @trainer.workouts.only_templates.should_not include(@not_template)
     end
   end
   

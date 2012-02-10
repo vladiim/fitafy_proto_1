@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
   
-  # after_create :manage_template_value
+  after_create :manage_template_value
   
   attr_accessible :title, :description, :exercise_ids, :booking_id
   
@@ -16,19 +16,11 @@ class Workout < ActiveRecord::Base
   
   validates :title, :length => { :maximum => 200 }
   
-  # scope :unique_title, select: "DISTINCT title", order: :title
-  # scope :unique_title, order(:title)
-  #                      .select("DISTINCT title")
-  #                      .select(:id)
-  # scope :unique_title, where: "DISTINCT title"
-  # scope :unique_title,  select("DISTINCT title").select(:id)
-  scope :unique_title, select("id, title")
+  scope :only_templates, select("id, title").where(template: true)
   
-  # protected
-  # 
-  #   def manage_template_value
-  #     if !booking_id.nil?
-  #       self.toggle!(:template) 
-  #     end
-  #   end
+  protected
+  
+    def manage_template_value
+      self.toggle!(:template) unless booking_id.nil?
+    end
 end

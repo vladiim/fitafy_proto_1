@@ -10,7 +10,7 @@ Factory.define :user do |trainer|
   trainer.admin false
 end
 
-Factory.define :client do |client|
+Factory.define :client, :class => "User" do |client|
   client.sequence(:username)  { |n| "client_#{n}"}
   client.sequence(:email)  { |n| "client_#{n}@email.com"}   
   client.password "password"
@@ -19,7 +19,7 @@ Factory.define :client do |client|
   client.admin false
 end
 
-Factory.define :admin do |admin|
+Factory.define :admin, :class => "User" do |admin|
   admin.sequence(:username)  { |n| "admin_#{n}"}
   admin.sequence(:email)  { |n| "admin_#{n}@email.com"}   
   admin.password "password"

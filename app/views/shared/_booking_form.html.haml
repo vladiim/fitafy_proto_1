@@ -8,13 +8,8 @@
 
     .four.columns#booking_form_workout
       = simple_fields_for :workout do |workout_form|
-        = workout_form.input :id, collection: current_user.workouts.unique_title, label: "Workout", prompt: "Select workout"
-        / = workout_form.input :id, collection: current_user.workouts.collect { |w| [w.title, w.id] }, label: "Workout", prompt: "Select workout"
+        = workout_form.input :id, collection: current_user.workouts.only_templates, label: "Workout", prompt: "Select workout"
 
-      / - if @workout
-      /   = f.association :workout, collection: @workouts, prompt: "Select workout", selected: @workout.title 
-      / - else
-      /   = f.association :workout, collection: @workouts, prompt: "Select workout"
       %p
         or
         = link_to "Create New", new_workout_path

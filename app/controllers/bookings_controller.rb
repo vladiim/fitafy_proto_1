@@ -8,7 +8,7 @@ class BookingsController < ApplicationController
   def new
     @title = "Create Booking"
     @booking = current_user.bookings.new
-    # @workout = Workout.find(params[:workout]) if params[:workout]
+    @workout = Workout.find(params[:workout]) if params[:workout]
   end
 
   def create 

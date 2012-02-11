@@ -6,8 +6,9 @@ class Exercise < ActiveRecord::Base
   
   has_and_belongs_to_many :workouts
   
-  validates :title, presence: true #, 
-  #                   uniqueness: { case_sensitive: false }
+  validates :title, presence: true , 
+                    uniqueness: { case_sensitive: false },
+                    length: { minimum: 4 }
                     
   validates_presence_of :description, message: "can't be blank"
   

@@ -8,6 +8,7 @@ class Ability
        admin_rules if @user.admin?
        trainer_rules if @user.role == "trainer_role"
        client_rules if @user.role == "client_role"
+       invited_rules if @user.role == "invited"
     else
       @guest = User.new
       guest_rules
@@ -30,5 +31,9 @@ class Ability
   
   def client_rules
     can :read, :all
+  end
+  
+  def invited_rules
+    
   end
 end

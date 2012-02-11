@@ -1,59 +1,63 @@
 require "authlogic/test_case"
 include Authlogic::TestCase
 
-Factory.define :user do |trainer|
-  trainer.sequence(:username)  { |n| "trainer_#{n}"}
-  trainer.sequence(:email)  { |n| "trainer_#{n}@email.com"}   
-  trainer.password "password"
-  trainer.password_confirmation "password"
-  trainer.role "trainer_role"
-  trainer.admin false
-end
-
-Factory.define :client, :class => "User" do |client|
-  client.sequence(:username)  { |n| "client_#{n}"}
-  client.sequence(:email)  { |n| "client_#{n}@email.com"}   
-  client.password "password"
-  client.password_confirmation "password"
-  client.role "client_role"
-  client.admin false
-end
-
-Factory.define :admin, :class => "User" do |admin|
-  admin.sequence(:username)  { |n| "admin_#{n}"}
-  admin.sequence(:email)  { |n| "admin_#{n}@email.com"}   
-  admin.password "password"
-  admin.password_confirmation "password"
-  admin.role "trainer_role"
-  admin.admin true
-end
-
-Factory.define :exercise do |exercise|
-  exercise.sequence(:title) { |n| "#{n} Bench Press"}
-  exercise.sequence(:description) { |n| "#{n} Do da bench press with your pectorials!!!" }
-  exercise.association(:user, factory: :user)
-  exercise.sequence(:body_part) { |n| "Back"}
-  exercise.sequence(:equipment) { |n| "#{n} Equipment"}  
-  exercise.sequence(:cues) { |n| "#{n} Cues"}  
-end
-
-Factory.define :workout do |workout|
-  workout.sequence(:title) { |n| "#{n} Da heaps Hardcore Workout"}
-  workout.sequence(:description) { |n| "#{n} Not for the feignt hearted" }
-  workout.association(:user, factory: :user)
-  workout.exercises {
-      count = 0
-      Array(1..3).sample.times.map do
-        Factory.create(:exercise, title: "Exercise #{count += 1}")
-      end
-    }
-end
-
-Factory.define :booking do |booking|
-  booking.trainer { |t| t.association(:user) }
-  booking.client { |c| c.association(:user) }    
-  booking.wo_date 3.days.from_now
-  booking.wo_time Time.now
-  booking.sequence(:message) { |n| "#{n} message for the #{n}th time broooo" }
-  booking.workout(factory: :workout)
+FactoryGirl.define do
+  
+  sequence :username do |n|
+    "user#{n}"
+  end
+  
+  sequence :title do |n|
+    "I'm The #{n} Badass Tittle"
+  end
+  
+  sequence :description do |n|
+    "I'm The #{n} Badass Description"
+  end
+  
+  sequence :equipment do |n|
+    "#{n} Equipment"
+  end
+  
+  factory :user do 
+    username    { FactoryGirl.generate(:username) }
+    email       { "#{username}@email.com"}
+    password    "password"
+    password_confirmation "password"
+    role        "trainer_role"
+    admin       false
+    
+    factory :client do
+      role      "client_role"
+    end
+    
+    factory :admin do
+      admin     true
+    end
+  end
+  
+  factory :exercise do
+    title              { FactoryGirl.generate(:title) }
+    description        { FactoryGirl.generate(:description) }
+    association(:user) { FactoryGirl.generate(:user) }
+    body_part          "Back"
+    equipment          { FactoryGirl.generate(:equipment) }
+    cues               "Some cues up in this mo fo"
+  end
+  
+  factory :workout do
+    title              { FactoryGirl.generate(:title) }
+    description        { FactoryGirl.generate(:description) }
+    association(:user) { FactoryGirl.generate(:user) }
+    exercises          { |exercises| [exercises.association(:exercise)] }
+  end
+  
+  factory :booking do
+    trainer            { |trainer| trainer.association(:user) }
+    client             { |client| client.association(:client) }
+    wo_date            { 3.days.from_now }    
+    wo_time            { Time.now }
+    message            { FactoryGirl.generate(:description) }
+    association(:workout) { FactoryGirl.generate(:workout) }
+  end
 end

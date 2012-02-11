@@ -44,10 +44,15 @@ describe Exercise do
         @exercise.should be_invalid
       end
       
-      it "should validate the uniqueness of a title" #do
-        # @exercise = @trainer.exercises.create(@attr)
-        # @trainer.exercises.create(title: @exercise.title, description: "new").should be_invalid
-      #end
+      it "should validate the uniqueness of a title" do
+        @exercise = @trainer.exercises.create(@attr)
+        @trainer.exercises.create(title: @exercise.title, description: "new").should be_invalid
+      end
+      
+      it "should not allow titles equal to or under 3 characters" do
+        @exercise = @trainer.exercises.create(@attr.merge(title: "123"))
+        @exercise.should be_invalid
+      end
       
       it "should validate the presence of a description" do
         @exercise = @trainer.exercises.create(@attr.merge(description: ""))

@@ -19,7 +19,7 @@ class ExercisesController < ApplicationController
   end
 
   def show
-    @title = "#{@exercise.title}"
+    @title = "#{@exercise.title.titleize}"
   end
 
   def edit

@@ -6,6 +6,10 @@
     .four.columns#booking_form_client
       = f.association :client, collection: current_user.training.collect { |c| [c.username, c.id] }, prompt: "Select client"
 
+      %p
+        or
+        = link_to "Invite New", new_invitation_path
+
     .four.columns#booking_form_workout
       = simple_fields_for :workout do |workout_form|
         = workout_form.input :id, collection: current_user.workouts.only_templates, label: "Workout", prompt: "Select workout"

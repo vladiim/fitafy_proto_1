@@ -6,6 +6,7 @@ Fitafy::Application.routes.draw do
   resources :password_resets
   resources :relationships, only: [:create, :destroy]
   resources :bookings
+  resources :invitations, only: [:new, :create]
   
   resources :exercises do
     resources :workouts, controller: 'exercises/workouts', only: :index
@@ -22,8 +23,10 @@ Fitafy::Application.routes.draw do
     end
   end
   
+  match 'signup', to: "user#new"
   match 'signin', to: "user_sessions#new"
   match 'signout', to: "user_sessions#destroy"
+  match'/signup/:invitation_token', to: "users#new"
   
   get "pages/home"
   root to: 'pages#home'

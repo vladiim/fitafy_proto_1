@@ -14,11 +14,14 @@ class User < ActiveRecord::Base
   
   has_many :exercises, :dependent => :destroy
   
+  has_many :invitations, class_name: "Invitation", foreign_key: "trainer_id"
+  belongs_to :invitation
+  
   has_many :bookings, :foreign_key => "trainer_id"
   has_many :reverse_bookings, :class_name => "Booking", :foreign_key => "client_id"
   
-  ROLES = %w[trainer_role client_role invited_role]
-   
+  ROLES = %w[trainer_role client_role invited_role] 
+
   def train!(client)
     relationships.create!(:client_id => client.id)
   end
@@ -45,6 +48,6 @@ class User < ActiveRecord::Base
   end
   
   def to_param
-    "#{id}_#{username.parameterize}"
+    "#{id}_#{username.parameterize}" 
   end
 end

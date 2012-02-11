@@ -16,8 +16,32 @@ describe "Clients" do
     page.should have_content("Client removed")
   end
   
-  it "adds a new client to the system" do
-
+  describe "new client" do
+    
+    before(:each) do
+      @client_email = FactoryGirl.generate(:email)
+    end
+    
+    it "invites a new client" do
+      integration_sign_in(@trainer)
+      click_link "Invite New"
+      fill_in "invitation_recipient_email", with: @client_email
+      click_button("Invite Client")
+      page.should have_content("Client invited!")
+      last_email.to.should include(@client_email)
+      last_email.body.should include(@trainer.username.titleize)      
+    end
+    
+    it "client creates account from invite" do
+      
+      @invitation = @trainer.invitations.create(recipient_email: @client_email)
+    end
+    
+    it "finds an exsisting client"
+    
+    it "creates a booking with a client that hasn't signed up yet"
+    
+    it "relates a signed up client to bookings already created"
   end
   
   describe "exsisting client" do

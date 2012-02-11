@@ -1,0 +1,7 @@
+= simple_form_for @invitation do |f|
+  
+  = f.error_notification
+
+  = f.input :recipient_email
+
+  = f.submit "Invite Client", :class => "a medium button"

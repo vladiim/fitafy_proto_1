@@ -7,6 +7,10 @@ FactoryGirl.define do
     "user#{n}"
   end
   
+  sequence :email do |n|
+    "user#{n}@email.com"
+  end
+  
   sequence :title do |n|
     "I'm The #{n} Badass Tittle"
   end
@@ -19,9 +23,13 @@ FactoryGirl.define do
     "#{n} Equipment"
   end
   
-  factory :user do 
+  sequence :recipient_email do |n|
+    "#{n}-recipient_email@email.com"
+  end
+  
+  factory :user, aliases: [:trainer] do 
     username    { FactoryGirl.generate(:username) }
-    email       { "#{username}@email.com"}
+    email       { FactoryGirl.generate(:email) }
     password    "password"
     password_confirmation "password"
     role        "trainer_role"
@@ -53,11 +61,16 @@ FactoryGirl.define do
   end
   
   factory :booking do
-    trainer            { |trainer| trainer.association(:user) }
-    client             { |client| client.association(:client) }
-    wo_date            { 3.days.from_now }    
-    wo_time            { Time.now }
-    message            { FactoryGirl.generate(:description) }
+    trainer               { |trainer| trainer.association(:user) }
+    client                { |client| client.association(:client) }
+    wo_date               { 3.days.from_now }    
+    wo_time               { Time.now }
+    message               { FactoryGirl.generate(:description) }
     association(:workout) { FactoryGirl.generate(:workout) }
+  end
+  
+  factory :invitation do
+    association(:trainer) { FactoryGirl.generate(:user) }
+    recipient_email       { FactoryGirl.generate(:recipient_email) }
   end
 end

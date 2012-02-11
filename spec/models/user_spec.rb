@@ -57,6 +57,13 @@ describe User do
     
   end
   
+  describe "invtations" do
+    
+    it "should respond to invitations" do
+      @trainer.should respond_to(:invitations)
+    end
+  end
+  
   describe "roles" do
     
     it "should have an admin attribute" do

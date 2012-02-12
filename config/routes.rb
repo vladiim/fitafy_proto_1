@@ -23,10 +23,9 @@ Fitafy::Application.routes.draw do
     end
   end
   
-  match 'signup', to: "user#new"
   match 'signin', to: "user_sessions#new"
   match 'signout', to: "user_sessions#destroy"
-  match'/signup/:invitation_token', to: "users#new"
+  match'/signup/:invitation_token', to: "users#edit"
   
   get "pages/home"
   root to: 'pages#home'

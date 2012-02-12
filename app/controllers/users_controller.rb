@@ -1,8 +1,9 @@
 class UsersController < ApplicationController   
-  load_and_authorize_resource
+  load_and_authorize_resource except: :edit
   
   def new
     @user = User.new
+    @user.email = @user.invitation.recipient_email if @user.invitation
     @user_session = UserSession.new
   end
   
@@ -23,8 +24,15 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @title = "Update Profile"
-    @user = current_user
+    if (params[:invitation_token]).present?
+      invitation = Invitation.find_by_token(params[:invitation_token])
+      @user = User.find_by_invitation_id(invitation.id)
+      
+      @title = "Create Profile"
+    else
+      @user = current_user
+      @title = "Update Profile"      
+    end
   end
 
   def update

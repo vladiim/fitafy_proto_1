@@ -1,5 +1,7 @@
 class Invitation < ActiveRecord::Base
   
+  attr_accessible :trainer_id, :recipient_email
+  
   belongs_to :trainer, class_name: "User", foreign_key: "trainer_id"
   has_one :recipient, class_name: "User"
   
@@ -35,6 +37,7 @@ class Invitation < ActiveRecord::Base
       @user.role = "invited_role"
       @user.password = @email
       @user.password_confirmation = @email
+      @user.invitation_id = self.id
       if @user.save!
         Relationship.create(trainer_id: @trainer.id, client_id: @user.id)
       end

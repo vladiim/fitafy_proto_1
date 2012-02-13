@@ -34,10 +34,10 @@ describe "Clients" do
     
     it "client creates account from invite" do
       integration_sign_in(@trainer)
-      @invitation = @trainer.invitations.create(recipient_email: @client_email)
+      @trainer.invitations.create(recipient_email: @client_email)
+      @client = User.find_by_email("#{@client_email}")
       click_link "Sign Out"
-      visit "/signup/#{@invitation.token}"
-      # page.should_not have_content : whatever the default edit content is
+      visit edit_invited_client_path(@client.perishable_token)      
       fill_in "user_username",              with: "new_client"
       fill_in "user_password",              with: "password"
       fill_in "user_password_confirmation", with: "password"

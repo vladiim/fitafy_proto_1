@@ -9,3 +9,7 @@ h2 {
 	padding-bottom: 0.2em;
 	@include text_shadow1;
 }
+
+#white_copy {
+	color: $light_gray;
+}

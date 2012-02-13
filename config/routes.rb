@@ -1,9 +1,8 @@
 Fitafy::Application.routes.draw do
-  
-  get "reverse_bookings/index"
 
   resources :user_sessions, only: [:new, :create, :destroy] 
-  resources :password_resets
+  resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :invited_clients, only: [:edit, :update]
   resources :relationships, only: [:create, :destroy]
   resources :bookings
   resources :invitations, only: [:new, :create]
@@ -25,7 +24,7 @@ Fitafy::Application.routes.draw do
   
   match 'signin', to: "user_sessions#new"
   match 'signout', to: "user_sessions#destroy"
-  match'/signup/:invitation_token', to: "users#edit"
+  match '/invited_clients/:perishable_token/edit', to: 'invited_clients#new'
   
   get "pages/home"
   root to: 'pages#home'

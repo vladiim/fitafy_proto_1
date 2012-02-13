@@ -1,5 +1,5 @@
 class UsersController < ApplicationController   
-  load_and_authorize_resource except: :edit
+  load_and_authorize_resource 
   
   def new
     @user = User.new
@@ -24,15 +24,8 @@ class UsersController < ApplicationController
   end
   
   def edit
-    if (params[:invitation_token]).present?
-      invitation = Invitation.find_by_token(params[:invitation_token])
-      @user = User.find_by_invitation_id(invitation.id)
-      
-      @title = "Create Profile"
-    else
-      @user = current_user
-      @title = "Update Profile"      
-    end
+    @user = current_user
+    @title = "Update Profile"      
   end
 
   def update

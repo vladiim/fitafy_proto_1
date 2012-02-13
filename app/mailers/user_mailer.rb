@@ -9,8 +9,8 @@ class UserMailer < ActionMailer::Base
          date:       Time.now
   end
   
-  def client_invitation(invitation)
-    @signup_url =   "http://localhost:3000/signup/#{invitation.token}"
+  def client_invitation(invitation, user)
+    @signup_url =   edit_invited_client_url(user.perishable_token)
     @trainer    =   User.find(invitation.trainer_id)
     mail to:        invitation.recipient_email,
          subject:   "fitafy Invite From #{@trainer.username}"

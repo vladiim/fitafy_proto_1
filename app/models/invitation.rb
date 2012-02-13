@@ -6,7 +6,7 @@ class Invitation < ActiveRecord::Base
   has_one :recipient, class_name: "User"
   
   before_create :generate_token
-  after_create :send_invitation, :create_user
+  after_create :create_invited_client
   
   validates :recipient_email, presence: true
   
@@ -24,11 +24,11 @@ class Invitation < ActiveRecord::Base
       end
     end
     
-    def send_invitation
-      UserMailer.client_invitation(self).deliver
+    def send_invitation(user)
+      UserMailer.client_invitation(self, user).deliver
     end
     
-    def create_user
+    def create_invited_client
       @trainer = User.find(self.trainer_id)
       @email = self.recipient_email
       @user = User.new
@@ -37,9 +37,11 @@ class Invitation < ActiveRecord::Base
       @user.role = "invited_role"
       @user.password = @email
       @user.password_confirmation = @email
+      @user.reset_perishable_token!
       @user.invitation_id = self.id
       if @user.save!
         Relationship.create(trainer_id: @trainer.id, client_id: @user.id)
+        send_invitation(@user)
       end
     end
 end

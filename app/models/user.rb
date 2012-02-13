@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
   
-  attr_accessible :username, :email, :password, :password_confirmation, :role, :invitation_token
-  
-  # after_update :destroy_invitation_token
+  attr_accessible :username, :email, :password, :password_confirmation, :role
   
   acts_as_authentic 
   
@@ -49,15 +47,7 @@ class User < ActiveRecord::Base
     [role.to_sym]
   end
   
-  def invitation_token
-    invitation.token if invitation
-  end
-  
-  def invitation_token=(token)
-    self.invitation = Invitation.find_by_token(token)
-  end
-  
-  def to_param
-    "#{id}_#{username.parameterize}" 
-  end
+  # def to_param
+  #   "#{id}_#{username.parameterize}" 
+  # end
 end

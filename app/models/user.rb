@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  attr_accessible :username, :email, :password, :password_confirmation, :role
+  attr_accessible :username, :email, :password, :password_confirmation, :role, :invitation_id
   
   acts_as_authentic 
   

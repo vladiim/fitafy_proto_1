@@ -1,0 +1,8 @@
+%tr
+  - for relationship in @relationships
+  
+    = link_to "#{relationship.trainer.username.titleize}", relationship.trainer
+   
+    = simple_form_for relationship do |f|
+      = f.input :accepted, label: "Accept Invite", id: "relationship_accepted"
+      = f.submit "Save", :class => "a nice small button"

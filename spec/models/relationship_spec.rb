@@ -25,6 +25,14 @@ describe Relationship do
     it "should have the right client attribute" do
       @relationship.client.should eq(@client)
     end
+    
+    it "should default :accepted to false" do
+      @relationship.accepted.should eq(false)
+    end
+    
+    it "should have a scope that checks if a relationship has been accepted" do
+      @relationship.should respond_to(:accepted)
+    end
   end
   
   describe "validations" do

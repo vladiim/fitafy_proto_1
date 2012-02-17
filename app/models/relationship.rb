@@ -1,10 +1,21 @@
 class Relationship < ActiveRecord::Base
   
-  attr_accessible :client_id
+  attr_accessible :client_id, :accepted
   
   belongs_to :trainer, :class_name => "User"
   belongs_to :client, :class_name => "User"
   
   validates_presence_of :trainer_id, :on => :create, :message => "can't be blank"
   validates_presence_of :client_id, :on => :create, :message => "can't be blank"
+  
+  scope :accepted, where(:accepted => true)
+  scope :unaccepted, where(:accepted => false)  
+  
+  after_create :send_client_invite
+  
+  protected
+  
+    def send_client_invite
+      UserMailer.send_client_invite(self).deliver
+    end
 end

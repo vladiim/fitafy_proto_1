@@ -43,8 +43,4 @@ class User < ActiveRecord::Base
   def role_symbols
     [role.to_sym]
   end
-  
-  def to_param
-    "#{id}_#{username.parameterize}"
-  end
 end

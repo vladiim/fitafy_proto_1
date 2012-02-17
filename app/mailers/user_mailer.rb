@@ -10,8 +10,16 @@ class UserMailer < ActionMailer::Base
   
   def password_reset(user)
     @email_link = edit_password_reset_url(user.perishable_token)
-    mail :to        => user.email,
-         :subject   => "fitafy - Password Reset",
-         :date      => Time.now
+    mail to:         user.email,
+         subject:    "fitafy - Password Reset",
+         date:       Time.now
+  end
+  
+  def send_client_invite(relationship)
+    @trainer      = relationship.trainer
+    @client       = relationship.client
+    @invites_url  = invites_path
+    mail to:         @client.email,
+         subject:    "fitafy - Trainer Invite"
   end
 end

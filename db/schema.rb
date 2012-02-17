@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120211045036) do
+ActiveRecord::Schema.define(:version => 20120216062224) do
 
   create_table "bookings", :force => true do |t|
     t.integer  "trainer_id"
@@ -50,23 +50,12 @@ ActiveRecord::Schema.define(:version => 20120211045036) do
     t.integer "exercise_id"
   end
 
-  create_table "invitations", :force => true do |t|
-    t.integer  "trainer_id"
-    t.string   "recipient_email"
-    t.string   "token"
-    t.datetime "sent_at"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "invitations", ["recipient_email"], :name => "index_invitations_on_recipient_email"
-  add_index "invitations", ["trainer_id"], :name => "index_invitations_on_trainer_id"
-
   create_table "relationships", :force => true do |t|
     t.integer  "trainer_id"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "accepted",   :default => false
   end
 
   add_index "relationships", ["client_id"], :name => "index_relationships_on_client_id"
@@ -84,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20120211045036) do
     t.datetime "updated_at"
     t.string   "role",                                 :null => false
     t.boolean  "admin",             :default => false
-    t.integer  "invitation_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

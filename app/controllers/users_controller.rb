@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @relationship = current_user.relationships.find_by_client_id(@user.id)
     @title = @user.username.titleize
   end
     

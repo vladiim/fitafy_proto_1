@@ -1,11 +1,11 @@
 Fitafy::Application.routes.draw do
+  
+  get "reverse_bookings/index"
 
   resources :user_sessions, only: [:new, :create, :destroy] 
-  resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :invited_clients, only: [:edit, :update]
-  resources :relationships, only: [:create, :destroy]
+  resources :password_resets
+  resources :relationships, only: [:index, :create, :update, :destroy]
   resources :bookings
-  resources :invitations, only: [:new, :create]
   
   resources :exercises do
     resources :workouts, controller: 'exercises/workouts', only: :index
@@ -24,9 +24,8 @@ Fitafy::Application.routes.draw do
   
   match 'signin', to: "user_sessions#new"
   match 'signout', to: "user_sessions#destroy"
-  match '/invited_clients/:perishable_token/edit', to: 'invited_clients#new'
+  match 'invites', to: "relationships#index"
   
-  get "pages/home"
   root to: 'pages#home'
   
   # The priority is based upon order of creation:

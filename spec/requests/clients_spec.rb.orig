@@ -7,6 +7,51 @@ describe "Clients" do
     @client = Factory(:client)
   end
   
+<<<<<<< HEAD
+  it "trains! and untrains! a client who is in the system" do
+    integration_sign_in(@trainer) 
+    visit user_path(@client)
+    click_button("Add client")
+    page.should have_content("Client invited")
+    click_button("Remove client")
+    page.should have_content("Client removed")
+  end
+  
+  describe "new client" do
+    
+    before(:each) do
+      @client_email = FactoryGirl.generate(:email)
+    end
+    
+    it "invites a new client" do
+      integration_sign_in(@trainer)
+      click_link "Invite New"
+      fill_in "invitation_recipient_email", with: @client_email
+      click_button("Invite Client")
+      page.should have_content("Client invited!")
+      last_email.to.should include(@client_email)
+      last_email.body.should include(@trainer.username.titleize)      
+    end
+    
+    it "client creates account from invite" do
+      integration_sign_in(@trainer)
+      @trainer.invitations.create(recipient_email: @client_email)
+      @client = User.find_by_email("#{@client_email}")
+      click_link "Sign Out"
+      visit edit_invited_client_path(@client.perishable_token)      
+      fill_in "user_username",              with: "new_client"
+      fill_in "user_password",              with: "password"
+      fill_in "user_password_confirmation", with: "password"
+      click_button("Create Account")
+      page.should have_content("Welcome to fitafy!")
+    end
+    
+    it "finds an exsisting client"
+    
+    it "creates a booking with a client that hasn't signed up yet"
+    
+    it "relates a signed up client to bookings already created"
+=======
   describe "creating a relationship with a client" do
     
     it "trains! and untrains! a client" do
@@ -42,17 +87,8 @@ describe "Clients" do
         # with no invites it should redirect to the home page
         current_path.should eq(root_path)
       end
-      
-      it "client visits /invites and declines" do
-        integration_sign_in(@client)
-        visit invites_path
-        check('relationship_declined')        
-        click_button("Save")
-        page.should have_content("Invite declined.")
-        # with no invites it should redirect to the home page
-        current_path.should eq(root_path)
-      end
     end    
+>>>>>>> accepted_invite
   end
   
   describe "exsisting client" do

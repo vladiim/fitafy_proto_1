@@ -5,4 +5,5 @@
    
     = simple_form_for relationship do |f|
       = f.input :accepted, label: "Accept Invite", id: "relationship_accepted"
+      = f.input :declined, label: "Decline Invite", id: "relationship_declined"
       = f.submit "Save", :class => "a nice small button"

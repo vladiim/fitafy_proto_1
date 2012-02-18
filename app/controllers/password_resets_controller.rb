@@ -30,14 +30,4 @@ class PasswordResetsController < ApplicationController
       render :edit
     end
   end
-  
-  private
-  
-    def load_user_using_perishable_token
-      @user = User.find_by_perishable_token(params[:id])
-      unless @user
-        flash[:notice] = "The url you entered isn't valid, try copy and pasting in out of your email again"
-        redirect_to root_url
-      end
-    end
 end

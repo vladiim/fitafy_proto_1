@@ -75,11 +75,11 @@ describe "Clients" do
       @new_client = User.find_by_email(@client_email)
       last_email.body.should include("has invited you to join fitafy")      
       last_email.body.should include(@new_client.perishable_token)
-      visit invites_path(@new_client.perishable_token)
+      visit edit_client_path(@new_client.perishable_token)
       fill_in "user_username",              with: "testy_la_roo"
       fill_in "user_password",              with: "password"
       fill_in "user_password_confirmation", with: "password"      
-      click_button "Save Details"
+      click_button "Complete Your Profile"
       page.should have_content("Welcome to fitafy")
       page.should have_css("a", "Trainer: 1")
     end

@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+  before_filter :load_user_using_perishable_token, only: [:edit, :update]
   
   def new
     @title = "Invite New Client"
@@ -15,5 +16,10 @@ class ClientsController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def edit
+    @title = "Complete Your Profile"
+    @user_session = UserSession.new
   end
 end

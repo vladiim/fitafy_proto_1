@@ -72,4 +72,9 @@ describe User do
       @trainer.should be_admin
     end
   end
+  
+  describe "validations" do
+    
+    it "doesn't allow email as username on update" 
+  end
 end

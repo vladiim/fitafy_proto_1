@@ -12,7 +12,7 @@ class UserMailer < ActionMailer::Base
   def send_new_client_invite(relationship)
     @trainer      = relationship.trainer
     @client       = User.find(relationship.client_id)
-    @url          = edit_user_url(@client.perishable_token)
+    @url          = edit_client_url(@client.perishable_token)
     mail to:        @client.email,
          subject:   "Invite to Join"
   end

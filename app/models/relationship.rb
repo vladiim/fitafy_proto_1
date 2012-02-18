@@ -21,6 +21,6 @@ class Relationship < ActiveRecord::Base
     end
     
     def destroy_if_declined
-      destroy if declined?
+      destroy if declined
     end
 end

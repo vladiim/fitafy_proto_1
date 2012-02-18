@@ -1,1 +1,26 @@
-= render 'shared/edit_basic_profile'
+.row
+
+.twelve.colums
+   
+  .five.columns#home_usp
+    %h2= @title
+
+    %p
+      We're excited to see you signing up to fitafy! Just give us your new username and password and you'll be on your way.
+
+  .four.columns#home_signup
+    = simple_form_for @user, url: client_path, method: :put do |f|
+    
+      = f.error_notification
+     
+      = f.hidden_field :perishable_token
+
+      = f.input :username, label: "Username", hint: "Pick a unique name"
+
+      = f.input :email
+    
+      = f.input :password
+    
+      = f.input :password_confirmation
+    
+      = f.button :submit, "#{@title}", :class => "a button"

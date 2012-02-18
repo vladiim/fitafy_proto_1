@@ -55,7 +55,7 @@ describe "Clients" do
     end    
   end
   
-  describe "trainer invites a new client" do
+  describe "trainer invites a client who isn't in the system" do
     
     before(:each) do
       @client_email = "new_client@email.com"
@@ -83,9 +83,18 @@ describe "Clients" do
       page.should have_content("Welcome to fitafy")
       page.should have_css("a", "Trainer: 1")
     end
+    
+    it "client can't keep their email as their username" do
+      invite_new_client(@trainer, @client_email)
+      @new_client = User.find_by_email(@client_email)
+      visit edit_client_path(@new_client.perishable_token)
+      fill_in "user_username",              with: @new_client.email
+      fill_in "user_password",              with: "password"
+      fill_in "user_password_confirmation", with: "password"      
+      click_button "Complete Your Profile"
+      page.should have_content("Can't use your email as username")
+    end
   end
-  
-  it "fix the emails so they don't look like dick, write tests to ensure the correct url is in the emails"
   
   describe "exsisting client" do
   

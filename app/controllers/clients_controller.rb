@@ -22,4 +22,18 @@ class ClientsController < ApplicationController
     @title = "Complete Your Profile"
     @user_session = UserSession.new
   end
+  
+  def update
+    @user_session = UserSession.new
+    @user.username =              params[:user][:username]
+    @user.password =              params[:user][:password]
+    @user.password =              params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+    if @user.save
+      flash[:success] = "Welcome to fitafy!"
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
 end

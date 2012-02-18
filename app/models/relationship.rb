@@ -17,7 +17,12 @@ class Relationship < ActiveRecord::Base
   protected
   
     def send_client_invite
-      UserMailer.send_client_invite(self).deliver
+      client = User.find(self.client_id)
+      if client.username == client.email
+        UserMailer.send_new_client_invite(self).deliver
+      else
+        UserMailer.send_exsisting_client_invite(self).deliver
+      end
     end
     
     def destroy_if_declined

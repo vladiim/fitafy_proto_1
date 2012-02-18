@@ -21,4 +21,11 @@ module UserMacros
     visit user_path(client)
     click_button("Add Client")
   end
+  
+  def invite_new_client(trainer, client_email)
+    integration_sign_in(trainer)
+    click_link("Invite New")
+    fill_in "client_email", with: client_email
+    click_button("Invite New Client")
+  end
 end

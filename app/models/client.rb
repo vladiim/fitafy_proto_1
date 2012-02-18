@@ -4,6 +4,9 @@ class Client
   
   attr_accessor :email
   
+  validates :email, presence: true
+  validate :email_not_taken_by_other_user
+  
   def initialize(attributes = {})
     attributes.each do |name, value|
       send("#{name}=", value)
@@ -32,4 +35,12 @@ class Client
   def create_relationship(trainer, client)
     trainer.relationships.create!(client_id: client.id)
   end
+  
+  protected
+  
+    def email_not_taken_by_other_user
+      if User.where(email: email).present?
+        errors.add(:email, "That email is in use by an existing user")
+      end
+    end
 end

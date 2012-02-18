@@ -12,6 +12,8 @@ class ClientsController < ApplicationController
       @client.trainer_creates_client(@trainer)
       flash[:success] = "New client invited! You can create workouts & bookings for them once they confirm their account"
       redirect_to :root
+    else
+      render :new
     end
   end
 end

@@ -27,7 +27,7 @@ describe "Clients" do
       
       it "should send an invite to the client" do
         last_email.to.should include(@client.email)
-        last_email.body.should include(@trainer.username)
+        last_email.body.should include(@trainer.username.titleize)
         last_email.body.should include("#{invites_path}")  
       end
       
@@ -67,9 +67,25 @@ describe "Clients" do
       fill_in "client_email", with: @client_email
       click_button("Invite New Client")
       last_email.to.should include(@client_email)
-      last_email.body.should include(@trainer.username)
+      last_email.body.should include(@trainer.username.titleize)
+    end
+    
+    it "client visits the link in the email and edits their user account" do
+      invite_new_client(@trainer, @client_email)
+      @new_client = User.find_by_email(@client_email)
+      last_email.body.should include("has invited you to join fitafy")      
+      last_email.body.should include(@new_client.perishable_token)
+      visit invites_path(@new_client.perishable_token)
+      fill_in "user_username",              with: "testy_la_roo"
+      fill_in "user_password",              with: "password"
+      fill_in "user_password_confirmation", with: "password"      
+      click_button "Save Details"
+      page.should have_content("Welcome to fitafy")
+      page.should have_css("a", "Trainer: 1")
     end
   end
+  
+  it "fix the emails so they don't look like dick, write tests to ensure the correct url is in the emails"
   
   describe "exsisting client" do
   

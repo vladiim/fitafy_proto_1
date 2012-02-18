@@ -18,7 +18,7 @@ describe "Clients" do
       page.should have_content("Client removed")    
     end
     
-    describe "trainer invites client" do
+    describe "trainer invites client already in the system" do
       
       before(:each) do
         trains_client(@trainer, @client)
@@ -53,6 +53,22 @@ describe "Clients" do
         current_path.should eq(root_path)
       end
     end    
+  end
+  
+  describe "trainer invites a new client" do
+    
+    before(:each) do
+      @client_email = "new_client@email.com"
+    end
+    
+    it "invites a new client generating an email invite" do
+      integration_sign_in(@trainer)
+      click_link("Invite New")
+      fill_in "client_email", with: @client_email
+      click_button("Invite New Client")
+      last_email.to.should include(@client_email)
+      last_email.body.should include(@trainer.username)
+    end
   end
   
   describe "exsisting client" do

@@ -14,7 +14,8 @@ class UserMailer < ActionMailer::Base
     @client       = User.find(relationship.client_id)
     @url          = edit_client_url(@client.perishable_token)
     mail to:        @client.email,
-         subject:   "Invite to Join"
+         subject:   "Invite to Join",
+         date:      Time.now
   end
   
   def send_exsisting_client_invite(relationship)
@@ -22,6 +23,7 @@ class UserMailer < ActionMailer::Base
     @client       = User.find(relationship.client_id)
     @invites_url  = invites_path
     mail to:        @client.email,
-         subject:   "Trainer Invite"
+         subject:   "Trainer Invite",
+         date:      Time.now         
   end  
 end

@@ -83,17 +83,6 @@ describe "Clients" do
       page.should have_content("Welcome to fitafy")
       page.should have_css("a", "Trainer: 1")
     end
-    
-    it "client can't keep their email as their username" do
-      invite_new_client(@trainer, @client_email)
-      @new_client = User.find_by_email(@client_email)
-      visit edit_client_path(@new_client.perishable_token)
-      fill_in "user_username",              with: @new_client.email
-      fill_in "user_password",              with: "password"
-      fill_in "user_password_confirmation", with: "password"      
-      click_button "Complete Your Profile"
-      page.should have_content("Can't use your email as username")
-    end
   end
   
   describe "exsisting client" do

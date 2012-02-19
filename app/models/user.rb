@@ -17,8 +17,6 @@ class User < ActiveRecord::Base
   has_many :bookings, :foreign_key => "trainer_id"
   has_many :reverse_bookings, :class_name => "Booking", :foreign_key => "client_id"
   
-  # validate :username_cant_be_email, on: :update
-  
   ROLES = %w[trainer_role client_role invited_role]
    
   def train!(client)
@@ -45,12 +43,4 @@ class User < ActiveRecord::Base
   def role_symbols
     [role.to_sym]
   end
-  
-  private 
-  
-    # def username_cant_be_email
-    #   if username == email
-    #     errors.add(:username, "can't use your email as username")
-    #   end
-    # end
 end

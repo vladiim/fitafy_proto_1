@@ -1,26 +1,26 @@
 class User < ActiveRecord::Base
+  acts_as_authentic 
   
   attr_accessible :username, :email, :password, :password_confirmation, :role
   
-  acts_as_authentic 
+  has_many :relationships, :foreign_key => "trainer_id", dependent: :destroy
+  has_many :training, through: :relationships, source: :client
   
-  has_many :relationships, :foreign_key => "trainer_id", :dependent => :destroy
-  has_many :training, :through => :relationships, :source => :client
+  has_many :reverse_relationships, class_name: "Relationship", foreign_key: "client_id", dependent: :destroy
+  has_many :trained_by, through: :reverse_relationships, source: :trainer
   
-  has_many :reverse_relationships, :class_name => "Relationship", :foreign_key => "client_id", :dependent => :destroy
-  has_many :trained_by, :through => :reverse_relationships, :source => :trainer
-  
-  has_many :workouts, :dependent => :destroy
+  has_many :workouts, dependent: :destroy
   
   has_many :exercises, :dependent => :destroy
   
   has_many :bookings, :foreign_key => "trainer_id"
-  has_many :reverse_bookings, :class_name => "Booking", :foreign_key => "client_id"
+  has_many :reverse_bookings, class_name: "Booking", foreign_key: "client_id"
+  # accepts_nested_attributes_for :bookings
   
   ROLES = %w[trainer_role client_role invited_role]
    
   def train!(client)
-    relationships.create!(:client_id => client.id)
+    relationships.create!(client_id: client.id)
   end
   
   def untrain!(client)

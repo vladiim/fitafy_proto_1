@@ -6,7 +6,7 @@ describe Booking do
     @client = Factory(:client)
     @workout = Factory(:workout)
     @date_time = 1.day.from_now
-    @booking = @trainer.bookings.create!(client_id: @client.id, workout: @workout, wo_date: 1.week.from_now)
+    @booking = @trainer.bookings.create!(client_id: @client.id, workout_id: @workout.id, wo_date: 1.week.from_now, wo_time: Time.now)
   end
   
   describe "associations" do
@@ -23,10 +23,10 @@ describe Booking do
       
     end
     
-    describe "workout associations" do
+    describe "exercise associations" do
       
-      it "booking workout should be the booking" do
-        @booking.workout.id.should eq(@workout.id)
+      it "should have many exercises" do
+        @booking.should respond_to(:exercises)        
       end
     end
   end
@@ -55,10 +55,6 @@ describe Booking do
     
     it "booking must have a time" do
       @trainer.bookings.build(@attr.merge(wo_time: "")).should be_invalid
-    end
-    
-    it "booking must have a workout" do
-      @trainer.bookings.build(@attr.merge(workout: nil)).should be_invalid
     end
     
     it "booking must have a client" do

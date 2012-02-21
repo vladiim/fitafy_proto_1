@@ -73,21 +73,8 @@ describe "Workouts" do
         new_workout(@trainer, @exercise)
         page.should have_css("a", text: @exercise.title)
         page.should have_content(@exercise.body_part)
+        page.should have_content(@exercise.equipment)        
       end
-      # 
-      # describe "workout with bookings" do
-      #   
-      #   before(:each) do
-      #     @client = new_client
-      #     @booking = Factory(:booking, workout: @workout, trainer: @trainer, client: @client)
-      #   end
-      #   
-      #   it "should have the booking number on the workout show page" do
-      #     visit workout_path(@workout)
-      #     click_link("1 Booking")
-      #     current_path.should eq(workout_bookings_path(@workout))
-      #   end
-      # end
     end    
   end  
 end

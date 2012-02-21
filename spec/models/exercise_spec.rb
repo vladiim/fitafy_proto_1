@@ -26,14 +26,24 @@ describe Exercise do
       end
     end
     
-    describe "workout associations" do
-      
-      before(:each) do
-        @workout = Factory(:workout, user: @trainer)
+    describe "associations" do
+            
+      describe "workout associations" do
+        
+        before(:each) do
+          @workout = Factory(:workout, user: @trainer)
+        end
+        
+        it "should have a workout attribute" do
+          @exercise.should respond_to(:workouts)
+        end
       end
       
-      it "should have a workout attribute" do
-        @exercise.should respond_to(:workouts)
+      describe "booking associations" do
+        
+        it "should belong to booking" do
+          @exercise.should respond_to(:booking)
+        end
       end
     end
     
@@ -44,20 +54,12 @@ describe Exercise do
         @exercise.should be_invalid
       end
       
-      it "should validate the uniqueness of a title" do
-        @exercise = @trainer.exercises.create(@attr)
-        @trainer.exercises.create(title: @exercise.title, description: "new").should be_invalid
-      end
-      
       it "should not allow titles equal to or under 3 characters" do
         @exercise = @trainer.exercises.create(@attr.merge(title: "123"))
         @exercise.should be_invalid
       end
       
-      it "should validate the presence of a description" do
-        @exercise = @trainer.exercises.create(@attr.merge(description: ""))
-        @exercise.should be_invalid
-      end
+      it "should validate the presence of a description if there is no booking_id" 
     end
   end    
 end

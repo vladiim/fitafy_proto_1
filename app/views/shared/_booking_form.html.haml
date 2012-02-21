@@ -11,8 +11,14 @@
         = link_to "Invite New", new_client_path
 
     .four.columns#booking_form_workout
-      = simple_fields_for :workout do |workout_form|
-        = workout_form.input :id, collection: current_user.workouts.only_templates, label: "Workout", prompt: "Select workout"
+      = f.association :workout, collection: current_user.workouts.collect { |w| [w.title, w.id] }, prompt: "Select workout"
+
+      / = simple_fields_for "booking[workout_attributes]" do |workout_form|
+      /   = workout_form.input :id, collection: current_user.workouts.collect { |w| [w.title, w.id] }, label: "Workout", prompt: "Select workout"
+      /   = workout_form.input :trainer_id, as: :hidden, input_html: { value: current_user.id }
+
+      / = simple_fields_for :workout do |workout_form|
+      /   = workout_form.input :id, collection: current_user.workouts, label: "Workout", prompt: "Select workout"
 
       %p
         or

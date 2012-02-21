@@ -2,15 +2,13 @@
 
 %p
   %strong Client:
-  = link_to "#{@booking.client.username.titleize}", user_path(@booking.client)
+  = link_to "#{@client.username.titleize}", user_path(@booking.client)
 
-- unless @booking.workout.nil?
-  %p
-    %strong Workout:
-    = link_to "#{@workout.title}", workout_path(@workout)
-  = render 'shared/workout_exercises'
-- else
-  / add workout form here
+%strong= @workout.title
+
+= render 'exercises'
+
+/ add workout form here
 
 %br
 

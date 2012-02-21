@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216062224) do
+ActiveRecord::Schema.define(:version => 20120221043523) do
 
   create_table "bookings", :force => true do |t|
     t.integer  "trainer_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120216062224) do
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "workout_id"
   end
 
   add_index "bookings", ["client_id"], :name => "index_bookings_on_client_id"
@@ -37,6 +38,9 @@ ActiveRecord::Schema.define(:version => 20120216062224) do
     t.string   "body_part"
     t.string   "equipment"
     t.text     "cues"
+    t.integer  "sets"
+    t.integer  "reps"
+    t.integer  "booking_id"
   end
 
   add_index "exercises", ["body_part"], :name => "index_exercises_on_body_part"
@@ -49,6 +53,18 @@ ActiveRecord::Schema.define(:version => 20120216062224) do
     t.integer "workout_id"
     t.integer "exercise_id"
   end
+
+  create_table "invitations", :force => true do |t|
+    t.integer  "trainer_id"
+    t.string   "recipient_email"
+    t.string   "token"
+    t.datetime "sent_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "invitations", ["recipient_email"], :name => "index_invitations_on_recipient_email"
+  add_index "invitations", ["trainer_id"], :name => "index_invitations_on_trainer_id"
 
   create_table "relationships", :force => true do |t|
     t.integer  "trainer_id"
@@ -74,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20120216062224) do
     t.datetime "updated_at"
     t.string   "role",                                 :null => false
     t.boolean  "admin",             :default => false
+    t.integer  "invitation_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
@@ -87,11 +104,8 @@ ActiveRecord::Schema.define(:version => 20120216062224) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "booking_id"
-    t.boolean  "template",    :default => true
   end
 
-  add_index "workouts", ["booking_id"], :name => "index_workouts_on_booking_id"
   add_index "workouts", ["title"], :name => "index_workouts_on_title"
   add_index "workouts", ["user_id", "title"], :name => "index_workouts_on_user_id_and_title"
   add_index "workouts", ["user_id"], :name => "index_workouts_on_user_id"

@@ -1,0 +1,22 @@
+/ - if @exercises.empty?
+/   / add exercises
+/ -else
+%table#workout_show_exercises
+  %thead
+    %tr#workout_show_exercises_title
+      %th Exercises
+      %th
+      %th
+    %tr#workout_show_exercises_head
+      %th Title
+      %th Sets
+      %th Reps
+
+  - @exercises.each do |exercise|
+    %tbody
+      %tr
+        %td= exercise.title.titleize
+        = simple_form_for exercise do |f|
+          %td= f.input :sets
+          %td= f.input :reps
+          %td= f.button :submit, :class => "a small button"

@@ -13,9 +13,7 @@ class BookingsController < ApplicationController
 
   def create 
     @booking = current_user.bookings.new(params[:booking])
-    @workout = Workout.find(params[:workout][:id])
     if @booking.save 
-      @booking.create_new_workout(@workout)
       flash[:success] = "Booking created!"
       redirect_to booking_path(@booking)
     else
@@ -26,7 +24,7 @@ class BookingsController < ApplicationController
   def show
     @booking = current_user.bookings.find(params[:id]) 
     @workout = @booking.workout
-    @exercises = @workout.exercises unless @workout.nil?
+    @exercises = @booking.exercises #unless @booking.exercises.empty
     @client = User.find(@booking.client_id)
     @title = "Booking for: #{@client.username}"    
   end

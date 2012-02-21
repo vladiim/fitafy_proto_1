@@ -1,16 +1,16 @@
 class Exercise < ActiveRecord::Base
   
-  attr_accessible :title, :description, :body_part, :equipment, :cues
+  attr_accessible :title, :description, :body_part, :equipment, :cues, :booking_id, :user_id
   
   belongs_to :user
+  belongs_to :booking
   
   has_and_belongs_to_many :workouts
   
   validates :title, presence: true , 
-                    uniqueness: { case_sensitive: false },
                     length: { minimum: 4 }
-                    
-  validates_presence_of :description, message: "can't be blank"
+  
+  # validates :description, length: { minimum: 4 }                    
   
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
   EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]

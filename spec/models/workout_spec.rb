@@ -13,17 +13,17 @@ describe Workout do
     @workout = Factory(:workout, user_id: @trainer.id)
   end
   
-  describe "template" do
-    
-    it "should set a newly created workout as a template" do
-      @workout.template.should be_true
-    end
-    
-    it "should have a scope that returns only templated workouts" do
-      @not_template = Factory(:workout, user_id: @trainer.id, template: false)
-      @trainer.workouts.only_templates.should_not include(@not_template)
-    end
-  end
+  # describe "template" do
+  #   
+  #   it "should set a newly created workout as a template" do
+  #     @workout.template.should be_true
+  #   end
+  #   
+  #   it "should have a scope that returns only templated workouts" do
+  #     @not_template = Factory(:workout, user_id: @trainer.id, template: false)
+  #     @trainer.workouts.only_templates.should_not include(@not_template)
+  #   end
+  # end
   
   describe "associations" do
     
@@ -49,17 +49,6 @@ describe Workout do
         @workout.should respond_to(:exercises)
       end
     end
-    
-    describe "bookings associations" do
-      
-      before(:each) do
-        @booking = Factory(:booking, workout: @workout, trainer_id: @trainer.id, client_id: @client.id, wo_date: 1.week.from_now)
-      end
-      
-      it "should have a booking attribute" do
-        @workout.should respond_to(:booking)
-      end
-    end
   end
   
   describe "validations" do
@@ -80,5 +69,7 @@ describe Workout do
     it "should require an exercise" do
       @trainer.workouts.build(@attr.merge(exercise_ids: nil)).should be_invalid
     end    
+    
+    it "title should be unique"
   end
 end

@@ -10,12 +10,15 @@
       %tr#workout_show_exercises_title
         %th Exercises
         %th
+        %th
       %tr#workout_show_exercises_head
         %th Title
         %th Body Part
+        %th Equipment
   
     - @exercises.each do |exercise|
       %tbody
         %tr
           %td= link_to "#{exercise.title.titleize}", exercise_path(exercise)
-          %td= exercise.body_part.titleize
+          %td= exercise.body_part
+          %td= exercise.equipment

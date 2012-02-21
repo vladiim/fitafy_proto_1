@@ -7,7 +7,6 @@ describe "Bookings" do
     @client = Factory(:client)
     @workout = Factory(:workout, user_id: @trainer.id)
     @new_workout = Factory(:workout, user_id: @trainer.id)
-    # @month = "March"
   end
   
   describe "creating a booking" do
@@ -60,9 +59,7 @@ describe "Bookings" do
     describe "editing the booking exercise details" do
       
       it "changes the sets and reps" do
-        # sign_in_visit_booking(@trainer, @booking)
-        integration_sign_in(@trainer)
-        visit booking_path(@booking)
+        sign_in_visit_booking(@trainer, @booking)
         fill_in "exercise_sets", with: 6
         fill_in "exercise_reps", with: 6        
         click_button("Update Exercise")

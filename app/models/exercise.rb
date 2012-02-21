@@ -10,8 +10,6 @@ class Exercise < ActiveRecord::Base
   validates :title, presence: true , 
                     length: { minimum: 4 }
   
-  # validates :description, length: { minimum: 4 }                    
-  
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
   EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]
   

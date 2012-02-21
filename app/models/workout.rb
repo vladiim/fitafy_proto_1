@@ -1,8 +1,6 @@
 class Workout < ActiveRecord::Base
   
-  # after_create :manage_template_value
-  
-  attr_accessible :title, :description, :exercise_ids, :booking_id
+  attr_accessible :title, :description, :exercise_ids
   
   belongs_to :user
   
@@ -10,17 +8,8 @@ class Workout < ActiveRecord::Base
   
   has_many :bookings
   
-  validates_presence_of :user_id, :on => :create, :message => "can't be blank"
-  validates_presence_of :title, :on => :create, :message => "can't be blank"
-  validates_presence_of :exercise_ids, :on => :create, :message => "can't be blank"
+  validates_presence_of :user_id, :title, :exercise_ids
   
   validates :title, :length => { :maximum => 200 }
   
-  # scope :only_templates, select("id, title").where(template: true)
-  
-  # protected
-  # 
-  #   def manage_template_value
-  #     self.toggle!(:template) unless booking_id.nil?
-  #   end
 end

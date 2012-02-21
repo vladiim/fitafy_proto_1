@@ -13,18 +13,6 @@ describe Workout do
     @workout = Factory(:workout, user_id: @trainer.id)
   end
   
-  # describe "template" do
-  #   
-  #   it "should set a newly created workout as a template" do
-  #     @workout.template.should be_true
-  #   end
-  #   
-  #   it "should have a scope that returns only templated workouts" do
-  #     @not_template = Factory(:workout, user_id: @trainer.id, template: false)
-  #     @trainer.workouts.only_templates.should_not include(@not_template)
-  #   end
-  # end
-  
   describe "associations" do
     
     describe "user associations" do

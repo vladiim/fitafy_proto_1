@@ -31,17 +31,19 @@ class Invitation < ActiveRecord::Base
     def create_invited_client
       @trainer = User.find(self.trainer_id)
       @email = self.recipient_email
-      @user = User.new
-      @user.username = @email
-      @user.email = @email
-      @user.role = "invited_role"
-      @user.password = @email
-      @user.password_confirmation = @email
-      @user.reset_perishable_token!
-      @user.invitation_id = self.id
-      if @user.save!
-        Relationship.create(trainer_id: @trainer.id, client_id: @user.id)
-        send_invitation(@user)
+        
+      User.new do |user|
+        user.username              = @email
+        user.email                 = @email
+        user.role                  = "invited_role"
+        user.password              = @email
+        user.password_confirmation = @email
+        user.reset_perishable_token!
+        user.invitation_id = self.id
+        if user.save!
+          Relationship.create(trainer_id: @trainer.id, client_id: @user.id)
+          send_invitation(user)
+        end
       end
     end
 end

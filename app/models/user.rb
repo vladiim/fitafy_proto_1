@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   
   has_many :bookings, :foreign_key => "trainer_id"
   has_many :reverse_bookings, class_name: "Booking", foreign_key: "client_id"
-  # accepts_nested_attributes_for :bookings
   
   ROLES = %w[trainer_role client_role invited_role]
    

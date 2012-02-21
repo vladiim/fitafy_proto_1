@@ -3,7 +3,7 @@ Fitafy::Application.routes.draw do
   get "reverse_bookings/index"
   
   resources :user_sessions, only: [:new, :create, :destroy] 
-  resources :password_resets
+  resources :password_resets, only: [:new, :create, :edit, :update]
   resources :relationships, only: [:index, :create, :update, :destroy]
   resources :bookings
   resources :clients, only: [:new, :create, :edit, :update]

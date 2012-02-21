@@ -98,12 +98,12 @@ describe "Clients" do
       page.should have_css("a", text: "#{@client.username.titleize}")     
     end
 
-    it "creates a booking with a client from their index page" do
-      integration_sign_in(@trainer)    
-      click_link("Clients: #{@trainer.training.count}")
-      click_link("Create Booking")
-      # page.select('Client').should have_value("#{@client.unsername}")
-    end
+    it "creates a booking with a client from their index page" # do
+    #       integration_sign_in(@trainer)    
+    #       click_link("Clients: #{@trainer.training.count}")
+    #       click_link("Create Booking")
+    #       # page.select('Client').should have_value("#{@client.unsername}")
+    #     end
   
     describe "client bookings" do
       

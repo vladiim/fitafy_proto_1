@@ -10,6 +10,8 @@ class Exercise < ActiveRecord::Base
   validates :title, presence: true , 
                     length: { minimum: 4 }
   
+  validate :description_if_no_booking_id
+  
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
   EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]
   
@@ -20,5 +22,12 @@ class Exercise < ActiveRecord::Base
   def equipment_symbols
     [equipment.to_sym]
   end
+  
+  private
+  
+    def description_if_no_booking_id
+      if !self.booking_id.present? && !self.description.present?
+        errors.add(:description, "can't be empty")
+      end
+    end
 end
-

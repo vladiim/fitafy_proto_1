@@ -50,16 +50,25 @@ describe Exercise do
     describe "validations" do
 
       it "should validate the presence of a title" do
-        @exercise = @trainer.exercises.create(@attr.merge(title: ""))
+        @exercise = @trainer.exercises.build(@attr.merge(title: ""))
         @exercise.should be_invalid
       end
       
       it "should not allow titles equal to or under 3 characters" do
-        @exercise = @trainer.exercises.create(@attr.merge(title: "123"))
+        @exercise = @trainer.exercises.build(@attr.merge(title: "123"))
         @exercise.should be_invalid
       end
       
-      it "should validate the presence of a description if there is no booking_id" 
+      it "should validate the presence of a description if there is no booking_id" do
+        @exercise = @trainer.exercises.build(@attr.merge(description: ""))
+        @exercise.should be_invalid
+      end
+      
+      it "should allow blank descriptions if there is a booking_id" do
+        @booking = Factory(:booking)
+        @exercise = @trainer.exercises.build(@attr.merge(description: "", booking_id: @booking.id))
+        @exercise.should be_valid
+      end
     end
   end    
 end

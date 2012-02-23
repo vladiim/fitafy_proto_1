@@ -21,7 +21,7 @@ class UserMailer < ActionMailer::Base
   def send_exsisting_client_invite(relationship)
     @trainer      = relationship.trainer
     @client       = User.find(relationship.client_id)
-    @invites_url  = invites_path
+    @invites_url  = invites_url
     mail to:        @client.email,
          subject:   "Trainer Invite",
          date:      Time.now         

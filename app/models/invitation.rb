@@ -5,7 +5,6 @@ class Invitation < ActiveRecord::Base
   belongs_to :trainer, class_name: "User", foreign_key: "trainer_id"
   has_one :recipient, class_name: "User"
   
-  before_create :generate_token
   after_create :create_invited_client
   
   validates :recipient_email, presence: true
@@ -13,10 +12,6 @@ class Invitation < ActiveRecord::Base
   validate :recipient_is_not_registered
   
   private
-  
-    def generate_token
-      self.token = Digest::SHA1.hexdigest([Time.now, rand].join)
-    end
     
     def recipient_is_not_registered
       if User.find_by_email(recipient_email)

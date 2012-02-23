@@ -1,10 +1,10 @@
-%p{:datetime => "#{@booking.wo_date}#{@booking.wo_time}"}=  "On #{@booking.booking_date} " "at #{@booking.booking_time}"
+%p{:datetime => "#{@presenter.booking.wo_date}#{@presenter.booking.wo_time}"}=  "On #{@presenter.booking.booking_date} " "at #{@presenter.booking.booking_time}"
 
 %p
   %strong Client:
-  = link_to "#{@client.username.titleize}", user_path(@booking.client)
+  = link_to "#{@presenter.client.username.titleize}", user_path(@presenter.client)
 
-%strong= @workout.title
+%strong= @presenter.workout.title
 
 = render 'exercises'
 
@@ -12,8 +12,8 @@
 
 %br
 
-=link_to "Edit Booking", edit_booking_path(@booking)
+=link_to "Edit Booking", edit_booking_path(@presenter.booking)
 
 |
 
-= link_to "Delete Booking", booking_path(@booking), method: :delete, confirm: "Are you sure you want to delete this booking?"
+= link_to "Delete Booking", booking_path(@presenter.booking), method: :delete, confirm: "Are you sure you want to delete this booking?"

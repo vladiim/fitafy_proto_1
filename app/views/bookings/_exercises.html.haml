@@ -11,7 +11,7 @@
       %th Sets
       %th Reps
 
-  - @exercises.each do |exercise|
+  - @presenter.exercises.each do |exercise|
     %tbody
       %tr
         %td= exercise.title.titleize

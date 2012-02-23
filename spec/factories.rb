@@ -3,8 +3,12 @@ include Authlogic::TestCase
 
 FactoryGirl.define do
   
-  sequence :username do |n|
-    "user#{n}"
+  sequence :trainer_name do |n|
+    "trainer#{n}"
+  end
+  
+  sequence :client_name do |n|
+    "client#{n}"
   end
   
   sequence :email do |n|
@@ -28,7 +32,7 @@ FactoryGirl.define do
   end
   
   factory :user, aliases: [:trainer] do 
-    username    { FactoryGirl.generate(:username) }
+    username    { FactoryGirl.generate(:trainer_name) }
     email       { FactoryGirl.generate(:email) }
     password    "password"
     password_confirmation "password"
@@ -36,6 +40,7 @@ FactoryGirl.define do
     admin       false
     
     factory :client do
+      username    { FactoryGirl.generate(:client_name) }      
       role      "client_role"
     end
     

@@ -22,11 +22,8 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = current_user.bookings.find(params[:id]) 
-    @workout = @booking.workout
-    @exercises = @booking.exercises #unless @booking.exercises.empty
-    @client = User.find(@booking.client_id)
-    @title = "Booking for: #{@client.username}"    
+    @presenter = Bookings::ShowPresenter.new(current_user, params[:id])
+    @title = @presenter.title
   end
 
   def edit

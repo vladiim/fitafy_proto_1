@@ -7,10 +7,15 @@ class Exercise < ActiveRecord::Base
   
   has_and_belongs_to_many :workouts
   
-  validates :title, presence: true , 
+  validates :title, presence: true,
                     length: { minimum: 4 }
   
-  validate :description_if_no_booking_id
+  validates :description, presence: true,
+                          uniqueness: { case_sensitive: false },
+                          if: :no_booking_id
+  
+  validates :title, uniqueness: { case_sensitive: false }, 
+                    if: :no_booking_id
   
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
   EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]
@@ -24,10 +29,8 @@ class Exercise < ActiveRecord::Base
   end
   
   private
-  
-    def description_if_no_booking_id
-      if !self.booking_id.present? && !self.description.present?
-        errors.add(:description, "can't be empty")
-      end
+    
+    def no_booking_id
+      !self.booking_id.present?
     end
 end

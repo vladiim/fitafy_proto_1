@@ -10,6 +10,7 @@ class Workout < ActiveRecord::Base
   
   validates_presence_of :user_id, :title, :exercise_ids
   
-  validates :title, :length => { :maximum => 200 }
+  validates :title, length: { :maximum => 200 },
+                    uniqueness: { case_sensitive: false }
   
 end

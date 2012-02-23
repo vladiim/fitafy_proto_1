@@ -58,6 +58,9 @@ describe Workout do
       @trainer.workouts.build(@attr.merge(exercise_ids: nil)).should be_invalid
     end    
     
-    it "title should be unique"
+    it "title should be unique" do
+      @workout = Factory(:workout)
+      @trainer.workouts.build(@attr.merge(title: @workout.title)).should be_invalid
+    end
   end
 end

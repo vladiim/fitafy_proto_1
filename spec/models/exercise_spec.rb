@@ -64,10 +64,22 @@ describe Exercise do
         @exercise.should be_invalid
       end
       
+      it "should validate the uniqueness of a description if there is no booking_id" do
+        @exercise = Factory(:exercise)
+        @exercise_copy = @trainer.exercises.build(@attr.merge(description: @exercise.description))
+        @exercise_copy.should be_invalid
+      end
+      
       it "should allow blank descriptions if there is a booking_id" do
         @booking = Factory(:booking)
         @exercise = @trainer.exercises.build(@attr.merge(description: "", booking_id: @booking.id))
         @exercise.should be_valid
+      end
+      
+      it "should validate the uniqueness of a title if there is no booking_id" do
+        @exercise = Factory(:exercise)
+        @exercise_copy = @trainer.exercises.build(@attr.merge(title: @exercise.title))
+        @exercise_copy.should be_invalid
       end
     end
   end    

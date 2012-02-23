@@ -37,19 +37,19 @@ describe "Navigations" do
 
     it "should lead to the right pages" do
       click_link("Clients")
-      # current_path.should eq(training_user_path(@trainer))
+      current_path.should eq(training_user_path(@trainer))
       click_link("Bookings")
-      # current_path.should eq(bookings_path)    
+      current_path.should eq(bookings_path)    
       click_link("Workouts")
       current_path.should eq(workouts_path)    
-      # click_link("Clients: 0")
-      # current_path.should eq(training_user_path(@trainer))
-      # click_link("Bookings: 0")
-      # current_path.should eq(bookings_path)
+      click_link("Clients: 0")
+      current_path.should eq(training_user_path(@trainer))
+      click_link("Bookings: 0")
+      current_path.should eq(bookings_path)
       click_link("Workouts: 1")
       current_path.should eq(workouts_path)    
-      # click_link("Exercises: 0")
-      # current_path.should eq(exercises_path)    
+      click_link("Exercises:")
+      current_path.should eq(exercises_path)    
     end
   end    
 end

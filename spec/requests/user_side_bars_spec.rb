@@ -24,21 +24,23 @@ describe "UserSideBars" do
   describe "experienced trainer" do
     
     before(:each) do
+      click_link("Sign Out")
       @client = Factory(:client)
-      @trainer.train!(@client)
-      @workout = Factory(:workout, user: @trainer)
+      @experience_trainer = Factory(:user)
+      @experience_trainer.train!(@client)
+      @workout = Factory(:workout, user: @experience_trainer)
     end
     
     it "should take users to the right path" do
-      # click_link("Clients: #{@trainer.training.count}")
-      # current_path.should eq(training_user_path(@trainer))    
+      integration_sign_in(@experience_trainer)
+      click_link("Clients: #{@experience_trainer.training.count}")
+      current_path.should eq(training_user_path(@experience_trainer))
       click_link("Workouts:")
       current_path.should eq(workouts_path)
-      # click_link("Bookings: #{@trainer.bookings.count}")
-      # current_path.should eq(bookings_path)
-      # click_link("Exercises: #{Exercise.count}")
-      # current_path.should eq(exercises_path)
+      click_link("Bookings: #{@experience_trainer.bookings.count}")
+      current_path.should eq(bookings_path)
+      click_link("Exercises: #{Exercise.count}")
+      current_path.should eq(exercises_path)
     end
   end
-  
 end

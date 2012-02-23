@@ -32,12 +32,13 @@ class Client
     end
   end
   
-  def create_relationship(trainer, client)
-    trainer.relationships.create!(client_id: client.id)
-  end
-  
   protected
-  
+    
+    
+    def create_relationship(trainer, client)
+      trainer.relationships.create!(client_id: client.id)
+    end
+    
     def email_not_taken_by_other_user
       if User.where(email: email).present?
         errors.add(:email, "That email is in use by an existing user")

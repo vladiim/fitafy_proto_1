@@ -25,11 +25,7 @@ class ClientsController < ApplicationController
   
   def update
     @user_session = UserSession.new
-    @user.username =              params[:user][:username]
-    @user.password =              params[:user][:password]
-    @user.password =              params[:user][:password]
-    @user.password_confirmation = params[:user][:password_confirmation]
-    if @user.save
+    if @user.update_attributes(params[:user])
       flash[:success] = "Welcome to fitafy!"
       redirect_to root_path
     else

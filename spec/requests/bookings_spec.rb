@@ -5,7 +5,8 @@ describe "Bookings" do
   before(:each) do
     @trainer = Factory(:user)
     @client = Factory(:client)
-    @workout = Factory(:workout, user_id: @trainer.id)
+    @exercise = Factory(:exercise)
+    @workout = Factory(:workout, user_id: @trainer.id, exercises: [@exercise])
     @new_workout = Factory(:workout, user_id: @trainer.id)
   end
   
@@ -60,10 +61,12 @@ describe "Bookings" do
       
       it "changes the sets and reps" do
         sign_in_visit_booking(@trainer, @booking)
-        fill_in "exercise_sets", with: 6
-        fill_in "exercise_reps", with: 6        
+        fill_in "exercise_sets", with: 623
+        fill_in "exercise_reps", with: 633        
         click_button("Update Exercise")
         page.should have_content("Exercise updated")
+        current_path.should eq(booking_path(@booking))
+        page.should have_css('input', value: 623)
       end
     end
   end  

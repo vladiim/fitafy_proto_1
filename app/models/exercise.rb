@@ -1,6 +1,6 @@
 class Exercise < ActiveRecord::Base
   
-  attr_accessible :title, :description, :body_part, :equipment, :cues, :booking_id, :user_id
+  attr_accessible :title, :description, :body_part, :equipment, :cues, :booking_id, :user_id, :sets, :reps
   
   belongs_to :user
   belongs_to :booking

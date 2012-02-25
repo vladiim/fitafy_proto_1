@@ -1,5 +1,5 @@
 class WorkoutsController < ApplicationController
-  load_and_authorize_resource :through => :current_user, except: [:new, :edit, :create]
+  load_and_authorize_resource :through => :current_user, except: [:new, :edit]
 
   def index
     @title = "Workouts"        
@@ -14,7 +14,7 @@ class WorkoutsController < ApplicationController
   end
   
   def create
-    if current_user.workouts.create!(params[:workout])
+    if @workout.save
       flash[:success] = "New workout added!"
       redirect_to workout_path(@workout)
     else

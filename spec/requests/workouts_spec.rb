@@ -5,7 +5,7 @@ describe "Workouts" do
   before(:each) do
     @trainer = Factory(:user)
     integration_sign_in(@trainer)
-    @exercise = Factory(:exercise, user_id: @trainer)
+    @exercise = Factory(:exercise, user_id: @trainer.id)
     @workout_title = "Da heaps Hardcore Workout"
     @workout_description = "Not for the feignt hearted"
   end
@@ -55,27 +55,22 @@ describe "Workouts" do
     end
     
     describe "workouts with exercises" do
-      
-      before(:each) do
-        @exercise = Factory(:exercise)
-      end
-      
+
       it "adds an exercise to the workout" do
         visit new_workout_path
         fill_in"workout_title", with: @workout_title
-        fill_in"workout_description", with: @workout_description               
+        fill_in"workout_description", with: @workout_description
         check("exercise_#{@exercise.id}")
         click_button("Create Workout")
-        page.should have_content("New workout added!")        
-        page.should have_content(@exercise.title)
+        page.should have_content("New workout added!")
       end
-      
+
       it "displays the exercise on the workout page" do
         click_link("Sign Out")
         new_workout(@trainer, @exercise)
         page.should have_css("a", text: @exercise.title)
         page.should have_content(@exercise.body_part)
-        page.should have_content(@exercise.equipment)        
+        page.should have_content(@exercise.equipment)
       end
     end    
   end  

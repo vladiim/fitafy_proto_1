@@ -8,7 +8,7 @@ class Bookings::ExercisesController < ApplicationController
   
   def create
     @booking = Booking.find(params[:booking_id])
-    if @booking.add_exercises(params[:exercise_ids])
+    if @booking.add_exercises(params[:booking][:exercise_ids])
       flash[:success] = "Booking updated!"
       redirect_to booking_path(@booking)
     else

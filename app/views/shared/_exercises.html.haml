@@ -1,10 +1,9 @@
-= hidden_field_tag "[exercise_ids][]", nil
+- @presenter.body_parts.each do |body_part|
 
-  - @presenter.body_parts.each do |body_part|
-  
-    %ul
-      %li
-        = body_part
+  %ul
+    %li
+      = body_part
+      = hidden_field_tag "[exercise_ids][]", nil
         - for exercise in Exercise.where(body_part: "#{body_part}")
         %ul        
           %li

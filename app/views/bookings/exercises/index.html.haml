@@ -1,1 +1,6 @@
-= render 'shared/exercises'
+= simple_form_for @presenter.parent, url: booking_exercises_path(@presenter.parent), method: :post do |f|
+
+  = render 'shared/exercises'
+
+  = f.button :submit, "#{@presenter.title}", :class => "a button"
+  

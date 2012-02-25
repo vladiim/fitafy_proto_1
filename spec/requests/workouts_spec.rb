@@ -22,6 +22,8 @@ describe "Workouts" do
     page.should have_content("#{@workout_title}")
   end
   
+  it "clicks create without updating any of the attributes (title breaks)"
+  
   describe "does stuff with a created workout" do
     
     before(:each) do

@@ -24,7 +24,17 @@ class Booking < ActiveRecord::Base
   def booking_time
     self.wo_time.strftime("%I:%M %p")
   end  
-      
+  
+  def add_exercises(exercise_ids)
+    @trainer = User.find(self.trainer_id)
+    @exercise_ids = exercise_ids.delete_if { |id| id == "" }
+    @exercise_ids.each do |id|
+      exercise = Exercise.find(id)
+      self.exercises.create!(user_id: @trainer.id,
+                             title: exercise.title)
+    end
+  end
+  
   private
   
     def wo_date_cannot_be_in_the_past
@@ -38,8 +48,7 @@ class Booking < ActiveRecord::Base
       @trainer = User.find(self.trainer_id)
       @workout.exercises.each do |e|
         self.exercises.create!(user_id: @trainer.id,
-                         title: e.title
-        )
+                         title: e.title)
       end
     end
 end

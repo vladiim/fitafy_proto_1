@@ -1,5 +1,5 @@
 class WorkoutsController < ApplicationController
-  load_and_authorize_resource :through => :current_user, except: [:new, :edit]
+  load_and_authorize_resource :through => :current_user, except: [:new, :edit, :create]
 
   def index
     @title = "Workouts"        
@@ -11,15 +11,10 @@ class WorkoutsController < ApplicationController
     
   def new
     @presenter = Exercises::ChildPresenter.new("Create Workout", "workout", nil, current_user)
-    
-    # @title = "Create Workout"
-    # @body_parts = Exercise::BODY_PARTS.sort
-    # @parent = current_user.workouts.build
-    # @model = "workout"
   end
   
   def create
-    if @workout.save
+    if current_user.workouts.create!(params[:workout])
       flash[:success] = "New workout added!"
       redirect_to workout_path(@workout)
     else
@@ -34,11 +29,6 @@ class WorkoutsController < ApplicationController
 
   def edit
     @presenter = Exercises::ChildPresenter.new("Edit Workout", "workout", params[:id], current_user)
-    
-    # @title = "Edit Workout"
-    # @body_parts = Exercise::BODY_PARTS.sort    
-    # @parent = current_user.workouts.find(params[:id])
-    # @model = "workout"
   end
 
   def update

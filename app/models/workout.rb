@@ -13,4 +13,11 @@ class Workout < ActiveRecord::Base
   validates :title, length: { :maximum => 200 },
                     uniqueness: { case_sensitive: false }
   
+  before_create :strip_empty_exercise_ids
+  
+  private
+  
+    def strip_empty_exercise_ids
+      @exercise_ids = exercise_ids.delete_if { |id| id == "" }
+    end
 end

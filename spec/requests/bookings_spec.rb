@@ -74,12 +74,13 @@ describe "Bookings" do
         sign_in_visit_booking(@trainer, @booking)        
         click_link("Add Exercise")
         check("exercise_#{@exercise2.id}")
-        click_button("Update Booking")
+        click_button("Add Exercises")
         page.should have_content("Booking updated")
         current_path.should eq(booking_path(@booking))
+        page.should have_content(@exercise2.title)
       end
       
-      it "should display the new exercise (fix test above)"
+      it "test for what happens if the person just hits update booking with no exercises checked"
       
       it "removes an exercise"
     end

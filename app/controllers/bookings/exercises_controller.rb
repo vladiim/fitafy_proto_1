@@ -1,5 +1,4 @@
 class Bookings::ExercisesController < ApplicationController
-  load_and_authorize_resource 
   
   def index
     @presenter = Exercises::ChildPresenter.new("Add Exercises", "booking", (params[:booking_id]), current_user)
@@ -23,6 +22,15 @@ class Bookings::ExercisesController < ApplicationController
       redirect_to booking_path(@booking)
     else
       render :edit
+    end
+  end
+  
+  def destroy
+    @booking = Booking.find(params[:booking_id])
+    @exercise = @booking.exercises.find(params[:id])
+    if @exercise.destroy
+      flash[:success] = "Exercise removed!"
+      redirect_to @booking
     end
   end
 end

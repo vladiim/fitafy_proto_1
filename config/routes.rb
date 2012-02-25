@@ -8,7 +8,7 @@ Fitafy::Application.routes.draw do
   resources :clients, only: [:new, :create, :edit, :update]
   
   resources :bookings do
-    resources :exercises, controller: 'bookings/exercises', only: [:index, :create, :update]
+    resources :exercises, controller: 'bookings/exercises', only: [:index, :create, :update, :destroy]
   end
   
   resources :exercises do

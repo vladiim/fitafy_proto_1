@@ -4,10 +4,13 @@
       %th Exercises
       %th
       %th
+      %th
     %tr#workout_show_exercises_head
       %th Title
       %th Sets
       %th Reps
+      %th
+      %th
 
   - @presenter.exercises.each do |exercise|
     %tbody
@@ -17,5 +20,7 @@
           %td= f.input :sets
           %td= f.input :reps
           %td= f.button :submit, :class => "a small button"
+          %td= link_to "Remove Exercise", booking_exercise_path(@presenter.booking, exercise), method: :delete, confirm: "Remove exercise?"
 
-= link_to "Add Exercise", booking_exercises_path(@presenter.booking)
+%p
+  = link_to "Add Exercise", booking_exercises_path(@presenter.booking)

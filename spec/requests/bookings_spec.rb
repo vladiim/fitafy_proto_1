@@ -71,7 +71,7 @@ describe "Bookings" do
       
       it "adds an exercise to the booking" do
         @exercise2 = Factory(:exercise)
-        sign_in_visit_booking(@trainer, @booking)        
+        sign_in_visit_booking(@trainer, @booking)
         click_link("Add Exercise")
         check("exercise_#{@exercise2.id}")
         click_button("Add Exercises")
@@ -80,9 +80,13 @@ describe "Bookings" do
         page.should have_content(@exercise2.title)
       end
       
-      it "test for what happens if the person just hits update booking with no exercises checked"
-      
-      it "removes an exercise"
+      it "removes an exercise" do
+        sign_in_visit_booking(@trainer, @booking)
+        click_link("Remove Exercise")
+        page.should have_content("Exercise removed!")
+        current_path.should eq(booking_path(@booking))
+        page.should_not have_content(@exercise.title)
+      end
     end
   end  
 end

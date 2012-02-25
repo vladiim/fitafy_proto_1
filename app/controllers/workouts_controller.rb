@@ -1,5 +1,5 @@
 class WorkoutsController < ApplicationController
-  load_and_authorize_resource :through => :current_user
+  load_and_authorize_resource :through => :current_user, except: [:new, :edit]
 
   def index
     @title = "Workouts"        
@@ -10,8 +10,12 @@ class WorkoutsController < ApplicationController
   end
     
   def new
-    @title = "Create Workout"
-    @body_parts = Exercise::BODY_PARTS.sort
+    @presenter = Exercises::ChildPresenter.new("Create Workout", "workout", nil, current_user)
+    
+    # @title = "Create Workout"
+    # @body_parts = Exercise::BODY_PARTS.sort
+    # @parent = current_user.workouts.build
+    # @model = "workout"
   end
   
   def create
@@ -29,8 +33,12 @@ class WorkoutsController < ApplicationController
   end
 
   def edit
-    @title = "Edit Workout"
-    @body_parts = Exercise::BODY_PARTS.sort    
+    @presenter = Exercises::ChildPresenter.new("Edit Workout", "workout", params[:id], current_user)
+    
+    # @title = "Edit Workout"
+    # @body_parts = Exercise::BODY_PARTS.sort    
+    # @parent = current_user.workouts.find(params[:id])
+    # @model = "workout"
   end
 
   def update

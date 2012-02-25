@@ -68,6 +68,20 @@ describe "Bookings" do
         current_path.should eq(booking_path(@booking))
         page.should have_css('input', value: 623)
       end
+      
+      it "adds an exercise to the booking" do
+        @exercise2 = Factory(:exercise)
+        sign_in_visit_booking(@trainer, @booking)        
+        click_link("Add Exercise")
+        check("exercise_#{@exercise2.id}")
+        click_button("Update Booking")
+        page.should have_content("Booking updated")
+        current_path.should eq(booking_path(@booking))
+      end
+      
+      it "should display the new exercise (fix test above)"
+      
+      it "removes an exercise"
     end
   end  
 end

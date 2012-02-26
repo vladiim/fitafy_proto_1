@@ -24,7 +24,7 @@ def make_users
                role:                    "trainer_role",
                admin:                   true
   )
-  50.times do |n|
+  20.times do |n|
     c_username = Faker::Name.first_name
     c_username = "#{c_username}_#{n}"
     c_email = "#{c_username}@email.com"
@@ -41,7 +41,7 @@ end
 def make_relationships
   @trainer = User.first
   users = User.all
-  clients = users[5..20]
+  clients = users[5..15]
   clients.each { |client| @trainer.train!(client) }
 end
 
@@ -86,7 +86,7 @@ end
 
 def make_workouts
   @trainer = User.first  
-  5.times do
+  5.times do |n|
     @trainer.workouts.create(title: "#{n} workout", description: Faker::Lorem.sentence(3), exercise_ids: [1, 2, 3])
   end
 end

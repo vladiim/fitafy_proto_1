@@ -93,9 +93,10 @@ end
 
 def make_bookings
   @trainer = User.first
+  n = 1
   @trainer.training.each do |client|
-    n = client.id
     workout = Workout.first
     @trainer.bookings.create(client_id: client.id, wo_date: n.days.from_now, wo_time: n.hours.from_now, workout_id: workout.id)
+    n += 1
   end
 end

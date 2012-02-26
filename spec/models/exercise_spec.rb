@@ -82,5 +82,5 @@ describe Exercise do
         @exercise_copy.should be_invalid
       end
     end
-  end    
+  end
 end

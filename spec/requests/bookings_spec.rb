@@ -87,6 +87,20 @@ describe "Bookings" do
         current_path.should eq(booking_path(@booking))
         page.should_not have_content(@exercise.title)
       end
+      
+      it "doesn't allow negative numbers for exercise sets" do
+        sign_in_visit_booking(@trainer, @booking)
+        fill_in "exercise_sets", with: -1
+        click_button("Update")
+        @booking.exercises.first.sets.should_not == -1
+      end
+      
+      it "doesn't allow negative numbers for exercise reps" do
+        sign_in_visit_booking(@trainer, @booking)
+        fill_in "exercise_reps", with: -1
+        click_button("Update")
+        @booking.exercises.first.reps.should_not == -1
+      end
     end
   end  
 end

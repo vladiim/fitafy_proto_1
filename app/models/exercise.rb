@@ -1,22 +1,30 @@
 class Exercise < ActiveRecord::Base
-  
+
   attr_accessible :title, :description, :body_part, :equipment, :cues, :booking_id, :user_id, :sets, :reps
-  
+
   belongs_to :user
   belongs_to :booking
-  
+
   has_and_belongs_to_many :workouts
-  
+
   validates :title, presence: true,
                     length: { minimum: 4 }
-  
+
   validates :description, presence: true,
                           uniqueness: { case_sensitive: false },
                           if: :no_booking_id
-  
+
   validates :title, uniqueness: { case_sensitive: false }, 
                     if: :no_booking_id
-  
+
+  validates_numericality_of :sets, 
+                            greater_than_or_equal_to: 0,
+                            if: :no_booking_id
+
+  validates_numericality_of :reps,
+                             greater_than_or_equal_to: 0,
+                             if: :no_booking_id  
+
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
   EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]
   

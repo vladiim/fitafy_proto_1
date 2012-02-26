@@ -22,7 +22,13 @@ describe "Workouts" do
     page.should have_content("#{@workout_title}")
   end
   
-  it "clicks create without updating any of the attributes (title breaks)"
+  it "tries to create a workout without exercises" do
+    visit new_workout_path
+    fill_in "workout_title", with: @workout_title
+    fill_in "workout_description", with: @workout_description
+    click_button("Create Workout")
+    page.should have_content("Exercises can't be empty")
+  end
   
   describe "does stuff with a created workout" do
     

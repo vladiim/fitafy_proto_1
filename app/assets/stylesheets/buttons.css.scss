@@ -41,3 +41,11 @@ a.signout {
 		color: $dark_blue;
 	}
 }
+
+input#no_style_button {
+	background: none;
+	border: 0;
+	color: $dark_blue;
+	align: left;
+	width: 100px;
+}

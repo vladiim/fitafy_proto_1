@@ -18,6 +18,7 @@ class WorkoutsController < ApplicationController
       flash[:success] = "New workout added!"
       redirect_to workout_path(@workout)
     else
+      @presenter = Exercises::ChildPresenter.new("Create Workout", "workout", nil, current_user)
       render :new
     end
   end

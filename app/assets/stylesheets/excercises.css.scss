@@ -1,3 +1,17 @@
-// Place all the styles related to the excercises controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "mixins";
+
+/* BOOKING EXERCISES TABLE */
+
+$set_rep_width: 30px;
+
+#exercise_sets {
+	width: $set_rep_width;
+}
+
+#exercise_reps {
+	width: $set_rep_width;
+}
+
+#exercise_remove {
+	text-align: center;
+}

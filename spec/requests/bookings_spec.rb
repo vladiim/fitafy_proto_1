@@ -63,7 +63,7 @@ describe "Bookings" do
         sign_in_visit_booking(@trainer, @booking)
         fill_in "exercise_sets", with: 623
         fill_in "exercise_reps", with: 633        
-        click_button("Update Exercise")
+        click_button("Update")
         page.should have_content("Exercise updated")
         current_path.should eq(booking_path(@booking))
         page.should have_css('input', value: 623)
@@ -72,7 +72,7 @@ describe "Bookings" do
       it "adds an exercise to the booking" do
         @exercise2 = Factory(:exercise)
         sign_in_visit_booking(@trainer, @booking)
-        click_link("Add Exercise")
+        click_link("Add More Exercises")
         check("exercise_#{@exercise2.id}")
         click_button("Add Exercises")
         page.should have_content("Booking updated")
@@ -82,7 +82,7 @@ describe "Bookings" do
       
       it "removes an exercise" do
         sign_in_visit_booking(@trainer, @booking)
-        click_link("Remove Exercise")
+        click_link("Remove")
         page.should have_content("Exercise removed!")
         current_path.should eq(booking_path(@booking))
         page.should_not have_content(@exercise.title)

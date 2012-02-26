@@ -2,8 +2,8 @@ Rake::Task['db:reset'].invoke
 make_users
 make_relationships
 make_exercises
-make_workouts    
-make_bookings    
+make_workouts
+make_bookings
 
 
 def make_users

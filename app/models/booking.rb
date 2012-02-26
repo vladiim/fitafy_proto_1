@@ -11,7 +11,7 @@ class Booking < ActiveRecord::Base
   validates_presence_of :trainer_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
   validates_presence_of :client_id, :message => "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
   
-  validates_presence_of :wo_date, :wo_time
+  validates_presence_of :wo_date, :wo_time, :workout_id
   
   validate :wo_date_cannot_be_in_the_past
   

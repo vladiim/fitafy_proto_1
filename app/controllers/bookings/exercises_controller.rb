@@ -17,11 +17,13 @@ class Bookings::ExercisesController < ApplicationController
   
   def update
     @booking = Booking.find(params[:booking_id])
-    if @booking.update_attributes(params[:exercise])
+    @exercise = @booking.exercises.find(params[:id])
+    if @exercise.update_attributes(params[:exercise])
       flash[:success] = "Exercise updated!"
       redirect_to booking_path(@booking)
     else
-      render :edit
+      @presenter = Bookings::ShowPresenter.new(current_user, params[:booking_id])
+      render 'bookings/show'
     end
   end
   

@@ -60,5 +60,9 @@ describe Booking do
     it "booking must have a client" do
       @trainer.bookings.build(@attr.merge(client: nil)).should be_invalid
     end
+    
+    it "booking must have a workout" do
+      @trainer.bookings.build(@attr.merge(workout: nil)).should be_invalid
+    end
   end
 end

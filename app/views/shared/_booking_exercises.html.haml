@@ -1,0 +1,22 @@
+%table#workout_show_exercises
+  %thead
+    %tr#workout_show_exercises_head
+      %th 
+        #booking_exercise_title
+        Title
+      %th Sets
+      %th Reps
+      %th
+      %th
+
+    %tbody
+      %tr= link_to "Add More Exercises", booking_exercises_path(@presenter.booking)
+      - @presenter.exercises.each do |exercise|
+        %tr
+          %td#booking_exercise_title
+            %strong= exercise.title.titleize
+            = link_to "Remove", booking_exercise_path(@presenter.booking, exercise), id: "exercise_remove", method: :delete, confirm: "Remove exercise?"
+          = simple_form_for exercise, url: booking_exercise_path(@presenter.booking, exercise), method: :put do |f|
+            %td= f.input :sets
+            %td= f.input :reps
+            %td= f.button :submit, "Update", :class => "small link"

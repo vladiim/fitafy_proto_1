@@ -17,13 +17,9 @@ class Exercise < ActiveRecord::Base
   validates :title, uniqueness: { case_sensitive: false }, 
                     if: :no_booking_id
 
-  validates_numericality_of :sets, 
-                            greater_than_or_equal_to: 0,
-                            if: :no_booking_id
+  validates_numericality_of :sets, greater_than_or_equal_to: 0
 
-  validates_numericality_of :reps,
-                             greater_than_or_equal_to: 0,
-                             if: :no_booking_id  
+  validates_numericality_of :reps, greater_than_or_equal_to: 0
 
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
   EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]

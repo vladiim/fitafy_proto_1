@@ -1,7 +1,8 @@
 class ExercisesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: :index
     
   def index
+    @exercises = Exercise.templates
     @title = "Exercises"
   end
 

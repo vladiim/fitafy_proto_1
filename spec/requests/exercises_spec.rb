@@ -75,5 +75,18 @@ describe "Excerses" do
         page.should have_css("h2", @workout.title)
       end
     end
+    
+    describe "exercise templates" do
+
+      before(:each) do
+        @booking = Factory(:booking, workout_id: @workout.id, trainer_id: @trainer.id)
+      end
+
+      it "only lists exercise templates" do
+        integration_sign_in(@trainer)
+        click_link("Exercises: 1")
+        
+      end
+    end
   end  
 end

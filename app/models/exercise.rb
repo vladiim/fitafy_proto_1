@@ -21,6 +21,8 @@ class Exercise < ActiveRecord::Base
 
   validates_numericality_of :reps, greater_than_or_equal_to: 0
 
+  scope :templates, where(booking_id: nil)
+
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
   EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]
   

@@ -27,7 +27,7 @@ describe "Bookings" do
           
     it "shows the details for the booking" do
       sign_in_visit_booking(@trainer, @booking)
-      page.should have_content(@booking.booking_date)
+      # page.should have_content(@booking.booking_date)
       page.should have_content(@booking.booking_time)
       page.should have_content(@booking.workout.title)
       click_link("#{@client.username.titleize}")

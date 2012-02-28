@@ -22,6 +22,9 @@ class Exercise < ActiveRecord::Base
   validates_numericality_of :reps, greater_than_or_equal_to: 0
 
   scope :templates, where(booking_id: nil)
+  scope :admin_exercises, where(admin: true)
+  
+  before_create :checks_if_created_by_admin
 
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
   EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]
@@ -38,5 +41,10 @@ class Exercise < ActiveRecord::Base
     
     def no_booking_id
       !self.booking_id.present?
+    end
+    
+    def checks_if_created_by_admin
+      user = User.find(self.user_id)
+      self.admin = true if user.admin?
     end
 end

@@ -24,6 +24,23 @@ describe Exercise do
         @exercise.user_id.should eq(@trainer.id)
         @exercise.user.should eq(@trainer)
       end
+      
+      describe "admin exercise" do
+        
+        before(:each) do
+          @admin = Factory(:admin)
+        end
+        
+        it "should mark the exercise as admin if created by admin" do
+          @admin_ex = Factory(:exercise, user_id: @admin.id)
+          @admin_ex.admin.should be_true
+        end
+        
+        it "should mark the exercise non-admin by default" do
+          @normal_ex = Factory(:exercise, user_id: @trainer.id)
+          @normal_ex.admin.should_not be_true
+        end
+      end
     end
     
     describe "associations" do
@@ -80,6 +97,10 @@ describe Exercise do
         @exercise = Factory(:exercise)
         @exercise_copy = @trainer.exercises.build(@attr.merge(title: @exercise.title))
         @exercise_copy.should be_invalid
+      end
+      
+      it "validates the presence of a user" do
+        @exercise = Exercise.create(@attr.merge(user_id: "")).should be_invalid
       end
     end
   end

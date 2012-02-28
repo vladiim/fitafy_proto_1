@@ -2,20 +2,47 @@ require 'spec_helper'
 
 describe "Excerses" do
   before(:each) do
+    @trainer = Factory(:trainer)
     @admin = Factory(:admin)
   end
   
-  it "creates a new excercise only as an admin user" do
-    create_exercise(@admin)
-    page.should have_content("New exercise added!")
-    visit exercises_path
-    page.should have_css("a", text: "#{@exercise_title}")
+  describe "creates an exercise" do
+    
+    it "creates a new excercise only as an admin user" do
+      create_exercise(@admin)
+      page.should have_content("New exercise added!")
+      visit exercises_path
+      page.should have_css("a", text: "#{@exercise_title}")
+    end
+    
+    it "a trainer can't view another trainer's exercise" do
+      @trainer1_exercise = Factory(:exercise, user_id: @trainer.id)
+      @trainer2 = Factory(:trainer)
+      integration_sign_in(@trainer2)
+      visit exercise_path(@trainer1_exercise)
+      page.should have_content("Sorry! You can't access that page")
+    end
+    
+    it "a trainer can view an admin's exercise" do
+      @admin_exercise = Factory(:exercise, user_id: @admin.id)
+      integration_sign_in(@trainer)
+      click_link("Exercise")
+      click_link(@admin_exercise.title)
+      current_path.should eq(exercise_path(@admin_exercise))
+    end
+    
+    it "a trainer can view his own exercise" do
+      @my_exercise = Factory(:exercise, user_id: @trainer.id, title: "testy balls")
+      integration_sign_in(@trainer)
+      click_link("Exercise")
+      click_link(@my_exercise.title)
+      current_path.should eq(exercise_path(@my_exercise))
+    end
   end
-  
+
   describe "does stuff with a created exercise" do
     
     before(:each) do
-      @trainer = Factory(:user)      
       @exercise = Factory(:exercise, user_id: @admin.id)
       @workout = @admin.workouts.create!(title: "Testing", exercise_ids: @exercise.id)
     end
@@ -85,7 +112,14 @@ describe "Excerses" do
       it "only lists exercise templates" do
         integration_sign_in(@trainer)
         click_link("Exercises: 1")
-        
+        current_path.should eq(exercises_path)
+      end
+      
+      it "doesn't link exercises created by another trainer" do
+        @other_exercise = Factory(:exercise)
+        integration_sign_in(@trainer)
+        click_link("Exercises: 1")
+        page.should_not have_css("a", text: @other_exercise.title)
       end
     end
   end  

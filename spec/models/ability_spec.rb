@@ -61,6 +61,11 @@ describe Ability do
       it "shouldn't be able to manage another trainer's exercise" do
         @trainer_ability.should_not be_able_to(:manage, @exercise)
       end
+      
+      it "shouldn't be able to read another trainer's exercise" do
+        @diff_trainer_exercise = Factory(:exercise)
+        @trainer_ability.should_not be_able_to(:read, @diff_trainer_exercise)
+      end
     end
     
     describe "workouts" do

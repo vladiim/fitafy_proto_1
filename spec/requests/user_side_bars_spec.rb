@@ -39,7 +39,7 @@ describe "UserSideBars" do
       current_path.should eq(workouts_path)
       click_link("Bookings: #{@experience_trainer.bookings.count}")
       current_path.should eq(bookings_path)
-      click_link("Exercises: #{Exercise.count}")
+      click_link("Exercises: #{Exercise.templates.admin_exercises.count}")
       current_path.should eq(exercises_path)
     end
   end

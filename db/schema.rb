@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120226045038) do
+ActiveRecord::Schema.define(:version => 20120228075256) do
 
   create_table "bookings", :force => true do |t|
     t.integer  "trainer_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20120226045038) do
     t.integer  "booking_id"
     t.integer  "sets",        :default => 0
     t.integer  "reps",        :default => 0
+    t.boolean  "admin",       :default => false
   end
 
   add_index "exercises", ["body_part"], :name => "index_exercises_on_body_part"

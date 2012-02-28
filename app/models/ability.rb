@@ -23,7 +23,9 @@ class Ability
   end
   
   def trainer_rules
-    can :read, [User, Exercise]
+    can :read, User
+    can :read, Exercise, user_id: @user.id
+    can :read, Exercise, admin: true
     can :manage, User, id: @user.id
     can :manage, [Exercise, Workout, Booking], user_id: @user.id
   end

@@ -2,7 +2,8 @@ class ExercisesController < ApplicationController
   load_and_authorize_resource except: :index
     
   def index
-    @exercises = Exercise.templates.admin_exercises
+    # @exercises = Exercise.templates.where("admin = true or user_id = ?", current_user.id)
+    @exercises = current_user.exercise_list
     @title = "Exercises"
   end
 

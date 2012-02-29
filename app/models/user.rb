@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
   
+  def exercise_list
+    Exercise.templates.where("admin = true or user_id = ?", self.id)
+  end
+  
   def role_symbols
     [role.to_sym]
   end

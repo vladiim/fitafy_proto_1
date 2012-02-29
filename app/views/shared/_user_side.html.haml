@@ -11,4 +11,4 @@
     %td=link_to "Workouts: #{current_user.workouts.count}", workouts_path
 
   %tr#user_side_row
-    %td=link_to "Exercises: #{Exercise.templates.admin_exercises.count}", exercises_path
+    %td=link_to "Exercises: #{current_user.exercise_list.count}", exercises_path

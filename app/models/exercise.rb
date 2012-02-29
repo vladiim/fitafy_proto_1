@@ -22,7 +22,6 @@ class Exercise < ActiveRecord::Base
   validates_numericality_of :reps, greater_than_or_equal_to: 0
 
   scope :templates, where(booking_id: nil)
-  scope :admin_exercises, where(admin: true)
   
   before_create :checks_if_created_by_admin
 

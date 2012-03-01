@@ -1,6 +1,13 @@
 class UserMailer < ActionMailer::Base
+  
   default from: "no_reply@fitafy.com"
   default_url_options[:host] = "localhost:3000"
+  
+  # if Rails.env.production?
+  #     default_url_options[:host] = "fitafy.com"
+  # else
+  #   default_url_options[:host] = "localhost:3000"
+  # end
   
   def password_reset(user)
     @email_link   = edit_password_reset_url(user.perishable_token)

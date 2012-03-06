@@ -1,52 +1,52 @@
-@import "mixins";
-
-#booking_form_client {
-	padding-right: 1.5em;
-}
-
-#booking_form_workout {
-	padding-right: 1.5em;
-	  #workout_id {
-		margin-top: 7.5px;
-	  }
-}
-
-textarea#booking_message {
-	width: 100px;
-	height: 40px;
-}
-
-label#booking_label {
-	margin: 10px 0;
-}
-
-#booking_submit {
-	position: absolute;
-	margin: 25px 0 0 0;
-	padding: 0 15px;
-}
-
-#booking_bottom_of_form {
-	border-top: dotted 1px $dark_blue;
-}
-
-select#booking_workout_id {
-	margin-top: 10px;
-}
-
-select#booking_client_id {
-	margin-top: 10px;
-}
-
-#booking_wo_date {
-	width: 100px;
-}
-
-#booking_wo_time_5i {
-	position:absolute;
-	margin: -24.5px 0 0 60px;
-}
-
-#booking_form_time {
-	margin-left: 35px;
-}
+//@import "mixins";
+//
+//#booking_form_client {
+//	padding-right: 1.5em;
+//}
+//
+//#booking_form_workout {
+//	padding-right: 1.5em;
+//	  #workout_id {
+//		margin-top: 7.5px;
+//	  }
+//}
+//
+//textarea#booking_message {
+//	width: 100px;
+//	height: 40px;
+//}
+//
+//label#booking_label {
+//	margin: 10px 0;
+//}
+//
+//#booking_submit {
+//	position: absolute;
+//	margin: 25px 0 0 0;
+//	padding: 0 15px;
+//}
+//
+//#booking_bottom_of_form {
+//	border-top: dotted 1px $dark_blue;
+//}
+//
+//select#booking_workout_id {
+//	margin-top: 10px;
+//}
+//
+//select#booking_client_id {
+//	margin-top: 10px;
+//}
+//
+//#booking_wo_date {
+//	width: 100px;
+//}
+//
+//#booking_wo_time_5i {
+//	position:absolute;
+//	margin: -24.5px 0 0 60px;
+//}
+//
+//#booking_form_time {
+//	margin-left: 35px;
+//}

@@ -1,21 +1,21 @@
-@import "mixins";
-
-table#user_side_table {
-	width: 195px;
-	@include fat_border1;
-}
-
-tr#user_side_row:nth-child(odd) {
-	background: $gray_blue;
-}
-
-tr#user_side_row:nth-child(even) {
-	background: $light_gray;
-}
-
-a#user_side_username {
-	&:hover {
-		background: none;
-		color: $dark_blue;
-	}
-}
+//@import "mixins";
+//
+//table#user_side_table {
+//	width: 195px;
+//	@include fat_border1;
+//}
+//
+//tr#user_side_row:nth-child(odd) {
+//	background: $gray_blue;
+//}
+//
+//tr#user_side_row:nth-child(even) {
+//	background: $light_gray;
+//}
+//
+//a#user_side_username {
+//	&:hover {
+//		background: none;
+//		color: $dark_blue;
+//	}
+//}

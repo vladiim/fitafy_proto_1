@@ -28,17 +28,17 @@ describe UserMailer do
       @trainer = Factory(:trainer)
     end
     
-    it "should have fitafy.com as the default host" do
-      
-      # ENV['RAILS_ENV'] = 'production' 
-      Rails.env = ActiveSupport::StringInquirer.new('production')
-      UserMailer.password_reset(@trainer).deliver
-      # rails = double('Rails', env: "production")
-      #       @prod_mailer = UserMailer.with_stub_const(:Rails, rails) 
-      #       @prod_mailer.password_reset(@trainer).deliver
-            
-      
-      last_email.body.should include("fitafy.com")
-    end
+    it "should have fitafy.com as the default host" # do
+    #       
+    #       # ENV['RAILS_ENV'] = 'production' 
+    #       Rails.env = ActiveSupport::StringInquirer.new('production')
+    #       UserMailer.password_reset(@trainer).deliver
+    #       # rails = double('Rails', env: "production")
+    #       #       @prod_mailer = UserMailer.with_stub_const(:Rails, rails) 
+    #       #       @prod_mailer.password_reset(@trainer).deliver
+    #             
+    #       
+    #       last_email.body.should include("fitafy.com")
+    # end
   end
 end

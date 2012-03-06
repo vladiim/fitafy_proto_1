@@ -1,32 +1,28 @@
 !!! 5
   
-%head
-  = render 'layouts/head'
+%head= render 'layouts/head'
 
-%nav#navigation
-  = render 'layouts/navigation'
+%nav= render 'layouts/navigation'
 
 %body
   
   %section#main{ role: 'main',:class => "#{controller.controller_name}" }
     .container
-      .row
-        .twelve.columns
-          .one.columns
+      .row-fluid
           
-          - if current_user
-            %section.ten.columns#main_background
-              = render 'layouts/flashes'
-              .seven.columns
-                %h2#content_title= @title
-                #main_content= yield
-              .three.columns#user_side
-                = render 'shared/user_side'
-      
-          - else
+        - if current_user
+          %section.span10#main_background
             = render 'layouts/flashes'
-            .ten.columns#sign_in_background
-              = yield
+            .span7
+              %h2#content_title= @title
+              #main_content= yield
+            .span3#user_side
+              = render 'shared/user_side'
+      
+        - else
+          = render 'layouts/flashes'
+          .span10#sign_in_background
+            = yield
 	
   %footer.container
     =render 'layouts/footer'

@@ -1,0 +1,18 @@
+@import "colors";
+
+//$iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings.png");
+//$iconWhiteSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings.png");
+
+$navbarHeight: 40px;
+$navbarBackground: white;
+$navbarBackgroundHighlight: $dark-blue;
+//$navbarLinkBackgroundHover: $dark-blue;
+$navbarText: $dark-blue;
+$navbarLinkColor: $dark-blue;
+$navbarLinkColorHover: $light-gray;
+
+// all variables listed @ https://github.com/twitter/bootstrap/blob/master/less/variables.less
+
+@import "bootstrap";
+
+body { margin-top: 80px; }

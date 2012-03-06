@@ -10,6 +10,6 @@ module ApplicationHelper
   end
   
   def logo
-    image_tag('logo.png', :alt => 'fitafy', :size => '150x150')
+    image_tag('logo.png', :alt => 'fitafy', :size => '100x100')
   end
 end

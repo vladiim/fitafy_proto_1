@@ -10,7 +10,7 @@ gem 'heroku'
 gem 'authlogic'
 gem 'cancan'
 gem 'will_paginate'
-gem 'simple_form'
+gem 'simple_form', '~> 2.0.0'
 gem 'faker'
 gem 'table_builder'
 
@@ -21,7 +21,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'haml-rails'
-  gem 'zurb-foundation'
+  gem 'bootstrap-sass', '~> 2.0.1'
 end
 
 gem 'jquery-rails'

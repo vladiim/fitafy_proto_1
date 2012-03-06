@@ -1,27 +1,28 @@
 - @user ||= current_user
 
-.container
-  .row
-    .twelve.columns
-      .one.columns
-      .four.columns
-        = link_to logo, root_path, id: "logo"
-      
-      .six.columns
-        - if current_user
-          #account_signedin
-            = link_to "My Account", edit_user_path(@user)
-            |  
-            = link_to "Sign Out", signout_path
-          %nav#main_nav
-            %ul
-              %li= link_to "Clients", training_user_path(@user)
-              %li= link_to "Bookings", bookings_path
-              %li= link_to "Workouts", workouts_path
-              - if current_user.admin?
-                %li= link_to "Exercises", exercises_path
-              - else 
-                %li= link_to "Contact", "#"
+- if current_user
+  .navbar.navbar-fixed-top
+    = link_to logo, root_path, id: "logo", :class => "brand"
+    .navbar-inner
+      .container
+        .nav-collapse
+          %ul.nav
+            %li
+              = link_to "Bookings", bookings_path
+              %li.divider-vertical
+            %li
+              = link_to "Clients", training_user_path(@user)
+              %li.divider-vertical
+            %li
+              = link_to "Workouts", workouts_path
+              %li.divider-vertical
+            %li
+              = link_to "Exercises", exercises_path
+              %li.divider-vertical
+            %li
+              = link_to "My Account", edit_user_path(@user)
+              %li.divider-vertical
+            %li= link_to "Sign Out", signout_path
 
-        - else 
-          = render 'shared/signin'
+- else
+  = render 'shared/signin'

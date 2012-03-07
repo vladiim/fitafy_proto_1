@@ -8,13 +8,17 @@
     - if current_user
       %nav.row-fluid
         .span12= render 'layouts/navigation'
-    - else
-      = link_to big_logo, root_path, id: "logo"
 
-    %section.row-fluid
-      .span12= render 'layouts/flashes'
-      %h2= @title
-      .span12= yield
+    %section
+      .row-fluid
+        - if current_user
+          .span10.offset2= render 'layouts/flashes'
+          .span12
+            %h2.offset1= @title
+            .offset1= yield
+        - else
+          = render 'layouts/flashes'
+          = yield
 
   %footer.container-fluid
     =render 'layouts/footer'

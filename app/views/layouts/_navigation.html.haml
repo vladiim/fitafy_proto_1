@@ -8,37 +8,57 @@
         .nav-collapse
           %ul.nav
 
+            //########## Bookings
             %li.dropdown
-              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} Bookings
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
+                %i.icon-calendar.icon-white
+                Bookings
+                %span.caret
               %ul.dropdown-menu
                 %li=link_to "Bookings: #{current_user.bookings.count}", bookings_path
                 %li=link_to "Create Booking", new_booking_path
               %li.divider-vertical
 
+            //########## Clients
             %li.dropdown
-              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} Clients
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
+                %i.icon-heart.icon-white
+                Clients
+                %span.caret
               %ul.dropdown-menu
                 %li=link_to "Clients: #{current_user.training.count}", training_user_path(current_user)
                 %li=link_to "Add New Client", new_client_path
               %li.divider-vertical
 
+            //########## Workout
             %li.dropdown
-              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} Workout
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} 
+                %i.icon-list.icon-white
+                Workout
+                %span.caret
               %ul.dropdown-menu
                 %li=link_to "Workouts: #{current_user.workouts.count}", workouts_path
                 %li=link_to "Create Workout", new_workout_path
               %li.divider-vertical
 
+            //########## Exercises
             %li.dropdown
-              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} Exercises
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
+                %i.icon-road.icon-white
+                Exercises
+                %span.caret
               %ul.dropdown-menu
                 %li=link_to "Exercises: #{current_user.exercise_list.count}", exercises_path
                 %li=link_to "Create Exercise", new_exercise_path
-              %li.divider-vertical
 
-          %ul.nav.pull-right
-            %li.dropdown
-              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}= current_user.username.titleize
+          //########## Profile
+          %ul.pull-right
+            .nav.btn-group
+              %a.btn.btn-primary{"href" => "#"}
+                %i.icon-user.icon-white
+                = current_user.username.titleize
+              %a{"class" => "btn btn-primary dropdown-toggle", "data-toggle" => "dropdown", "href" => "#"}
+                %span.caret
               %ul.dropdown-menu
                 %li= link_to "My Profile", edit_user_path(current_user), id: "user_side_username"
                 %li=link_to "Sign Out", signout_path

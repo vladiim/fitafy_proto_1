@@ -2,25 +2,23 @@
   
 %head= render 'layouts/head'
 
-%nav= render 'layouts/navigation'
-
 %body
-  
+
+  %nav.navbar.navbar-fixed-top= render 'layouts/navigation'
+
   %section#main{ role: 'main',:class => "#{controller.controller_name}" }
-    .container
-      .row-fluid
           
-        - if current_user
-          %section
-            = render 'layouts/flashes'
-            %h2#content_title= @title
-            #main_content= yield
-            / .span3#user_side
-            /   = render 'shared/user_side'
-      
-        - else
-          = render 'layouts/flashes'
-          = yield
+    - if current_user
+      %section
+        = render 'layouts/flashes'
+        %h2#content_title= @title
+        #main_content= yield
+        / .span3#user_side
+        /   = render 'shared/user_side'
+    
+    - else
+      = render 'layouts/flashes'
+      = yield
 	
   %footer.container
     =render 'layouts/footer'

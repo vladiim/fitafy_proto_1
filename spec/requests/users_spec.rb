@@ -22,7 +22,7 @@ describe "Signups" do
     page.should_not have_content("Start in minutes")
     click_link "Sign Out"
     current_path.should eq(root_path)
-    page.should have_content("Start in minutes")
+    page.should have_content("You train your clients")
   end
   
   it "incorrectly signs a user in" do

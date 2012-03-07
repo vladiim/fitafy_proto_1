@@ -2,7 +2,61 @@
   = render 'shared/booking_form'
 
 - else
-  .row.well
-    .span6= render 'shared/home_usp'
+   
+  .row-fluid
+    .span6
+      .well
+        %h2 You train your clients
+        %h2 We'll manage them
+        %br
+        %p We make managing Personal Training clients a breeze. Stop worrying about the business of being a PT and get on with training your clients.
+        %br
+        = link_to "Try It Now!", signup_path, :class => "btn btn-large btn-primary"
+        %a.btn.btn-large.btn-success{"data-toggle" => "modal", "href" => "#signIn"} Sign In
 
-    .span6= render 'shared/signup'
+    .span6
+      %ul.thumbnails
+        %li.span6
+          %a.thumbnail{ "href" => "#" }
+            %img{"src" => "http://placehold.it/450x215"}
+
+  .row-fluid
+
+    .span3
+      %ul.thumbnails
+        %li.span3
+          .thumbnail
+            %img{ "src" => "http://placehold.it/260x180" }
+            .caption
+              %h6 Reason #1 fitafy rocks
+              %p Drumstick capicola ham hock boudin prosciutto brisket strip steak, meatloaf tongue cow sausage bresaola tenderloin salami ball tip. Prosciutto tongue t-bone filet mignon.
+
+    .span3#fitafy_rocks_socks
+      %ul.thumbnails
+        %li.span3
+          .thumbnail
+            %img{ "src" => "http://placehold.it/260x180" }
+            .caption
+              %h6 Reason #1 fitafy rocks
+              %p Drumstick capicola ham hock boudin prosciutto brisket strip steak, meatloaf tongue cow sausage bresaola tenderloin salami ball tip. Prosciutto tongue t-bone filet mignon.
+
+    .span3
+      %ul.thumbnails
+        %li.span3
+          .thumbnail
+            %img{ "src" => "http://placehold.it/260x180" }
+            .caption
+              %h6 Reason #1 fitafy rocks
+              %p Drumstick capicola ham hock boudin prosciutto brisket strip steak, meatloaf tongue cow sausage bresaola tenderloin salami ball tip. Prosciutto tongue t-bone filet mignon.
+
+.modal.hide.fade.in#signIn
+  .modal-header
+    %a.close{ "data-dismiss" => "modal" } x
+    %h3 Sign In
+  .modal-body= render "shared/signin"
+
+/ %ul 
+/   %li Easily manage client bookings
+/   %li Track and monitor client progress
+/   %li Keep and reuse all your workouts 
+/   %li Retain clients like never before

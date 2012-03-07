@@ -1,4 +1,9 @@
-//@import "mixins";
+@import "mixins";
+
+body#main_content_yo {
+	background: $light-gray;
+}
+
 //
 //body {
 //	background-image: url("background2.jpeg");

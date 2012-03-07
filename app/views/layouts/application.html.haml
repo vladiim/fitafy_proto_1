@@ -2,26 +2,22 @@
   
 %head= render 'layouts/head'
 
-%body
+%body#main_content_yo
+  .container-fluid
 
-  %nav.navbar.navbar-fixed-top= render 'layouts/navigation'
-
-  %section#main{ role: 'main',:class => "#{controller.controller_name}" }
-          
     - if current_user
-      %section
-        = render 'layouts/flashes'
-        %h2#content_title= @title
-        #main_content= yield
-        / .span3#user_side
-        /   = render 'shared/user_side'
-    
+      %nav.row-fluid
+        .span12= render 'layouts/navigation'
     - else
-      = render 'layouts/flashes'
-      = yield
-	
-  %footer.container
+      = link_to big_logo, root_path, id: "logo"
+
+    %section.row-fluid
+      .span12= render 'layouts/flashes'
+      %h2= @title
+      .span12= yield
+
+  %footer.container-fluid
     =render 'layouts/footer'
-	
+
 %br
 = debug(params) if Rails.env.development?

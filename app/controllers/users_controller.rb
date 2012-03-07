@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
-    @user.email = @user.invitation.recipient_email if @user.invitation
+    @user.email = @user.invitation.recipient_email if @user.invitation_id
     @user_session = UserSession.new
   end
   

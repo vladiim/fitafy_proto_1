@@ -26,7 +26,7 @@ describe "Excerses" do
     it "a trainer can view an admin's exercise" do
       @admin_exercise = Factory(:exercise, user_id: @admin.id)
       integration_sign_in(@trainer)
-      click_link("Exercise")
+      click_link("Exercises: ")
       click_link(@admin_exercise.title)
       current_path.should eq(exercise_path(@admin_exercise))
     end
@@ -34,7 +34,7 @@ describe "Excerses" do
     it "a trainer can view his own exercise" do
       @my_exercise = Factory(:exercise, user_id: @trainer.id, title: "testy balls")
       integration_sign_in(@trainer)
-      click_link("Exercise")
+      click_link("Exercises: ")
       click_link(@my_exercise.title)
       current_path.should eq(exercise_path(@my_exercise))
     end

@@ -43,7 +43,7 @@ describe "Bookings" do
 
     it "edits a booking from the index page" do
       integration_sign_in(@trainer)      
-      click_link("Bookings")
+      click_link("Bookings: ")
       click_link("#{@booking.client.username.titleize}")
       select("#{@new_workout.title}", from: "booking_workout_id")
       click_button("Edit Booking")

@@ -11,18 +11,16 @@
       .row-fluid
           
         - if current_user
-          %section.span10#main_background
+          %section
             = render 'layouts/flashes'
-            .span7
-              %h2#content_title= @title
-              #main_content= yield
-            .span3#user_side
-              = render 'shared/user_side'
+            %h2#content_title= @title
+            #main_content= yield
+            / .span3#user_side
+            /   = render 'shared/user_side'
       
         - else
           = render 'layouts/flashes'
-          .span10#sign_in_background
-            = yield
+          = yield
 	
   %footer.container
     =render 'layouts/footer'

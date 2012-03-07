@@ -7,22 +7,58 @@
       .container
         .nav-collapse
           %ul.nav
-            %li
-              = link_to "Bookings", bookings_path
+
+            %li.dropdown
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} Bookings
+              %ul.dropdown-menu
+                %li=link_to "Bookings: #{current_user.bookings.count}", bookings_path
+                %li=link_to "Create Booking", new_booking_path
               %li.divider-vertical
-            %li
-              = link_to "Clients", training_user_path(@user)
+
+            %li.dropdown
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} Clients
+              %ul.dropdown-menu
+                %li=link_to "Clients: #{current_user.training.count}", training_user_path(current_user)
+                %li=link_to "Add New Client", new_client_path
               %li.divider-vertical
-            %li
-              = link_to "Workouts", workouts_path
+
+            %li.dropdown
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} Workout
+              %ul.dropdown-menu
+                %li=link_to "Workouts: #{current_user.workouts.count}", workouts_path
+                %li=link_to "Create Workout", new_workout_path
               %li.divider-vertical
-            %li
-              = link_to "Exercises", exercises_path
+
+            %li.dropdown
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} Exercises
+              %ul.dropdown-menu
+                %li=link_to "Exercises: #{current_user.exercise_list.count}", exercises_path
+                %li=link_to "Create Exercise", new_exercise_path
               %li.divider-vertical
-            %li
-              = link_to "My Account", edit_user_path(@user)
-              %li.divider-vertical
-            %li= link_to "Sign Out", signout_path
+
+          %ul.nav.pull-right
+            %li.dropdown
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}= current_user.username.titleize
+              %ul.dropdown-menu
+                %li= link_to "My Profile", edit_user_path(current_user), id: "user_side_username"
+                %li=link_to "Sign Out", signout_path
 
 - else
-  = render 'shared/signin'
+  .navbar.navbar-fixed-top
+    = link_to logo, root_path, id: "logo", :class => "brand"
+    .navbar-inner
+      .container
+        .nav-collapse
+          %ul.nav
+            %li
+              = link_to "Sign Up", "#"
+              %li.divider-vertical
+            %li
+              = link_to "Features", "#"
+              %li.divider-vertical
+            %li
+              = link_to "About", "#"
+              %li.divider-vertical
+            %li= link_to "Sign In", "#signIn", "data-toggle" => "modal"
+
+  = render "shared/signin"

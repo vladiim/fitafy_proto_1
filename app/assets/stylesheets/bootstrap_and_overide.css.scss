@@ -4,12 +4,12 @@
 //$iconWhiteSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings.png");
 
 $navbarHeight: 40px;
-$navbarBackground: white;
+$navbarBackground: transparentize($dark-blue, 0.95);
 $navbarBackgroundHighlight: $dark-blue;
-//$navbarLinkBackgroundHover: $dark-blue;
-$navbarText: $dark-blue;
-$navbarLinkColor: $dark-blue;
-$navbarLinkColorHover: $light-gray;
+//$navbarLinkBackgroundHover: $light-gray;
+$navbarText: $light-gray;
+$navbarLinkColor: $light-gray;
+$navbarLinkColorHover: $gray_blue;
 
 // all variables listed @ https://github.com/twitter/bootstrap/blob/master/less/variables.less
 

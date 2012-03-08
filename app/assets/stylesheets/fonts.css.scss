@@ -1,8 +1,9 @@
-//@import "mixins";
-//
-//body h1 h2 h3 h4 h5 h6 p ul li {
-//	font-family: Helvetica, Verdana, Arial, sans-serif;
-//}
+@import "mixins";
+
+h1 {
+	padding: 0 0 0.5em 0.5em;
+}
+
 //
 //h2 {
 //	color: $dark_blue;

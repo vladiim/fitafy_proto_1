@@ -12,10 +12,10 @@
     %section
       .row-fluid
         - if current_user
-          .span10= render 'layouts/flashes'
-          .span12
-            %h2= @title
-            = yield
+          .span12= render 'layouts/flashes'
+          .row-fluid
+            %h1.span12= @title
+            .span12= yield
         - else
           = render 'layouts/flashes'
           = yield

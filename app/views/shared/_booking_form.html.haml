@@ -4,31 +4,30 @@
 
   = f.error_notification
 
-  .row#booking_top_of_form
-    .four.columns#booking_form_client
+  .row-fluid
+    .span4.well
       = f.association :client, collection: current_user.training.collect { |c| [c.username, c.id] }, prompt: "Select client"
 
       %p
         or
         = link_to "Invite New", new_client_path
 
-    .four.columns#booking_form_workout
+    .span4.well
       = f.association :workout, collection: current_user.workouts.collect { |w| [w.title, w.id] }, prompt: "Select workout"
 
       %p
         or
         = link_to "Create New", new_workout_path
 
-  .row#booking_middle_of_form
-    .four.columns#booking_form_date
+  .row-fluid
+    .span4.well
       = f.input :wo_date, as: :string, input_html: { :class => 'date_picker' }, label: "Date", start_date: Time.now
 
-    .four.columns#booking_form_time
       = f.input :wo_time, :label => "Time", time_separator: ""
 
-  .row#booking_bottom_of_form
-    .five.columns
-      = f.input :message, as: :text
-    
-    .four.columns
-      = f.button :submit, "#{@title}", id: 'booking_submit', :class => "a small button"
+    .span4.well
+      = f.input :message, as: :text, input_html: { rows: 7 }
+
+  .row-fluid
+    .span4
+      = f.button :submit, "#{@title}", id: 'booking_submit', :class => "btn btn-large btn-primary"

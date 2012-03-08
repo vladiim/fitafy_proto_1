@@ -51,7 +51,7 @@ describe "Excerses" do
       integration_sign_in(@trainer)
       visit exercises_path
       click_link("#{@exercise.title}")
-      page.should have_css("h2", text: "#{@exercise.title}")
+      page.should have_css("h1", text: "#{@exercise.title}")
       page.should have_content("Description: #{@exercise.description}")
       page.should have_content(@exercise.body_part)
       page.should have_content(@exercise.equipment)
@@ -94,12 +94,12 @@ describe "Excerses" do
         click_link(@exercise.title)
         click_link("1 Workout")
         click_link(@workout.title)
-        page.should have_css("h2", @workout.title)
+        page.should have_css("h1", @workout.title)
         click_link("Exercises: ")
         click_link("1 Workout")
         page.should have_content("1 exercise")
         click_link(@workout.title)
-        page.should have_css("h2", @workout.title)
+        page.should have_css("h1", @workout.title)
       end
     end
     

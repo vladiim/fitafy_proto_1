@@ -1,11 +1,10 @@
-//@import "mixins";
+@import "mixins";
 //
 //// LINKS
 //
-// a{
-//	color: $dark_blue;
-//	&:hover {
-//		background: $dark_blue;
-//		color: $gray_blue;
-//	}
-//}
+ a{
+	&:hover {
+		background: $dark_blue;
+		color: $gray_blue;
+	}
+}

@@ -34,7 +34,7 @@ describe "Clients" do
       it "client visits /invites and accepts" do
         integration_sign_in(@client)
         visit invites_path
-        page.should have_css("h2", text: "Invites")
+        page.should have_css("h1", text: "Invites")
         page.should have_css("a", text: @trainer.username.titleize)
         check('relationship_accepted')
         click_button("Save")

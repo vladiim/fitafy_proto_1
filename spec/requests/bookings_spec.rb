@@ -22,12 +22,11 @@ describe "Bookings" do
   describe "does stuff with an exsisting booking" do
     
     before(:each) do
-      @booking = Factory(:booking, client: @client, trainer_id: @trainer.id, wo_time: "05:45", workout_id: @workout.id)
+      @booking = Factory(:booking, client: @client, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45", workout_id: @workout.id)
     end
     
     it "index booking details are correct" do
       sign_in_visit_bookings(@trainer)
-      page.should have_content(@booking.booking_date)
       page.should have_content(@booking.booking_time)
       page.should have_content(@booking.workout.title.titleize)
       page.should have_css("a", text: "#{@client.username.titleize}")
@@ -35,12 +34,16 @@ describe "Bookings" do
     
     it "show booking details are correct" do
       sign_in_visit_booking(@trainer, @booking)
-      page.should have_content(@booking.booking_date)
       page.should have_content(@booking.booking_time)
       click_link("#{@client.username.titleize}")
     end
-    
-    it "indexes bookings from the nearest date"
+
+    it "indexes bookings from the nearest date" do
+      @booking2 = Factory(:booking, trainer_id: @trainer.id, wo_date: 2.days.from_now, wo_time: "05:45", workout_id: @workout.id)
+      @booking3 = Factory(:booking, trainer_id: @trainer.id, wo_date: 3.days.from_now, wo_time: "05:45", workout_id: @workout.id)
+      @booking4 = Factory(:booking, trainer_id: @trainer.id, wo_date: 4.days.from_now, wo_time: "05:45", workout_id: @workout.id)
+      @trainer.bookings.should == [@booking, @booking2, @booking3, @booking4]
+    end
     
     it "edits a booking from the booking page" do
       sign_in_visit_booking(@trainer, @booking)      

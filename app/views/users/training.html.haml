@@ -1,11 +1,10 @@
 - if @clients.empty?
   %p 
     You have no clients yet
-    = link_to "Add some", "#"  
+    = link_to "Add some", new_client_path
+
 
 - else
   = will_paginate @clients
-  %br
-  %table
-    = render @clients
+  = render 'shared/clients'
   = will_paginate @clients

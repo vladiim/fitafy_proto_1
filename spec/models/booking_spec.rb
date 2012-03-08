@@ -20,7 +20,6 @@ describe Booking do
       it "booking client should be the client" do
         @booking.client.should eq(@client)
       end
-      
     end
     
     describe "exercise associations" do

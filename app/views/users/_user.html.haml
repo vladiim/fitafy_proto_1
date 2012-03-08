@@ -1,9 +1,0 @@
-%ul
-  %li
-    %h6= link_to "#{user.username.titleize}", user_path(user)
-    = link_to "Create Booking", "#"
-    | 
-    - if user.reverse_bookings.empty?
-      0 Bookings
-    - else
-      = link_to "#{pluralize(user.reverse_bookings.count, 'Booking')}", user_reverse_bookings_path(user)

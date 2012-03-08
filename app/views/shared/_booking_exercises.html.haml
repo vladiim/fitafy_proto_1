@@ -1,22 +1,27 @@
-%table#workout_show_exercises
+%table.table
   %thead
-    %tr#workout_show_exercises_head
+    %tr#table_blue
+      %th
+        %h3 #
       %th 
-        #booking_exercise_title
-        Title
-      %th Sets
-      %th Reps
+        %h3 Exercise
+      %th 
+        %h3 Sets
+      %th
+        %h3 Reps
       %th
       %th
 
     %tbody
-      %tr= link_to "Add More Exercises", booking_exercises_path(@presenter.booking)
       - @presenter.exercises.each do |exercise|
         %tr
-          %td#booking_exercise_title
-            %strong= exercise.title.titleize
-            = link_to "Remove", booking_exercise_path(@presenter.booking, exercise), id: "exercise_remove", method: :delete, confirm: "Remove exercise?"
+          %td Order
+          %td
+            %h3= exercise.title.titleize
           = simple_form_for exercise, url: booking_exercise_path(@presenter.booking, exercise), method: :put do |f|
-            %td= f.input :sets
-            %td= f.input :reps
-            %td= f.button :submit, "Update", :class => "small link"
+            %td= f.input :sets, input_html: { maxlength: 20 }, :label => false
+            %td= f.input :reps, :label => false
+            %td= f.button :submit, "Update", :class => "btn btn-primary"
+            %td= link_to "Remove", booking_exercise_path(@presenter.booking, exercise), id: "exercise_remove", method: :delete, confirm: "Remove exercise?"
+
+= link_to "Add More Exercises", booking_exercises_path(@presenter.booking), :class => "btn btn-large btn-primary"

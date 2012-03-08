@@ -1,17 +1,26 @@
-%p{:datetime => "#{@presenter.booking.wo_date}#{@presenter.booking.wo_time}"}=  "On #{@presenter.booking.booking_date} " "at #{@presenter.booking.booking_time}"
+.row-fluid
+  %table.span12.table.table-bordered
+    %thead
+      %tr
+        %th Time
+        %th Date
+        %th Client
+        %th Instructions
+    %tbody
+      %tr
+        %td{:datetime => "#{@presenter.booking.wo_time}"}= @presenter.booking.booking_time
+        %td{:datetime => "#{@presenter.booking.wo_date}"}= @presenter.booking.booking_date
+        %td= link_to "#{@presenter.client.username.titleize}", user_path(@presenter.client)
+        %td
 
-%p
-  %strong Client:
-  = link_to "#{@presenter.client.username.titleize}", user_path(@presenter.client)
+.row-fluid
+  = render 'shared/booking_exercises'
 
-%strong= @presenter.workout.title
-
-= render 'shared/booking_exercises'
-
-%br
-
-=link_to "Edit Booking", edit_booking_path(@presenter.booking)
-
-|
-
-= link_to "Delete Booking", booking_path(@presenter.booking), method: :delete, confirm: "Are you sure you want to delete this booking?"
+.row-fluid
+  %br
+  
+  =link_to "Edit Booking", edit_booking_path(@presenter.booking)
+  
+  |
+  
+  = link_to "Delete Booking", booking_path(@presenter.booking), method: :delete, confirm: "Are you sure you want to delete this booking?"

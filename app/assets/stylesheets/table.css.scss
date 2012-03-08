@@ -1,6 +1,9 @@
 @import "bootstrap_and_overide" ;
 
-th {
+tr#table_blue {
 	background: $dark-blue;
 	color: $light-gray;
+	h3 {
+		color: $light-gray;
+	}
 }

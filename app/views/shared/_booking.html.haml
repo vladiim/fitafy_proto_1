@@ -1,5 +1,5 @@
 %table.table
-  %tr
+  %tr#table_blue
     %thead
       %th Time
       %th Date
@@ -15,10 +15,3 @@
       %td= link_to "#{booking.client.username.titleize}", user_path(booking.client)
       %td= booking.workout.title.titleize
       %td= link_to "Visit Booking", booking_path(booking)
-    / 
-    / %h6{:datetime => "#{booking.wo_date}#{booking.wo_time}"}= link_to "#{booking.booking_date} At #{booking.booking_time}", booking_path(booking)
-    / = link_to "For #{booking.client.username.titleize}", edit_booking_path(booking)
-    / |
-    / = "Workout: #{booking.workout.title.titleize}" 
-    / |
-    / = link_to "Delete Booking", booking_path(booking), method: :delete, confirm: "Are you sure you want to delete this booking?"

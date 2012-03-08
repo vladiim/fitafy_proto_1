@@ -4,10 +4,18 @@
   .navbar.navbar-fixed-top
     .navbar-inner
       .container
+  
+        //############# Collapse button for responsive design
+        %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+
         = link_to logo, root_path, id: "logo", :class => "brand"
         .nav-collapse
           %ul.nav
-    
+  
             //########## Bookings
             %li.dropdown
               %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
@@ -30,11 +38,11 @@
                 %li=link_to "Add New Client", new_client_path
               %li.divider-vertical
     
-            //########## Workout
+            //########## Workouts
             %li.dropdown
               %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} 
                 %i.icon-list.icon-white
-                Workout
+                Workouts
                 %span.caret
               %ul.dropdown-menu
                 %li=link_to "Workouts: #{current_user.workouts.count}", workouts_path

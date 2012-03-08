@@ -9,6 +9,11 @@
 	margin-left: 40px;
 }
 
+// overide mobile nav pushing down content
+.navbar-fixed-top {
+	position: absolute;
+}
+
 //@import "mixins";
 //
 //a#logo {

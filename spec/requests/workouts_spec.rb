@@ -12,7 +12,7 @@ describe "Workouts" do
   
   it "creates a new workout" do
     visit root_path
-    click_link("Workouts")
+    click_link("Workouts: ")
     current_path.should eq(new_workout_path)
     fill_in "workout_title", with: @workout_title
     fill_in "workout_description", with: @workout_description
@@ -38,7 +38,7 @@ describe "Workouts" do
     end
     
     it "visits the workouts page" do
-      click_link("Workouts")
+      click_link("Workouts: ")
       click_link(@workout.title)
     end
         

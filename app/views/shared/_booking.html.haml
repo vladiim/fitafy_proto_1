@@ -3,15 +3,15 @@
     %thead
       %th Time
       %th Date
-      %th For
+      %th Client
       %th Workout
       %th
 
   - for booking in @bookings
 
     %tr{:datetime => "#{booking.wo_date}#{booking.wo_time}"}
-      %td= booking.booking_date
       %td= booking.booking_time
+      %td= booking.booking_date
       %td= link_to "#{booking.client.username.titleize}", user_path(booking.client)
       %td= booking.workout.title.titleize
       %td= link_to "Visit Booking", booking_path(booking)

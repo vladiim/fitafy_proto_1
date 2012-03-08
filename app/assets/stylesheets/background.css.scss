@@ -1,26 +1,5 @@
-@import "mixins";
+@import "bootstrap_and_overide" ;
 
 body#main_content_yo {
 	background: $light-gray;
 }
-
-//
-//body {
-//	background-image: url("background2.jpeg");
-//	background-repeat: repeat-x, repeat;	
-//}
-//
-//#main_background {
-//	background: $background_blue;
-//	@include glow1;
-//	padding: 1em;
-//}
-//
-//#sign_in {
-//	display: block;
-//	padding-top: 1em;
-//	background-image: url("home.png");
-//	background-repeat: no-repeat;
-//	height: 28em;
-//	position: relative;
-//}

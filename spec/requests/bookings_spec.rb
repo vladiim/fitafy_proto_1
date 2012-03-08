@@ -24,27 +24,27 @@ describe "Bookings" do
     before(:each) do
       @booking = Factory(:booking, client: @client, trainer_id: @trainer.id, wo_time: "05:45", workout_id: @workout.id)
     end
-          
-    it "shows the details for the booking" do
-      sign_in_visit_booking(@trainer, @booking)
-      # page.should have_content(@booking.booking_date)
+    
+    it "index booking details are correct" do
+      sign_in_visit_bookings(@trainer)
+      page.should have_content(@booking.booking_date)
       page.should have_content(@booking.booking_time)
-      page.should have_content(@booking.workout.title)
+      page.should have_content(@booking.workout.title.titleize)
+      page.should have_css("a", text: "#{@client.username.titleize}")
+    end
+    
+    it "show booking details are correct" do
+      sign_in_visit_booking(@trainer, @booking)
+      page.should have_content(@booking.booking_date)
+      page.should have_content(@booking.booking_time)
       click_link("#{@client.username.titleize}")
     end
+    
+    it "indexes bookings from the nearest date"
     
     it "edits a booking from the booking page" do
       sign_in_visit_booking(@trainer, @booking)      
       click_link("Edit Booking")
-      select("#{@new_workout.title}", from: "booking_workout_id")
-      click_button("Edit Booking")
-      page.should have_content("Booking updated")
-    end
-
-    it "edits a booking from the index page" do
-      integration_sign_in(@trainer)      
-      click_link("Bookings: ")
-      click_link("#{@booking.client.username.titleize}")
       select("#{@new_workout.title}", from: "booking_workout_id")
       click_button("Edit Booking")
       page.should have_content("Booking updated")

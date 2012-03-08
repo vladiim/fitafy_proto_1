@@ -14,69 +14,8 @@
 	position: absolute;
 }
 
-//@import "mixins";
-//
-//a#logo {
-//	&:hover {
-//		background: $see_through;
-//	}
-//}
-//
-//#navigation {
-//	background: $light_gray;
-//	border-bottom: $fat_blue_border;
-//}
-//
-//#account_signedin {
-//	text-align: right;
-//	margin-right: 45px;
-//	font-size: 80%;
-//}
-//
-//#main_nav {
-//	margin: 30px 0 0 0;
-//	padding: 0;
-//	ul {
-//		list-style-type: none;
-//  		display: inline;		
-//		padding: 0;
-//		margin: 0;
-//		li {
-//			align: right;
-//		}
-//	}
-//	a {
-//		font-size: 120%;
-//		font-weight: bold;
-//		text-align: center;
-//		padding: 7.5px 15px;
-//		background: $dark_blue;
-//		color: $light_gray;
-//		float: left;
-//		border-right: solid $light_gray;
-//		&:hover {
-//			background: $gray_blue;
-//			color: $dark_blue;
-//		}
-//		&:active {
-//			background: $gray_blue;
-//			color: $dark_blue;			
-//		}
-//	}
-//}
-//
-//.nav-bar {
-//	background: $gray_blue;
-//	li {
-//		display: block;
-//		width: 350px;
-//		border: none;
-//		a {
-//			color: black;
-//			&:hover {
-//				background: $light_gray;
-//				color: $dark_blue;
-//			}
-//		}
-//	}
-//}
+a#logo {
+	&:hover {
+		background: $see_through;
+	}
+}

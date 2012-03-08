@@ -9,8 +9,13 @@ module BookingMacros
   end
   
   def sign_in_visit_booking(trainer, booking)
-    integration_sign_in(trainer)      
-    visit booking_path(booking)      
+    integration_sign_in(trainer)
+    visit booking_path(booking)
+  end
+  
+  def sign_in_visit_bookings(trainer)
+    integration_sign_in(trainer)
+    visit bookings_path
   end
 
   def sign_in_and_create_booking(trainer, client, workout)

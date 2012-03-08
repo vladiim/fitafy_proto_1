@@ -1,17 +1,10 @@
 - if @bookings.empty?
   %p
     You have no bookings
-    = link_to "add some", root_path
+    = link_to "add some", new_booking_path
 
--else
-  
-  = link_to "Create New Booking", root_path
-
-  %br
-  %br
-
+- else
   = will_paginate @bookings
-  %br
 
   = render 'shared/booking'
   = will_paginate @bookings

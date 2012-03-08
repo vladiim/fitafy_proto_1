@@ -1,16 +1,5 @@
-@import "mixins";
+@import "bootstrap_and_overide" ;
 
 h1 {
 	padding: 0 0 0.5em 0.5em;
 }
-
-//
-//h2 {
-//	color: $dark_blue;
-//	padding-bottom: 0.2em;
-//	@include text_shadow1;
-//}
-//
-//#white_copy {
-//	color: $light_gray;
-//}

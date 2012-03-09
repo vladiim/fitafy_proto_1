@@ -10,11 +10,11 @@ module ApplicationHelper
   end
   
   def logo
-    image_tag('logo.png', :alt => 'fitafy', :size => '100x100')
+    image_tag('logo.png', alt: 'fitafy', size: '100x100', id: "logo")
   end
   
   def big_logo
-    image_tag('logo.png', :alt => 'fitafy', :size => '200x200')
+    image_tag('logo.png', alt: 'fitafy', size: '200x200')
   end
   
   class ::WillPaginate::ActionView::LinkRenderer

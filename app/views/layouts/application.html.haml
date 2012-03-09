@@ -2,20 +2,19 @@
   
 %head= render 'layouts/head'
 
-%body#main_content_yo
+%body
   .container-fluid
 
     - if current_user
       %nav.row-fluid
         .span12= render 'layouts/navigation'
 
-    %section
+    %section#main_content_yo
       .row-fluid
         - if current_user
           .span12= render 'layouts/flashes'
-          .row-fluid
-            %h1.span12= @title
-            .span12= yield
+          %h1.row-fluid= @title
+          .row-fluid.span12= yield
         - else
           = render 'layouts/flashes'
           = yield

@@ -5,9 +5,16 @@
 
 $fat_blue_border: 7px solid #064780;
 
+@mixin border-rad1 {
+	-khtml-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
 // Links
 $linkColor:               $dark-blue;
-$linkColorHover:          #333;
+$linkColorHover:          $light_blue;
 //$linkColor:             #08c;
 //$linkColorHover:        darken(@linkColor, 15%);
 
@@ -82,7 +89,6 @@ $navbarLinkColorHover: $gray_blue;
 
 @import "bootstrap";
 
-nav { margin-bottom: 80px; }
-h1 {color: $dark-blue;}
+h1 {	color: $dark-blue; }
 
 @import "bootstrap-responsive";

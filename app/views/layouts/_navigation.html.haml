@@ -1,10 +1,11 @@
 - @user ||= current_user
 
 - if current_user
-  .navbar.navbar-fixed-top
+  .navbar
     .navbar-inner
-      .container
-  
+      .container#navigation_bar
+        = link_to logo, root_path, :class => "brand"
+
         //############# Collapse button for responsive design
         %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
           %span.icon-bar
@@ -12,10 +13,9 @@
           %span.icon-bar
           %span.icon-bar
 
-        = link_to logo, root_path, id: "logo", :class => "brand"
         .nav-collapse
-          %ul.nav
-  
+          %ul.nav#navigation_bar
+
             //########## Bookings
             %li.dropdown
               %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
@@ -70,23 +70,3 @@
               %ul.dropdown-menu
                 %li= link_to "My Profile", edit_user_path(current_user), id: "user_side_username"
                 %li=link_to "Sign Out", signout_path
-
-/ - else
-/   .navbar.navbar-fixed-top
-/     = link_to logo, root_path, id: "logo", :class => "brand"
-/     .navbar-inner
-/       .container
-/         .nav-collapse
-/           %ul.nav
-/             %li
-/               = link_to "Sign Up", "#"
-/               %li.divider-vertical
-/             %li
-/               = link_to "Features", "#"
-/               %li.divider-vertical
-/             %li
-/               = link_to "About", "#"
-/               %li.divider-vertical
-/             %li= link_to "Sign In", "#signIn", "data-toggle" => "modal"
-/   
-/   = render "shared/signin"

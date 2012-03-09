@@ -1,11 +1,53 @@
-- @presenter.body_parts.each do |body_part|
+%label Exercises
+/- @presenter.body_parts.each do |body_part|
 
-  %ul
+.tabbable.tabs-left
+  %ul.nav.nav-tabs 
+    %li.active
+      = link_to "Shoulders", "#lA", "data-toggle" => "tab"
     %li
-      = body_part
-      = hidden_field_tag "#{@presenter.model}[exercise_ids][]", nil
-        - for exercise in Exercise.where(body_part: "#{body_part}")
-        %ul
-          %li
-          = check_box_tag "#{@presenter.model}[exercise_ids][]", exercise.id, @presenter.parent.exercise_ids.include?(exercise.id), id: dom_id(exercise)
-          = label_tag dom_id(exercise), exercise.title
+      = link_to "Back", "#lB", "data-toggle" => "tab"
+  .tab-content
+    .tab-pane.active#lA
+      %p Shoulder exercise
+    .tab-pane#lB
+      %p Back exercise
+
+// http://haml-lang.com/docs/yardoc/file.HAML_REFERENCE.html learn haml mo fo!!
+
+// Working tabs
+/ .tabbable.tabs-left
+/   %ul.nav.nav-tabs 
+/     %li.active
+/       = link_to "Shoulders", "#lA", "data-toggle" => "tab"
+/     %li
+/       = link_to "Back", "#lB", "data-toggle" => "tab"
+/   .tab-content
+/     .tab-pane.active#lA
+/       %p Shoulder exercise
+/     .tab-pane#lB
+/       %p Back exercise
+
+// Previous solution for exercises
+  / %ul
+  /   %li
+  /     = body_part
+  /     = hidden_field_tag "#{@presenter.model}[exercise_ids][]", nil
+  /       - for exercise in Exercise.where(body_part: "#{body_part}")
+  /       %ul
+  /         %li
+  /         = check_box_tag "#{@presenter.model}[exercise_ids][]", exercise.id, @presenter.parent.exercise_ids.include?(exercise.id), id: dom_id(exercise)
+  /         = label_tag dom_id(exercise), exercise.title
+
+
+/ - @presenter.body_parts.each do |body_part|
+/ 
+/   %ul
+/     %li
+/       = body_part
+/       = hidden_field_tag "#{@presenter.model}[exercise_ids][]", nil
+/         - for exercise in Exercise.where(body_part: "#{body_part}")
+/         %ul
+/           %li
+/           = check_box_tag "#{@presenter.model}[exercise_ids][]", exercise.id, @presenter.parent.exercise_ids.include?(exercise.id), id: dom_id(exercise)
+/           = label_tag dom_id(exercise), exercise.title

@@ -1,18 +1,16 @@
 = simple_form_for @exercise do |f|
 
   - f.error_notification
-
-  = f.input :title, input_html: {size: 50}, placeholder: "Barbell Bench Press"
-
-  = f.input :description, as: :text, input_html: { rows: 5 }, placeholder: "Lie flat on the bench with the feet firmly pressing into the floor. Place your grip on the bar slightly wider than shoulder width. Remove the bar from the supports."
-
-  .row
-    .four.columns
-      = f.input :body_part, collection: Exercise::BODY_PARTS, prompt: "Select body part"
-    .four.columns
-      = f.input :equipment, collection: Exercise::EQUIPMENT, prompt: "Select equipment"
   
-  .row
-    = f.input :cues, input_html: { rows: 6 }, placeholder: "Use a wider grip with the elbows perpendicular to the torso to focus on the chest."
+  .row-fluid
+    .span8.well#title= f.input :title, input_html: {size: 50}, placeholder: "Barbell Bench Press"
 
-    = f.button :submit, "#{@title}", :class => "a button"
+  .row-fluid
+    .span4.well= f.input :body_part, collection: Exercise::BODY_PARTS, prompt: "Select body part"
+    .span4.well= f.input :equipment, collection: Exercise::EQUIPMENT, prompt: "Select equipment"
+
+  .row-fluid
+    .span4.well= f.input :description, as: :text, input_html: { rows: 5 }, placeholder: "Lie flat on the bench with the feet firmly pressing into the floor. Place your grip on the bar slightly wider than shoulder width. Remove the bar from the supports."
+    .span4.well= f.input :cues, input_html: { rows: 5 }, placeholder: "Use a wider grip with the elbows perpendicular to the torso to focus on the chest."
+
+  = f.button :submit, "#{@title}", :class => "btn btn-large btn-primary"

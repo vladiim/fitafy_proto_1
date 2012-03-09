@@ -1,5 +1,3 @@
-= link_to "Create New Exercise", new_exercise_path
-
-%br
-%br
-= render @exercises
+= will_paginate @exercises
+= render 'shared/exercise'
+= will_paginate @exercises

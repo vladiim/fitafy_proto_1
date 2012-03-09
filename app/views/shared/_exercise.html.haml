@@ -1,0 +1,19 @@
+%table.table.span11
+  %tr#table_blue
+    %thead
+      %th Exercise
+      %th Workouts
+      %th Add To Workout
+      %th
+
+  - for exercise in @exercises
+
+    %tr
+      %td= link_to "#{exercise.title}", exercise_path(exercise)
+      %td= link_to "#{pluralize(exercise.workouts.count, 'Workout')}", exercise_workouts_path(exercise, @workouts)
+      %td= link_to "Add to Workout", new_workout_path
+      %td
+        - if can? :manage, Exercise
+          = link_to "Edit", edit_exercise_path(exercise)
+          |
+          = link_to "Delete", exercise_path(exercise), method: :delete, confirm: "Are you sure you want to delete this exercise?"

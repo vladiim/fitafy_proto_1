@@ -86,7 +86,19 @@ describe "Excerses" do
       page.should have_content("Exercise deleted")
     end
     
+    it "paginates the list of exercises" do
+      20.times do
+        Factory(:exercise, user_id: @trainer.id)
+      end
+      integration_sign_in(@trainer)
+      visit exercise_path
+      click_link("Next")
+      page.should have_content("20")
+    end
+    
     describe "exercise.workouts" do
+      
+      it "can can see all the trainer or an admin's workouts associated with the exercise"
       
       it "can see all the workouts associated to an exercise" do
         integration_sign_in(@admin)

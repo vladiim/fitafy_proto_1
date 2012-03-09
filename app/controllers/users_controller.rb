@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     @user = User.new
     @user.email = @user.invitation.recipient_email if @user.invitation_id
     @user_session = UserSession.new
+    @title = "Sign Up"
   end
   
   def show
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user_session = UserSession.new
-    if @user.save      
+    if @user.save
       flash[:success] = "Welcome to fitafy!"
       redirect_to root_path
     else
@@ -35,7 +36,8 @@ class UsersController < ApplicationController
       flash[:success] = "Your details have been updated"
       redirect_to edit_user_path(current_user)
     else
-      render :new
+      render :edit
+      @title = "Update Profile"
     end
   end
 

@@ -1,0 +1,14 @@
+= simple_form_for @user do |f|
+
+  = f.error_notification
+
+  .row-fluid
+    .span4.well= f.input :username
+    .span4.well= f.input :email
+
+  .row-fluid
+    .span4.well= f.input :password
+    .span4.well= f.input :password_confirmation
+
+  .row-fluid
+    = f.button :submit, @title, :class => "btn btn-large btn-primary"

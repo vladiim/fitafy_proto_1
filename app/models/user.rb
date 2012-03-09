@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic 
   
-  attr_accessible :username, :email, :password, :password_confirmation, :role
+  attr_accessible :username, :email, :password, :password_confirmation
   
   has_many :relationships, :foreign_key => "trainer_id", dependent: :destroy
   has_many :training, through: :relationships, source: :client
@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   
   has_many :bookings, :foreign_key => "trainer_id"
   has_many :reverse_bookings, class_name: "Booking", foreign_key: "client_id"
+  
+  before_create :set_user_role
   
   ROLES = %w[trainer_role client_role invited_role]
    
@@ -46,4 +48,10 @@ class User < ActiveRecord::Base
   def role_symbols
     [role.to_sym]
   end
+  
+  private
+  
+    def set_user_role
+      
+    end
 end

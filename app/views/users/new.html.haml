@@ -1,25 +1,6 @@
-.row-fluid
+= link_to big_logo, root_path, id: "logo"
 
-  .offset2
-  
-    .span3.well
-  
-      = link_to big_logo, root_path, id: "logo"
-  
-      %h2#signup Start in minutes
+%h2#signup Start in minutes
+
+= render "form"
       
-      = simple_form_for @user do |f|
-      
-        = f.error_notification
-        
-        = f.input :role, as: :hidden, input_html: { value: "trainer_role" }
-       
-        = f.input :username, :label => false, placeholder: "User name", maxlength: 30, required: true, autofocus: true
-       
-        = f.input :email, :label => false, placeholder: "Email", required: true
-       
-        = f.input :password, :label => false, placeholder: "Password", required: true
-       
-        = f.input :password_confirmation, :label => false, placeholder: "Password confirmation", required: true
-       
-        = f.button :submit, "Sign Up", :class => "btn btn-large btn-primary"

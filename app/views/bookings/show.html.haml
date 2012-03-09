@@ -1,5 +1,5 @@
-.row-fluid
-  %table.span12.table.table-bordered
+.row-fluid.span11
+  %table.table.table-bordered
     %thead
       %tr
         %th Time
@@ -13,10 +13,10 @@
         %td= link_to "#{@presenter.client.username.titleize}", user_path(@presenter.client)
         %td
 
-.row-fluid
+.row-fluid.span11
   = render 'shared/booking_exercises'
 
-.row-fluid
+.row-fluid.span11
   %br
   
   =link_to "Edit Booking", edit_booking_path(@presenter.booking)

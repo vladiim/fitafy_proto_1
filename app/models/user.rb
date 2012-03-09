@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
   has_many :bookings, :foreign_key => "trainer_id"
   has_many :reverse_bookings, class_name: "Booking", foreign_key: "client_id"
   
-  before_create :set_user_role
+  before_create :set_trainer_role
+  before_update :set_client_role
   
   ROLES = %w[trainer_role client_role invited_role]
    
@@ -51,7 +52,11 @@ class User < ActiveRecord::Base
   
   private
   
-    def set_user_role
-      
+    def set_trainer_role
+      self.role = "trainer_role" if self.role == nil
+    end
+    
+    def set_client_role
+      self.role = "client_role" if self.role == "invited_role"
     end
 end

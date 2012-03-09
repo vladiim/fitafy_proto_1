@@ -44,6 +44,11 @@ FactoryGirl.define do
       role      "client_role"
     end
     
+    factory :invited do
+      username    { FactoryGirl.generate(:client_name) }      
+      role      "invited_role"
+    end
+    
     factory :admin do
       admin     true
     end

@@ -20,7 +20,11 @@ FactoryGirl.define do
   end
   
   sequence :description do |n|
-    "I'm The #{n} Badass Description"
+    "I'm The #{n} Badass Description... this is greeeeat!"
+  end
+  
+  sequence :instructions do |n|
+    "I'm The #{n} Badass Instructions... now lift some weights biaaaaatch"
   end
   
   sequence :equipment do |n|
@@ -65,7 +69,7 @@ FactoryGirl.define do
   
   factory :workout do
     title              { FactoryGirl.generate(:title) }
-    description        { FactoryGirl.generate(:description) }
+    instructions       { FactoryGirl.generate(:instructions) }
     association(:user) { FactoryGirl.generate(:user) }
     exercises          { |exercises| [exercises.association(:exercise)] }
   end

@@ -58,6 +58,6 @@ class Booking < ActiveRecord::Base
     end
     
     def create_instructions(workout)
-      self.instructions = workout.description
+      instructions = workout.instructions
     end
 end

@@ -7,7 +7,7 @@ describe Workout do
     @client = Factory(:client)
     @exercise = Factory(:exercise)
     @attr = { title:        "Workout 1",
-              description:  "Workout Description",
+              instructions: "Workout Instructions",
               exercise_ids:  @exercise.id
     }
     @workout = Factory(:workout, user_id: @trainer.id)

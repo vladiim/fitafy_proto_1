@@ -6,10 +6,14 @@
 
 .tabbable.tabs-left.row-fluid
   %ul.nav.nav-tabs
+
+    // left hand tabs are the body_parts
     = hidden_field_tag "#{@presenter.model}[exercise_ids][]", nil
     - @presenter.body_parts.each do |body_part|
       - n1 += 1 
       %li= link_to body_part, "#l#{@presenter.alphabet[n1]}", "data-toggle" => "tab"
+
+  // tab content is the exercises associated to the body_part
   .tab-content.well.span7
     - @presenter.body_parts.each do |body_part|
       - n2 += 1 

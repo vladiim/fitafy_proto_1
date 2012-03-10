@@ -35,7 +35,7 @@ describe "Bookings" do
     it "show booking details are correct" do
       sign_in_visit_booking(@trainer, @booking)
       page.should have_content(@booking.booking_time)
-      page.should have_content(@workout.description)
+      page.should have_content(@workout.instructions)
       click_link("#{@client.username.titleize}")
     end
 

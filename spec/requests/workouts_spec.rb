@@ -7,7 +7,7 @@ describe "Workouts" do
     integration_sign_in(@trainer)
     @exercise = Factory(:exercise, user_id: @trainer.id)
     @workout_title = "Da heaps Hardcore Workout"
-    @workout_description = "Not for the feignt hearted"
+    @workout_instructions = "Not for the feignt hearted"
   end
   
   it "creates a new workout" do
@@ -15,7 +15,7 @@ describe "Workouts" do
     click_link("Workouts: ")
     current_path.should eq(new_workout_path)
     fill_in "workout_title", with: @workout_title
-    fill_in "workout_description", with: @workout_description
+    fill_in "workout_instructions", with: @workout_instructions
     check("exercise_#{@exercise.id}")
     click_button("Create Workout")
     page.should have_content("New workout added!")
@@ -25,7 +25,7 @@ describe "Workouts" do
   it "tries to create a workout without exercises" # do
   #     visit new_workout_path
   #     fill_in "workout_title", with: @workout_title
-  #     fill_in "workout_description", with: @workout_description
+  #     fill_in "workout_instructions", with: @workout_instructions
   #     click_button("Create Workout")
   #     page.should have_content("Exercises can't be empty")
   #   end
@@ -65,7 +65,7 @@ describe "Workouts" do
       it "adds an exercise to the workout" do
         visit new_workout_path
         fill_in"workout_title", with: @workout_title
-        fill_in"workout_description", with: @workout_description
+        fill_in"workout_instructions", with: @workout_instructions
         check("exercise_#{@exercise.id}")
         click_button("Create Workout")
         page.should have_content("New workout added!")

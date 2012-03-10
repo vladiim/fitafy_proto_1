@@ -4,7 +4,7 @@ module WorkoutMacros
     integration_sign_in(trainer)
     visit new_workout_path
     fill_in"workout_title",         with: "Workout Title"
-    fill_in"workout_description",   with: "Workout Description"
+    fill_in"workout_instructions",   with: "Workout Instructions"
     check("exercise_#{@exercise.id}")
     click_button("Create Workout")
   end

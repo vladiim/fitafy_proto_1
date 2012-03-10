@@ -19,8 +19,6 @@
 .row-fluid.span11
   %br
   
-  =link_to "Edit Booking", edit_booking_path(@presenter.booking)
-  
-  |
-  
-  = link_to "Delete Booking", booking_path(@presenter.booking), method: :delete, confirm: "Are you sure you want to delete this booking?"
+  = link_to "Edit", edit_booking_path(@presenter.booking)
+  | 
+  = link_to "Delete", booking_path(@presenter.booking), method: "delete", confirm: "Are you sure you want to delete the booking?"

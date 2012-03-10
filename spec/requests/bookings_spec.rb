@@ -18,47 +18,64 @@ describe "Bookings" do
       page.should have_content("Booking created")
     end
   end
-  
-  describe "does stuff with an exsisting booking" do
+
+  describe "index" do
     
+    it "index booking details are correct" do
+      @destroy_booking = Factory(:booking, client: @client, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45")
+      
+      sign_in_visit_bookings(@trainer)
+      page.should have_content(@destroy_booking.booking_time)
+      page.should have_content(@destroy_booking.booking_date)
+      page.should have_content(@destroy_booking.workout.title.titleize)
+
+      click_link(@client.username.titleize)
+      current_path.should eq(user_path(@client))
+      visit bookings_path
+
+      click_link("Visit")
+      current_path.should eq(booking_path(@destroy_booking))
+      visit bookings_path
+
+      click_link("Edit")
+      current_path.should eq(edit_booking_path(@destroy_booking))
+      visit bookings_path
+
+      click_link("Delete")
+      page.should_not have_content(@destroy_booking.booking_time)
+    end
+
+    it "indexes bookings from the nearest date" do
+      @booking3 = Factory(:booking, trainer_id: @trainer.id, wo_date: 3.days.from_now, wo_time: "05:45", workout_id: @workout.id)
+      @booking = Factory(:booking, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45", workout_id: @workout.id)
+      @booking4 = Factory(:booking, trainer_id: @trainer.id, wo_date: 4.days.from_now, wo_time: "05:45", workout_id: @workout.id)
+      @booking2 = Factory(:booking, trainer_id: @trainer.id, wo_date: 2.days.from_now, wo_time: "05:45", workout_id: @workout.id)
+      @trainer.bookings.should == [@booking, @booking2, @booking3, @booking4]
+    end
+  end
+    
+  describe "does stuff with an exsisting booking" do
+
     before(:each) do
       @booking = Factory(:booking, client: @client, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45", workout_id: @workout.id)
     end
     
-    it "index booking details are correct" do
-      sign_in_visit_bookings(@trainer)
-      page.should have_content(@booking.booking_time)
-      page.should have_content(@booking.workout.title.titleize)
-      page.should have_css("a", text: "#{@client.username.titleize}")
-    end
-    
-    it "show booking details are correct" do
-      sign_in_visit_booking(@trainer, @booking)
-      page.should have_content(@booking.booking_time)
-      page.should have_content(@booking.instructions)
-      click_link("#{@client.username.titleize}")
-    end
+    describe "show" do
+      
+      it "edits a booking from the booking page" do
+        sign_in_visit_booking(@trainer, @booking)      
+        click_link("Edit")
+        select("#{@new_workout.title}", from: "booking_workout_id")
+        click_button("Edit")
+        page.should have_content("Booking updated")
+      end
 
-    it "indexes bookings from the nearest date" do
-      @booking2 = Factory(:booking, trainer_id: @trainer.id, wo_date: 2.days.from_now, wo_time: "05:45", workout_id: @workout.id)
-      @booking3 = Factory(:booking, trainer_id: @trainer.id, wo_date: 3.days.from_now, wo_time: "05:45", workout_id: @workout.id)
-      @booking4 = Factory(:booking, trainer_id: @trainer.id, wo_date: 4.days.from_now, wo_time: "05:45", workout_id: @workout.id)
-      @trainer.bookings.should == [@booking, @booking2, @booking3, @booking4]
-    end
-    
-    it "edits a booking from the booking page" do
-      sign_in_visit_booking(@trainer, @booking)      
-      click_link("Edit Booking")
-      select("#{@new_workout.title}", from: "booking_workout_id")
-      click_button("Edit Booking")
-      page.should have_content("Booking updated")
-    end
-
-    it "destroys the booking" do
-      sign_in_visit_booking(@trainer, @booking)
-      click_link("Delete Booking")
-      page.should have_content("Booking deleted")
-      current_path.should eq(bookings_path)
+      it "destroys the booking" do
+        sign_in_visit_booking(@trainer, @booking)
+        click_link("Delete")
+        page.should have_content("Booking deleted")
+        current_path.should eq(bookings_path)
+      end
     end
     
     describe "editing the booking exercise details" do
@@ -106,5 +123,5 @@ describe "Bookings" do
         @booking.exercises.first.reps.should_not == -1
       end
     end
-  end  
+  end
 end

@@ -26,4 +26,8 @@ class Bookings::ShowPresenter
   def title
     @title = "Booking for: #{@client.username}"
   end
+  
+  def instructions
+    @booking.instructions
+  end
 end

@@ -16,6 +16,8 @@ class Booking < ActiveRecord::Base
   validate :wo_date_cannot_be_in_the_past
   
   after_create :create_exercises_and_instructions
+  
+  default_scope order(:wo_time).order(:wo_date)
 
   def booking_date
     self.wo_date.strftime("%A %e %b") 
@@ -46,18 +48,19 @@ class Booking < ActiveRecord::Base
     def create_exercises_and_instructions
       @workout = Workout.find(self.workout_id)
       @trainer = User.find(self.trainer_id)
-      create_exercises(@workout, @trainer)
-      create_instructions(@workout)
+      create_exercises!(@workout, @trainer)
+      create_instructions!(@workout)
     end
 
-    def create_exercises(workout, trainer)
+    def create_exercises!(workout, trainer)
       @workout.exercises.each do |e|
         self.exercises.create!(user_id: @trainer.id,
-                         title: e.title)
+                               title: e.title)
       end
     end
     
-    def create_instructions(workout)
-      instructions = workout.instructions
+    def create_instructions!(workout)
+      self.instructions = workout.instructions
+      save!
     end
 end

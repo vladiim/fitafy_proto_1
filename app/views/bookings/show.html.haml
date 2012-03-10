@@ -11,7 +11,7 @@
         %td{:datetime => "#{@presenter.booking.wo_time}"}= @presenter.booking.booking_time
         %td{:datetime => "#{@presenter.booking.wo_date}"}= @presenter.booking.booking_date
         %td= link_to "#{@presenter.client.username.titleize}", user_path(@presenter.client)
-        %td
+        %td= @presenter.booking.instructions
 
 .row-fluid.span11
   = render 'shared/booking_exercises'

@@ -10,7 +10,7 @@
 
     %tr
       %td= link_to "#{exercise.title}", exercise_path(exercise)
-      %td= link_to "#{pluralize(exercise.workouts.count, 'Workout')}", exercise_workouts_path(exercise, @workouts)
+      %td= link_to "#{pluralize(exercise.current_user_workouts(current_user, 1), 'Workout')}", exercise_workouts_path(exercise)
       %td= link_to "Add to Workout", new_workout_path
       %td
         - if can? :manage, Exercise

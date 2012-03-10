@@ -36,6 +36,14 @@ class Exercise < ActiveRecord::Base
     [equipment.to_sym]
   end
   
+  def current_user_workouts(current_user, count=false)
+    if count
+      workouts.where(user_id: current_user.id).count
+    else
+      workouts.where(user_id: current_user.id)
+    end
+  end
+  
   private
     
     def no_booking_id

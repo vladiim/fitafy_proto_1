@@ -91,4 +91,7 @@ $navbarLinkColorHover: $gray_blue;
 
 h1 {	color: $dark-blue; }
 
+// Exercise title checkboxes
+h6#workout_exercise_title { color: white; }
+
 @import "bootstrap-responsive";

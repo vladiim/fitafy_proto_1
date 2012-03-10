@@ -1,53 +1,20 @@
-%label Exercises
-/- @presenter.body_parts.each do |body_part|
+.row-fluid
+  %label.label.span9 Exercises
 
-.tabbable.tabs-left
-  %ul.nav.nav-tabs 
-    %li.active
-      = link_to "Shoulders", "#lA", "data-toggle" => "tab"
-    %li
-      = link_to "Back", "#lB", "data-toggle" => "tab"
-  .tab-content
-    .tab-pane.active#lA
-      %p Shoulder exercise
-    .tab-pane#lB
-      %p Back exercise
+- n1 = -1
+- n2 = -1
 
-// http://haml-lang.com/docs/yardoc/file.HAML_REFERENCE.html learn haml mo fo!!
-
-// Working tabs
-/ .tabbable.tabs-left
-/   %ul.nav.nav-tabs 
-/     %li.active
-/       = link_to "Shoulders", "#lA", "data-toggle" => "tab"
-/     %li
-/       = link_to "Back", "#lB", "data-toggle" => "tab"
-/   .tab-content
-/     .tab-pane.active#lA
-/       %p Shoulder exercise
-/     .tab-pane#lB
-/       %p Back exercise
-
-// Previous solution for exercises
-  / %ul
-  /   %li
-  /     = body_part
-  /     = hidden_field_tag "#{@presenter.model}[exercise_ids][]", nil
-  /       - for exercise in Exercise.where(body_part: "#{body_part}")
-  /       %ul
-  /         %li
-  /         = check_box_tag "#{@presenter.model}[exercise_ids][]", exercise.id, @presenter.parent.exercise_ids.include?(exercise.id), id: dom_id(exercise)
-  /         = label_tag dom_id(exercise), exercise.title
-
-
-/ - @presenter.body_parts.each do |body_part|
-/ 
-/   %ul
-/     %li
-/       = body_part
-/       = hidden_field_tag "#{@presenter.model}[exercise_ids][]", nil
-/         - for exercise in Exercise.where(body_part: "#{body_part}")
-/         %ul
-/           %li
-/           = check_box_tag "#{@presenter.model}[exercise_ids][]", exercise.id, @presenter.parent.exercise_ids.include?(exercise.id), id: dom_id(exercise)
-/           = label_tag dom_id(exercise), exercise.title
+.tabbable.tabs-left.row-fluid
+  %ul.nav.nav-tabs
+    = hidden_field_tag "#{@presenter.model}[exercise_ids][]", nil
+    - @presenter.body_parts.each do |body_part|
+      - n1 += 1 
+      %li= link_to body_part, "#l#{@presenter.alphabet[n1]}", "data-toggle" => "tab"
+  .tab-content.well.span7
+    - @presenter.body_parts.each do |body_part|
+      - n2 += 1 
+      .tab-pane{"id" => "l#{@presenter.alphabet[n2]}"}
+        - Exercise.where(body_part: "#{body_part}").each do |exercise|
+          %label.label.span1{"for" => "exercise_#{exercise.id}"}
+            = check_box_tag "#{@presenter.model}[exercise_ids][]", exercise.id, @presenter.parent.exercise_ids.include?(exercise.id), id: dom_id(exercise)
+            %h6#workout_exercise_title= exercise.title

@@ -8,6 +8,9 @@ class Exercises::ChildPresenter
     @model = model
     @parent_id = parent_id
     @user = current_user
+    @n1 = -1
+    @n2 = -1
+    @alphabet = ("A".."Z").to_a
   end
   
   def parent
@@ -32,5 +35,9 @@ class Exercises::ChildPresenter
   
   def body_parts
     @body_parts = Exercise::BODY_PARTS.sort
+  end
+  
+  def alphabet
+    @alphabet
   end
 end

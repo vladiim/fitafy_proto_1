@@ -55,6 +55,53 @@ describe "Clients" do
     end    
   end
   
+  describe "index" do
+    
+    it "index client details are correct" do
+      @trainer.train!(@client)
+      integration_sign_in(@trainer)
+      click_link("Clients: ")
+
+      page.should have_content("0 Bookings")
+
+      click_link(@client.username.titleize)
+      current_path.should eq(user_path(@client))
+
+      @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id)
+      click_link("Clients: ")
+      click_link("1 Booking")
+      page.should have_css("h1", text: "Bookings for #{@client.username.titleize}")
+
+      click_link("Clients: ")
+      click_link("Create Booking")
+      current_path.should eq(new_booking_path)
+
+      click_link("Clients: ")
+      click_button("Remove Client")
+      page.should_not have_css("a", text: @client.username.titleize)
+    end
+
+    it "indexes clients by their name" do
+      @client2 = Factory(:client, username: "CCCCC")
+      @trainer.train!(@client2)
+      @client = Factory(:client, username: "AAAAAA")
+      @trainer.train!(@client)
+
+      # @trainer.training.should == [@client, @client2, @client3, @client4] don't know how to test this on the page... come back to it
+    end
+    
+    it "paginates more than 10 clients" do
+      30.times do |client|
+        @client = Factory(:client)
+        @trainer.train!(@client)
+      end
+      
+      integration_sign_in(@trainer)
+      click_link("Clients: ")
+      page.should have_css("a", text: "3")
+    end
+  end
+  
   describe "trainer invites a client who isn't in the system" do
     
     before(:each) do

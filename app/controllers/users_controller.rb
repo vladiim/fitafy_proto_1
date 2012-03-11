@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   def training
     @title = "Clients"
     @user = User.find(params[:id])
-    @clients = @user.training.paginate(:page => params[:page], :per_page => 10)
+    @clients = @user.training.order("username").paginate(:page => params[:page], :per_page => 10)
   end
   
   def trained_by

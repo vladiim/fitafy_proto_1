@@ -8,4 +8,9 @@ module WorkoutMacros
     check("exercise_#{@exercise.id}")
     click_button("Create Workout")
   end
+  
+  def sign_in_visit_workouts(trainer)
+    integration_sign_in(trainer)
+    visit workouts_path
+  end
 end

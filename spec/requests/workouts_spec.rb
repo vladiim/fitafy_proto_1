@@ -22,13 +22,48 @@ describe "Workouts" do
     page.should have_content("#{@workout_title}")
   end
   
-  it "tries to create a workout without exercises" # do
-  #     visit new_workout_path
-  #     fill_in "workout_title", with: @workout_title
-  #     fill_in "workout_instructions", with: @workout_instructions
-  #     click_button("Create Workout")
-  #     page.should have_content("Exercises can't be empty")
-  #   end
+  it "tries to create a workout without exercises" do
+    visit new_workout_path
+    fill_in "workout_title", with: @workout_title
+    fill_in "workout_instructions", with: @workout_instructions
+    click_button("Create Workout")
+    page.should have_content("Oops! There are some errors")
+  end
+  
+  describe "index" do
+
+    it "index booking details are correct" do
+      @destroy_workout = Factory(:workout, user_id: @trainer.id)
+      Factory(:booking, trainer_id: @trainer.id)
+      
+      sign_in_visit_workouts(@trainer)
+      page.should have_content("1 exercise")
+      page.should have_content("0 Bookings")
+
+      click_link(@destroy_workout.title.titleize)
+      current_path.should eq(workout_path(@destroy_workout))
+
+      visit workouts_path
+      click_link("Create Booking")
+      current_path.should eq(new_booking_path)
+
+      @booking = Factory(:booking, workout_id: @destroy_workout.id, trainer_id: @trainer.id)
+      visit workouts_path
+      click_link("1 Booking")
+      page.should have_css("h1", "#{@destroy_workout.title.titleize} Bookings")
+
+      visit workouts_path
+      click_link("Delete")
+      page.should_not have_content(@destroy_workout.title.titleize)
+    end
+
+    it "indexes workouts alphabetically" do
+      @workout2 = Factory(:workout, title: "CCCCC", user_id: @trainer.id)
+      @workout = Factory(:workout, title: "AAAAAA", user_id: @trainer.id)
+
+      # @trainer.training.should == [@client, @client2, @client3, @client4] don't know how to test this on the page... come back to it
+    end
+  end
   
   describe "does stuff with a created workout" do
     
@@ -54,9 +89,9 @@ describe "Workouts" do
     it "deletes a workout" do
       Factory(:workout, user: @trainer, exercise_ids: @exercise.id)
       visit workouts_path
-      click_link("Delete Workout")
+      click_link("Delete")
       page.should have_content("Workout deleted")
-      click_link("Delete Workout")
+      click_link("Delete")
       page.should have_content("You have no workouts")
     end
     

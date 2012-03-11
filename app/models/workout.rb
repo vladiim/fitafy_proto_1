@@ -15,6 +15,14 @@ class Workout < ActiveRecord::Base
   
   before_create :strip_empty_exercise_ids
   
+  def trainer_bookings_with_workout_title(current_user, count=false)
+    if count
+      bookings.where(trainer_id: current_user.id).count
+    else
+      bookings.where(trainer_id: current_user.id)
+    end
+  end
+  
   private
   
     def strip_empty_exercise_ids

@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     Exercise.templates.where("admin = true or user_id = ?", self.id)
   end
   
+  def alphabetical_workouts
+    workouts.order("title")
+  end
+  
   def role_symbols
     [role.to_sym]
   end

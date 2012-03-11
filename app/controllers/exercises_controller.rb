@@ -2,7 +2,7 @@ class ExercisesController < ApplicationController
   load_and_authorize_resource except: :index
     
   def index
-    @exercises = current_user.exercise_list.paginate(:page => params[:page], :per_page => 10) 
+    @exercises = current_user.exercise_list.paginate(:page => params[:page], :per_page => 10)
     @title = "Exercises"
   end
 

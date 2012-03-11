@@ -61,7 +61,17 @@ describe "Workouts" do
       @workout2 = Factory(:workout, title: "CCCCC", user_id: @trainer.id)
       @workout = Factory(:workout, title: "AAAAAA", user_id: @trainer.id)
 
-      # @trainer.training.should == [@client, @client2, @client3, @client4] don't know how to test this on the page... come back to it
+      # @trainer.workouts.should == [@workout, @workout2] don't know how to test this on the page... come back to it
+    end
+    
+    it "paginates over 10 workouts" do
+      30.times do 
+        Factory(:workout, user_id: @trainer.id)
+      end
+    
+      integration_sign_in(@trainer)
+      visit workouts_path
+      page.should have_css("a", text: "3")
     end
   end
   

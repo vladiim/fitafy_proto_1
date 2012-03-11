@@ -1,11 +1,13 @@
 class WorkoutsController < ApplicationController
-  load_and_authorize_resource :through => :current_user, except: [:new, :edit]
+  load_and_authorize_resource :through => :current_user, except: [:new, :edit, :index]
 
   def index
     @title = "Workouts"        
     if current_user.workouts.empty?
       redirect_to new_workout_path 
-      flash[:message] = "You have no workouts, why not make some?" 
+      flash[:message] = "You have no workouts, why not make some?"
+    else
+      @workouts = current_user.alphabetical_workouts.paginate(:page => params[:page], :per_page => 10)
     end
   end
     

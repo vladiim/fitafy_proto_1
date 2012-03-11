@@ -15,7 +15,7 @@ describe "UserSideBars" do
       click_link("Workouts: #{@trainer.workouts.count}")
       current_path.should eq(new_workout_path)
       click_link("Bookings: #{@trainer.bookings.count}")
-      current_path.should eq(bookings_path)
+      current_path.should eq(new_booking_path)
       click_link("Exercises: #{Exercise.count}")
       current_path.should eq(exercises_path)
     end
@@ -29,6 +29,7 @@ describe "UserSideBars" do
       @experience_trainer = Factory(:user)
       @experience_trainer.train!(@client)
       @workout = Factory(:workout, user: @experience_trainer)
+      @booking = Factory(:booking, trainer_id: @experience_trainer.id)
     end
     
     it "should take users to the right path" do

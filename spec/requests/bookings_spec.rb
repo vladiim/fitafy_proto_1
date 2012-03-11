@@ -10,6 +10,16 @@ describe "Bookings" do
     @new_workout = Factory(:workout, user_id: @trainer.id)
   end
   
+  describe "no bookings" do
+    
+    it "redirects you from the booking path if you have no booking" do
+      integration_sign_in(@trainer)
+      click_link("Bookings: ")
+      current_path.should eq(new_booking_path)
+      page.should have_content("You have no bookings, why not make some?")
+    end
+  end
+  
   describe "creating a booking" do
     
     it "creates a booking" do
@@ -71,6 +81,10 @@ describe "Bookings" do
       end
 
       it "destroys the booking" do
+        Factory(:booking, trainer_id: @trainer.id) 
+        # otherwise when you click_link("Delete") there are no more bookings 
+        # and you get redirected from booking#index to booking#new
+        
         sign_in_visit_booking(@trainer, @booking)
         click_link("Delete")
         page.should have_content("Booking deleted")

@@ -15,6 +15,18 @@ describe "Signups" do
   
   it "fails to sign up as a new trainer with bad details" do
     visit root_path
+    click_link("Start Using fitafy!")
+    fill_in "user_username", with: "b"
+    fill_in "user_email", with: "b@b"
+    fill_in "user_password", with: "b"
+    fill_in "user_password_confirmation", with: "b"
+    click_button("Sign Up")
+    
+    page.should have_content("Oops! There are some errors")
+    page.should have_content("minimum is 3 characters")
+    page.should have_content("should look like an email address")
+    page.should have_content("(minimum is 4 characters)")
+    page.should have_css("input", value: "Sign Up")
   end
   
   it "signs in then out" do

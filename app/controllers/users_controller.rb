@@ -21,6 +21,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to fitafy!"
       redirect_to root_path
     else
+      @title = "Sign Up"
       render :new
     end
   end

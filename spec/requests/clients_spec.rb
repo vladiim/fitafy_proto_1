@@ -151,7 +151,7 @@ describe "Clients" do
       current_path.should eq(training_user_path(@trainer))
       page.should have_css("a", text: "#{@client.username.titleize}")     
     end
-  
+    
     describe "client bookings" do
       
       before(:each) do

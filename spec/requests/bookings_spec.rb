@@ -76,6 +76,7 @@ describe "Bookings" do
         sign_in_visit_booking(@trainer, @booking)      
         click_link("Edit")
         select("#{@new_workout.title}", from: "booking_workout_id")
+        fill_in "booking_instructions", with: "New instructions mo fo"
         click_button("Edit")
         page.should have_content("Booking updated")
       end

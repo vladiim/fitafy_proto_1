@@ -26,7 +26,10 @@
       = f.input :wo_time, :label => "Time", time_separator: ""
 
     .span4.well
-      = f.input :message, as: :text, input_html: { rows: 7 }
+      - if controller == "new"
+        = f.input :message, as: :text, input_html: { rows: 7 }
+      - else
+        = f.input :instructions, as: :text, input_html: { rows: 7 }
 
   .row-fluid
     .span4

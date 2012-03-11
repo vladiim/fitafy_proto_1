@@ -57,6 +57,13 @@ describe "Clients" do
   
   describe "index" do
     
+    it "redirects you if you have no clients" do
+      integration_sign_in(@trainer)
+      click_link("Clients: ")
+      current_path.should eq(new_client_path)
+      page.should have_content("You have no clients, why not invite some?")
+    end
+    
     it "index client details are correct" do
       @trainer.train!(@client)
       integration_sign_in(@trainer)

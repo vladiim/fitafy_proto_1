@@ -13,7 +13,7 @@ describe "Navigations" do
       click_link("My Profile")
       current_path.should eq(edit_user_path(@trainer))    
       click_link("Clients: 0")
-      current_path.should eq(training_user_path(@trainer))
+      current_path.should eq(new_client_path)
       click_link("Bookings: 0")
       current_path.should eq(new_booking_path)
       click_link("Workouts: 0")
@@ -28,10 +28,13 @@ describe "Navigations" do
     before(:each) do
       @workout = Factory(:workout, user: @trainer)
       @booking = Factory(:booking, trainer_id: @trainer.id)
+      @client = Factory(:client)
+      @trainer.train!(@client)
     end
 
     it "should lead to the right pages" do
-      click_link("Clients: 0")
+      integration_sign_in(@trainer)
+      click_link("Clients: 1")
       current_path.should eq(training_user_path(@trainer))
       click_link("Bookings: 1")
       current_path.should eq(bookings_path)

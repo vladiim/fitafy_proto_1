@@ -46,8 +46,13 @@ class UsersController < ApplicationController
   
   def training
     @title = "Clients"
-    @user = User.find(params[:id])
-    @clients = @user.training.order("username").paginate(:page => params[:page], :per_page => 10)
+    if current_user.training.empty?
+      redirect_to new_client_path 
+      flash[:message] = "You have no clients, why not invite some?"
+    else
+      @user = User.find(params[:id])
+      @clients = @user.training.order("username").paginate(:page => params[:page], :per_page => 10)
+    end
   end
   
   def trained_by

@@ -1,0 +1,11 @@
+%table.table
+  %tr
+    %thead
+      %th Clients
+      %th Bookings
+
+  - for client in @presenter.user.training.limit(5)
+
+    %tr
+      %td= link_to "#{client.username}", user_path(client)
+      %td= pluralize(@presenter.user_client_bookings(@presenter.user, client).count, 'bookings')

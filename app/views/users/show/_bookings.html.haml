@@ -1,0 +1,12 @@
+%table.table
+  %tr
+    %thead
+      %th Details
+      %th Client
+
+
+  - for booking in @presenter.user.bookings.limit(5)
+
+    %tr
+      %td= link_to "#{booking.booking_time} #{booking.booking_date}", booking_path(booking)
+      %td= link_to booking.client.username, user_path(booking.client)

@@ -1,0 +1,11 @@
+%table.table
+  %tr
+    %thead
+      %th Exercise
+      %th
+
+  - for exercise in @presenter.exercises.limit(5)
+
+    %tr
+      %td= link_to "#{exercise.title}", exercise_path(exercise)
+      %td= link_to "Add to Workout", new_workout_path

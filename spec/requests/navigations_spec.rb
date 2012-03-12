@@ -5,13 +5,16 @@ describe "Navigations" do
   before (:each) do
     @trainer = Factory(:user)
     integration_sign_in(@trainer)
+    @admin = Factory(:admin)
   end
   
   describe "as a brand new trainer" do
 
     it "should lead to the right pages" do
-      click_link("My Profile")
+      click_link("My Details")
       current_path.should eq(edit_user_path(@trainer))    
+      click_link("Profile")
+      current_path.should eq(user_path(@trainer))    
       click_link("Clients: 0")
       current_path.should eq(new_client_path)
       click_link("Bookings: 0")

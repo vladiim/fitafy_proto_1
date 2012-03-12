@@ -1,6 +1,7 @@
-= render 'shared/train_form'
+- if @presenter.current_user == @presenter.user
 
-- if @user.reverse_bookings.empty?
-  0 Bookings
+  - if @presenter.trainer?(current_user)
+    = render 'users/show/my_trainer_profile'
+
 - else
-  = link_to "#{pluralize(@user.reverse_bookings.count, 'Booking')}", user_reverse_bookings_path(@user)
+  = render 'shared/train_form'

@@ -1,0 +1,11 @@
+%table.table
+  %tr
+    %thead
+      %th Workout
+      %th
+
+  - for workout in @presenter.workouts.limit(5)
+
+    %tr
+      %td= link_to "#{workout.title}", workout_path(workout)
+      %td= link_to "Add to Booking", new_booking_path(workout: workout)

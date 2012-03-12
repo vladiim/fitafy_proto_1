@@ -68,5 +68,6 @@
               %a{"class" => "btn btn-primary dropdown-toggle", "data-toggle" => "dropdown", "href" => "#"}
                 %span.caret
               %ul.dropdown-menu
-                %li= link_to "My Profile", edit_user_path(current_user), id: "user_side_username"
+                %li= link_to "Profile", user_path(current_user)
+                %li= link_to "My Details", edit_user_path(current_user)
                 %li=link_to "Sign Out", signout_path

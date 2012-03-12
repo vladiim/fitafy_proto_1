@@ -1,7 +1,2 @@
 .well.span11
-
-  = simple_form_for @client do |f|
-  
-    = f.input :email
-  
-    = f.button :submit, "Invite New Client", :class => "btn btn-large btn-primary"
+  = render 'shared/invite_client'

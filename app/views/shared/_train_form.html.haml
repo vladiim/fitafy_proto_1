@@ -1,9 +1,7 @@
-- unless current_user == @user
+#train_form
 
-  #train_form
+- if current_user.training?(@user)
+  = render 'shared/untrain'
 
-  - if current_user.training?(@user)
-    = render 'shared/untrain'
-
-  - else
-    = render 'shared/train'
+- else
+  = render 'shared/train'

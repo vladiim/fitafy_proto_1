@@ -151,23 +151,5 @@ describe "Clients" do
       current_path.should eq(training_user_path(@trainer))
       page.should have_css("a", text: "#{@client.username.titleize}")     
     end
-    
-    describe "client bookings" do
-      
-      before(:each) do
-        @booking = Factory(:booking, client_id: @client.id, trainer_id: @trainer.id, wo_time: "12:00", wo_date: 1.day.from_now)
-      end
-      
-      it "looks at which bookings a client has" do
-        integration_sign_in(@trainer)
-        click_link("Clients: 1")
-        click_link("1 Booking")
-        page.should have_content(@booking.booking_time)
-        current_path.should eq(user_reverse_bookings_path(@client))
-        visit user_path(@client)
-        click_link("1 Booking")
-        current_path.should eq(user_reverse_bookings_path(@client))
-      end
-    end
   end
 end

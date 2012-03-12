@@ -9,9 +9,8 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
-    @relationship = current_user.relationships.find_by_client_id(@user.id)
-    @title = @user.username.titleize
+    @presenter = Users::ShowPresenter.new(current_user, params[:id])
+    @title = @presenter.title
   end
     
   def create

@@ -92,4 +92,9 @@ class Users::ShowPresenter
   def user_client_bookings(trainer, client)
     Booking.where(trainer_id: trainer.id).where(client_id: client.id)
   end
+  
+  def trainer_first
+    trainers = @user.trained_by
+    trainers[0]
+  end
 end

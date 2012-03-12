@@ -1,0 +1,10 @@
+- if @presenter.current_user.bookings.empty?
+  %p You have no bookings yet, why don't you request one?
+  = link_to "Request Booking", new_booking_path, :class => "btn btn-large btn-primary"
+
+- else
+  / = render 'users/show/bookings'
+  / %p
+  /   = @presenter.booking_count
+  /   out of
+  /   = link_to "#{pluralize(@presenter.user.bookings.count, 'booking')}", bookings_path

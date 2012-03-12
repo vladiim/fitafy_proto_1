@@ -1,0 +1,6 @@
+- if @presenter.current_user.trained_by.count > 1
+  // more than one trainer
+
+- else
+  %p Your trainer is the one, the only:
+  = link_to @presenter.trainer_first.username.titleize, user_path(@presenter.trainer_first), :class => "btn btn-large btn-primary"

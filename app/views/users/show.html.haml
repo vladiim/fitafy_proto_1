@@ -3,5 +3,8 @@
   - if @presenter.trainer?(current_user)
     = render 'users/show/my_trainer_profile'
 
+  - else
+    = render 'users/show/my_client_profile'
+
 - else
   = render 'shared/train_form'

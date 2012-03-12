@@ -53,5 +53,4 @@ class BookingsController < ApplicationController
     flash[:success] = "Booking deleted"
     redirect_to bookings_path
   end
-
 end

@@ -8,4 +8,4 @@
 
     %tr
       %td= link_to "#{client.username}", user_path(client)
-      %td= pluralize(@presenter.user_client_bookings(@presenter.user, client).count, 'bookings')
+      %td= link_to pluralize(@presenter.user_client_bookings(@presenter.user, client).count, 'bookings'), user_reverse_bookings_path(client)

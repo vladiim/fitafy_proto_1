@@ -91,6 +91,18 @@ describe "Bookings" do
         page.should have_content("Booking deleted")
         current_path.should eq(bookings_path)
       end
+      
+      it "redirects you from bookings_path to new_booking_path if you click on a '0 bokings' link" do
+        @client2 = Factory(:client)
+        @trainer.train!(@client2)
+        @admin = Factory(:admin)
+        integration_sign_in(@trainer)
+        click_link("Profile")
+        
+        click_link("0 bookings")
+        current_path.should eq(new_booking_path)
+        page.should have_content("There were no bookings for that client, why not make some?")
+      end
     end
     
     describe "editing the booking exercise details" do

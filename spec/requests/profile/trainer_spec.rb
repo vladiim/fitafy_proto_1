@@ -83,7 +83,7 @@ describe "my profile" do
 
       it "should show my bookings" do
         click_link("12 bookings")
-        current_path.should eq(bookings_path)
+        current_path.should eq(user_reverse_bookings_path(@client))
       end
       
       it "bookings should have link to booking" do

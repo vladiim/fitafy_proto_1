@@ -1,72 +1,22 @@
 .row-fluid
   // clients
-  .well.span4
+  .well.span5
     .label Clients
-  
-    - if @presenter.current_user.training.empty?
-      %p You have no clients, why not invite one?
-      = render 'shared/invite_client'
-  
-    - else
-      = render 'users/show/clients'
-      %p
-        = @presenter.training_count
-        out of
-        = link_to "#{pluralize(@presenter.user.training.count, 'client')}", training_user_path(@presenter.user)
+    = render 'users/show/trainer_clients'
   
   // bookings
   - unless @presenter.current_user.training.empty?
-    .well.span4
+    .well.span5
       .label Bookings
-  
-      - if @presenter.current_user.bookings.empty?
-        %p You have no bookings, why not create one?
-        = link_to "Create Booking", new_booking_path, :class => "btn btn-large btn-primary"
-  
-      - else
-        = render 'users/show/bookings'
-        %p
-          = @presenter.booking_count
-          out of
-          = link_to "#{pluralize(@presenter.user.bookings.count, 'booking')}", bookings_path
+      = render 'users/show/trainer_bookings'
 
 .row-fluid
   // workouts
-  .well.span4
+  .well.span5
     .label Workouts
-  
-    - if @presenter.current_user.workouts.empty?
-      %p You haven't created any workouts. Here's some we prepared earlier:
-      = render 'users/show/workouts'
-      %p
-        You can look through
-        = link_to "#{pluralize(@presenter.workouts.count, 'workout')}", workouts_path
-        or
-        = link_to "create a new workout", new_workout_path
-  
-    - else
-      = render 'users/show/workouts'
-      %p
-        = @presenter.workouts_count
-        out of 
-        = link_to pluralize(@presenter.user_and_admin_workouts.count, 'workouts'), workouts_path
+    = render 'users/show/trainer_workouts'
   
   // Exercises
-  .well.span4
+  .well.span5
     .label Exercises
-  
-    - if @presenter.current_user.exercises.empty?
-      %p You haven't created any exercises. Here's some we prepared earlier:
-      = render 'users/show/exercises'    
-      %p
-        You can look through
-        = link_to "#{@presenter.exercises.count} exercises", exercises_path
-        or
-        = link_to "create a new exercise", new_exercise_path
-  
-    - else
-      = render 'users/show/exercises'
-      %p
-        = @presenter.exercises_count
-        out of 
-        = link_to pluralize(@presenter.user_and_admin_exercises.count, 'exercises'), exercises_path
+    = render 'users/show/trainer_exercises'

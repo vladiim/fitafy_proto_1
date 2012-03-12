@@ -1,0 +1,10 @@
+- if @presenter.current_user.training.empty?
+  %p You have no clients, why not invite one?
+  = render 'shared/invite_client'
+
+- else
+  = render 'users/show/clients'
+  %p
+    = @presenter.training_count
+    out of
+    = link_to "#{pluralize(@presenter.user.training.count, 'client')}", training_user_path(@presenter.user)

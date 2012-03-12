@@ -1,0 +1,15 @@
+- if @presenter.current_user.workouts.empty?
+  %p You haven't created any workouts. Here's some we prepared earlier:
+  = render 'users/show/workouts'
+  %p
+    You can look through
+    = link_to "#{pluralize(@presenter.workouts.count, 'workout')}", workouts_path
+    or
+    = link_to "create a new workout", new_workout_path
+
+- else
+  = render 'users/show/workouts'
+  %p
+    = @presenter.workouts_count
+    out of 
+    = link_to pluralize(@presenter.user_and_admin_workouts.count, 'workouts'), workouts_path

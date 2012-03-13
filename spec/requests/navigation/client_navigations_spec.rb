@@ -47,10 +47,9 @@ describe "Client Navigations" do
       page.should have_content("You'll see your workouts once you finish a booking")
     end
     
-    it "with no exercises the client is led to a new booking" do
-      click_link("Exercises: 0")
-      current_path.should eq(new_booking_path)
-      page.should have_content("You'll see your exercises once you finish a booking")
+    it "clients can't see exercises nav" do
+      page.should_not have_css("a", text: "Exercises:")
+      page.should_not have_css("a", text: "Add New Exercise")
     end
     
     it "signs the client out" do
@@ -85,20 +84,18 @@ describe "Client Navigations" do
       page.should have_content("You'll see your workouts once you finish a booking")
     end
     
-    it "shouldn't be able to see their exercises until a booking has been completed" do
-      click_link("Exercises: 0")
-      current_path.should eq(user_reverse_bookings_path(@client))
-      page.should have_content("You'll see your exercises once you finish a booking")
-    end
-    
     describe "completed booking" do
       
-      it "should be able to see the booking workout if the booking is completed" do
-        click_link("Workouts: 1")
+      before(:each) do
+        @completed_booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, status: "completed", workout_id: @workout.id)
+        integration_sign_in(@client)
       end
-      
-      it "should be able to see the booking exercises if the booking is completed" do
-        click_link("Exercises: 1")
+
+      it "should be able to see the booking workout if the booking is completed" do
+        click_link("My Workouts: 1")
+        current_path.should eq(user_completed_reverse_bookings_path(@client))
+        page.should have_css("h1", text: "Completed Workouts")
+        page.should have_css("a", text: @workout.title)
       end
     end
   end

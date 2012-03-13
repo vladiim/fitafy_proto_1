@@ -64,4 +64,17 @@ describe Booking do
       @trainer.bookings.build(@attr.merge(workout: nil)).should be_invalid
     end
   end
+
+  describe "status" do
+    
+    it "newly created bookings have a trainer_proposed status by default" do
+      @trainer_requested_booking = Factory(:booking, client_id: @client.id, trainer_id: @trainer.id)
+      @trainer_requested_booking.status?.should eq("trainer_proposed")
+      @trainer_requested_booking.status?.should_not eq("client_proposed")
+      @trainer_requested_booking.status?.should_not eq("revised_time")
+      @trainer_requested_booking.status?.should_not eq("approved")
+      @trainer_requested_booking.status?.should_not eq("declined")
+      @trainer_requested_booking.status?.should_not eq("completed")
+    end
+  end
 end

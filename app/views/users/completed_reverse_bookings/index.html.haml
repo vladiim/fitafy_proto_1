@@ -1,0 +1,15 @@
+%table.table.span11
+  %tr#table_blue
+    %thead
+      %th Workout
+      %th Exercises
+      %th Trainer
+      %th
+
+  - for booking in @completed_bookings
+
+    %tr{:datetime => "#{booking.wo_date}#{booking.wo_time}"}
+      %td= link_to booking.workout_title, "#"
+      %td= booking.exercises.count
+      %td= link_to "#{booking.trainer.username.titleize}", user_path(booking.trainer)
+      %td LINK WORKOUT.TITLE TO COMPLETED BOOKING TODO

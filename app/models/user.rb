@@ -59,6 +59,10 @@ class User < ActiveRecord::Base
     [role.to_sym]
   end
   
+  def completed_reverse_bookings
+    self.reverse_bookings.where(status: "completed")
+  end
+  
   private
   
     def set_trainer_role
@@ -68,4 +72,5 @@ class User < ActiveRecord::Base
     def set_client_role
       self.role = "client_role" if self.role == "invited_role"
     end
+    
 end

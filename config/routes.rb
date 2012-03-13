@@ -21,7 +21,8 @@ Fitafy::Application.routes.draw do
   end
   
   resources :users do
-    resources :reverse_bookings, only: :index
+    resources :reverse_bookings, controller: 'users/reverse_bookings', only: :index
+    resources :completed_reverse_bookings, controller: 'users/completed_reverse_bookings', only: :index
     member do
       get :training, :trained_by
     end

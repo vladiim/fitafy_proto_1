@@ -1,4 +1,4 @@
-class ReverseBookingsController < ApplicationController
+class Users::ReverseBookingsController < ApplicationController
   def index
     flash.keep
     @user = User.find(params[:user_id])

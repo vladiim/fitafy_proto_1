@@ -20,18 +20,7 @@
     Workouts
     %span.caret
   %ul.dropdown-menu
-    %li=link_to "My Workouts: #{current_user.workouts.count}", workouts_path
-  %li.divider-vertical
-
-//########## Exercises
-%li.dropdown
-  %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
-    %i.icon-road.icon-white
-    Exercises
-    %span.caret
-  %ul.dropdown-menu
-    %li=link_to "Exercises: #{current_user.exercise_list.count}", exercises_path
-    %li=link_to "Create Exercise", new_exercise_path
+    %li=link_to "My Workouts: #{current_user.completed_reverse_bookings.count}", user_completed_reverse_bookings_path(current_user)
   %li.divider-vertical
 
 //########## Profile

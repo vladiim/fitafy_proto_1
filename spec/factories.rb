@@ -77,7 +77,7 @@ FactoryGirl.define do
   factory :booking do
     trainer               { |trainer| trainer.association(:user) }
     client                { |client| client.association(:client) }
-    wo_date               { 3.days.from_now }    
+    wo_date               { 3.days.from_now }
     wo_time               { Time.now }
     message               { FactoryGirl.generate(:description) }
     association(:workout) { FactoryGirl.generate(:workout) }

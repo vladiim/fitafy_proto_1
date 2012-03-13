@@ -13,13 +13,15 @@ class Booking < ActiveRecord::Base
   
   validates_presence_of :wo_date, :wo_time
   
-  validates_presence_of :workout_id, :if => :not_booking_request
+  validates_presence_of :workout_id, :if => :not_status_client_proposed
   
   validate :wo_date_cannot_be_in_the_past
   
-  after_create :create_exercises_and_instructions, :if => :not_booking_request
+  after_create :create_exercises_and_instructions, :if => :not_status_client_proposed
   
   default_scope order(:wo_time).order(:wo_date)
+
+  STATUS = %w[ trainer_proposed client_proposed revised_time approved declined completed ]
 
   def booking_date
     self.wo_date.strftime("%A %e %b") 
@@ -37,6 +39,19 @@ class Booking < ActiveRecord::Base
       self.exercises.create!(user_id: @trainer.id,
                              title: exercise.title)
     end
+  end
+
+  def status_symbols
+    [status.to_sym]
+  end
+  
+  def status?
+    @status = self.status
+  end
+  
+  def workout_title
+    workout = Workout.find(self.workout_id)
+    @workout_title = workout.title
   end
   
   private
@@ -66,8 +81,8 @@ class Booking < ActiveRecord::Base
       save!
     end
     
-    def not_booking_request
-      request == false
+    def not_status_client_proposed
+      self.status != "client_proposed"
     end
     
     def request!(value)

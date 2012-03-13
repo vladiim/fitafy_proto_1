@@ -2,6 +2,7 @@
 
   = f.error_notification
   = f.input :client_id, as: :hidden, input_html: { value: current_user.id }
+  = f.input :status, as: :hidden, input_html: { value: "client_proposed"}
 
   .row-fluid
     .span5.well
@@ -14,6 +15,8 @@
         %label Trainer
         = link_to current_user.trainer.username.titleize, user_path(current_user.trainer)
         = f.input :trainer_id, as: :hidden, input_html: { value: current_user.trainer.id }
+      - else
+        = f.association :trainer, collection: current_user.trained_by.collect { |c| [c.username, c.id] }, prompt: "Select trainer"
 
   .row-fluid
     .span5

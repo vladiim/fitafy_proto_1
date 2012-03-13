@@ -1,8 +1,7 @@
 class BookingsController < ApplicationController
   
   def index
-    @title = "Bookings"
-    
+    @title = "Bookings"    
     if current_user.bookings.empty?
       redirect_to new_booking_path
       flash[:message] = "You have no bookings, why not make some?"

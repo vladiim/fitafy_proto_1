@@ -6,7 +6,7 @@
     %span.caret
   %ul.dropdown-menu
     %li=link_to "My Bookings: #{current_user.reverse_bookings.count}", user_reverse_bookings_path(@user)
-    %li=link_to "Create Booking", new_booking_path
+    %li=link_to "Request Booking", new_booking_request_path
     - if current_user.trained_by.count == 1
       %li= link_to "Trainer", user_path(current_user.trainer)
     - else

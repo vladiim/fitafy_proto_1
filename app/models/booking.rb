@@ -1,6 +1,6 @@
 class Booking < ActiveRecord::Base
   
-  attr_accessible :client_id, :wo_date, :wo_time, :message, :exercises, :trainer, :trainer_id, :client, :workout_id, :instructions, :request
+  attr_accessible :client_id, :wo_date, :wo_time, :message, :exercises, :trainer, :trainer_id, :client, :workout_id, :instructions, :status
   
   belongs_to :trainer, class_name: "User"
   belongs_to :client, class_name: "User"
@@ -13,11 +13,11 @@ class Booking < ActiveRecord::Base
   
   validates_presence_of :wo_date, :wo_time
   
-  validates_presence_of :workout_id, :if => :not_status_client_proposed
+  validates_presence_of :workout_id, :if => :created_by_trainer
   
   validate :wo_date_cannot_be_in_the_past
   
-  after_create :create_exercises_and_instructions, :if => :not_status_client_proposed
+  after_create :create_exercises_and_instructions, :if => :created_by_trainer
   
   default_scope order(:wo_time).order(:wo_date)
 
@@ -81,8 +81,8 @@ class Booking < ActiveRecord::Base
       save!
     end
     
-    def not_status_client_proposed
-      self.status != "client_proposed"
+    def created_by_trainer
+      status == "trainer_proposed"
     end
     
     def request!(value)

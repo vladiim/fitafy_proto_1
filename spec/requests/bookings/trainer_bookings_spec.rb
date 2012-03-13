@@ -27,6 +27,14 @@ describe "Bookings" do
       sign_in_and_create_booking(@trainer, @client, @workout)
       page.should have_content("Booking created")
     end
+    
+    it "sends an email to the client to confirm the booking"
+    
+    it "client approves the booking, sends an email back"
+    
+    it "client declines the booking, sends an email back"
+    
+    it "suggests a new time for the booking, sends email back"
   end
 
   describe "index" do

@@ -1,6 +1,6 @@
 class Booking < ActiveRecord::Base
   
-  attr_accessible :client_id, :wo_date, :wo_time, :message, :exercises, :trainer, :client, :workout_id, :instructions
+  attr_accessible :client_id, :wo_date, :wo_time, :message, :exercises, :trainer, :trainer_id, :client, :workout_id, :instructions, :request
   
   belongs_to :trainer, class_name: "User"
   belongs_to :client, class_name: "User"
@@ -9,13 +9,15 @@ class Booking < ActiveRecord::Base
   has_many :exercises
   
   validates_presence_of :trainer_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
-  validates_presence_of :client_id, :message => "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
+  validates_presence_of :client_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
   
-  validates_presence_of :wo_date, :wo_time, :workout_id
+  validates_presence_of :wo_date, :wo_time
+  
+  validates_presence_of :workout_id, :if => :not_booking_request
   
   validate :wo_date_cannot_be_in_the_past
   
-  after_create :create_exercises_and_instructions
+  after_create :create_exercises_and_instructions, :if => :not_booking_request
   
   default_scope order(:wo_time).order(:wo_date)
 
@@ -62,5 +64,21 @@ class Booking < ActiveRecord::Base
     def create_instructions!(workout)
       self.instructions = workout.instructions
       save!
+    end
+    
+    def not_booking_request
+      request == false
+    end
+    
+    def request!(value)
+      request = value
+    end
+    
+    def set_client_id!(id)
+      client_id = id
+    end
+    
+    def set_trainer_id!(id)
+      trainer_id = id
     end
 end

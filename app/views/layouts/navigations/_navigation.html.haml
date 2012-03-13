@@ -1,0 +1,25 @@
+- @user ||= current_user
+
+- if current_user
+  .navbar
+    .navbar-inner
+      .container#navigation_bar
+        = link_to logo, root_path, :class => "brand"
+
+        //############# Collapse button for responsive design
+        %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+
+        .nav-collapse
+          %ul.nav#navigation_bar
+
+            - if current_user.role == "trainer_role"
+              = render 'layouts/navigations/trainer_navigation'
+            
+            - elsif current_user.role == "client_role"
+              = render 'layouts/navigations/client_navigation'
+            
+            - else

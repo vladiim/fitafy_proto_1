@@ -13,7 +13,10 @@
       %td= booking.booking_time
       %td= booking.booking_date
       %td= link_to "#{booking.client.username.titleize}", user_path(booking.client)
-      %td= booking.workout.title.titleize
+      - if booking.workout == nil
+        %td None
+      - else
+        %td= booking.workout.title.titleize
       %td
         = link_to "Visit", booking_path(booking)
         |

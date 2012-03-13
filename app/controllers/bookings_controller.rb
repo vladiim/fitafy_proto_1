@@ -1,16 +1,19 @@
 class BookingsController < ApplicationController
   
   def index
+    flash.keep
     @title = "Bookings"
+    
     if current_user.bookings.empty?
       redirect_to new_booking_path
       flash[:message] = "You have no bookings, why not make some?"
     else
-      @bookings = current_user.bookings.paginate(:page => params[:page], :per_page => 10) 
+      @bookings = current_user.bookings.paginate(:page => params[:page], :per_page => 10)
     end
   end
   
   def new
+    flash.keep
     @title = "Create Booking"
     @booking = current_user.bookings.new
     @workout = Workout.find(params[:workout]) if params[:workout]

@@ -1,0 +1,34 @@
+= simple_form_for @booking do |f|
+
+  = f.error_notification
+
+  .row-fluid
+    .span5.well
+      = f.association :client, collection: current_user.training.collect { |c| [c.username, c.id] }, prompt: "Select client"
+
+      %p
+        or
+        = link_to "Invite New", new_client_path
+
+    .span5.well
+      = f.association :workout, collection: current_user.workouts.collect { |w| [w.title, w.id] }, prompt: "Select workout"
+
+      %p
+        or
+        = link_to "Create New", new_workout_path
+
+  .row-fluid
+    .span5.well
+      = f.input :wo_date, as: :string, input_html: { :class => 'date_picker' }, label: "Date", start_date: Time.now
+
+      = f.input :wo_time, :label => "Time", time_separator: ""
+
+    .span5.well
+      - if controller == "new"
+        = f.input :message, as: :text, input_html: { rows: 7 }
+      - else
+        = f.input :instructions, as: :text, input_html: { rows: 7 }
+
+  .row-fluid
+    .span5
+      = f.button :submit, "#{@title}", id: 'booking_submit', :class => "btn btn-large btn-primary"

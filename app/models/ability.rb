@@ -32,5 +32,6 @@ class Ability
   
   def client_rules
     can :read, :all
+    can :manage, User, id: @user.id
   end
 end

@@ -37,6 +37,11 @@ class User < ActiveRecord::Base
     reverse_relationships.find_by_trainer_id(trainer)
   end
   
+  def trainer
+    trainer_id = trained_by.first.id
+    @trainer = User.find(trainer_id)
+  end
+  
   def deliver_password_reset_instructions!
     reset_perishable_token!
     UserMailer.password_reset(self).deliver

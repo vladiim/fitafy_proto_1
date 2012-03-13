@@ -1,0 +1,21 @@
+= simple_form_for @booking, :url => booking_requests_path do |f|
+
+  = f.error_notification
+  = f.input :client_id, as: :hidden, input_html: { value: current_user.id }
+  = f.input :trainer_id, as: :hidden, input_html: { value: current_user.trainer.id }
+  = f.input :request, as: :hidden, input_html: { value: true }
+
+  .row-fluid
+    .span5.well
+      = f.input :wo_date, as: :string, input_html: { :class => 'date_picker' }, label: "Date", start_date: Time.now
+    
+      = f.input :wo_time, :label => "Time", time_separator: ""
+
+    .span5.well
+      - if current_user.trained_by.count == 1
+        %label Trainer
+        = link_to current_user.trainer.username.titleize, user_path(current_user.trainer)
+
+  .row-fluid
+    .span5
+      = f.button :submit, "#{@title}", id: 'booking_submit', :class => "btn btn-large btn-primary"

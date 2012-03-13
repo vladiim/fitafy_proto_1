@@ -4,8 +4,14 @@ class WorkoutsController < ApplicationController
   def index
     @title = "Workouts"        
     if current_user.workouts.empty?
-      redirect_to new_workout_path 
-      flash[:message] = "You have no workouts, why not make some?"
+      
+      if current_user.role == "trainer_role"
+        redirect_to new_workout_path 
+        flash[:message] = "You have no workouts, why not make some?"
+      else
+        redirect_to user_reverse_bookings_path(current_user)
+        flash[:error] = "You'll see your workouts once you finish a booking"
+      end
     else
       @workouts = current_user.alphabetical_workouts.paginate(:page => params[:page], :per_page => 10)
     end

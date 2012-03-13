@@ -2,8 +2,13 @@ class ExercisesController < ApplicationController
   load_and_authorize_resource except: :index
     
   def index
-    @exercises = current_user.exercise_list.paginate(:page => params[:page], :per_page => 10)
     @title = "Exercises"
+    if current_user.role == "client_role" && current_user.exercises.empty?
+      redirect_to user_reverse_bookings_path(current_user)
+      flash[:error] = "You'll see your exercises once you finish a booking"
+    else
+      @exercises = current_user.exercise_list.paginate(:page => params[:page], :per_page => 10)
+    end
   end
 
   def new

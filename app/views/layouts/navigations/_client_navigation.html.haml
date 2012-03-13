@@ -1,0 +1,47 @@
+//########## Bookings
+%li.dropdown
+  %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
+    %i.icon-calendar.icon-white
+    Bookings
+    %span.caret
+  %ul.dropdown-menu
+    %li=link_to "My Bookings: #{current_user.reverse_bookings.count}", user_reverse_bookings_path(@user)
+    %li=link_to "Create Booking", new_booking_path
+    - if current_user.trained_by.count == 1
+      %li= link_to "Trainer", user_path(current_user.trainer)
+    - else
+      %li= link_to "Trainers: #{current_user.trained_by.count}", trained_by_user_path(current_user)
+  %li.divider-vertical
+
+//########## Workouts
+%li.dropdown
+  %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} 
+    %i.icon-list.icon-white
+    Workouts
+    %span.caret
+  %ul.dropdown-menu
+    %li=link_to "My Workouts: #{current_user.workouts.count}", workouts_path
+  %li.divider-vertical
+
+//########## Exercises
+%li.dropdown
+  %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
+    %i.icon-road.icon-white
+    Exercises
+    %span.caret
+  %ul.dropdown-menu
+    %li=link_to "Exercises: #{current_user.exercise_list.count}", exercises_path
+    %li=link_to "Create Exercise", new_exercise_path
+  %li.divider-vertical
+
+//########## Profile
+.nav.btn-group#user_nav_button
+  %a.btn.btn-primary{"href" => "#"}
+    %i.icon-user.icon-white
+    = current_user.username.titleize
+  %a{"class" => "btn btn-primary dropdown-toggle", "data-toggle" => "dropdown", "href" => "#"}
+    %span.caret
+  %ul.dropdown-menu
+    %li= link_to "Profile", user_path(current_user)
+    %li= link_to "My Details", edit_user_path(current_user)
+    %li=link_to "Sign Out", signout_path

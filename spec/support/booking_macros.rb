@@ -4,6 +4,7 @@ module BookingMacros
     select(client.username,      from: "booking_client_id")
     select(workout.title,        from: "booking_workout_id")
     fill_in "booking_wo_date",   with: "#{1.day.from_now}"
+    fill_in "booking_message",   with: "This is a message yo"
     click_button("Create Booking")
   end
   

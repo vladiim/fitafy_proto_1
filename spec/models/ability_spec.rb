@@ -93,6 +93,18 @@ describe Ability do
     
     describe "exercises" do
       
+      it "should be able to manage their own profile" do
+        @client_ability.should be_able_to(:manage, @client)
+      end
+      
+      it "should be able to see other user's profiles" do
+        @client_ability.should be_able_to(:read, User)
+      end
+      
+      it "shouldn't be able to manage other user's profiles" do
+        @client_ability.should_not be_able_to(:manage, @trainer)
+      end
+      
       it "should be able to view exercises" do
         @client_ability.should be_able_to(:read, @exercise)
       end

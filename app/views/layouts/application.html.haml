@@ -7,17 +7,17 @@
 
     - if current_user
       %nav.row-fluid
-        .span12= render 'layouts/navigation'
+        .span12= render 'layouts/navigations/navigation'
 
-    %section#main_content_yo
-      .row-fluid
-        - if current_user
-          .row-fluid.span11= render 'layouts/flashes'
+      %section#main_content_yo
+        .row-fluid
+          .span11= render 'layouts/flashes'
           %h1.row-fluid= @title
           .row-fluid.span12= yield
-        - else
-          = render 'layouts/flashes'
-          = yield
+    - else
+      = link_to big_logo, root_path, id: "logo"
+      = render 'layouts/flashes'
+      %section#main_content_yo= yield
 
   %footer.container-fluid
     =render 'layouts/footer'

@@ -17,6 +17,7 @@ class UserSessionsController < ApplicationController
   def destroy
     @user_session = UserSession.find
     @user_session.destroy
+    flash[:success] = "Signed out!"
     redirect_to root_path
   end
   

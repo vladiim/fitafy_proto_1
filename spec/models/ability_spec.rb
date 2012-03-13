@@ -1,10 +1,6 @@
 require "spec_helper"
 require "cancan/matchers"
 
-# FOR WHATEVER REASON, FACTORY GIRL STARTED FAILING TO CREATE 
-# UNIQUE USERNAMES & EMAILS FOR THIS SPEC HENCE THE LACK OF DRY
-#TARTED AT COMMIT a401221d68a55fb8714ee1b7a0f52b506ff98f6f
-
 describe Ability do
   
   describe "guest" do
@@ -14,60 +10,62 @@ describe Ability do
       @guest_ability = Ability.new(@guest)
       @guest_ability.should be_able_to(:create, User)
     end
-    
   end
+  
+  # before(:each) do
+  #   @admin = Factory(:admin)
+  #   @user_client = Factory(:client)
+  #   @exercise = Factory(:exercise, user: @admin)
+  #   @workout = Factory(:workout, user: @admin)
+  # end
   
   describe "admin" do
     
+    before(:each) do
+      # @admin = Factory(:admin)
+      # @admin_ability = Ability.new(@admin)
+      # @exercise = Factory(:exercise, user_id: @admin.id)
+      # @workout = Factory(:workout, user_id: @admin.id)
+    end
+    
     it "should be able to manage every-mutha-fuckin-thing" do
-      @admin = Factory(:admin, username: "unique1", email: "unique1@email.com")
+      @admin = Factory(:user, username: "admin1", email: "admin1@email.com", admin: true)
       @admin_ability = Ability.new(@admin)
       @admin_ability.should be_able_to(:manage, :all)
     end
   end
   
   describe "trainer_role" do
-
+    
+    before(:each) do
+      @trainer = Factory(:user)
+      @trainer_ability = Ability.new(@trainer)
+    end
+    
     describe "users" do
       
       it "should be able to view users" do
-        @trainer = Factory(:user, username: "unique2", email: "unique2@email.com")
-        @trainer_ability = Ability.new(@trainer)
         @trainer_ability.should be_able_to(:read, User)
       end
       
       it "should be able to manage it's own account" do
-        @trainer = Factory(:user, username: "unique3", email: "unique3@email.com")
-        @trainer_ability = Ability.new(@trainer)
         @trainer_ability.should be_able_to(:manage, @trainer)
-      end    
+      end
     end
     
     describe "exercises" do
 
       it "should be able to manage exercises for themselves" do
-        @trainer = Factory(:trainer)
-        @trainer_ability = Ability.new(@trainer)
-
         @trainer_ability.should be_able_to(:manage, Factory(:exercise, user: @trainer))
       end
 
       it "shouldn't be able to manage another trainer's exercise" do
-        @trainer = Factory(:trainer)
-        @trainer_ability = Ability.new(@trainer)
-        @trainer2 = Factory(:trainer)
-        @exercise = Factory(:exercise, user_id: @trainer2.id)
-
         @trainer_ability.should_not be_able_to(:manage, @exercise)
       end
       
       it "shouldn't be able to read another trainer's exercise" do
-        @trainer = Factory(:trainer)
-        @trainer_ability = Ability.new(@trainer)
-        @trainer2 = Factory(:trainer)
-        @exercise = Factory(:exercise, user_id: @trainer2.id)
-
-        @trainer_ability.should_not be_able_to(:read, @exercise)
+        @diff_trainer_exercise = Factory(:exercise)
+        @trainer_ability.should_not be_able_to(:read, @diff_trainer_exercise)
       end
     end
     

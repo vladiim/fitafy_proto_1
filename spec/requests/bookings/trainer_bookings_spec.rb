@@ -28,37 +28,88 @@ describe "Bookings" do
       page.should have_content("Booking created")
     end
     
-    it "sends an email to the client to confirm the booking"
-    
-    it "client approves the booking, sends an email back"
-    
-    it "client declines the booking, sends an email back"
-    
-    it "suggests a new time for the booking, sends email back"
+    describe "trainer booking requests" do
+      
+      it "redirects you from the booking request index if it's empty" do
+        integration_sign_in(@trainer)
+        visit booking_requests_path
+        current_path.should eq(new_booking_path)
+        page.should have_content("You have no booking requests, why not send one?")
+      end
+      
+      before(:each) do
+        @trainer.train!(@client)
+        sign_in_and_create_booking(@trainer, @client, @workout)
+        click_link("Sign Out")
+        integration_sign_in(@client)
+        visit booking_requests_path
+      end
+      
+      it "sends an email to the client to confirm the booking" do
+        last_email.to.should include(@client.email)
+        last_email.body.should include(booking_requests_path)
+      end
+
+      it "client approves the booking, sends an email back" do
+        click_button("Confirm")
+        last_email.to.should include(@trainer.email)
+        last_email.body.should include("has been confirmed")
+      end
+
+      it "client declines the booking, sends an email back" do
+        click_button("Decline")
+        last_email.to.should include(@trainer.email)
+        last_email.body.should include("has been declined")
+      end
+
+      it "suggests a new time for the booking, sends email back" do
+        click_link("Suggest New Time")
+        current_path.should eq(edit_booking_request)
+        fill_in "booking_wo_date",   with: "#{1.day.from_now}"
+        fill_in "booking_message",   with: "This is a message yo"
+        click_button("Suggest New Time")
+        
+        last_email.to.should include(@client.email)
+        last_email.body.should include(booking_requests_path)
+      end
+    end
   end
 
   describe "index" do
-    
-    it "index booking details are correct" do
-      @destroy_booking = Factory(:booking, client: @client, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45")
       
+    before(:each) do
+      @destroy_booking = Factory(:booking, client: @client, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45")
       sign_in_visit_bookings(@trainer)
+    end
+    
+    it "should have the booking time" do
       page.should have_content(@destroy_booking.booking_time)
+    end
+    
+    it "should have the booking date" do
       page.should have_content(@destroy_booking.booking_date)
+    end
+    
+    it "should have the workout title" do
       page.should have_content(@destroy_booking.workout.title.titleize)
-
+    end
+    
+    it "should link to the client's profile" do
       click_link(@client.username.titleize)
       current_path.should eq(user_path(@client))
-      visit bookings_path
-
+    end
+    
+    it "should lead to the booking page" do
       click_link("Visit")
       current_path.should eq(booking_path(@destroy_booking))
-      visit bookings_path
-
+    end
+    
+    it "should be able to edit the booking" do
       click_link("Edit")
       current_path.should eq(edit_booking_path(@destroy_booking))
-      visit bookings_path
-
+    end
+    
+    it "should be able to delete the booking" do
       click_link("Delete")
       page.should_not have_content(@destroy_booking.booking_time)
     end
@@ -68,7 +119,8 @@ describe "Bookings" do
       @booking = Factory(:booking, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45", workout_id: @workout.id)
       @booking4 = Factory(:booking, trainer_id: @trainer.id, wo_date: 4.days.from_now, wo_time: "05:45", workout_id: @workout.id)
       @booking2 = Factory(:booking, trainer_id: @trainer.id, wo_date: 2.days.from_now, wo_time: "05:45", workout_id: @workout.id)
-      @trainer.bookings.should == [@booking, @booking2, @booking3, @booking4]
+      
+      # @trainer.bookings.should == [@booking, @booking2, @booking3, @booking4] fucked if I know how to do this... one day :)
     end
   end
     

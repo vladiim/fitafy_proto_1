@@ -1,6 +1,8 @@
 class Booking < ActiveRecord::Base
   
-  attr_accessible :client_id, :wo_date, :wo_time, :message, :exercises, :trainer, :trainer_id, :client, :workout_id, :instructions, :status
+  attr_accessible :client_id, :wo_date, :wo_time, :message, :exercises, 
+                  :trainer, :trainer_id, :client, :workout_id, :instructions, 
+                  :status, :request_from
   
   belongs_to :trainer, class_name: "User"
   belongs_to :client, class_name: "User"
@@ -11,7 +13,7 @@ class Booking < ActiveRecord::Base
   validates_presence_of :trainer_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
   validates_presence_of :client_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
   
-  validates_presence_of :wo_date, :wo_time
+  validates_presence_of :wo_date, :wo_time, :request_from
   
   validates_presence_of :workout_id, :if => :created_by_trainer
   
@@ -52,6 +54,11 @@ class Booking < ActiveRecord::Base
   def workout_title
     workout = Workout.find(self.workout_id)
     @workout_title = workout.title
+  end
+  
+  def sender
+    # sender is in reference to booking request
+    @sender = User.find(self.request_from)
   end
   
   private

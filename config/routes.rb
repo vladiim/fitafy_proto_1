@@ -6,7 +6,7 @@ Fitafy::Application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :relationships, only: [:index, :create, :update, :destroy]
   resources :clients, only: [:index, :new, :create, :edit, :update]
-  resources :booking_requests, controller: 'bookings/requests', only: [:new, :create]
+  resources :booking_requests, controller: 'bookings/requests'
   
   resources :bookings do
     resources :exercises, controller: 'bookings/exercises', only: [:index, :create, :update, :destroy]

@@ -40,7 +40,7 @@ describe "client bookings" do
         select(@trainer2.username, from: "booking_trainer_id")
       end
       
-      describe "booking emails" do
+      describe "client booking requests" do
         
         it "sends an email to the trainer to confirm the booking"
     
@@ -54,6 +54,10 @@ describe "client bookings" do
       describe "created booking" do
         
         it "indexes upcoming bookings correctly"
+        
+        it "has the trainer's name"
+        
+        it "doesn't have a workout listed"
       end
     end
   end

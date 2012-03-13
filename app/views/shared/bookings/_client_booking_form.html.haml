@@ -2,6 +2,7 @@
 
   = f.error_notification
   = f.input :client_id, as: :hidden, input_html: { value: current_user.id }
+  = f.input :request_from, as: :hidden, input_html: { value: current_user.id }
   = f.input :status, as: :hidden, input_html: { value: "client_proposed"}
 
   .row-fluid

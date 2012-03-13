@@ -2,6 +2,8 @@
 
   = f.error_notification
 
+  = f.input :request_from, as: :hidden, input_html: { value: current_user.id }
+
   .row-fluid
     .span5.well
       = f.association :client, collection: current_user.training.collect { |c| [c.username, c.id] }, prompt: "Select client"

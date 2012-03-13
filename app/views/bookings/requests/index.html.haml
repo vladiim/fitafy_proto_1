@@ -1,0 +1,26 @@
+%table.table.span11
+  %tr#table_blue
+    %thead
+      %th From
+      %th Details
+      %th 
+      %th 
+      %th 
+
+  - for booking in @booking_requests
+
+    %tr{:datetime => "#{booking.wo_date}#{booking.wo_time}"}
+      %td= booking.sender.username
+      %td= "#{booking.booking_date} at #{booking.booking_time}"
+
+        = simple_form_for booking, url: booking_request_path, html: { method: :put } do |f|
+        %td
+          = f.input :status, as: :hidden, input_html: { value: "approved" }
+          = f.button :submit, "Confirm", :class => "btn btn-success"
+
+        = simple_form_for booking, url: booking_request_path, html: { method: :delete } do |f|
+        %td
+          = f.input :status, as: :hidden, input_html: { value: "declined" }
+          = f.button :submit, "Decline", :class => "btn btn-success"
+
+        %td= link_to "Suggest New Time", edit_booking_request_path

@@ -11,6 +11,10 @@ FactoryGirl.define do
     "client#{n}"
   end
   
+  sequence :admin_name do |n|
+    "admin#{n}"
+  end
+  
   sequence :email do |n|
     "user#{n}@email.com"
   end
@@ -54,6 +58,7 @@ FactoryGirl.define do
     end
     
     factory :admin do
+      username    { FactoryGirl.generate(:trainer_name) }
       admin     true
     end
   end
@@ -81,6 +86,7 @@ FactoryGirl.define do
     wo_time               { Time.now }
     message               { FactoryGirl.generate(:description) }
     association(:workout) { FactoryGirl.generate(:workout) }
+    request_from          1
   end
   
   factory :invitation do

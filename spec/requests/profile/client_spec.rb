@@ -26,7 +26,7 @@ describe "my profile" do
       it "should drive the client to request a booking time with the trainer" do
         page.should have_content("You have no bookings yet, why don't you request one?")
         click_link("Request Booking")
-        current_path.should eq(new_booking_path)
+        current_path.should eq(new_booking_request_path)
       end
     end
   end

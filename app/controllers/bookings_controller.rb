@@ -1,7 +1,6 @@
 class BookingsController < ApplicationController
   
   def index
-    flash.keep
     @title = "Bookings"
     
     if current_user.bookings.empty?

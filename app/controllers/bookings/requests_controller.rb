@@ -4,9 +4,11 @@ class Bookings::RequestsController < ApplicationController
     @booking_request = Booking.new(params[:booking])
     if @booking_request.save
       flash[:success] = "Booking requested, your trainer will confirm the time"
-      redirect_to bookings_path
+      redirect_to reverse_bookings_path
     else
-      # render "bookings#new"
+      render template: "bookings/new"
+      @title = "Request Booking"
+      @booking = Booking.new
     end
   end
 end

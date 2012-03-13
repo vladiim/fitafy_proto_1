@@ -82,13 +82,13 @@ describe "Client Navigations" do
     it "shouldn't be able to see their workouts until a booking has been completed" do
       click_link("Workouts: 0")
       current_path.should eq(user_reverse_bookings_path(@client))
-      page.should have_content("No peeking! We'll show you you're workout once you've finished.")
+      page.should have_content("You'll see your workouts once you finish a booking")
     end
     
     it "shouldn't be able to see their exercises until a booking has been completed" do
       click_link("Exercises: 0")
       current_path.should eq(user_reverse_bookings_path(@client))
-      page.should have_content("No peeking! We'll show you you're workout once you've finished.")
+      page.should have_content("You'll see your exercises once you finish a booking")
     end
     
     describe "completed booking" do

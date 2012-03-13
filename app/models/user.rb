@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
   
   def trainer
-    trainer_id = trained_by.first.id
+    trainer_id = self.trained_by.first.id
     @trainer = User.find(trainer_id)
   end
   

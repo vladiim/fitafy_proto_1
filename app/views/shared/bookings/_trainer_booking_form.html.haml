@@ -24,10 +24,10 @@
       = f.input :wo_time, :label => "Time", time_separator: ""
 
     .span5.well
-      - if controller == "new"
-        = f.input :message, as: :text, input_html: { rows: 7 }
-      - else
+      - if params[:action] == "edit"
         = f.input :instructions, as: :text, input_html: { rows: 7 }
+      - else
+        = f.input :message, as: :text, input_html: { rows: 7 }
 
   .row-fluid
     .span5

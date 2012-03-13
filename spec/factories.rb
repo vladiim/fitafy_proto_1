@@ -11,10 +11,6 @@ FactoryGirl.define do
     "client#{n}"
   end
   
-  sequence :admin_name do |n|
-    "admin#{n}"
-  end
-  
   sequence :email do |n|
     "user#{n}@email.com"
   end
@@ -49,16 +45,15 @@ FactoryGirl.define do
     
     factory :client do
       username    { FactoryGirl.generate(:client_name) }      
-      role      "client_role"
+      role        "client_role"
     end
     
     factory :invited do
       username    { FactoryGirl.generate(:client_name) }      
-      role      "invited_role"
+      role        "invited_role"
     end
     
     factory :admin do
-      username    { FactoryGirl.generate(:trainer_name) }
       admin     true
     end
   end

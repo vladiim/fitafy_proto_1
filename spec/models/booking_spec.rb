@@ -6,7 +6,7 @@ describe Booking do
     @client = Factory(:client)
     @workout = Factory(:workout)
     @date_time = 1.day.from_now
-    @booking = @trainer.bookings.create!(client_id: @client.id, workout_id: @workout.id, wo_date: 1.week.from_now, wo_time: Time.now, request_from: @trainer.id)
+    @booking = @trainer.bookings.create!(client_id: @client.id, workout_id: @workout.id, wo_date: 1.week.from_now, wo_time: Time.now, request_from: @trainer.id, last_message_from: @trainer.id)
   end
   
   describe "associations" do
@@ -77,28 +77,29 @@ describe Booking do
 
   describe "status" do
     
-    it "newly created bookings have a trainer_proposed status by default" do
-      @trainer_requested_booking = Factory(:booking, client_id: @client.id, trainer_id: @trainer.id, request_from: @trainer.id)
-      @trainer_requested_booking.status?.should eq("trainer_proposed")
-      @trainer_requested_booking.status?.should_not eq("client_proposed")
-      @trainer_requested_booking.status?.should_not eq("revised_time")
-      @trainer_requested_booking.status?.should_not eq("approved")
-      @trainer_requested_booking.status?.should_not eq("declined")
-      @trainer_requested_booking.status?.should_not eq("completed")
+    describe "trainer requested booking" do
+      
+      before(:each) do
+        @booking = Factory(:booking, client_id: @client.id, trainer_id: @trainer.id, last_message_from: @trainer.id,)
+      end
+      
+      it "newly created bookings have a trainer_proposed status by default" do
+        @booking.status?.should eq("trainer_proposed")
+      end
+
+      it "trainer: records who the booking request is from" do
+        @trainer.booking_last_message_from.should_not include(@booking)
+        @client.booking_last_message_from.should include(@booking)
+      end
     end
     
-    it "trainer: records who the booking request is from" do
-      @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, request_from: @trainer.id)
-      
-      @trainer.booking_requests.should_not include(@booking)
-      @client.booking_requests.should include(@booking)
-    end
-    
-    it "client: records who the booking request is from" do
-      @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, request_from: @client.id)
-      
-      @client.booking_requests.should_not include(@booking)
-      @trainer.booking_requests.should include(@booking)
+    describe "client requested booking" do
+      it "client: records who the booking request is from" do
+        @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, last_message_from: @client.id)
+
+        @client.booking_last_message_from.should_not include(@booking)
+        @trainer.booking_last_message_from.should include(@booking)
+      end
     end
   end
 end

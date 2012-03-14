@@ -51,7 +51,7 @@ describe "Trainer Navigations" do
     
     before(:each) do
       @workout = Factory(:workout, user: @trainer)
-      @booking = Factory(:booking, trainer_id: @trainer.id)
+      @booking = Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id)
       @client = Factory(:client)
       @trainer.train!(@client)
       integration_sign_in(@trainer)

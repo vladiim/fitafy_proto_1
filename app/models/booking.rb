@@ -2,7 +2,7 @@ class Booking < ActiveRecord::Base
   
   attr_accessible :client_id, :wo_date, :wo_time, :message, :exercises, 
                   :trainer, :trainer_id, :client, :workout_id, :instructions, 
-                  :status, :request_from
+                  :status, :last_message_from
   
   belongs_to :trainer, class_name: "User"
   belongs_to :client, class_name: "User"
@@ -13,15 +13,13 @@ class Booking < ActiveRecord::Base
   validates_presence_of :trainer_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
   validates_presence_of :client_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
   
-  validates_presence_of :wo_date, :wo_time, :request_from
+  validates_presence_of :wo_date, :wo_time, :last_message_from
   
   validates_presence_of :workout_id, :if => :created_by_trainer
   
   validate :wo_date_cannot_be_in_the_past
   
   after_create :create_exercises_and_instructions, :if => :created_by_trainer
-  # after_create :send_create_request
-  # after_update :send_update_request
   
   default_scope order(:wo_time).order(:wo_date)
 
@@ -60,7 +58,7 @@ class Booking < ActiveRecord::Base
   
   def sender
     # sender is in reference to booking request
-    @sender = User.find(self.request_from)
+    @sender = User.find(self.last_message_from)
   end
   
   private
@@ -105,45 +103,4 @@ class Booking < ActiveRecord::Base
     def set_trainer_id!(id)
       trainer_id = id
     end
-    
-    # def send_create_request
-    #   request_sender = find_sender
-    #   request_receiver = find_receiver_based_on_sender(request_sender)
-    #   BookingMailer.request_booking_create(request_sender, request_receiver).deliver
-    # end
-    # 
-    # def send_update_request
-    #   if self.status == "confirmed"
-    #     send_request_confirmed
-    #   elsif self.status == "declined"
-    #     # send_request_delined
-    #   elsif self.status == "revised_time"
-    #     # send_request_revised_time
-    #   else
-    #     # log error
-    #   end
-    # end
-    # 
-    # def send_request_confirmed
-    #   original_sender = find_sender
-    #   original_receiver = find_receiver_based_on_sender(original_sender)
-    #   self.sender = original_receiver.id
-    #   self.save!
-    #   receiver = original_sender
-    #   BookingMailer.request_booking_confirmed(sender, receiver, self).deliver
-    # end
-    # 
-    # def find_sender
-    #   @sender = User.find(self.request_from)
-    # end
-    # 
-    # def find_receiver_based_on_sender(request_sender)
-    #   if self.trainer_id == request_sender.id
-    #     receiver = User.find(self.client_id)
-    #   elsif self.client_id == request_sender.id
-    #     receiver = User.find(self.trainer_id)
-    #   else
-    #     puts "we got a problem yo"
-    #   end
-    # end
 end

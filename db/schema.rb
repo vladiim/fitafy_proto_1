@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(:version => 20120313063201) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "workout_id"
-    t.text     "instructions", :default => "No workout insructions"
-    t.string   "status",       :default => "trainer_proposed"
-    t.integer  "request_from"
+    t.text     "instructions",      :default => "No workout insructions"
+    t.string   "status",            :default => "trainer_proposed"
+    t.integer  "last_message_from"
   end
 
   add_index "bookings", ["client_id"], :name => "index_bookings_on_client_id"

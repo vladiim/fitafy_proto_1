@@ -68,7 +68,7 @@ describe "my profile" do
           @trainer.train!(@client_new)
           Factory(:workout, user_id: @trainer.id)
           Factory(:exercise, user_id: @trainer.id)
-          Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, wo_time: "06:44:00")
+          Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, wo_time: "06:44:00", last_message_from: @trainer.id)
         end
         integration_sign_in(@trainer)
         click_link("Profile")

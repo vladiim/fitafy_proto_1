@@ -81,7 +81,7 @@ FactoryGirl.define do
     wo_time               { Time.now }
     message               { FactoryGirl.generate(:description) }
     association(:workout) { FactoryGirl.generate(:workout) }
-    request_from          { trainer.id }
+    last_message_from     { trainer.id }
     
     factory :client_booking do
       request_from        { client.id }

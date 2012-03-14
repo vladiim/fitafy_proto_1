@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Excerses" do
+describe "Exercises" do
   before(:each) do
     @trainer = Factory(:trainer)
     @admin = Factory(:admin)
@@ -136,7 +136,7 @@ describe "Excerses" do
     describe "exercise templates" do
   
       before(:each) do
-        @booking = Factory(:booking, workout_id: @workout.id, trainer_id: @trainer.id)
+        @booking = Factory(:booking, workout_id: @workout.id, trainer_id: @trainer.id, last_message_from: @trainer.id)
       end
   
       it "only lists exercise templates" do

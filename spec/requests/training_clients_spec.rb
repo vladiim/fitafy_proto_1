@@ -74,7 +74,7 @@ describe "Clients" do
       click_link(@client.username.titleize)
       current_path.should eq(user_path(@client))
 
-      @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id)
+      @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, last_message_from: @trainer.id,)
       click_link("Clients: ")
       click_link("1 Booking")
       page.should have_css("h1", text: "Bookings for #{@client.username.titleize}")

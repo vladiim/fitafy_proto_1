@@ -63,11 +63,11 @@ class User < ActiveRecord::Base
     self.reverse_bookings.where(status: "completed")
   end
   
-  def booking_requests
+  def booking_last_message_from
     if role == "trainer_role"
-      bookings.find(:all, conditions: ["request_from != ?", self.id])
+      bookings.find(:all, conditions: ["last_message_from != ?", self.id])
     else
-      reverse_bookings.find(:all, conditions: ["request_from != ?", self.id])
+      reverse_bookings.find(:all, conditions: ["last_message_from != ?", self.id])
     end
   end
   

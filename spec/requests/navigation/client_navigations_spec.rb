@@ -64,7 +64,7 @@ describe "Client Navigations" do
       @trainer2 = Factory(:trainer)
       @trainer2.train!(@client)
       @workout = Factory(:workout, user: @trainer)
-      @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id)
+      @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, last_message_from: @client.id)
       integration_sign_in(@client)
     end
 
@@ -87,7 +87,7 @@ describe "Client Navigations" do
     describe "completed booking" do
       
       before(:each) do
-        @completed_booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, status: "completed", workout_id: @workout.id)
+        @completed_booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, status: "completed", workout_id: @workout.id, last_message_from: @trainer.id)
         integration_sign_in(@client)
       end
 

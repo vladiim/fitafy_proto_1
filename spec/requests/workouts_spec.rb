@@ -31,28 +31,39 @@ describe "Workouts" do
   end
   
   describe "index" do
-
-    it "index booking details are correct" do
+    
+    before(:each) do
       @destroy_workout = Factory(:workout, user_id: @trainer.id)
-      Factory(:booking, trainer_id: @trainer.id)
-      
+      Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id)
       sign_in_visit_workouts(@trainer)
+    end
+    
+    it "should show the number of workout exercises" do
       page.should have_content("1 exercise")
+    end
+    
+    it "should show the correct number of bookings" do
       page.should have_content("0 Bookings")
+    end
 
+    it "should have a link to the workout's show page" do
       click_link(@destroy_workout.title.titleize)
       current_path.should eq(workout_path(@destroy_workout))
+    end
 
-      visit workouts_path
+    it "should have a link to create booking" do
       click_link("Create Booking")
       current_path.should eq(new_booking_path)
-
-      @booking = Factory(:booking, workout_id: @destroy_workout.id, trainer_id: @trainer.id)
+    end
+    
+    it "should allow you to see bookings if they exsist" do
+      @booking = Factory(:booking, workout_id: @destroy_workout.id, trainer_id: @trainer.id, last_message_from: @trainer.id,)
       visit workouts_path
       click_link("1 Booking")
       page.should have_css("h1", "#{@destroy_workout.title.titleize} Bookings")
-
-      visit workouts_path
+    end
+    
+    it "should let you destroy a workout from the index page" do
       click_link("Delete")
       page.should_not have_content(@destroy_workout.title.titleize)
     end

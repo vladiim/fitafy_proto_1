@@ -2,7 +2,7 @@ describe Bookings::ShowPresenter do
   
   before(:each) do
     @trainer = Factory(:user)
-    @booking = Factory(:booking, trainer_id: @trainer.id)
+    @booking = Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id)
     @presenter = Bookings::ShowPresenter.new(@trainer, @booking.id)
   end
   

@@ -1,4 +1,4 @@
-= simple_form_for @booking, :url => booking_requests_path do |f|
+= simple_form_for @booking, :url => @request_url do |f|
 
   = f.error_notification
   = f.input :client_id, as: :hidden, input_html: { value: current_user.id }

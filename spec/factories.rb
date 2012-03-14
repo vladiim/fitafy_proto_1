@@ -4,15 +4,15 @@ include Authlogic::TestCase
 FactoryGirl.define do
   
   sequence :trainer_name do |n|
-    "trainer#{n}"
+    "trainer_lalala#{n}"
   end
   
   sequence :client_name do |n|
-    "client#{n}"
+    "client_lalala#{n}"
   end
   
   sequence :email do |n|
-    "user#{n}@email.com"
+    "user_lalala#{n}@email.com"
   end
   
   sequence :title do |n|
@@ -74,14 +74,18 @@ FactoryGirl.define do
     exercises          { |exercises| [exercises.association(:exercise)] }
   end
   
-  factory :booking do
+  factory :booking, aliases: [:trainer_booking] do
     trainer               { |trainer| trainer.association(:user) }
     client                { |client| client.association(:client) }
     wo_date               { 3.days.from_now }
     wo_time               { Time.now }
     message               { FactoryGirl.generate(:description) }
     association(:workout) { FactoryGirl.generate(:workout) }
-    request_from          1
+    request_from          { trainer.id }
+    
+    factory :client_booking do
+      request_from        { client.id }
+    end
   end
   
   factory :invitation do

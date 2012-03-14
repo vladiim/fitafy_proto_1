@@ -3,34 +3,32 @@ require "cancan/matchers"
 
 describe Ability do
   
+  before(:each) do
+    @admin = Factory(:admin)
+    @user_client = Factory(:client)
+    @exercise = Factory(:exercise, user: @admin)
+    @workout = Factory(:workout, user: @admin)
+  end
+  
   describe "guest" do
     
-    it "should be able to create a new user" do
+    before(:each) do
       @guest = nil
-      @guest_ability = Ability.new(@guest)
+      @guest_ability = Ability.new(@guest)      
+    end
+    
+    it "should be able to create a new user" do
       @guest_ability.should be_able_to(:create, User)
     end
   end
   
-  # before(:each) do
-  #   @admin = Factory(:admin)
-  #   @user_client = Factory(:client)
-  #   @exercise = Factory(:exercise, user: @admin)
-  #   @workout = Factory(:workout, user: @admin)
-  # end
-  
   describe "admin" do
     
     before(:each) do
-      # @admin = Factory(:admin)
-      # @admin_ability = Ability.new(@admin)
-      # @exercise = Factory(:exercise, user_id: @admin.id)
-      # @workout = Factory(:workout, user_id: @admin.id)
+      @admin_ability = Ability.new(@admin)
     end
     
     it "should be able to manage every-mutha-fuckin-thing" do
-      @admin = Factory(:user, username: "admin1", email: "admin1@email.com", admin: true)
-      @admin_ability = Ability.new(@admin)
       @admin_ability.should be_able_to(:manage, :all)
     end
   end
@@ -50,7 +48,7 @@ describe Ability do
       
       it "should be able to manage it's own account" do
         @trainer_ability.should be_able_to(:manage, @trainer)
-      end
+      end    
     end
     
     describe "exercises" do
@@ -93,18 +91,6 @@ describe Ability do
     end
     
     describe "exercises" do
-      
-      it "should be able to manage their own profile" do
-        @client_ability.should be_able_to(:manage, @client)
-      end
-      
-      it "should be able to see other user's profiles" do
-        @client_ability.should be_able_to(:read, User)
-      end
-      
-      it "shouldn't be able to manage other user's profiles" do
-        @client_ability.should_not be_able_to(:manage, @trainer)
-      end
       
       it "should be able to view exercises" do
         @client_ability.should be_able_to(:read, @exercise)

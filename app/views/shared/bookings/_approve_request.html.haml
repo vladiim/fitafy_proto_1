@@ -1,0 +1,4 @@
+= simple_form_for @booking, url: booking_request_path(@booking), html: { method: :put } do |f|
+  = f.input :status, as: :hidden, input_html: { value: "confirmed" }
+  = f.input :request_from, as: :hidden, input_html: { value: current_user.id }
+  = f.button :submit, "Confirm", :class => "btn btn-success"

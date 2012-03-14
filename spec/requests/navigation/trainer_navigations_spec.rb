@@ -78,6 +78,12 @@ describe "Trainer Navigations" do
     end
   end
   
+  describe "invites" do
+    
+    it "should have invites nav if they have invites"
+    
+  end
+  
   describe "trainer who has made workouts for themself" do
     it "has my bookings with a self made workout"
   end

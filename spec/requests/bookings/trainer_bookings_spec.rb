@@ -36,7 +36,7 @@ describe "Bookings" do
         current_path.should eq(new_booking_path)
         page.should have_content("You have no booking requests, why not send one?")
       end
-      
+
       before(:each) do
         @trainer.train!(@client)
         sign_in_and_create_booking(@trainer, @client, @workout)
@@ -49,32 +49,30 @@ describe "Bookings" do
         last_email.to.should include(@client.email)
         last_email.body.should include(booking_requests_path)
       end
-
+  
       it "client approves the booking, sends an email back" do
         click_button("Confirm")
         last_email.to.should include(@trainer.email)
-        last_email.body.should include("has been confirmed")
+        last_email.body.should include("#{@client.username.titleize} has confirmed your booking on")
       end
-
+  
       it "client declines the booking, sends an email back" do
         click_button("Decline")
         last_email.to.should include(@trainer.email)
         last_email.body.should include("has been declined")
       end
-
+  
       it "suggests a new time for the booking, sends email back" do
         click_link("Suggest New Time")
-        current_path.should eq(edit_booking_request)
         fill_in "booking_wo_date",   with: "#{1.day.from_now}"
-        fill_in "booking_message",   with: "This is a message yo"
-        click_button("Suggest New Time")
+        click_button("Request Booking")
         
         last_email.to.should include(@client.email)
         last_email.body.should include(booking_requests_path)
       end
     end
   end
-
+  
   describe "index" do
       
     before(:each) do
@@ -113,7 +111,7 @@ describe "Bookings" do
       click_link("Delete")
       page.should_not have_content(@destroy_booking.booking_time)
     end
-
+  
     it "indexes bookings from the nearest date" do
       @booking3 = Factory(:booking, trainer_id: @trainer.id, wo_date: 3.days.from_now, wo_time: "05:45", workout_id: @workout.id)
       @booking = Factory(:booking, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45", workout_id: @workout.id)
@@ -125,7 +123,7 @@ describe "Bookings" do
   end
     
   describe "does stuff with an exsisting booking" do
-
+  
     before(:each) do
       @booking = Factory(:booking, client: @client, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45", workout_id: @workout.id)
     end
@@ -140,7 +138,7 @@ describe "Bookings" do
         click_button("Edit")
         page.should have_content("Booking updated")
       end
-
+  
       it "destroys the booking" do
         Factory(:booking, trainer_id: @trainer.id) 
         # otherwise when you click_link("Delete") there are no more bookings 

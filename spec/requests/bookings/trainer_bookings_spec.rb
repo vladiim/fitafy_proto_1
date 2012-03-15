@@ -22,9 +22,15 @@ describe "Bookings" do
   
   describe "creating a booking" do
     
-    it "creates a booking" do
+    it "creates a booking for a client" do
       @trainer.train!(@client)
       sign_in_and_create_booking(@trainer, @client, @workout)
+      page.should have_content("Booking created")
+    end
+    
+    it "creates a booking for themself" do
+      @trainer.train!(@client)
+      sign_in_and_create_booking(@trainer, @trainer, @workout)
       page.should have_content("Booking created")
     end
     

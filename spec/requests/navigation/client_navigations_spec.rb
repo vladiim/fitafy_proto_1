@@ -84,6 +84,17 @@ describe "Client Navigations" do
       page.should have_content("You'll see your workouts once you finish a booking")
     end
     
+    describe "invites" do
+
+      it "should have booking invites nav if they have booking invites" do
+        @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, last_message_from: @trainer.id, status: "trainer_proposed")
+        integration_sign_in(@client)
+        click_link("Booking Invites: 1")
+
+        current_path.should eq(booking_invites_path)
+      end
+    end
+    
     describe "completed booking" do
       
       before(:each) do

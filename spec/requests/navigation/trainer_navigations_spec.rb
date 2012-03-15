@@ -79,21 +79,30 @@ describe "Trainer Navigations" do
     
     describe "invites" do
 
-      before(:each) do
+      it "should have booking invites nav if they have booking invites" do
         @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, last_message_from: @client.id, status: "client_proposed")
         integration_sign_in(@trainer)
-      end
-
-      it "should have booking invites nav if they have booking invites" do
         click_link("Booking Invites: 1")
+
         current_path.should eq(booking_invites_path)
       end
-      
-      it "should have client invites nav if they have client invites"
     end
   end
   
   describe "trainer who has made workouts for themself" do
-    it "has my bookings with a self made workout"
+
+    it "has my bookings with a self made workout" do
+      @workout = Factory(:workout, user_id: @trainer.id)
+      visit new_booking_path
+      
+      select(@trainer.username,      from: "booking_client_id")
+      select(@workout.title,         from: "booking_workout_id")
+      fill_in "booking_wo_date",     with: "#{1.day.from_now}"
+      fill_in "booking_message",     with: "This is a message yo"
+      click_button("Create Booking")
+      
+      current_path.should eq(user_reverse_bookings_path(@trainer))
+      page.should have_content("Bookings for #{@trainer.username.titleize}")
+    end
   end
 end

@@ -28,6 +28,7 @@ GEM
     activesupport (3.2.0)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    acts_as_ordered (0.0.2.alpha)
     addressable (2.2.7)
     ansi (1.4.2)
     arel (3.0.2)
@@ -171,6 +172,9 @@ GEM
     uglifier (1.2.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    wicked (0.1.0)
+      activesupport (>= 3.0.7)
+      rails (>= 3.0.7)
     will_paginate (3.0.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
@@ -179,6 +183,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_ordered
   authlogic
   bootstrap-sass (~> 2.0.1)
   cancan
@@ -199,4 +204,5 @@ DEPENDENCIES
   table_builder
   turn (= 0.8.2)
   uglifier (>= 1.0.3)
+  wicked
   will_paginate

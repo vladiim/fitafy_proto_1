@@ -13,6 +13,8 @@ gem 'will_paginate'
 gem 'simple_form', '~> 2.0.0'
 gem 'faker'
 gem 'table_builder'
+gem 'acts_as_ordered'
+gem 'wicked'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,4 +1,4 @@
 = simple_form_for @booking, url: booking_request_path(@booking), html: { method: :put } do |f|
   = f.input :status, as: :hidden, input_html: { value: "declined" }
   = f.input :last_message_from, as: :hidden, input_html: { value: current_user.id }
-  = f.button :submit, "Decline", :class => "btn btn-success"
+  = f.button :submit, "Decline", :class => "btn btn-danger"

@@ -1,5 +1,5 @@
 - if current_user
-  = render 'shared/booking_form'
+  = render 'shared/bookings/booking_form'
 
 - else
   .row-fluid
@@ -15,9 +15,9 @@
 
     .span6
       %ul.thumbnails
-        %li.span6
+        %li
           %a.thumbnail{ "href" => "#" }
-            %img{"src" => "http://placehold.it/450x215"}
+            %img{"src" => "http://placehold.it/300x240"}
 
   .row-fluid
 

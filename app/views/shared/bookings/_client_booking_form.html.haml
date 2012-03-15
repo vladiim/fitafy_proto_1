@@ -3,7 +3,10 @@
   = f.error_notification
   = f.input :client_id, as: :hidden, input_html: { value: current_user.id }
   = f.input :last_message_from, as: :hidden, input_html: { value: current_user.id }
-  = f.input :status, as: :hidden, input_html: { value: "client_proposed"}
+  - if params[:action] == "edit"
+    = f.input :status, as: :hidden, input_html: { value: "revised_time"}
+  - else
+    = f.input :status, as: :hidden, input_html: { value: "client_proposed"}
 
   .row-fluid
     .span5.well

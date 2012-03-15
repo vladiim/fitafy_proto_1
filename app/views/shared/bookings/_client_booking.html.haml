@@ -1,0 +1,26 @@
+%table.table.span11
+  %tr#table_blue
+    %thead
+      %th Time
+      %th Date
+      %th Trainer
+      %th Workout
+      %th
+
+  - for @booking in @bookings
+
+    %tr{:datetime => "#{@booking.wo_date}#{@booking.wo_time}"}
+      %td= @booking.booking_time
+      %td= @booking.booking_date
+      %td= link_to "#{@booking.trainer.username.titleize}", user_path(@booking.trainer)
+      - if @booking.workout == nil
+        %td None
+      - else
+        - if @booking.status == "completed"
+          %td= @booking.workout.title.titleize
+        - else
+          %td Workout not completed yet
+      %td
+        - unless @booking.status == "completed"
+          = render 'shared/bookings/decline_request'
+          = link_to "Suggest New Time", edit_booking_request_path(@booking)

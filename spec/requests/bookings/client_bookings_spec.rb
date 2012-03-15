@@ -41,24 +41,79 @@ describe "client bookings" do
       end
       
       describe "client booking requests" do
-        
-        it "sends an email to the trainer to confirm the booking"
-    
-        it "trainer approves the booking, sends an email back"
-    
-        it "trainer declines the booking, sends an email back"
-    
-        it "trainer suggests a new time for the booking, sends email back"
+
+        it "redirects you from the booking request index if it's empty" do
+          integration_sign_in(@client)
+          visit booking_requests_path
+          current_path.should eq(new_booking_path)
+          page.should have_content("You have no booking requests, why not send one?")
+        end
+
+        before(:each) do
+          @reverse_booking = Factory(:client_booking, client_id: @client.id, last_message_from: @client.id, trainer_id: @trainer.id)
+          integration_sign_in(@trainer)
+          visit booking_requests_path
+        end
+
+        it "sends an email to the trainer to confirm the booking" do
+          last_email.to.should include(@trainer.email)
+          last_email.body.should include(booking_requests_path)
+        end
+
+        it "trainer approves the booking, sends an email back" do
+          click_button("Confirm")
+          last_email.to.should include(@client.email)
+          last_email.body.should include("#{@trainer.username.titleize} has confirmed your booking on")
+        end
+
+        it "client declines the booking, sends an email back" do
+          click_button("Decline")
+          last_email.to.should include(@client.email)
+          last_email.body.should include("#{@trainer.username.titleize} has declined your booking on")
+          last_email.body.should include("You can suggest a new time or delete the booking")
+        end
+
+        it "suggests a new time for the booking, sends email back" do
+          click_link("Suggest New Time")
+          fill_in "booking_wo_date",   with: "#{1.day.from_now}"
+          click_button("Suggest New Time")
+
+          last_email.to.should include(@trainer.email)
+          last_email.body.should include(booking_requests_path)
+        end
       end
-      
-      describe "created booking" do
-        
-        it "indexes upcoming bookings correctly"
-        
-        it "has the trainer's name"
-        
-        it "doesn't have a workout listed"
-      end
+    end
+  end
+  
+  describe "created booking" do
+    
+    before(:each) do
+      @booking = Factory(:booking, trainer_id: @trainer.id,  last_message_from: @trainer.id, client_id: @client.id)
+      sign_in_visit_reverse_bookings(@client)
+    end
+    
+    it "has the trainer's name" do
+      page.should have_css("a", text: @trainer.username.titleize)
+    end
+    
+    it "doesn't have a workout listed until the booking's completed" do
+      page.should_not have_content(@booking.workout.title)
+    end
+    
+    it "suggests a new time for the booking before it's completed" do
+      click_link("Suggest New Time")
+      fill_in "booking_wo_date",   with: "#{1.day.from_now}"
+      click_button("Suggest New Time")
+
+      last_email.to.should include(@trainer.email)
+      last_email.body.should include(booking_requests_path)
+    end
+    
+    it "allows the client to decline the booking before it's completed" do
+      click_button("Decline")
+      last_email.to.should include(@trainer.email)
+      last_email.body.should include("#{@client.username.titleize} has declined your booking on")
+      last_email.body.should include("You can suggest a new time or delete the booking")
     end
   end
 end

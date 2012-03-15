@@ -18,7 +18,7 @@ class BookingObserver < ActiveRecord::Observer
     elsif @booking.status == "declined"
       send_request_declined
     elsif @booking.status == "revised_time"
-      # send_request_revised_time(booking)
+      send_request_revised_time
     else
       # log error
     end
@@ -37,7 +37,7 @@ class BookingObserver < ActiveRecord::Observer
   
   def send_create_request
     sender_and_receiver = find_sender_and_receiver
-    BookingMailer.request_booking_trainer_proposed(sender_and_receiver[0], sender_and_receiver[1]).deliver
+    BookingMailer.request_booking_proposed(sender_and_receiver[0], sender_and_receiver[1]).deliver
   end
   
   def send_request_confirmed
@@ -48,6 +48,11 @@ class BookingObserver < ActiveRecord::Observer
   def send_request_declined
     sender_and_receiver = find_sender_and_receiver
     BookingMailer.request_booking_declined(sender_and_receiver[0], sender_and_receiver[1], @booking).deliver
+  end
+  
+  def send_request_revised_time
+    sender_and_receiver = find_sender_and_receiver
+    BookingMailer.request_booking_revised_time(sender_and_receiver[0], sender_and_receiver[1], @booking).deliver
   end
   
   def find_sender_and_receiver

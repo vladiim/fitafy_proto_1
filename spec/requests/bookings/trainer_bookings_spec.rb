@@ -63,12 +63,12 @@ describe "Bookings" do
         last_email.body.should include("You can suggest a new time or delete the booking")
       end
   
-      it "suggests a new time for the booking, sends email back" do
+      it "client suggests a new time for the booking, sends email back" do
         click_link("Suggest New Time")
         fill_in "booking_wo_date",   with: "#{1.day.from_now}"
-        click_button("Request Booking")
+        click_button("Suggest New Time")
         
-        last_email.to.should include(@client.email)
+        last_email.to.should include(@trainer.email)
         last_email.body.should include(booking_requests_path)
       end
     end

@@ -1,9 +1,3 @@
-- if @bookings.empty?
-  %p
-    You have no bookings
-    = link_to "add some", new_booking_path
-
-- else
-  = will_paginate @bookings
-  = render 'shared/booking'
-  = will_paginate @bookings
+= will_paginate @bookings
+= render 'shared/bookings/booking'
+= will_paginate @bookings

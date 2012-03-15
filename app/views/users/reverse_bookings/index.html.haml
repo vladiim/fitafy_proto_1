@@ -1,1 +1,5 @@
-= render 'shared/booking'
+- if current_user.role == "client_role"
+  = render 'shared/bookings/client_booking'
+
+- else
+  = render 'shared/bookings/booking'

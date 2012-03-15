@@ -84,7 +84,7 @@ FactoryGirl.define do
     last_message_from     { trainer.id }
     
     factory :client_booking do
-      request_from        { client.id }
+      last_message_from   { client.id }
     end
   end
   

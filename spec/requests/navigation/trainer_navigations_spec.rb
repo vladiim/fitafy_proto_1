@@ -76,12 +76,21 @@ describe "Trainer Navigations" do
       click_link("Exercises:")
       current_path.should eq(exercises_path)
     end
-  end
-  
-  describe "invites" do
     
-    it "should have invites nav if they have invites"
-    
+    describe "invites" do
+
+      before(:each) do
+        @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, last_message_from: @client.id, status: "client_proposed")
+        integration_sign_in(@trainer)
+      end
+
+      it "should have booking invites nav if they have booking invites" do
+        click_link("Booking Invites: 1")
+        current_path.should eq(booking_invites_path)
+      end
+      
+      it "should have client invites nav if they have client invites"
+    end
   end
   
   describe "trainer who has made workouts for themself" do

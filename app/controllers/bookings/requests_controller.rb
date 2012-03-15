@@ -1,15 +1,15 @@
 class Bookings::RequestsController < ApplicationController
   
   def index
-    if current_user.booking_last_message_from.empty?
+    if current_user.booking_invites.empty?
       redirect_to new_booking_path
       flash[:error] = "You have no booking requests, why not send one?"
     else
-      @booking_requests = current_user.booking_last_message_from
+      @booking_requests = current_user.booking_invites
       @title = "Booking Requests"
     end
   end
-
+  
   def new
     @booking = Booking.new
     @title = "Request Booking"

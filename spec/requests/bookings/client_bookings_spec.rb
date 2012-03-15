@@ -52,7 +52,7 @@ describe "client bookings" do
         before(:each) do
           @reverse_booking = Factory(:client_booking, client_id: @client.id, last_message_from: @client.id, trainer_id: @trainer.id)
           integration_sign_in(@trainer)
-          visit booking_requests_path
+          visit booking_invites_path
         end
 
         it "sends an email to the trainer to confirm the booking" do

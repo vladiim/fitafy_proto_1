@@ -32,6 +32,7 @@ Fitafy::Application.routes.draw do
   match 'signup', to: "users#new"
   match 'signout', to: "user_sessions#destroy"
   match 'invites', to: "relationships#index"
+  match 'booking_invites', to: "bookings/requests#index"
   root to: 'pages#home'
 
 end

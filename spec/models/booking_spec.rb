@@ -88,17 +88,17 @@ describe Booking do
       end
 
       it "trainer: records who the booking request is from" do
-        @trainer.booking_last_message_from.should_not include(@booking)
-        @client.booking_last_message_from.should include(@booking)
+        @trainer.booking_invites.should_not include(@booking)
+        @client.booking_invites.should include(@booking)
       end
     end
     
     describe "client requested booking" do
       it "client: records who the booking request is from" do
-        @booking = Factory(:booking, trainer_id: @trainer.id, client_id: @client.id, last_message_from: @client.id)
+        @booking = Factory(:client_booking, trainer_id: @trainer.id, client_id: @client.id, last_message_from: @client.id)
 
-        @client.booking_last_message_from.should_not include(@booking)
-        @trainer.booking_last_message_from.should include(@booking)
+        @client.booking_invites.should_not include(@booking)
+        @trainer.booking_invites.should include(@booking)
       end
     end
   end

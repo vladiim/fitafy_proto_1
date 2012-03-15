@@ -31,8 +31,8 @@
   %ul.dropdown-menu
     %li= link_to "Profile", user_path(current_user)
     %li= link_to "My Details", edit_user_path(current_user)
-    %li=link_to "Sign Out", signout_path
     - if current_user.trained_by.count == 1
       %li= link_to "Trainer", user_path(current_user.trainer)
     - else
       %li= link_to "Trainers: #{current_user.trained_by.count}", trained_by_user_path(current_user)
+    %li=link_to "Sign Out", signout_path

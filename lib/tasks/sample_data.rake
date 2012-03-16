@@ -151,19 +151,19 @@ def make_bookings
                              last_message_from: @trainer.id)
       n += 1
     end
-    
-    n = 1
-    
-    2.times do
-      booking = Booking.find(n)
-      booking.update_attributes(status: "client_proposed")
-      n += 2
-      booking2 = Booking.find(n)
-      booking2.update_attributes(status: "revised_time")
-      n += 2
-      booking3 = Booking.find(n)
-      booking3.update_attributes(status: "completed")
-    end
+  end
+
+  n = 2
+  
+  2.times do
+    booking = Booking.find(n)
+    booking.update_attributes(status: "client_proposed")
+    n += 2
+    booking2 = Booking.find(n)
+    booking2.update_attributes(status: "revised_time")
+    n += 2
+    booking3 = Booking.find(n)
+    booking3.update_attributes(status: "completed")
   end
 end
 

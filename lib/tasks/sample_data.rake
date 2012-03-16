@@ -138,7 +138,7 @@ end
 
 def make_bookings
   @trainer = User.find(1)
-  @workouts = [Workout.first, Workout.find(2), Workout.find(3), Workout.find(4)]
+  @workouts = [Workout.find(1), Workout.find(2), Workout.find(3), Workout.find(4)]
   
   @trainer.training.each do |client|
     n = 1
@@ -148,7 +148,7 @@ def make_bookings
                              wo_time: n.hours.from_now, 
                              workout_id: workout.id,
                              status: "trainer_proposed",
-                             last_message_from: trainer.id)
+                             last_message_from: @trainer.id)
       n += 1
     end
     

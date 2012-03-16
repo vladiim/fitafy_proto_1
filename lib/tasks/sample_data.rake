@@ -108,34 +108,6 @@ def make_workouts
   end
 end
 
-# def make_trainer_proposed_bookings
-#   @trainer = User.first
-#   n = 1
-#   @trainer.training.each do |client|
-#     workout = Workout.first
-#     @trainer.bookings.create(client_id: client.id, 
-#                              wo_date: n.days.from_now, 
-#                              wo_time: n.hours.from_now, 
-#                              workout_id: workout.id,
-#                              status: "trainer_proposed",
-#                              last_message_from: @trainer.id)
-#     n += 1
-#   end
-# end
-# 
-# def make_client_proposed_bookings
-#   @trainer = User.first
-#   n = 2
-#   @trainer.training.each do |client|
-#     @trainer.bookings.create(client_id: client.id, 
-#                              wo_date: n.days.from_now, 
-#                              wo_time: n.hours.from_now, 
-#                              status: "client_proposed",
-#                              last_message_from: client.id)
-#     n += 1
-#   end
-# end
-
 def make_bookings
   @trainer = User.find(1)
   @workouts = [Workout.find(1), Workout.find(2), Workout.find(3), Workout.find(4)]
@@ -166,31 +138,3 @@ def make_bookings
     booking3.update_attributes(status: "completed")
   end
 end
-
-# def create_a_booking_for_each_client(workouts, trainer, client)
-#   n = 1
-#   workouts.each do |workout|
-#     trainer.bookings.create(client_id: client.id, 
-#                            wo_date: n.days.from_now, 
-#                            wo_time: n.hours.from_now, 
-#                            workout_id: workout.id,
-#                            status: "trainer_proposed",
-#                            last_message_from: trainer.id)
-#     n += 1
-#   end
-# end
-# 
-# def change_booking_status(bookings)
-#   second_booking = bookings[1]
-#   third_booking = bookings[2]
-#   forth_booking = bookings[3]
-#   
-#   second_booking.update_attributes(status: "client_proposed")
-#   second_booking.save
-#   
-#   third_booking.update_attributes(status: "revised_time")
-#   third_booking.save
-#   
-#   forth_booking.update_attributes(status: "completed")
-#   forth_booking.save
-# end

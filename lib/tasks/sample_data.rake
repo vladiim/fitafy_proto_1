@@ -5,8 +5,8 @@ namespace :db do
     make_users
     make_relationships
     make_exercises
-    make_workouts    
-    make_bookings    
+    make_workouts
+    make_bookings
   end
 end
 
@@ -42,7 +42,15 @@ def make_relationships
   @trainer = User.first
   users = User.all
   clients = users[5..15]
-  clients.each { |client| @trainer.train!(client) }
+  make_client_relationships(clients)
+end
+
+def make_client_relationships(clients)
+  clients.each do |client| 
+    relationship = @trainer.train!(client)
+    relationship.toggle(:accepted)
+    relationship.save
+  end
 end
 
 def make_exercises
@@ -94,16 +102,95 @@ end
 def make_workouts
   @trainer = User.first  
   5.times do |n|
-    @trainer.workouts.create(title: "#{n} workout", description: Faker::Lorem.sentence(3), exercise_ids: [1, 2, 3])
+    @trainer.workouts.create(title: "#{n} workout", 
+                             instructions: Faker::Lorem.sentence(5), 
+                             exercise_ids: [1, 2, 3])
   end
 end
 
+# def make_trainer_proposed_bookings
+#   @trainer = User.first
+#   n = 1
+#   @trainer.training.each do |client|
+#     workout = Workout.first
+#     @trainer.bookings.create(client_id: client.id, 
+#                              wo_date: n.days.from_now, 
+#                              wo_time: n.hours.from_now, 
+#                              workout_id: workout.id,
+#                              status: "trainer_proposed",
+#                              last_message_from: @trainer.id)
+#     n += 1
+#   end
+# end
+# 
+# def make_client_proposed_bookings
+#   @trainer = User.first
+#   n = 2
+#   @trainer.training.each do |client|
+#     @trainer.bookings.create(client_id: client.id, 
+#                              wo_date: n.days.from_now, 
+#                              wo_time: n.hours.from_now, 
+#                              status: "client_proposed",
+#                              last_message_from: client.id)
+#     n += 1
+#   end
+# end
+
 def make_bookings
-  @trainer = User.first
-  n = 1
-  @trainer.training.each do |client|
-    workout = Workout.first
-    @trainer.bookings.create(client_id: client.id, wo_date: n.days.from_now, wo_time: n.hours.from_now, workout_id: workout.id)
-    n += 1
+  trainer = User.first
+  workouts = [Workout.first, Workout.find(2), Workout.find(3), Workout.find(4)]
+  
+  trainer.training.each do |client|
+    n = 1
+    workouts.each do |workout|
+      trainer.bookings.create(client_id: client.id, 
+                             wo_date: n.days.from_now, 
+                             wo_time: n.hours.from_now, 
+                             workout_id: workout.id,
+                             status: "trainer_proposed",
+                             last_message_from: trainer.id)
+      n += 1
+    end
+    
+    second_booking = bookings[1]
+    third_booking = bookings[2]
+    forth_booking = bookings[3]
+
+    second_booking.update_attributes(status: "client_proposed")
+    second_booking.save
+
+    third_booking.update_attributes(status: "revised_time")
+    third_booking.save
+
+    forth_booking.update_attributes(status: "completed")
+    forth_booking.save
   end
 end
+
+# def create_a_booking_for_each_client(workouts, trainer, client)
+#   n = 1
+#   workouts.each do |workout|
+#     trainer.bookings.create(client_id: client.id, 
+#                            wo_date: n.days.from_now, 
+#                            wo_time: n.hours.from_now, 
+#                            workout_id: workout.id,
+#                            status: "trainer_proposed",
+#                            last_message_from: trainer.id)
+#     n += 1
+#   end
+# end
+# 
+# def change_booking_status(bookings)
+#   second_booking = bookings[1]
+#   third_booking = bookings[2]
+#   forth_booking = bookings[3]
+#   
+#   second_booking.update_attributes(status: "client_proposed")
+#   second_booking.save
+#   
+#   third_booking.update_attributes(status: "revised_time")
+#   third_booking.save
+#   
+#   forth_booking.update_attributes(status: "completed")
+#   forth_booking.save
+# end

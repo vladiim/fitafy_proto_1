@@ -86,7 +86,7 @@ class Users::ShowPresenter
   
   def user_and_admin_exercises
     @workouts = @user.workouts
-    @workouts << @admin.workouts
+    @workouts << @admin.workouts if @admin
   end
   
   def user_client_bookings(trainer, client)

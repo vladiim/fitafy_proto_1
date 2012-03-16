@@ -158,7 +158,7 @@ def make_bookings
       booking = Booking.find(n)
       booking.update_attributes(status: "client_proposed")
       n += 2
-      booking2 = Booking.finds(n)
+      booking2 = Booking.find(n)
       booking2.update_attributes(status: "revised_time")
       n += 2
       booking3 = Booking.find(n)

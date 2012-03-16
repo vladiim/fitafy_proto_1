@@ -143,7 +143,7 @@ def make_bookings
   @trainer.training.each do |client|
     n = 1
     @workouts.each do |workout|
-      @bookings = @trainer.bookings.create(client_id: client.id, 
+      @trainer.bookings.create(client_id: client.id, 
                              wo_date: n.days.from_now, 
                              wo_time: n.hours.from_now, 
                              workout_id: workout.id,
@@ -152,18 +152,18 @@ def make_bookings
       n += 1
     end
     
-    second_booking = @bookings[1]
-    third_booking = @bookings[2]
-    forth_booking = @bookings[3]
-
-    second_booking.update_attributes(status: "client_proposed")
-    second_booking.save
-
-    third_booking.update_attributes(status: "revised_time")
-    third_booking.save
-
-    forth_booking.update_attributes(status: "completed")
-    forth_booking.save
+    n = 1
+    
+    2.times do
+      booking = @trainer.bookings[n]
+      booking.update_attributes(status: "client_proposed")
+      n += 2
+      booking2 = @trainer.bookings[n]
+      booking2.update_attributes(status: "revised_time")
+      n += 2
+      booking3 = @trainer.bookings[n]
+      booking3.update_attributes(status: "completed")
+    end
   end
 end
 

@@ -100,7 +100,7 @@ def make_exercises
 end
 
 def make_workouts
-  @trainer = User.first  
+  @trainer = User.find(1)
   5.times do |n|
     @trainer.workouts.create(title: "#{n} workout", 
                              instructions: Faker::Lorem.sentence(5), 
@@ -137,13 +137,13 @@ end
 # end
 
 def make_bookings
-  trainer = User.first
-  workouts = [Workout.first, Workout.find(2), Workout.find(3), Workout.find(4)]
+  @trainer = User.find(1)
+  @workouts = [Workout.first, Workout.find(2), Workout.find(3), Workout.find(4)]
   
-  trainer.training.each do |client|
+  @trainer.training.each do |client|
     n = 1
-    workouts.each do |workout|
-      trainer.bookings.create(client_id: client.id, 
+    @workouts.each do |workout|
+      @bookings = @trainer.bookings.create(client_id: client.id, 
                              wo_date: n.days.from_now, 
                              wo_time: n.hours.from_now, 
                              workout_id: workout.id,
@@ -152,9 +152,9 @@ def make_bookings
       n += 1
     end
     
-    second_booking = bookings[1]
-    third_booking = bookings[2]
-    forth_booking = bookings[3]
+    second_booking = @bookings[1]
+    third_booking = @bookings[2]
+    forth_booking = @bookings[3]
 
     second_booking.update_attributes(status: "client_proposed")
     second_booking.save

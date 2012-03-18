@@ -12,10 +12,14 @@ class UserObserver < ActiveRecord::Observer
   
   private
   
+  def trainer_already_trains_themself
+    trainer_already_trains_themself = Relationship.where(trainer_id: @user.id, client_id: @user.id)
+    !trainer_already_trains_themself.empty?
+  end
+  
   def make_themself_a_client
-    trainer_already_trains_themself = Relationship.where("trainer_id = ? AND client_id = ?", @user.id, @user.id)
-    unless trainer_already_trains_themself
-      @user.train!(@user) if @user.role == "trainer_role"
+    if @user.role == "trainer_role"
+      @user.train!(@user) unless trainer_already_trains_themself
     end
   end
 end

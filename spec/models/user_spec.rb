@@ -7,6 +7,17 @@ describe User do
     @client = Factory(:client)
     @trainer.train!(@client)
   end
+
+  describe "when a trainer is created" do
+    
+    it "trainer should automatically train themself" do
+      @trainer.training.should include(@trainer)
+    end
+    
+    it "should automatically accept the invite to train themself"
+    
+    it "shouln't send the invite email"
+  end
   
   describe "trainer and client relationships" do
     

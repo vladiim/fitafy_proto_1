@@ -80,5 +80,4 @@ class User < ActiveRecord::Base
     def set_client_role
       self.role = "client_role" if self.role == "invited_role"
     end
-    
 end

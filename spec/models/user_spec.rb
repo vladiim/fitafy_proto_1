@@ -14,7 +14,10 @@ describe User do
       @trainer.training.should include(@trainer)
     end
     
-    it "should automatically accept the invite to train themself"
+    it "should automatically accept the invite to train themself" do
+      @my_relationship = @trainer.relationships.where(client_id: @trainer.id)
+      @my_relationship.first.accepted.should eq(true)
+    end
     
     it "shouln't send the invite email"
   end

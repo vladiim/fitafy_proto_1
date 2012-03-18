@@ -22,7 +22,9 @@ class User < ActiveRecord::Base
   ROLES = %w[trainer_role client_role invited_role]
    
   def train!(client)
-    relationships.create!(client_id: client.id)
+    relationship = relationships.build(client_id: client.id)
+    relationship.accepted = true if client.id == self.id
+    relationship.save!
   end
   
   def untrain!(client)

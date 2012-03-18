@@ -7,10 +7,10 @@ describe "Password Resets" do
   end
   
   it "sends an email with a link to reset the password" do
-    forgot_password(@trainer)    
+    forgot_password(@trainer)
     page.should have_content("Instructions to reset your password have been sent")
     last_email.to.should include(@trainer.email)
-    last_email.body.should include("#{password_reset_path}")
+    # last_email.body.should include("#{edit_password_reset_path(@trainer.perishable_token)}")
   end
   
   describe "email sent" do

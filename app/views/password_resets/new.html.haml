@@ -1,16 +1,18 @@
-.row#homebreak
-
-.twelve.colums#sign_in
+.row-fluid
    
-  .five.columns#home_usp
+  .span5
     %h2= @title
 
     %p
       Just give us a valid user email and we'll send you instructions on how to reset it 
 
-  .four.columns#home_signup
-    = form_tag password_resets_path, method: :post do |f|
-
-      = email_field_tag :email, params[:email], placeholder: "Email", size: 30, id: "forgot_password_link_email"
-
-      = submit_tag @title, :class => "a medium button", id: "submit_reset_password"
+    %br
+    
+    .four.columns#home_signup
+      = form_tag password_resets_path, method: :post do |f|
+    
+        = email_field_tag :email, params[:email], placeholder: "Email", size: 30, id: "forgot_password_link_email"
+        
+        %br
+        
+        = submit_tag @title, :class => "btn btn-large btn-primary", id: "submit_reset_password"

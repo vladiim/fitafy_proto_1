@@ -46,9 +46,9 @@ class UsersController < ApplicationController
   
   def training
     @title = "Clients"
-    if current_user.training.empty?
+    if current_user.training.count == 1
       redirect_to new_client_path 
-      flash[:message] = "You have no clients, why not invite some?"
+      flash[:message] = "Your only client is you! Why not invite some clients you can make money from?"
     else
       @user = User.find(params[:id])
       @clients = @user.training.order("username").paginate(:page => params[:page], :per_page => 10)

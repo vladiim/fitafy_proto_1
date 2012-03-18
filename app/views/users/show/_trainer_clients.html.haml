@@ -1,5 +1,5 @@
-- if @presenter.current_user.training.empty?
-  %p You have no clients, why not invite one?
+- if @presenter.current_user.training.count <= 1
+  %p "Your only client is you! Why not invite some clients you can make money from?"
   = render 'shared/invite_client'
 
 - else

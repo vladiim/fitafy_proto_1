@@ -88,8 +88,9 @@ describe "Exercises" do
       20.times do
         Factory(:exercise, user_id: @trainer.id)
       end
+
       integration_sign_in(@trainer)
-      visit exercise_path
+      visit exercises_path
       click_link("Next")
       page.should have_content("20")
     end

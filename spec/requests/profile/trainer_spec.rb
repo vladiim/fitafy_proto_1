@@ -30,7 +30,7 @@ describe "my profile" do
       end
       
       it "adds new client" do
-        page.should have_content("You have no clients, why not invite one?")
+        page.should have_content("Your only client is you! Why not invite some clients you can make money from?")
         fill_in "client_email", with: "testi@email.com"
         click_button("Invite New Client")
         page.should have_content("New client invited!")
@@ -77,7 +77,7 @@ describe "my profile" do
       it "should show my clients" do
         page.should have_content("0 bookings")
         page.should have_content("12 bookings")
-        click_link("13 clients")
+        click_link("14 clients")
         current_path.should eq(training_user_path(@trainer))
       end
 

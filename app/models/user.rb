@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   end
   
   def exercise_list
-    Exercise.templates.where("admin = true or user_id = ?", self.id)
+    Exercise.templates.where("admin = ? or user_id = ?", true, self.id)
   end
   
   def alphabetical_workouts

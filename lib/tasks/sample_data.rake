@@ -17,13 +17,13 @@ def make_users
                password_confirmation:   "password",
                role:                    "trainer_role"
   )
-  User.create!(username:               "admin",
+  admin = User.create!(username:               "admin",
                email:                   "admin@email.com",
                password:                "password", 
                password_confirmation:   "password",
-               role:                    "trainer_role",
-               admin:                   true
+               role:                    "trainer_role"
   )
+  admin.toggle!(:admin)
   20.times do |n|
     c_username = Faker::Name.first_name
     c_username = "#{c_username}_#{n}"

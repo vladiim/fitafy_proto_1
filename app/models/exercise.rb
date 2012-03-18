@@ -23,7 +23,7 @@ class Exercise < ActiveRecord::Base
 
   scope :templates, where(booking_id: nil)
   
-  before_create :checks_if_created_by_admin
+  after_create :checks_if_created_by_admin
 
   BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
   EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]
@@ -52,6 +52,6 @@ class Exercise < ActiveRecord::Base
     
     def checks_if_created_by_admin
       user = User.find(self.user_id)
-      self.admin = true if user.admin?
+      self.toggle!(:admin) if user.admin?
     end
 end

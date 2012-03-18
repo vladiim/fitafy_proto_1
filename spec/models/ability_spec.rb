@@ -52,18 +52,26 @@ describe Ability do
     end
     
     describe "exercises" do
-
+      
+      
       it "should be able to manage exercises for themselves" do
         @trainer_ability.should be_able_to(:manage, Factory(:exercise, user: @trainer))
       end
 
       it "shouldn't be able to manage another trainer's exercise" do
+        @trainer_ability.should_not be_able_to(:manage, Factory(:exercise))
+      end
+      
+      it "shouldn't be able to manage an admin's exercise" do
         @trainer_ability.should_not be_able_to(:manage, @exercise)
       end
       
       it "shouldn't be able to read another trainer's exercise" do
-        @diff_trainer_exercise = Factory(:exercise)
-        @trainer_ability.should_not be_able_to(:read, @diff_trainer_exercise)
+        @trainer_ability.should_not be_able_to(:read, Factory(:exercise))
+      end
+      
+      it "should be able to read an admin's exercise" do
+        @trainer_ability.should be_able_to(:read, @exercise)
       end
     end
     

@@ -57,10 +57,10 @@ describe "Trainer Navigations" do
       integration_sign_in(@trainer)
     end
 
-    it "with a client, clients_path works" # do
-    #       click_link("Clients: 1")
-    #       current_path.should eq(training_user_path(@trainer))
-    #     end
+    it "with a client, clients_path works" do
+      click_link("Clients: 2")
+      current_path.should eq(training_user_path(@trainer))
+    end
     
     it "with a booking, bookings_path works" do
       click_link("Bookings: 1")

@@ -18,6 +18,13 @@ class Relationship < ActiveRecord::Base
   
     def send_client_invite
       client = User.find(self.client_id)
+      trainer = User.find(self.trainer_id)
+      unless client == trainer
+        send_new_client_email(client)
+      end
+    end
+    
+    def send_new_client_email(client)
       if client.username == client.email
         UserMailer.send_new_client_invite(self).deliver
       else

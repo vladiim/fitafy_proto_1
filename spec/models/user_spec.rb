@@ -19,7 +19,10 @@ describe User do
       @my_relationship.first.accepted.should eq(true)
     end
     
-    it "shouln't send the invite email"
+    it "shouln't send the invite email" do
+      @new_trainer = Factory(:user)
+      last_email.body.should_not include("#{@new_trainer.username.titleize} wants to train you")
+    end
   end
   
   describe "trainer and client relationships" do

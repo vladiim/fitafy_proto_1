@@ -15,11 +15,91 @@
 
         .nav-collapse
           %ul.nav#navigation_bar
+            
+            //########## Bookings
+            %li.dropdown
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
+                %i.icon-calendar.icon-white
+                Bookings
+                %span.caret
+              %ul.dropdown-menu
 
+                - if current_user.role == "trainer_role"
+                  %li=link_to "Bookings: #{current_user.bookings.count}", bookings_path
+                  %li=link_to "Create Booking", new_booking_path
+                  - unless current_user.booking_invites.empty?
+                    %li= link_to "Booking Invites: #{current_user.booking_invites.count}", booking_invites_path
+
+                - else
+                  %li=link_to "My Bookings: #{current_user.reverse_bookings.count}", user_reverse_bookings_path(@user)
+                  %li=link_to "Request Booking", new_booking_request_path
+                  - unless current_user.booking_invites.empty?
+                    %li= link_to "Booking Invites: #{current_user.booking_invites.count}", booking_invites_path
+
+                %li.divider-vertical
+
+
+            //########## Clients
             - if current_user.role == "trainer_role"
-              = render 'layouts/navigations/trainer_navigation'
-            
-            - elsif current_user.role == "client_role"
-              = render 'layouts/navigations/client_navigation'
-            
-            - else
+              %li.dropdown
+                %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
+                  %i.icon-heart.icon-white
+                  Clients
+                  %span.caret
+                %ul.dropdown-menu
+                  %li=link_to "Clients: #{current_user.training.count}", training_user_path(current_user)
+                  %li=link_to "Add New Client", new_client_path
+                %li.divider-vertical
+
+            //########## Workouts
+            %li.dropdown
+              %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"} 
+                %i.icon-list.icon-white
+                Workouts
+                %span.caret
+              %ul.dropdown-menu
+
+                - if current_user.role == "trainer_role"
+                  %li=link_to "Workouts: #{current_user.workouts.count}", workouts_path
+                  %li=link_to "Create Workout", new_workout_path
+
+                - else
+                  %li=link_to "My Workouts: #{current_user.completed_reverse_bookings.count}", user_completed_reverse_bookings_path(current_user)
+
+                %li.divider-vertical
+
+            //########## Exercises
+            - if current_user.role == "trainer_role"
+              %li.dropdown
+                %a{"href" => "#", "class" => "dropdown-toggle", "data-toggle" => "dropdown"}
+                  %i.icon-road.icon-white
+                  Exercises
+                  %span.caret
+                %ul.dropdown-menu
+                  %li=link_to "Exercises: #{current_user.exercise_list.count}", exercises_path
+                  %li=link_to "Create Exercise", new_exercise_path
+                %li.divider-vertical
+
+            //########## Profile
+            .nav.btn-group#user_nav_button
+              %a.btn.btn-primary{"href" => "#"}
+                %i.icon-user.icon-white
+                = current_user.username.titleize
+              %a{"class" => "btn btn-primary dropdown-toggle", "data-toggle" => "dropdown", "href" => "#"}
+                %span.caret
+              %ul.dropdown-menu
+                %li= link_to "Profile", user_path(current_user)
+                %li= link_to "My Details", edit_user_path(current_user)
+                - if current_user.trained_by.count == 1
+                  %li= link_to "Trainer", user_path(current_user.trainer)
+                - else
+                  %li= link_to "Trainers: #{current_user.trained_by.count}", trained_by_user_path(current_user)
+                %li=link_to "Sign Out", signout_path
+
+            / - if current_user.role == "trainer_role"
+            /   = render 'layouts/navigations/trainer_navigation'
+            / 
+            / - elsif current_user.role == "client_role"
+            /   = render 'layouts/navigations/client_navigation'
+            / 
+            / - else

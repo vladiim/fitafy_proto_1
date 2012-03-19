@@ -1,0 +1,6 @@
+= form_for current_user.reverse_relationships, url: { controller: :reverse_relationships, action: :create }, html: { method: :post } do |f|
+  = f.hidden_field :trainer_id, input_html: { value: @user.id }
+  .actions
+    = f.submit "Add Trainer", :class => "btn btn-success"
+
+// current_user.reverse_relationships.build(trainer_id: @user.id),

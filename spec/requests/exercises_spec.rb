@@ -152,6 +152,12 @@ describe "Exercises" do
         click_link("Exercises: 1")
         page.should_not have_css("a", text: @other_exercise.title)
       end
+      
+      it "sees 2 admin's exercises" do
+        @admin2 = Factory(:admin)
+        @exercise2 = Factory(:exercise, user_id: @admin2.id)
+        @trainer.exercise_list.should include(@exercise2)
+      end
     end
   end  
 end

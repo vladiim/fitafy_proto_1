@@ -43,10 +43,6 @@ class Users::ShowPresenter
     end
   end
   
-  def trainer?(user)
-    user.role == "trainer_role"
-  end
-  
   def training_count
     if @user.training.count >= 5
       @training_count = 5

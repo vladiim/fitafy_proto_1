@@ -1,7 +1,12 @@
-#train_form
+%table
+  %tr
+    %td
+      - if current_user.training?(@user)
+        = render 'shared/train_form/untrain'
+      
+      - else
+        = render 'shared/train_form/train'
 
-- if current_user.training?(@user)
-  = render 'shared/untrain'
-
-- else
-  = render 'shared/train'
+    %td
+      - if @user.trainer? && !@user.training?(current_user)
+        = render 'shared/train_form/get_trained_by'

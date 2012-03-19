@@ -8,7 +8,7 @@ class InvitationsController < ApplicationController
   def create
     @invitation = current_user.invitations.new(params[:invitation])
     if @invitation.save
-      flash[:success] = "Client invited! When they accept you can create bookings for the."
+      flash[:success] = "Client invited!"
       redirect_to root_url
     else
       render :new

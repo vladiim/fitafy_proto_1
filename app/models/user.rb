@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic 
   
-  attr_accessible :username, :email, :password, :password_confirmation
+  attr_accessible :username, :email, :password, :password_confirmation, :role
   
   has_many :relationships, :foreign_key => "trainer_id", dependent: :destroy
   has_many :training, through: :relationships, source: :client
@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     relationship.save!
   end
   
+  def get_trained!(trainer)
+    relationship = reverse_relationships.create(trainer_id: trainer.id)
+  end
+  
   def untrain!(client)
     relationships.find_by_client_id(client).destroy
   end
@@ -37,6 +41,10 @@ class User < ActiveRecord::Base
   
   def trained_by?(trainer)
     reverse_relationships.find_by_trainer_id(trainer)
+  end
+  
+  def trainer?
+    self.role == "trainer_role"
   end
   
   def trainer

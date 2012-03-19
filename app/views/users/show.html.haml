@@ -1,10 +1,15 @@
 - if @presenter.current_user == @presenter.user
 
-  - if @presenter.trainer?(current_user)
+  - if current_user.trainer?
     = render 'users/show/my_trainer_profile'
 
   - else
     = render 'users/show/my_client_profile'
 
 - else
-  = render 'shared/train_form'
+  
+  - if @presenter.user.trainer?
+    = render 'users/show/other_trainer_profile'
+
+  - else
+    = render 'shared/train_form'

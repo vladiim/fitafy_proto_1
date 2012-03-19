@@ -17,4 +17,11 @@ class Users::ReverseBookingsController < ApplicationController
       @title = "Bookings for #{@user.username.titleize}"
     end
   end
+  
+  def create
+    @user = User.find(params[:reverse_relationship][:trainer_id])
+    current_user.get_trained!(@user)
+    flash[:success] = "Trainer invited!"
+    redirect_to @user
+  end
 end

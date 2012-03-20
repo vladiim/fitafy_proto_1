@@ -76,13 +76,13 @@ class Users::ShowPresenter
   end
   
   def user_and_admin_workouts
-    @workouts = @user.workouts
+    @workouts = @user.workouts if @user.workouts
     @workouts << @admin.workouts
   end
   
   def user_and_admin_exercises
-    @workouts = @user.workouts
-    @workouts << @admin.workouts if @admin
+    @workouts = @user.exercises if @user.exercises
+    @workouts << @admin.exercises
   end
   
   def user_client_bookings(trainer, client)

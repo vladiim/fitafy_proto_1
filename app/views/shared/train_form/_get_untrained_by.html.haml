@@ -1,0 +1,5 @@
+= form_for current_user.reverse_relationships(trainer_id: @presenter.user.id), url: { controller: :reverse_relationships, action: :destroy }, html: { method: :delete } do |f|
+
+  = f.hidden_field :trainer_id, value: @presenter.user.id
+
+  .actions= f.submit "Remove Trainer", :class => "btn btn-danger"

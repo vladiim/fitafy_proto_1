@@ -34,9 +34,8 @@ class Client
   
   protected
     
-    
     def create_relationship(trainer, client)
-      trainer.relationships.create!(client_id: client.id)
+      trainer.train!(client)
     end
     
     def email_not_taken_by_other_user

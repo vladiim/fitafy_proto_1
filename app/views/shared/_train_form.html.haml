@@ -8,5 +8,9 @@
         = render 'shared/train_form/train'
 
     %td
-      - if @user.trainer? && !@user.training?(current_user)
-        = render 'shared/train_form/get_trained_by'
+      - if @user.trainer? 
+        - if @user.training?(current_user)
+          = render 'shared/train_form/get_untrained_by'
+
+        - else
+          = render 'shared/train_form/get_trained_by'

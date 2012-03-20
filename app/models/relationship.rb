@@ -1,6 +1,6 @@
 class Relationship < ActiveRecord::Base
   
-  attr_accessible :client_id, :accepted, :declined
+  attr_accessible :client_id, :trainer_id, :accepted, :declined
   
   belongs_to :trainer, :class_name => "User"
   belongs_to :client, :class_name => "User"
@@ -11,18 +11,17 @@ class Relationship < ActiveRecord::Base
   scope :accepted, where(:accepted => true)
   scope :unaccepted, where(:accepted => false)  
   
-  after_create :send_client_invite
   after_save :destroy_if_declined
   
-  protected
-  
-    def send_client_invite
-      client = User.find(self.client_id)
-      trainer = User.find(self.trainer_id)
-      unless client == trainer
-        send_new_client_email(client)
-      end
+  def send_client_invite
+    client = User.find(self.client_id)
+    trainer = User.find(self.trainer_id)
+    unless client == trainer
+      send_new_client_email(client)
     end
+  end
+  
+  protected
     
     def send_new_client_email(client)
       if client.username == client.email

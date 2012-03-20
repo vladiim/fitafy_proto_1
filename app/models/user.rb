@@ -25,10 +25,11 @@ class User < ActiveRecord::Base
     relationship = relationships.build(client_id: client.id)
     relationship.accepted = true if client.id == self.id
     relationship.save!
+    relationship.send_client_invite
   end
   
   def get_trained!(trainer)
-    relationship = reverse_relationships.create(trainer_id: trainer.id)
+    reverse_relationships.create(trainer_id: trainer.id)
   end
   
   def untrain!(client)

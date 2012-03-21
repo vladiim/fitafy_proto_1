@@ -13,6 +13,8 @@ class Relationship < ActiveRecord::Base
   
   after_save :destroy_if_declined
   
+  before_destroy :ensure_trainer_client_arent_same
+  
   def send_client_invite
     find_trainer_and_client
 
@@ -42,5 +44,9 @@ class Relationship < ActiveRecord::Base
     def find_trainer_and_client
       @trainer = User.find(self.trainer_id)
       @client = User.find(self.client_id)
+    end
+    
+    def ensure_trainer_client_arent_same
+      self.trainer_id != self.client_id
     end
 end

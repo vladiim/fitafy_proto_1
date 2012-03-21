@@ -36,6 +36,7 @@ describe Relationship do
   end
   
   describe "validations" do
+
     it "should require a trainer_id" do
       @relationship.trainer_id = nil
       @relationship.should be_invalid
@@ -44,6 +45,11 @@ describe Relationship do
     it "should require a client_id" do
       @relationship.client_id = nil
       @relationship.should be_invalid
+    end
+    
+    it "can't destroy a relationship where the same person is the trainer & client" do
+      @non_destroy_relationship = @trainer.relationships.find_by_client_id(@trainer.id)
+      @non_destroy_relationship.destroy.should eq(false)
     end
   end
   

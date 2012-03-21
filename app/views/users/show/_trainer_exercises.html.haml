@@ -1,15 +1,18 @@
 - if @presenter.current_user.exercises.empty?
   %p You haven't created any exercises. Here's some we prepared earlier:
-  = render 'users/show/exercises'    
-  %p
-    You can look through
-    = link_to "#{@presenter.exercises.count} exercises", exercises_path
-    or
-    = link_to "create a new exercise", new_exercise_path
+  = render 'users/show/exercises'
+
+  - unless @presenter.exercises.nil?
+    %p
+      You can look through
+      = link_to "#{@presenter.exercises.count} exercises", exercises_path
+      or
+      = link_to "create a new exercise", new_exercise_path
 
 - else
-  = render 'users/show/exercises'
-  %p
-    = @presenter.exercises_count
-    out of 
-    = link_to pluralize(@presenter.user_and_admin_exercises.count, 'exercises'), exercises_path
+  - unless @presenter.user_and_admin_exercises.nil?
+    = render 'users/show/exercises'
+    %p
+      = @presenter.exercises_count
+      out of 
+      = link_to pluralize(@presenter.user_and_admin_exercises.count, 'exercises'), exercises_path

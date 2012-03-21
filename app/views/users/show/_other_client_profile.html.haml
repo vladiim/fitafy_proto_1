@@ -8,9 +8,9 @@
       %tr
         %th Trainers
         %td
-          %ul
+          %ul#trainer-list
             - for trainer in @presenter.trainers
-              %li= link_to @presenter.trainer_username(trainer), user_path(trainer)
+              %li#trainer-list= link_to @presenter.trainer_username(trainer), user_path(trainer)
       %tr
         %th Bookings
         %td#booking-count

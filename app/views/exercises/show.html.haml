@@ -1,28 +1,29 @@
-%p
-  %strong Description:
-  = @exercise.description
+%table.table.span11
 
-%p
-  %strong Body Part:
-  = @exercise.body_part
+  %tr
+    %th Description
+    %td= @exercise.description
 
-%p
-  %strong Equipment:
-  = @exercise.equipment
+  %tr
+    %th Body Part
+    %td= @exercise.body_part
 
-%p
-  %strong Cues:
-  = @exercise.cues
+  %tr
+    %th Equipment
+    %td= @exercise.equipment
 
-%p
-  Used in
-  - if @exercise.workouts.empty?
-    0 workouts
-  - else
-    = link_to "#{pluralize(@exercise.workouts.count, 'Workout')}", exercise_workouts_path(@exercise, @workouts)
+  %tr
+    %th Cues
+    %td= @exercise.cues
 
-  |
-  = link_to "Create Booking", new_booking_path
+  %tr
+    %th Workouts
+    %td
+      Used in
+      - if @exercise.workouts.empty?
+        0 workouts
+      - else
+        = link_to "#{pluralize(@exercise.workouts.count, 'Workout')}", exercise_workouts_path(@exercise, @workouts)
 
   - if can? :update, @exercise
     |

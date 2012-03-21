@@ -8,8 +8,6 @@ describe "Exercises" do
   
   describe "creates an exercise" do
     
-    it "clean this shit up (exercises#show)"
-    
     it "creates a new excercise only as an admin user" do
       create_exercise(@admin)
       page.should have_content("New exercise added!")
@@ -54,7 +52,7 @@ describe "Exercises" do
       visit exercises_path
       click_link("#{@exercise.title}")
       page.should have_css("h1", text: "#{@exercise.title}")
-      page.should have_content("Description: #{@exercise.description}")
+      page.should have_content(@exercise.description)
       page.should have_content(@exercise.body_part)
       page.should have_content(@exercise.equipment)
       page.should have_content(@exercise.cues)

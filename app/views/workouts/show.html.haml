@@ -1,9 +1,15 @@
-%p
-= render 'shared/workout_exercises'
+- unless @workout.instructions.nil?
+  .row-fluid.well.span11
+    .label Instructions
+    = @workout.instructions
 
-- if can? :manage, Workout
-  Manage 
-  = "#{@title}:"
-  = link_to "Edit", edit_workout_path(@workout)
-  |
-  = link_to "Delete", @workout, method: :delete, confirm: "Are you sure you want to delete the workout?"
+.row-fluid
+  = render 'shared/workout_exercises'
+
+.row-fluid
+  - if can? :manage, Workout
+    Manage 
+    = "#{@title}:"
+    = link_to "Edit", edit_workout_path(@workout)
+    |
+    = link_to "Delete", @workout, method: :delete, confirm: "Are you sure you want to delete the workout?"

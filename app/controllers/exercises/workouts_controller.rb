@@ -5,5 +5,4 @@ class Exercises::WorkoutsController < ApplicationController
     @workouts = @exercise.current_user_workouts(current_user)
     @title = "#{@exercise.title} Workouts"
   end
-  
 end

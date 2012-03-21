@@ -8,6 +8,8 @@ describe "Exercises" do
   
   describe "creates an exercise" do
     
+    it "clean this shit up (exercises#show)"
+    
     it "creates a new excercise only as an admin user" do
       create_exercise(@admin)
       page.should have_content("New exercise added!")

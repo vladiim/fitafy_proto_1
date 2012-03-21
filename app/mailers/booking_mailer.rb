@@ -1,4 +1,4 @@
-class BookingMailer < ActionMailer::Base
+class BookingMailer < AsyncMailer
   default from: "no_reply@fitafy.com"
   default_url_options[:host] = "localhost:3000"
   

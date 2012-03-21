@@ -85,10 +85,6 @@ describe Ability do
         @trainer_ability.should_not be_able_to(:manage, @workout)
       end
     end
-    
-    describe "bookings" do
-      
-    end
   end
   
   describe "client_role" do

@@ -12,6 +12,8 @@ gem 'cancan', '~> 1.6.0'
 gem 'will_paginate', '~> 3.0.0'
 gem 'simple_form', '~> 2.0.0'
 gem 'faker', '~> 1.0.0'
+gem 'resque', '~> 1.20.0', require: "resque/server"
+gem 'resque_mailer'
 
 # Gems used only for assets and not required
 # in production environments by default.

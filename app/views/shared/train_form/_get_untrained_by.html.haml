@@ -2,4 +2,4 @@
 
   = f.hidden_field :trainer_id, value: @presenter.user.id
 
-  .actions= f.submit "Remove Trainer", :class => "btn btn-danger"
+  .actions= f.submit "Remove Trainer", :class => "btn btn-danger", confirm: "Are you sure?"

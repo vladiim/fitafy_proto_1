@@ -1,7 +1,6 @@
-class UserMailer < ActionMailer::Base
+class UserMailer < AsyncMailer
   
   default from: "no_reply@fitafy.com"
-  # default_url_options[:host] = "localhost:3000"
   
   if Rails.env.production?
       default_url_options[:host] = "fitafy.com"
@@ -27,6 +26,7 @@ class UserMailer < ActionMailer::Base
   
   def send_exsisting_client_invite(relationship)
     set_relationship_trainer_client_and_url(relationship)
+
     mail to:        @client.email,
          subject:   "Trainer Invite",
          date:      Time.now
@@ -34,6 +34,7 @@ class UserMailer < ActionMailer::Base
   
   def send_exsisting_trainer_invite(relationship)
     set_relationship_trainer_client_and_url(relationship)
+
     mail to:        @trainer.email,
          subject:   "Client Invite",
          date:      Time.now
@@ -42,7 +43,7 @@ class UserMailer < ActionMailer::Base
   private
   
     def set_relationship_trainer_client_and_url(relationship)
-      @trainer      = relationship.trainer
+      @trainer      = User.find(relationship.trainer_id)
       @client       = User.find(relationship.client_id)
       @invites_url  = invites_url
     end

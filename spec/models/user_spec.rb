@@ -71,7 +71,6 @@ describe User do
     it "user should have an exercise attribute" do
       @trainer.should respond_to(:exercises)
     end
-    
   end
   
   describe "bookings" do

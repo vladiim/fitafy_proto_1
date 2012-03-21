@@ -152,4 +152,14 @@ describe "Clients" do
       page.should have_css("a", text: "#{@client.username.titleize}")     
     end
   end
+  
+  describe "trained_by" do
+    
+    before(:each) do
+      integration_sign_in(@trainer)
+      visit user_trained_by_path(@trainer)
+    end
+    
+    it "shouldn't have remove trainer button for themself"
+  end
 end

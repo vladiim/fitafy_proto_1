@@ -34,4 +34,5 @@ Fitafy::Application.routes.draw do
   match 'booking_invites', to: "bookings/requests#index"
   root to: 'pages#home'
 
+  mount Resque::Server, at: "/resque"
 end

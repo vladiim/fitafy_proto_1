@@ -1,18 +1,17 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.0'
+gem 'rails', '~> 3.2.0'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
-gem 'heroku'
-gem 'authlogic'
-gem 'cancan'
-gem 'will_paginate'
+gem 'pg', '~> 0.13.0'
+gem 'heroku', '~> 2.21.0'
+gem 'authlogic', '~> 3.1.0'
+gem 'cancan', '~> 1.6.0'
+gem 'will_paginate', '~> 3.0.0'
 gem 'simple_form', '~> 2.0.0'
-gem 'faker'
-gem 'table_builder'
+gem 'faker', '~> 1.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -20,37 +19,19 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'haml-rails'
+  gem 'haml-rails', '~> 0.3.0'
   gem 'bootstrap-sass', '~> 2.0.1'
+  gem 'jquery-rails', '~> 2.0.0'
 end
-
-gem 'jquery-rails'
 
 ##############TEST SUITE###############
 
 gem 'rspec-rails', :group => [:test, :development]
 
 group :test do
-  gem 'factory_girl_rails'
-  gem 'capybara'
-  gem 'guard-rspec'
-  gem 'spork'
-end 
-
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
-group :test do
-  # Pretty printed test output
+  gem 'factory_girl_rails', '~> 1.7.0'
+  gem 'capybara', '~> 1.1.0'
+  gem 'guard-rspec', '~> 0.6.0'
+  gem 'spork', '~> 0.9.0'
   gem 'turn', '0.8.2', :require => false
 end

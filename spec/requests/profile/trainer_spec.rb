@@ -146,7 +146,6 @@ describe "my profile" do
       end
       
       it "should have a train trainer button" do
-        
         click_button("Add Trainer")
         page.should have_content("Trainer invited")
         visit user_path(@new_trainer)
@@ -168,8 +167,17 @@ describe "my profile" do
     
     describe "not my client" do
 
-      it "should not show trainer stats" do
+      it "should show 1 trainer" do
         page.should have_css("a", text: @trainer2.username)
+      end
+      
+      it "should show many trainers" do
+        10.times do
+          trainer = Factory(:trainer)
+          trainer.train!(@client3)
+          visit user_path(@client3)
+          page.should have_css("a", text: trainer.username)
+        end
       end
 
       it "should have a train user button" do
@@ -182,11 +190,6 @@ describe "my profile" do
       it "should not have a add trainer button" do
         page.should_not have_css("submit", text: "Add Trainer")
       end
-    end
-    
-    describe "my client's page" do
-      
-      it "blah blah blah"
     end
   end
 end

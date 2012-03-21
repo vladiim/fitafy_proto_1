@@ -14,11 +14,15 @@ class Relationship < ActiveRecord::Base
   after_save :destroy_if_declined
   
   def send_client_invite
-    client = User.find(self.client_id)
-    trainer = User.find(self.trainer_id)
-    unless client == trainer
-      send_new_client_email(client)
+    find_trainer_and_client
+
+    unless @client == @trainer
+      send_new_client_email(@client)
     end
+  end
+
+  def send_trainer_invite
+    UserMailer.send_exsisting_trainer_invite(self).deliver
   end
   
   protected
@@ -33,5 +37,10 @@ class Relationship < ActiveRecord::Base
     
     def destroy_if_declined
       destroy if declined
+    end
+    
+    def find_trainer_and_client
+      @trainer = User.find(self.trainer_id)
+      @client = User.find(self.client_id)
     end
 end

@@ -38,7 +38,19 @@ describe User do
 
     it "clients should be trained_by a trainer" do
       @client.should be_trained_by(@trainer)
-    end    
+    end
+  end
+  
+  describe "client and trainer reverse_relationships" do
+    
+    it "client invite should send an email to the trainer" do
+      @client2 = Factory(:client)
+      @client2.get_trained!(@trainer)
+      
+      last_email.to.should include(@trainer.email)
+      last_email.body.should include("#{@client2.username.titleize} wants you to train them!")
+      last_email.body.should include(" to accept or decline")
+    end
   end
   
   describe "workouts" do

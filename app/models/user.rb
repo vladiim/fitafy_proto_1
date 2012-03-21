@@ -29,7 +29,9 @@ class User < ActiveRecord::Base
   end
   
   def get_trained!(trainer)
-    reverse_relationships.create(trainer_id: trainer.id)
+    relationship = reverse_relationships.build(trainer_id: trainer.id)
+    relationship.save!
+    relationship.send_trainer_invite
   end
   
   def untrain!(client)

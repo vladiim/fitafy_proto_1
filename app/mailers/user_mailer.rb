@@ -26,11 +26,24 @@ class UserMailer < ActionMailer::Base
   end
   
   def send_exsisting_client_invite(relationship)
-    @trainer      = relationship.trainer
-    @client       = User.find(relationship.client_id)
-    @invites_url  = invites_url
+    set_relationship_trainer_client_and_url(relationship)
     mail to:        @client.email,
          subject:   "Trainer Invite",
-         date:      Time.now         
-  end  
+         date:      Time.now
+  end
+  
+  def send_exsisting_trainer_invite(relationship)
+    set_relationship_trainer_client_and_url(relationship)
+    mail to:        @trainer.email,
+         subject:   "Client Invite",
+         date:      Time.now
+  end
+  
+  private
+  
+    def set_relationship_trainer_client_and_url(relationship)
+      @trainer      = relationship.trainer
+      @client       = User.find(relationship.client_id)
+      @invites_url  = invites_url
+    end
 end

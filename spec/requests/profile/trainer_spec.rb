@@ -153,10 +153,6 @@ describe "my profile" do
         click_button("Remove Trainer")
         page.should have_content("Trainer removed")
       end
-      
-      it "test the trained_by and untrained_by functionality in the model"
-      
-      it "test the right emails go out for the get_trained! method in the model"
     end
     
     describe "experienced trainer" do

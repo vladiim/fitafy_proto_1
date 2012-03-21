@@ -156,10 +156,20 @@ describe "Clients" do
   describe "trained_by" do
     
     before(:each) do
+      Factory(:admin)
+      @new_trainer = Factory(:trainer)
+      @new_trainer.train!(@trainer)
       integration_sign_in(@trainer)
-      visit user_trained_by_path(@trainer)
+      click_link ("Trainers:")
     end
     
-    it "shouldn't have remove trainer button for themself"
+    it "should be able to get rid of another trainer but not themself" do
+      click_button("Remove Trainer")
+      visit trained_by_user_path(@trainer)
+      
+      # page.should_not have_css("a", text: @new_trainer.username.titelize)
+      # page.should have_css("a", text: @trainer.username.titelize)
+      page.should_not have_css("input", text: "Remove Trainer")
+    end
   end
 end

@@ -7,11 +7,14 @@
       %th
 
   %tbody  
-    - for user in @trainers
+    - for @trainer in @trainers
       %tr
-        %td= link_to "#{user.username.titleize}", user_path(user)
-        %td= link_to "#{pluralize(user.reverse_bookings.count, 'Booking')}", user_reverse_bookings_path(user)
+        %td= link_to "#{@trainer.username.titleize}", user_path(@trainer)
+        %td= link_to "#{pluralize(@trainer.reverse_bookings.count, 'Booking')}", user_reverse_bookings_path(@trainer)
         %td= link_to "Request Booking", new_booking_path
         %td
-          = form_for current_user.reverse_relationships.find_by_trainer_id(user), html: { method: :delete } do |f|
-            .actions= f.submit "Remove Trainer", :class => "btn btn-danger", confirm: "Are you sure you want to stop being trained by #{user.username}?"
+          - unless current_user == @trainer
+            = render "shared/train_form/get_untrained_by"
+
+/ form_for current_user.reverse_relationships.find_by_trainer_id(user.id), html: { method: :delete } do |f|
+/               = f.submit "Remove Trainer", :class => "btn btn-danger", confirm: "Are you sure you want to stop being trained by #{user.username}?"

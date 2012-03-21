@@ -120,7 +120,7 @@ describe "my profile" do
       visit user_path(@new_trainer)
     end
     
-    describe "new trainer" do
+    describe "trainer" do
 
       it "should show client stats" do
         page.should have_css("td", id: "client-count", text: "1")
@@ -154,21 +154,39 @@ describe "my profile" do
         page.should have_content("Trainer removed")
       end
     end
-    
-    describe "experienced trainer" do
-      
-      it "should show stuff on the trainer"
-    end
   end
   
-  describe "visiting another client's page" do
+  describe "visiting a client's page" do
     
-    describe "new client" do
-      it "should show stuff on the client" 
+    before(:each) do
+      @trainer2 = Factory(:trainer)
+      @client3 = Factory(:client)
+      @trainer2.train!(@client3)
+      integration_sign_in(@trainer)
+      visit user_path(@client3)
     end
     
-    describe "experienced client" do
-      it "should show stuff on the client" 
+    describe "not my client" do
+
+      it "should not show trainer stats" do
+        page.should have_css("a", text: @trainer2.username)
+      end
+
+      it "should have a train user button" do
+        click_button("Add Client")
+        page.should have_content("Client invited")
+        click_button("Remove Client")
+        page.should have_content("Client removed")
+      end
+
+      it "should not have a add trainer button" do
+        page.should_not have_css("submit", text: "Add Trainer")
+      end
+    end
+    
+    describe "my client's page" do
+      
+      it "blah blah blah"
     end
   end
 end

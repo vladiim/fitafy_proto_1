@@ -14,4 +14,4 @@
         %td= link_to "Request Booking", new_booking_path
         %td
           = form_for current_user.reverse_relationships.find_by_trainer_id(user), html: { method: :delete } do |f|
-            .actions= f.submit "Remove Trainer", :class => "none", confirm: "Are you sure you want to stop being trained by #{user.username}?"
+            .actions= f.submit "Remove Trainer", :class => "btn btn-danger", confirm: "Are you sure you want to stop being trained by #{user.username}?"

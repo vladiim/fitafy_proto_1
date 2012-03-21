@@ -90,7 +90,16 @@ class Users::ShowPresenter
   end
   
   def trainer_first
-    trainers = @user.trained_by
+    # trainers = @user.trained_by
+    trainers
     trainers[0]
+  end
+  
+  def trainers
+    trainers = @user.trained_by
+  end
+  
+  def trainer_username(trainer)
+    trainer.username
   end
 end

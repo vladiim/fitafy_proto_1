@@ -1,0 +1,21 @@
+.row-fluid
+  = render "shared/train_form"
+
+.row-fluid
+  %table.span6.table.table-bordered.table-striped
+
+    %tbody
+      %tr
+        %th Trainers
+        - for trainer in @presenter.trainers
+          %td
+            = link_to @presenter.trainer_username(trainer), user_path(trainer)
+      %tr
+        %th Bookings
+        %td#booking-count
+          = @presenter.user.bookings.count
+
+      %tr
+        %th Workouts
+        %td#workout-count
+          = @presenter.user.workouts.count

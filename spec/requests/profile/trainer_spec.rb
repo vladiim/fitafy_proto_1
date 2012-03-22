@@ -95,14 +95,6 @@ describe "my profile" do
         current_path.should eq(user_path(@client))
       end
       
-      it "go to my + admin's workouts" do
-        integration_sign_in(@trainer)
-        click_link("Profile")
-        click_link("22 workouts")
-        page.should have_css("a", text: "3")
-        current_path.should eq(workouts_path)
-      end
-      
       it "go to my + admin's exercises" do
         integration_sign_in(@trainer)
         click_link("Profile")
@@ -168,7 +160,7 @@ describe "my profile" do
     describe "not my client" do
 
       it "should show 1 trainer" do
-        page.should have_css("a", text: @trainer2.username)
+        page.should have_css("a", text: @trainer2.username.titleize)
       end
       
       it "should show many trainers" do
@@ -176,7 +168,7 @@ describe "my profile" do
           trainer = Factory(:trainer)
           trainer.train!(@client3)
           visit user_path(@client3)
-          page.should have_css("a", text: trainer.username)
+          page.should have_css("a", text: trainer.username.titleize)
         end
       end
 

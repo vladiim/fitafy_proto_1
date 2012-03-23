@@ -25,8 +25,8 @@ class Exercise < ActiveRecord::Base
   
   after_create :checks_if_created_by_admin
 
-  BODY_PARTS = %w[Bicep Chest Legs Shoulder Tricep Back]
-  EQUIPMENT = %w[ Dumbbell Chinup-bar Dumbells Bench Barbell Squat-rack Cable-machine Barbell]
+  BODY_PARTS = ["Abdominals", "Back", "Biceps", "Chest", "Legs", "Lower back", "Shoulders", "Tricep"]
+  EQUIPMENT = ["45 degree Leg Press machine", "BOSU", "BOSU and Cables", "Barbell", "Barbell or Dumbbell", "Bench, Chair", "Bench, chair", "Cable machine", "Cables", "Chest Press Machine", "Dual Cable Machine", "Dumbbell", "Dumbbells", "Dumbbells Optional", "EZ bar", "EZ bar, Preacher bench", "EZY Bar", "Elastic Band", "Elastic band", "Hack Squat machine", "Lat pulldown machine", "Leg Extension machine ", "Leg curl machine", "Low cable row", "Parallel Bars", "Pull Bar", "Pulldown machine", "Swiss Ball", "Swiss ball", "Swiss ball, Dumbbells", "Wall", "barbell", "cable cross over machine", "dumbbell", "dumbbells", "dumbell, swissball", "dumbells, Barbell optional", "dumbells, flyes", "elastic band", "low cable row, Wide bar", "parallel bars", "roman chair", "swiss ball"]
   
   def body_parts_symbols
     [body_parts.to_sym]

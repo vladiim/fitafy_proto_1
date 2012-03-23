@@ -19,6 +19,6 @@
       - n2 += 1 
       .tab-pane{"id" => "l#{@presenter.alphabet[n2]}"}
         - Exercise.where(body_part: "#{body_part}").each do |exercise|
-          %label.label.span1{"for" => "exercise_#{exercise.id}"}
+          %label.well.span1{"for" => "exercise_#{exercise.id}"}
             = check_box_tag "#{@presenter.model}[exercise_ids][]", exercise.id, @presenter.parent.exercise_ids.include?(exercise.id), id: dom_id(exercise)
-            %h6#workout_exercise_title= exercise.title
+            %p#workout_exercise_title= exercise.title

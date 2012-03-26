@@ -9,7 +9,7 @@
       %p
         or
         / = link_to "Invite New", new_client_path
-        %a.btn.btn-large.btn-success{"data-toggle" => "modal", "href" => "#signIn"} Sign In
+        %a{"data-toggle" => "modal", "href" => "#invite_client"} Invite New
 
     .span5.well
       = f.association :workout, collection: current_user.workouts.collect { |w| [w.title, w.id] }, prompt: "Select workout"
@@ -35,8 +35,8 @@
       = f.input :last_message_from, as: :hidden, input_html: { value: current_user.id }
       = f.button :submit, "#{@title}", id: 'booking_submit', :class => "btn btn-large btn-primary"
 
-.modal.hide.fade.in#signIn
+.modal.hide.fade.in#invite_client
   .modal-header
     %a.close{ "data-dismiss" => "modal" } x
-    %h3 Sign In
-  .modal-body= render "shared/signin"
+    %h3 Invite New Client
+  .modal-body= render "shared/invite_client"

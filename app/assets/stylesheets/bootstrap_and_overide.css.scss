@@ -74,8 +74,6 @@ $linkColorHover:          $light_blue;
 //$infoBackground:          #d9edf7;
 //$infoBorder:              darken(spin(@infoBackground, -10), 7%);
 
-
-
 // GRID
 // --------------------------------------------------
 
@@ -101,5 +99,10 @@ h1 {
 
 // Exercise title checkboxes
 h6#workout_exercise_title { color: white; }
+
+// select form element
+select, input, textarea {
+	width: 85%;
+}
 
 @import "bootstrap-responsive";

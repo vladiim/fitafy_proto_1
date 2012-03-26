@@ -3,11 +3,12 @@ class PagesController < ApplicationController
   
   def home
     if current_user.nil?
-      @user = User.new 
+      @user = User.new
     else
       @title = "Create Booking"
       @user = current_user
       @booking = current_user.bookings.new
+      @client = Client.new
     end
     @user_session = UserSession.new
   end

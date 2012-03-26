@@ -15,6 +15,7 @@ class BookingsController < ApplicationController
     @title = "Create Booking"
     @booking = current_user.bookings.new
     @workout = Workout.find(params[:workout]) if params[:workout]
+    @client = Client.new
   end
 
   def create 

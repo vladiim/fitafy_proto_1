@@ -16,9 +16,11 @@ class Exercises::ChildPresenter
   def parent
     if @parent_id == nil
         @parent = @user.workouts.new 
+
     else
       if @model == "booking"
         @parent = @user.bookings.find(@parent_id)
+
       else 
         @parent = @user.workouts.find(@parent_id)
       end
@@ -39,5 +41,9 @@ class Exercises::ChildPresenter
   
   def alphabet
     @alphabet
+  end
+  
+  def sorted_exercises(body_part)
+    exercises = Exercise.find(:all, conditions: ["body_part = ?", body_part], order: "title")
   end
 end

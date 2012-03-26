@@ -1,0 +1,21 @@
+@import "bootstrap_and_overide";
+
+@media screen and (max-width: 800px) {
+
+	a#logo_small {
+		margin: 0 auto;
+		visibility: visible;
+		border-left: 0;
+	}
+
+	#navigation_bar {
+		
+		margin-top: 0;
+		height: 35px;
+		
+		#logo {
+			visibility: hidden;
+			margin-left: -1000px;
+		}
+	}
+}

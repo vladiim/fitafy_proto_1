@@ -1,0 +1,15 @@
+@import "bootstrap_and_overide";
+
+@media screen and (max-width: 710px) {
+
+	#navigation_bar { 
+		width: 90%; 
+		height: 60px;
+		
+		li { border-right: none; }
+		
+		li:nth-child(6) { margin: -5px 0 0 0; }
+		
+		li:hover > ul { margin: -7.5px 0 0 0; }
+	}
+}

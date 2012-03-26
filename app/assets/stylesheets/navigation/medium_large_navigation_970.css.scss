@@ -1,0 +1,11 @@
+@import "bootstrap_and_overide";
+
+@media screen and (max-width: 970px) {
+	
+	#navigation_bar {
+
+		a {
+			font: 12px Arial, Helvetica; 
+		}
+	}
+}

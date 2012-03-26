@@ -1,0 +1,28 @@
+@import "bootstrap_and_overide";
+
+@media screen and (max-width: 480px) {
+
+	#navigation_bar {
+
+		li:nth-child(4) { margin: -5px 0 0 0; }
+		
+		li:nth-child(6) { 
+			float: right;
+			margin: -120px 0 0 0;
+
+			ul { margin-left: -35px; }
+
+			ul li a { color: white; }
+
+			a { 
+				color: $dark_blue; 
+				text-shadow: none;
+			}
+		}
+		
+		ul a { 
+			width: 80px; 
+			font-size: 80%;
+		}
+	}
+}

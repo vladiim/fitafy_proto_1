@@ -17,3 +17,8 @@
 	background-image: -ms-linear-gradient($mid_blue, $dark-blue);
 	background-image: linear-gradient($mid_blue, $dark-blue);
 }
+
+@mixin blue_grandient_radial {
+	background-image: -moz-radial-gradient(center 45deg,circle cover, #cde6f9, #6191bf);
+	background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%,800, from($off-white), to($mid_blue));
+}

@@ -23,3 +23,9 @@
     -webkit-box-shadow: 0 1px 1px $dark_gray;
 	box-shadow: 0 1px 1px $dark_gray;
 }
+
+// TEXT
+@mixin text_shadow_dark_gray1 { text-shadow: 0 1px 0 $grayDarker; }
+@mixin text_shadow_dark_gray2 { text-shadow: 0 -1px 1px $grayDarker; }
+@mixin text_shadow_white1 { text-shadow: 0 1px 0 white; }
+@mixin text_shadow_white2 { text-shadow: 0 -1px 1px white; }

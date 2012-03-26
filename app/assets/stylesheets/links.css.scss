@@ -6,5 +6,6 @@
 	&:hover {
 		background: $gray_blue;
 		text-decoration: none;
+		@include point_2_trans;
 	}
 }

@@ -49,13 +49,13 @@ $linkColorHover:          $light_blue;
 //$hrBorder:                @grayLighter;
 
 // Navbar
-$navbarHeight: 40px;
-$navbarBackground: transparentize($dark-blue, 0.95);
-$navbarBackgroundHighlight: $dark-blue;
+//$navbarHeight: 40px;
+//$navbarBackground: transparentize($dark-blue, 0.95);
+//$navbarBackgroundHighlight: $dark-blue;
 //$navbarLinkBackgroundHover: $light-gray;
-$navbarText: $light-gray;
-$navbarLinkColor: $light-gray;
-$navbarLinkColorHover: $gray_blue;
+//$navbarText: $light-gray;
+//$navbarLinkColor: $light-gray;
+//$navbarLinkColorHover: $gray_blue;
 
 // Form states and alerts
 //$warningText:             #c09853;
@@ -93,7 +93,11 @@ $navbarLinkColorHover: $gray_blue;
 
 @import "bootstrap";
 
-h1 {	color: $dark-blue; }
+h1 {
+	color: $dark-blue;
+	@include text_shadow_white1;
+	@include text_shadow_white2;
+}
 
 // Exercise title checkboxes
 h6#workout_exercise_title { color: white; }

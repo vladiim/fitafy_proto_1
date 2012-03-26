@@ -24,6 +24,14 @@
 	box-shadow: 0 1px 1px $dark_gray;
 }
 
+// BORDERS
+
+@mixin border1 {
+	-webkit-box-shadow: inset 0 2px 2px $light_gray, inset -2px 2px 2px $light_gray, inset 2px 2px 2px $light_gray, inset 2px -2px 2px $light_gray,  inset 0 2px 2px $dark_blue, inset -2px 1px 2px $dark_blue, inset 2px 1px 2px $dark_blue, inset 2px -2px 2px $dark_blue, 1px 2px 2px $dark_blue, -1px -1px 2px $dark_blue;
+	-moz-box-shadow: inset 0 2px 2px $light_gray, inset -2px 2px 2px $light_gray, inset 2px 2px 2px $light_gray, inset 2px -2px 2px $light_gray,  inset 0 2px 2px $dark_blue, inset -2px 1px 2px $dark_blue, inset 2px 1px 2px $dark_blue, inset 2px -2px 2px $dark_blue, 1px 2px 2px $dark_blue, -1px -1px 2px $dark_blue;
+	box-shadow: inset 0 2px 2px $light_gray, inset -2px 2px 2px $light_gray, inset 2px 2px 2px $light_gray, inset 2px -2px 2px $light_gray,  inset 0 2px 2px $dark_blue, inset -2px 1px 2px $dark_blue, inset 2px 1px 2px $dark_blue, inset 2px -2px 2px $dark_blue, 1px 2px 2px $dark_blue, -1px -1px 2px $dark_blue;
+}
+
 // TEXT
 @mixin text_shadow_dark_gray1 { text-shadow: 0 1px 0 $grayDarker; }
 @mixin text_shadow_dark_gray2 { text-shadow: 0 -1px 1px $grayDarker; }

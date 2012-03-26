@@ -1,9 +1,9 @@
 @import "bootstrap_and_overide" ;
 
 section#main_content_yo {
-//	background: $light-gray;
 	@include blue_grandient_radial;
 	@include border-rad1;
 	padding: 0.5em;
 	margin-top: 10px;
+	@include border1;
 }

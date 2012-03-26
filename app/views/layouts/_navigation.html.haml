@@ -1,16 +1,16 @@
 - @user ||= current_user
 
 - if current_user
-
+  = link_to logo, root_path, :id => "logo_small"
   %ul.container#navigation_bar
     .row-fluid
       = link_to logo, root_path, :id => "logo"
 
-      / //############# Collapse button for responsive design
-      / %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
-      /   %span.icon-bar
-      /   %span.icon-bar
-      /   %span.icon-bar
+      //############# Collapse button for responsive design
+      %a.btn.btn-navbar
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
 
       // BOOKINGS
       %li#main

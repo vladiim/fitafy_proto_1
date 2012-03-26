@@ -1,15 +1,30 @@
 @import "bootstrap_and_overide" ;
 
+a#logo {
+	&:hover {
+		background: $see_through;
+	}
+}
+
+a#logo_small {
+	visibility: hidden;
+}
+
 #navigation_bar {
 	width: 100%;
 	background: $dark-blue;
-	margin: 0 auto;
-	@include blue_gradient;
+	margin: -50px auto 0 auto;
+	@include blue_gradient_lighter;
 	@include radius_6;
 	@include shadow_dark_gray_bottom_right;
+
+	.btn.btn-navbar {
+		visibility: hidden;
+		margin-left: -1000px;
+	}
 	
 	li {
-		margin-top: 20px;
+		margin-top: 1.5em;
 		float: left;
 		border-right: 1px solid $dark_gray;
 		position: relative;
@@ -32,6 +47,7 @@
 	
 	li:hover > a {
 		color: $light_gray;
+		font-weight: bold;
 		background: none;
 		@include point_3_trans;
 	}
@@ -78,11 +94,5 @@
 	
 	ul a:hover {
 		background: $whiteLighter;
-	}
-}
-
-a#logo {
-	&:hover {
-		background: $see_through;
 	}
 }

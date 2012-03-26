@@ -1,18 +1,85 @@
 @import "bootstrap_and_overide" ;
 
-.nav {
-	padding-top: 15px;
+#navigation_bar {
+	width: 100%;
+	background: $dark-blue;
+	margin: 0 auto;
+	@include blue_gradient;
+	@include radius_6;
+	@include shadow_dark_gray_bottom_right;
+	
+	li {
+		margin-top: 20px;
+		float: left;
+		border-right: 1px solid $dark_gray;
+		position: relative;
+	}
+	
+	li:last-child {
+		border-right: none
+	}
+	
+	a {
+		float: left;
+		padding: 10px 15px;
+		color: $gray-blue;
+		text-transform: uppercase;
+		font: bold 14px Arial, Helvetica;
+		text-decoration: none;
+		text-shadow: 0 1px 0 $grayDarker;
+		text-shadow: 0 -1px 1px $grayDarker;
+	}
+	
+	li:hover > a {
+		color: $light_gray;
+		background: none;
+		@include point_3_trans;
+	}
+	
+	ul {
+		margin: 20px 0 0 0;
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		top: 38px;
+		z-index: 999;
+		@include blue_gradient_lighter;
+		@include shadow_light_top_right;
+		@include radius_3;
+		@include point_2_trans;
+	}
+	
+	li:hover > ul {
+		opacity: 1;
+		visibility: visible;
+		margin: 0;
+	}
+	
+	ul ul {
+		top: 0;
+	}
+	
+	ul li {
+		margin-top: 0px;
+		@include shadow_double_blue_horizontal;
+	}
+	
+	ul li:last-child {
+		@include shadow_remove_last;
+	}
+	
+	ul a {
+		text-transform: none;
+		padding: 15px;
+		width: 130px;
+		_height: 15px;
+		display: block;
+	}
+	
+	ul a:hover {
+		background: $whiteLighter;
+	}
 }
-
-.nav.btn-group#user_nav_button {
-	margin: -7.5px;
-	margin-left: 40px;
-}
-
-// overide mobile nav pushing down content
-//.navbar-fixed-top {
-//	position: absolute;
-//}
 
 a#logo {
 	&:hover {

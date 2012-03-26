@@ -1,0 +1,25 @@
+// SHADOWS
+
+@mixin shadow_light_top_right {
+	-moz-box-shadow: 0 -1px rgba(255, 255, 255, .3);
+	-webkit-box-shadow: 0 -1px 0 rgba(255, 255, 255, .3);
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, .3);
+}
+
+@mixin shadow_double_blue_horizontal {
+	-moz-box-shadow: 0 1px 0 $dark_blue, 0 2px 0 $light_blue;
+	-webkit-box-shadow: 0 1px 0 $dark_blue, 0 2px 0 $light_blue;
+	box-shadow: 0 1px 0 $dark_blue, 0 2px 0 $light_blue;
+}
+
+@mixin shadow_remove_last {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+@mixin shadow_dark_gray_bottom_right {
+	-moz-box-shadow: 0 1px 1px $dark_gray;
+    -webkit-box-shadow: 0 1px 1px $dark_gray;
+	box-shadow: 0 1px 1px $dark_gray;
+}

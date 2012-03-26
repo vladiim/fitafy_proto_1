@@ -6,8 +6,7 @@
   .container-fluid
 
     - if current_user
-      %nav.row-fluid
-        .span12= render 'layouts/navigations/navigation'
+      %nav= render 'layouts/navigation'
 
       %section#main_content_yo
         .row-fluid

@@ -1,0 +1,73 @@
+- @user ||= current_user
+
+- if current_user
+
+  %ul.container#navigation_bar
+    .row-fluid
+      = link_to logo, root_path, :id => "logo"
+
+      / //############# Collapse button for responsive design
+      / %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
+      /   %span.icon-bar
+      /   %span.icon-bar
+      /   %span.icon-bar
+
+      // BOOKINGS
+      %li#main
+        / %i.icon-calendar.icon-white
+        - if current_user.role == "trainer_role"
+          = link_to "Bookings", bookings_path
+          %ul
+            %li=link_to "Bookings: #{current_user.bookings.count}", bookings_path
+            %li=link_to "Create Booking", new_booking_path
+            - unless current_user.booking_invites.empty?
+              %li= link_to "Booking Invites: #{current_user.booking_invites.count}", booking_invites_path
+
+        - else
+          = link_to "Bookings", user_reverse_bookings_path(@user)
+          %ul
+            %li=link_to "My Bookings: #{current_user.reverse_bookings.count}", user_reverse_bookings_path(@user)
+            %li=link_to "Request Booking", new_booking_request_path
+            - unless current_user.booking_invites.empty?
+              %li= link_to "Booking Invites: #{current_user.booking_invites.count}", booking_invites_path
+
+      // CLIENTS
+      - if current_user.role == "trainer_role"
+        %li#main
+          / %i.icon-heart.icon-white
+          = link_to "Clients", training_user_path(current_user)
+          %ul
+            %li=link_to "Clients: #{current_user.training.count}", training_user_path(current_user)
+            %li=link_to "Add New Client", new_client_path
+
+      // WORKOUTS
+      %li#main
+        / %i.icon-list.icon-white
+        = link_to "Workouts", workouts_path
+        %ul
+          - if current_user.role == "trainer_role"
+            %li=link_to "Workouts: #{current_user.workouts.count}", workouts_path
+            %li=link_to "Create Workout", new_workout_path
+
+          - else
+            %li=link_to "My Workouts: #{current_user.completed_reverse_bookings.count}", user_completed_reverse_bookings_path(current_user)
+
+      // EXERCISES
+      - if current_user.role == "trainer_role"
+        %li#main
+          = link_to "Exercises", exercises_path
+          %ul
+            %li=link_to "Exercises: #{current_user.exercise_list.count}", exercises_path
+            %li=link_to "Create Exercise", new_exercise_path
+
+      // PROFILE
+      %li#main
+        = link_to current_user.username.titleize, user_path(current_user)
+        %ul
+          %li= link_to "Profile", user_path(current_user)
+          %li= link_to "My Details", edit_user_path(current_user)
+          - if current_user.trained_by.count == 1
+            %li= link_to "Trainer", user_path(current_user.trainer) unless current_user.role == "trainer_role"
+          - else
+            %li= link_to "Trainers: #{current_user.trained_by.count}", trained_by_user_path(current_user)
+          %li=link_to "Sign Out", signout_path

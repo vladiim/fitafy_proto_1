@@ -1,0 +1,19 @@
+// GRADIENTS
+
+@mixin blue_gradient {
+	background: -moz-linear-gradient($dark_blue, $light_blue);
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(1, $dark_blue), color-stop(1, $light_blue));
+	background: -webkit-linear-gradient($dark_blue, $light_blue);
+	background: -o-linear-gradient($dark_blue, $light_blue);
+	background: -ms-linear-gradient($dark_blue, $light_blue);
+	background: linear-gradient($dark_blue, $light_blue);
+}
+
+@mixin blue_gradient_lighter {
+	background-image: -moz-linear-gradient($mid_blue, $dark-blue);
+	background-image: -webkit-gradient(linear, left top, left bottom, from($mid_blue), to($dark-blue));
+	background-image: -webkit-linear-gradient($mid_blue, $dark-blue);
+	background-image: -o-linear-gradient($mid_blue, $dark-blue);
+	background-image: -ms-linear-gradient($mid_blue, $dark-blue);
+	background-image: linear-gradient($mid_blue, $dark-blue);
+}

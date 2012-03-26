@@ -1,0 +1,13 @@
+// Radius
+
+@mixin radius_3 {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+@mixin radius_6 {
+	-moz-border-radius: 6px;
+	webkit-border-radius: 6px;
+	border-radius: 6px;
+}

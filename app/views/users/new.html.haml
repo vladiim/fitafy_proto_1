@@ -1,6 +1,11 @@
-= link_to big_logo, root_path, id: "logo"
-
 %h2#signup Start in minutes
 
 = render "form"
-      
+
+%a.btn.btn-large.btn-success{"data-toggle" => "modal", "href" => "#signIn"} Sign In
+
+.modal.hide.fade.in#signIn
+  .modal-header
+    %a.close{ "data-dismiss" => "modal" } x
+    %h3 Sign In
+  .modal-body= render "shared/signin"

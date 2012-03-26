@@ -1,5 +1,10 @@
 @import "bootstrap_and_overide" ;
 
+body#background_stripes {
+	background: $mid_blue;
+	@include stripy_blue_background;
+}
+
 section#main_content_yo {
 	@include blue_grandient_radial;
 	@include border-rad1;

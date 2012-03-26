@@ -36,7 +36,7 @@ a#logo_small {
 		padding: 10px 10px;
 		color: $gray-blue;
 		text-transform: uppercase;
-		font: 16px Arial, Helvetica;
+		font: bold 16px Arial, Helvetica;
 		text-decoration: none;
 		@include text_shadow_dark_gray1;
 		@include text_shadow_dark_gray2;

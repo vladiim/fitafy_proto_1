@@ -5,6 +5,7 @@
     = render 'users/show/client_trainers'
   
   // bookings
-  .well.span5
-    .label Bookings
-    = render 'users/show/client_bookings'
+  - unless @presenter.current_user.trained_by.count < 1
+    .well.span5
+      .label Bookings
+      = render 'users/show/client_bookings'

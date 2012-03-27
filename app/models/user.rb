@@ -1,24 +1,24 @@
 class User < ActiveRecord::Base
   acts_as_authentic 
-  
+
   attr_accessible :username, :email, :password, :password_confirmation, :role
-  
+
   has_many :relationships, :foreign_key => "trainer_id", dependent: :destroy
   has_many :training, through: :relationships, source: :client
-  
+
   has_many :reverse_relationships, class_name: "Relationship", foreign_key: "client_id", dependent: :destroy
   has_many :trained_by, through: :reverse_relationships, source: :trainer
-  
+
   has_many :workouts, dependent: :destroy
-  
+
   has_many :exercises, :dependent => :destroy
-  
+
   has_many :bookings, :foreign_key => "trainer_id"
   has_many :reverse_bookings, class_name: "Booking", foreign_key: "client_id"
-  
+
   before_create :set_trainer_role
   before_update :set_client_role
-  
+
   ROLES = %w[trainer_role client_role invited_role]
    
   def train!(client)
@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
   def completed_reverse_bookings
     self.reverse_bookings.where(status: "completed")
   end
-  
+
   def booking_invites
     if role == "client_role"
       reverse_bookings.find(:all, conditions: ["status = ? AND last_message_from != ?", 'trainer_proposed', self.id])
@@ -83,9 +83,9 @@ class User < ActiveRecord::Base
       bookings.find(:all, conditions: ["status = ? AND last_message_from != ?", 'client_proposed', self.id])
     end
   end
-  
+
   private
-  
+
     def set_trainer_role
       self.role = "trainer_role" if self.role == nil
     end

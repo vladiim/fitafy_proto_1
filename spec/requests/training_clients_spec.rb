@@ -52,7 +52,9 @@ describe "Clients" do
         # with no invites it should redirect to the home page
         current_path.should eq(root_path)
       end
-    end    
+    end
+    
+    it "remove and invite client should have the invite as a flash on the client's home page"
   end
   
   describe "index" do
@@ -117,6 +119,7 @@ describe "Clients" do
     
     it "invites a new client generating an email invite" do
       integration_sign_in(@trainer)
+      click_link("Create Booking")
       click_link("Invite New")
       fill_in "client_email", with: @client_email
       click_button("Invite New Client")

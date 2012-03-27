@@ -24,6 +24,7 @@ module UserMacros
   
   def invite_new_client(trainer, client_email)
     integration_sign_in(trainer)
+    click_link("Create Booking")
     click_link("Invite New")
     fill_in "client_email", with: client_email
     click_button("Invite New Client")

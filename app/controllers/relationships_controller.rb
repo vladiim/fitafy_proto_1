@@ -15,7 +15,7 @@ class RelationshipsController < ApplicationController
     flash[:success] = "Client invited, feel free to make bookings for them while they accept your invite"
     redirect_to @user
   end
-  
+
   def update
     @relationship = Relationship.find(params[:id])
     if @relationship.update_attributes(params[:relationship])
@@ -29,7 +29,7 @@ class RelationshipsController < ApplicationController
       render :index
     end
   end
-  
+
   def destroy
     @user = Relationship.find(params[:id]).client
     current_user.untrain!(@user)

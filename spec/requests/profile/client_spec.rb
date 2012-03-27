@@ -26,6 +26,12 @@ describe "client profile" do
       click_link("Request Booking")
       current_path.should eq(new_booking_request_path)
     end
+    
+    it "can handle having no traininers" do
+      @trainer.untrain!(@client)
+      click_link("Profile")
+      page.should have_content("You currently have no trainer")
+    end
   end
   
   describe "visiting a trainer's page" do

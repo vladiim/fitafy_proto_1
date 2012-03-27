@@ -14,4 +14,4 @@
       %td= "#{@booking.booking_date} at #{@booking.booking_time}"
       %td= render 'shared/bookings/approve_request'
       %td= render 'shared/bookings/decline_request'
-      %td= link_to "Suggest New Time", edit_booking_request_path(@booking)
+      %td= link_to "Suggest New Time", edit_booking_request_path(@booking), :class => "btn btn-primary"

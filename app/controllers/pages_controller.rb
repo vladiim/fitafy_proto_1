@@ -5,10 +5,8 @@ class PagesController < ApplicationController
     if current_user.nil?
       @user = User.new
     else
-      @title = "Create Booking"
-      @user = current_user
-      @booking = current_user.bookings.new
-      @client = Client.new
+      @presenter = Users::ShowPresenter.new(current_user, params[:id])
+      @title = @presenter.title
     end
     @user_session = UserSession.new
   end

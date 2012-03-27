@@ -1,9 +1,16 @@
-%tr
+%p Either accept or decline the invites below
+
+%table.table.span11
   - for relationship in @relationships
-  
-    = link_to "#{relationship.trainer.username.titleize}", relationship.trainer
-   
-    = simple_form_for relationship do |f|
-      = f.input :accepted, label: "Accept Invite", id: "relationship_accepted"
-      = f.input :declined, label: "Decline Invite", id: "relationship_declined"
-      = f.submit "Save", :class => "a nice small button"
+
+    %tr
+
+      = simple_form_for relationship do |f|
+
+        %td= link_to "#{relationship.trainer.username.titleize}", relationship.trainer
+
+        %td= f.input :accepted, label: "Accept Invite", id: "relationship_accepted"
+
+        %td= f.input :declined, label: "Decline Invite", id: "relationship_declined"
+
+        %td= f.submit "Save", :class => "btn btn-primary"

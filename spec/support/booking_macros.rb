@@ -33,6 +33,7 @@ module BookingMacros
 
   def sign_in_and_create_booking(trainer, client, workout)
     integration_sign_in(trainer)
+    click_link("Create Booking")
     create_booking(trainer, client, workout)
   end
 end

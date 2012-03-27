@@ -1,12 +1,20 @@
 class Users::ShowPresenter
-  
+
   def initialize(current_user, show_user_id)
     @current_user = current_user
-    @user = User.find(show_user_id)
+    user_id_or_home(show_user_id)
     @admins = User.find(:all, conditions: ["admin = true"])
     @admin = @admins.first
   end
-  
+
+  def user_id_or_home(show_user_id)
+    if show_user_id == nil
+      @user = current_user
+    else
+      @user = User.find(show_user_id)
+    end
+  end
+
   def title
     @title = @user.username.titleize
   end
@@ -77,14 +85,18 @@ class Users::ShowPresenter
   
   def user_and_admin_workouts
     @workouts = @user.workouts
-    admin_workouts = @admin.workouts
-    @workouts += admin_workouts
+    if @admin
+      admin_workouts = @admin.workouts
+      @workouts += admin_workouts
+    end
   end
   
   def user_and_admin_exercises
     @exercises = @user.exercises
-    admin_exercises = @admin.exercises
-    @exercises += admin_exercises
+    if @admin
+      admin_exercises = @admin.exercises
+      @exercises += admin_exercises
+    end
   end
   
   def user_client_bookings(trainer, client)

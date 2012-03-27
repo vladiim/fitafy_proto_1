@@ -32,6 +32,7 @@ class Bookings::RequestsController < ApplicationController
     @booking = find_booking_request_by_user
     @title = "Suggest New Time"
     @request_url = booking_request_path(@booking)
+    @client = Client.new
   end
   
   def update

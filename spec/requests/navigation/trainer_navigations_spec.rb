@@ -104,4 +104,6 @@ describe "Trainer Navigations" do
       page.should have_content("Booking created!")
     end
   end
+  
+  it "should have booking invites and client invites"
 end

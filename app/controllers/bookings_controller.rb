@@ -37,6 +37,7 @@ class BookingsController < ApplicationController
     @title = "Edit Booking"
     @user = current_user
     @booking = @user.bookings.find(params[:id])
+    @client = Client.new
   end
 
   def update

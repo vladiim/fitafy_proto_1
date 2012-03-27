@@ -1,4 +1,4 @@
-- @client ||= @presenter.client if @presenter
+- @client = @presenter.client unless @presenter.nil?
 
 = simple_form_for @client do |f|
 

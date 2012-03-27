@@ -91,15 +91,15 @@ describe "client bookings" do
       @booking = Factory(:booking, trainer_id: @trainer.id,  last_message_from: @trainer.id, client_id: @client.id)
       sign_in_visit_reverse_bookings(@client)
     end
-    
+
     it "has the trainer's name" do
       page.should have_css("a", text: @trainer.username.titleize)
     end
-    
+
     it "doesn't have a workout listed until the booking's completed" do
       page.should_not have_content(@booking.workout.title)
     end
-    
+
     it "suggests a new time for the booking before it's completed" do
       click_link("Suggest New Time")
       fill_in "booking_wo_date",   with: "#{1.day.from_now}"
@@ -108,7 +108,7 @@ describe "client bookings" do
       last_email.to.should include(@trainer.email)
       last_email.body.should include(booking_requests_path)
     end
-    
+
     it "allows the client to decline the booking before it's completed" do
       click_button("Decline")
       last_email.to.should include(@trainer.email)

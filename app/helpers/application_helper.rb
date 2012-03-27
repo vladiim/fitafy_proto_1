@@ -10,7 +10,7 @@ module ApplicationHelper
   end
   
   def logo
-    image_tag('logo.png', alt: 'fitafy', size: '100x100', id: "logo")
+    image_tag('logo.png', alt: 'fitafy', size: '125x125', id: "logo")
   end
   
   def big_logo

@@ -1,10 +1,11 @@
 - @user ||= current_user
 
 - if current_user
-  = link_to logo, root_path, :id => "logo_small"
+  / = link_to logo, root_path, :id => "logo_small"
+  = link_to logo, root_path, :id => "logo"
   %ul.container#navigation_bar
     .row-fluid
-      = link_to logo, root_path, :id => "logo"
+      / = link_to logo, root_path, :id => "logo"
 
       // BOOKINGS
       %li#main

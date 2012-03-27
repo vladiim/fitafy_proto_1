@@ -1,0 +1,8 @@
+@import "bootstrap_and_overide";
+
+@media screen and (max-width: 570px) {
+
+	#navigation_bar { 	
+		li:nth-child(4) { margin: -10px 0 0 0; }
+	}
+}

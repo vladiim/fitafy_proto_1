@@ -1,15 +1,15 @@
 @import "bootstrap_and_overide" ;
 
-a#logo_small {
-	visibility: hidden;
-	border-left: -1000px;
-}
+//a#logo_small {
+//	visibility: hidden;
+//	border-left: -1000px;
+//}
 
 #navigation_bar {
 	width: 100%;
 	height: 40px;
 	background: $dark-blue;
-	margin: -45px auto 0 auto;
+	margin: 0 auto 0 auto;
 	@include blue_gradient_lighter;
 	@include radius_6;
 	@include shadow_dark_gray_bottom_right;

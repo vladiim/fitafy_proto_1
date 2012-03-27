@@ -105,4 +105,8 @@ select, input, textarea {
 	width: 85%;
 }
 
+select#booking_wo_time_4i, select#booking_wo_time_5i {
+	width: 35%;
+}
+
 @import "bootstrap-responsive";

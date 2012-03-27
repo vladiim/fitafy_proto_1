@@ -22,7 +22,7 @@
     .span5.well
       = f.input :wo_date, as: :string, input_html: { :class => 'date_picker' }, label: "Date", start_date: Time.now
 
-      = f.input :wo_time, :label => "Time", time_separator: ""
+      = f.input :wo_time, :label => "Time", minute_step: 5, ampm: true
 
     .span5.well
       - if params[:action] == "edit"

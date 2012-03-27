@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120313063201) do
+ActiveRecord::Schema.define(:version => 20120327031419) do
 
   create_table "bookings", :force => true do |t|
     t.integer  "trainer_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20120313063201) do
     t.text     "instructions",      :default => "No workout insructions"
     t.string   "status",            :default => "trainer_proposed"
     t.integer  "last_message_from"
+    t.integer  "booking_length",    :default => 30,                       :null => false
   end
 
   add_index "bookings", ["client_id"], :name => "index_bookings_on_client_id"

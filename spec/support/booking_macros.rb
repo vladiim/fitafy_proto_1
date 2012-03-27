@@ -12,7 +12,8 @@ module BookingMacros
     visit root_path
     trainer.train!(client)
     integration_sign_in(trainer)
-    select("#{client.username}", from: "booking_client_id")  
+    select("#{client.username}", from: "booking_client_id")
+    select("30", from: "booking_booking_length")
     click_button("Create Booking")
   end
   

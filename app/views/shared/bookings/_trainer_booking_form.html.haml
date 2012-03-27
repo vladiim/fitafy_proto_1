@@ -21,14 +21,14 @@
   .row-fluid
     .span5.well
       = f.input :wo_date, as: :string, input_html: { :class => 'date_picker' }, label: "Date", start_date: Time.now
-
       = f.input :wo_time, :label => "Time", minute_step: 5, ampm: true
+      = f.input :booking_length, collection: (15..120).step(15), :label => "Workout Length (minutes)"
 
     .span5.well
       - if params[:action] == "edit"
         = f.input :instructions, as: :text, input_html: { rows: 7 }
       - else
-        = f.input :message, as: :text, input_html: { rows: 7 }
+        = f.input :message, as: :text, input_html: { rows: 9 }
 
   .row-fluid
     .span5

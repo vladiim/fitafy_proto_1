@@ -55,7 +55,7 @@ describe "Bookings" do
         last_email.to.should include(@client.email)
         last_email.body.should include(booking_requests_path)
       end
-  
+
       it "client approves the booking, sends an email back" do
         click_button("Confirm")
         last_email.to.should include(@trainer.email)
@@ -83,7 +83,7 @@ describe "Bookings" do
   describe "index" do
       
     before(:each) do
-      @destroy_booking = Factory(:booking, client_id: @client.id, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45", last_message_from: @trainer.id)
+      @destroy_booking = Factory(:booking, client_id: @client.id, trainer_id: @trainer.id, wo_date: 1.days.from_now, wo_time: Time.now, last_message_from: @trainer.id)
       sign_in_visit_bookings(@trainer)
     end
     
@@ -120,10 +120,10 @@ describe "Bookings" do
     end
   
     it "indexes bookings from the nearest date" do
-      @booking3 = Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id, wo_date: 3.days.from_now, wo_time: "05:45", workout_id: @workout.id)
-      @booking = Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45", workout_id: @workout.id)
-      @booking4 = Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id, wo_date: 4.days.from_now, wo_time: "05:45", workout_id: @workout.id)
-      @booking2 = Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id, wo_date: 2.days.from_now, wo_time: "05:45", workout_id: @workout.id)
+      @booking3 = Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id, wo_date: 3.days.from_now, wo_time: Time.now, workout_id: @workout.id)
+      @booking = Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id, wo_date: 1.days.from_now, wo_time: Time.now, workout_id: @workout.id)
+      @booking4 = Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id, wo_date: 4.days.from_now, wo_time: Time.now, workout_id: @workout.id)
+      @booking2 = Factory(:booking, trainer_id: @trainer.id, last_message_from: @trainer.id, wo_date: 2.days.from_now, wo_time: Time.now, workout_id: @workout.id)
       
       # @trainer.bookings.should == [@booking, @booking2, @booking3, @booking4] fucked if I know how to do this... one day :)
     end
@@ -132,7 +132,7 @@ describe "Bookings" do
   describe "does stuff with an exsisting booking" do
   
     before(:each) do
-      @booking = Factory(:booking, client: @client, trainer_id: @trainer.id, last_message_from: @trainer.id, wo_date: 1.days.from_now, wo_time: "05:45", workout_id: @workout.id)
+      @booking = Factory(:booking, client: @client, trainer_id: @trainer.id, last_message_from: @trainer.id, wo_date: 1.days.from_now, wo_time: Time.now, workout_id: @workout.id)
     end
     
     describe "show" do

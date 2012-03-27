@@ -37,8 +37,8 @@ describe Booking do
                 wo_date:      :tomorrow,
                 wo_time:      Time.now,
                 workout:      @workout,
-                request_from: @trainer
-.id
+                request_from: @trainer.id,
+                booking_length: 30
       }
     end
     
@@ -61,22 +61,30 @@ describe Booking do
     it "booking must have a client" do
       @trainer.bookings.build(@attr.merge(client: nil)).should be_invalid
     end
-    
+
     it "booking must have a workout" do
       @trainer.bookings.build(@attr.merge(workout: nil)).should be_invalid
     end
-    
+
     it "trainer bookings must have a request_from" do
       @trainer.bookings.build(@attr.merge(request_from: nil)).should be_invalid
     end
-    
+
     it "client bookings must have a request_from" do
       @client.reverse_bookings.build(@attr.merge(trainer_id: @trainer.id, request_from: nil)).should be_invalid
+    end
+
+    it "must have a booking_length for a trainer" do
+      @trainer.bookings.build(@attr.merge(booking_lenth: nil)).should be_invalid
+    end
+
+    it "must have a booking_length for a client" do
+      @client.reverse_bookings.build(@attr.merge(trainer_id: @trainer.id, booking_lenth: nil)).should be_invalid
     end
   end
 
   describe "status" do
-    
+
     describe "trainer requested booking" do
       
       before(:each) do

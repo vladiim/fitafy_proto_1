@@ -2,7 +2,7 @@ class Booking < ActiveRecord::Base
   
   attr_accessible :client_id, :wo_date, :wo_time, :message, :exercises, 
                   :trainer, :trainer_id, :client, :workout_id, :instructions, 
-                  :status, :last_message_from
+                  :status, :last_message_from, :booking_length
   
   belongs_to :trainer, class_name: "User"
   belongs_to :client, class_name: "User"
@@ -13,9 +13,11 @@ class Booking < ActiveRecord::Base
   validates_presence_of :trainer_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
   validates_presence_of :client_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
   
-  validates_presence_of :wo_date, :wo_time, :last_message_from
+  validates_presence_of :wo_date, :wo_time, :last_message_from, :booking_length
   
   validates_presence_of :workout_id, :if => :created_by_trainer
+  
+  validates_numericality_of :booking_length
   
   validate :wo_date_cannot_be_in_the_past
   

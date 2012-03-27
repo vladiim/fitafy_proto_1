@@ -20,7 +20,6 @@ describe "client bookings" do
       it "new booking auto selects the trainer if there's only one trainer" do
         page.should have_content(@trainer.username.titleize)
 
-        page.should_not have_css("label", text: "Workout")
         page.should_not have_css("label", text: "Message")
         page.should_not have_css("label", text: "Instructions")
         

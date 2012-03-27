@@ -19,9 +19,9 @@
 }
 
 @mixin shadow_dark_gray_bottom_right {
-	-moz-box-shadow: 0 1px 1px $dark_gray;
-    -webkit-box-shadow: 0 1px 1px $dark_gray;
-	box-shadow: 0 1px 1px $dark_gray;
+	-moz-box-shadow: 0 2px 3px $grayDarker;
+    -webkit-box-shadow: 0 2px 3px $grayDarker;
+	box-shadow: 0 2px 3px $grayDarker;
 }
 
 // BORDERS

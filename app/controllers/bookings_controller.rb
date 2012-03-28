@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
-  
+  respond_to :html, :json
+
   def index
     @title = "Bookings"    
     if current_user.bookings.empty?
@@ -9,7 +10,7 @@ class BookingsController < ApplicationController
       @bookings = current_user.bookings.paginate(:page => params[:page], :per_page => 10)
     end
   end
-  
+
   def new
     flash.keep
     @title = "Create Booking"
@@ -29,25 +30,21 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @presenter = Bookings::ShowPresenter.new(current_user, params[:id])
-    @title = @presenter.title
+    @presenter = Bookings::MasterPresenter.new(current_user, params[:id])
+    @title = @presenter.show_title
+    respond_with @presenter.booking, @presenter.exercises
   end
 
   def edit
-    @title = "Edit Booking"
-    @user = current_user
-    @booking = @user.bookings.find(params[:id])
-    @client = Client.new
+    @presenter = Bookings::MasterPresenter.new(current_user, params[:id])
+    @title = @presenter.edit_title
+    respond_with @presenter.booking, @presenter.exercises
   end
 
   def update
-    @booking = current_user.bookings.find(params[:id])
-    if @booking.update_attributes(params[:booking])
-      flash[:success] = "Booking updated"
-      redirect_to booking_path(@booking)
-    else
-      render :edit
-    end
+    @presenter = Bookings::MasterPresenter.new(current_user, params[:id])
+    flash[:success] = "Booking updated" if @presenter.booking.update_attributes(params[:booking])
+    respond_with @presenter.booking, @presenter.exercises
   end
 
   def destroy

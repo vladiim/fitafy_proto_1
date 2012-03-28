@@ -136,9 +136,14 @@ describe "Bookings" do
     end
     
     describe "show" do
-      
+
+      it "edits the sets and reps inplace from the bookings#show page" do
+        sign_in_visit_booking(@trainer, @booking)
+        fill_in "exercise_reps", with: "10"
+      end
+
       it "edits a booking from the booking page" do
-        sign_in_visit_booking(@trainer, @booking)      
+        sign_in_visit_booking(@trainer, @booking)
         click_link("Edit")
         select("#{@new_workout.title}", from: "booking_workout_id")
         fill_in "booking_instructions", with: "New instructions mo fo"

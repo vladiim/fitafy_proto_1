@@ -13,7 +13,8 @@ gem 'will_paginate', '~> 3.0.0'
 gem 'simple_form', '~> 2.0.0'
 gem 'faker', '~> 1.0.0'
 gem 'resque', '~> 1.20.0', require: "resque/server"
-gem 'resque_mailer'
+gem 'resque_mailer', '~> 2.0.0'
+gem 'best_in_place', '~> 1.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

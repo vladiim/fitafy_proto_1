@@ -1,14 +1,10 @@
-%table.table
+%table.table.span11
   %thead
     %tr#table_blue
-      %th
-        %h3 #
-      %th 
-        %h3 Exercise
-      %th 
-        %h3 Sets
-      %th
-        %h3 Reps
+      %th #
+      %th Exercise
+      %th Sets
+      %th Reps
       %th
       %th
 
@@ -17,11 +13,14 @@
         %tr
           %td Order
           %td
-            %h3= exercise.title.titleize
-          = simple_form_for exercise, url: booking_exercise_path(@presenter.booking, exercise), method: :put do |f|
-            %td= f.input :sets, input_html: { maxlength: 20 }, :label => false
-            %td= f.input :reps, :label => false
-            %td= f.button :submit, "Update", :class => "btn btn-primary"
-            %td= link_to "Remove", booking_exercise_path(@presenter.booking, exercise), id: "exercise_remove", method: :delete, confirm: "Remove exercise?"
+            = exercise.title.titleize
+            / = simple_form_for exercise, url: booking_exercise_path(@presenter.booking, exercise), method: :put do |f|
+            %td= best_in_place exercise, :sets, type: :textarea
+            %td= best_in_place exercise, :reps, type: :textarea
+            %td
+            / %td= f.input :sets, input_html: { maxlength: 20 }, :label => false
+            / %td= f.input :reps, :label => false
+            / %td= f.button :submit, "Update", :class => "btn btn-primary"
+            %td= link_to "Remove", booking_exercise_path(@presenter.booking, exercise), id: "exercise_remove", :class => "btn btn-danger", method: :delete, confirm: "Remove exercise?"
 
 = link_to "Add More Exercises", booking_exercises_path(@presenter.booking), :class => "btn btn-large btn-primary"

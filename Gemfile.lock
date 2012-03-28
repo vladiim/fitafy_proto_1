@@ -34,6 +34,9 @@ GEM
     authlogic (3.1.0)
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
+    best_in_place (1.0.6)
+      jquery-rails
+      rails (~> 3.1)
     bootstrap-sass (2.0.1)
     builder (3.0.0)
     cancan (1.6.7)
@@ -198,6 +201,7 @@ PLATFORMS
 
 DEPENDENCIES
   authlogic (~> 3.1.0)
+  best_in_place (~> 1.0.0)
   bootstrap-sass (~> 2.0.1)
   cancan (~> 1.6.0)
   capybara (~> 1.1.0)
@@ -211,7 +215,7 @@ DEPENDENCIES
   pg (~> 0.13.0)
   rails (~> 3.2.0)
   resque (~> 1.20.0)
-  resque_mailer
+  resque_mailer (~> 2.0.0)
   rspec-rails
   sass-rails (~> 3.2.3)
   simple_form (~> 2.0.0)

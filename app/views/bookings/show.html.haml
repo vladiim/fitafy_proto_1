@@ -6,19 +6,17 @@
         %th Date
         %th Client
         %th Instructions
+        %th
     %tbody
+
       %tr
         %td{:datetime => "#{@presenter.booking.wo_time}"}= @presenter.booking.booking_time
         %td{:datetime => "#{@presenter.booking.wo_date}"}= @presenter.booking.booking_date
         %td= link_to "#{@presenter.client.username.titleize}", user_path(@presenter.client)
-        %td= @presenter.booking.instructions
+        %td= best_in_place @presenter.booking, :instructions
+        %td
+          = link_to "Edit", edit_booking_path(@presenter.booking)
+          |
+          = link_to "Delete", booking_path(@presenter.booking), method: "delete", confirm: "Are you sure you want to delete the booking?"
 
-.row-fluid.span11
-  = render 'shared/bookings/booking_exercises'
-
-.row-fluid.span11
-  %br
-  
-  = link_to "Edit", edit_booking_path(@presenter.booking)
-  | 
-  = link_to "Delete", booking_path(@presenter.booking), method: "delete", confirm: "Are you sure you want to delete the booking?"
+.row-fluid= render 'shared/bookings/booking_exercises'

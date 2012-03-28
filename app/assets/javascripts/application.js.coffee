@@ -6,6 +6,8 @@
 # 
 # = require jquery
 # = require jquery_ujs
-# = require bootstrap
 # = require jquery-ui
+# = require jquery.purr
+# = require best_in_place
+# = require bootstrap
 # = require_tree .

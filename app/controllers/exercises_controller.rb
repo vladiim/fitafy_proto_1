@@ -1,6 +1,7 @@
 class ExercisesController < ApplicationController
   load_and_authorize_resource except: :index
-    
+  respond_to :html, :json
+
   def index
     @title = "Exercises"
     @exercises = current_user.exercise_list.paginate(:page => params[:page], :per_page => 10)
@@ -21,6 +22,7 @@ class ExercisesController < ApplicationController
 
   def show
     @title = "#{@exercise.title.titleize}"
+    respond_with @exercise
   end
 
   def edit

@@ -4,6 +4,7 @@
       %tr
         %th Time
         %th Date
+        %th Length
         %th Client
         %th Instructions
         %th
@@ -12,6 +13,7 @@
       %tr
         %td{:datetime => "#{@presenter.booking.wo_time}"}= @presenter.booking.booking_time
         %td{:datetime => "#{@presenter.booking.wo_date}"}= @presenter.booking.booking_date
+        %td= "#{@presenter.booking.booking_length} minutes"
         %td= link_to "#{@presenter.client.username.titleize}", user_path(@presenter.client)
         %td= best_in_place @presenter.booking, :instructions
         %td

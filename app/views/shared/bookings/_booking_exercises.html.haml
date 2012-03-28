@@ -7,20 +7,21 @@
       %th Reps
       %th
       %th
+      %th
 
     %tbody
       - @presenter.exercises.each do |exercise|
         %tr
           %td Order
+          %td= exercise.title.titleize
+          %td= best_in_place exercise, :sets, type: :textarea
+          %td= best_in_place exercise, :reps, type: :textarea
           %td
-            = exercise.title.titleize
-            / = simple_form_for exercise, url: booking_exercise_path(@presenter.booking, exercise), method: :put do |f|
-            %td= best_in_place exercise, :sets, type: :textarea
-            %td= best_in_place exercise, :reps, type: :textarea
-            %td
-            / %td= f.input :sets, input_html: { maxlength: 20 }, :label => false
-            / %td= f.input :reps, :label => false
-            / %td= f.button :submit, "Update", :class => "btn btn-primary"
-            %td= link_to "Remove", booking_exercise_path(@presenter.booking, exercise), id: "exercise_remove", :class => "btn btn-danger", method: :delete, confirm: "Remove exercise?"
-
-= link_to "Add More Exercises", booking_exercises_path(@presenter.booking), :class => "btn btn-large btn-primary"
+          %td= link_to "Remove", booking_exercise_path(@presenter.booking, exercise), id: "exercise_remove", :class => "btn btn-danger", method: :delete, confirm: "Remove exercise?"
+      %tr
+        %td
+        %td= link_to "Add More Exercises", booking_exercises_path(@presenter.booking), :class => "btn btn-primary"
+        %td
+        %td
+        %td
+        %td

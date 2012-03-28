@@ -1,10 +1,17 @@
 class Bookings::MasterPresenter
 
-  def initialize(user, booking_id)
+  def initialize(user, booking_id=nil)
     @user = user
     @booking_id = booking_id
-    @booking = @user.bookings.find(booking_id)
-    @client = User.find(@booking.client_id)
+
+    # be able to create bookings#new/show
+    if @booking_id == nil
+      @booking = Booking.new
+      @client = Client.new
+    else
+      @booking = @user.bookings.find(booking_id)
+      @client = User.find(@booking.client_id)
+    end
   end
 
   def workout

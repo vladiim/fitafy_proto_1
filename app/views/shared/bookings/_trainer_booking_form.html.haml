@@ -1,4 +1,4 @@
-= simple_form_for @booking do |f|
+= simple_form_for @presenter.booking do |f|
 
   = f.error_notification
 
@@ -33,7 +33,7 @@
   .row-fluid
     .span5
       = f.input :last_message_from, as: :hidden, input_html: { value: current_user.id }
-      = f.button :submit, "#{@title}", id: 'booking_submit', :class => "btn btn-large btn-primary"
+      = f.button :submit, "#{@title}", id: 'booking_submit', :class => "btn btn-primary"
 
 .modal.hide.fade.in#invite_client
   .modal-header

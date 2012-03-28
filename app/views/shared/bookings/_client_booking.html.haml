@@ -6,6 +6,7 @@
       %th Trainer
       %th Workout
       %th
+      %th
 
   - for @booking in @bookings
 
@@ -20,7 +21,6 @@
           %td= @booking.workout.title.titleize
         - else
           %td Workout not completed yet
-      %td
         - unless @booking.status == "completed"
-          = render 'shared/bookings/decline_request'
-          = link_to "Suggest New Time", edit_booking_request_path(@booking)
+          %td= link_to "Suggest New Time", edit_booking_request_path(@booking), :class => "btn btn-primary"
+          %td= render 'shared/bookings/decline_request'

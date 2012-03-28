@@ -12,11 +12,11 @@ describe "client bookings" do
   describe "have no bookings" do
     
     describe "create booking details" do
-      
+
       before(:each) do
         click_link("Request Booking")
       end
-      
+
       it "new booking auto selects the trainer if there's only one trainer" do
         page.should have_content(@trainer.username.titleize)
 

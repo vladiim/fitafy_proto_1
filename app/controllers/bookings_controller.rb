@@ -15,6 +15,7 @@ class BookingsController < ApplicationController
     flash.keep
     @title = "Create Booking"
     @booking = current_user.bookings.new
+    @presenter = Bookings::MasterPresenter.new(current_user)
     @workout = Workout.find(params[:workout]) if params[:workout]
     @client = Client.new
   end
@@ -44,7 +45,7 @@ class BookingsController < ApplicationController
   def update
     @presenter = Bookings::MasterPresenter.new(current_user, params[:id])
     flash[:success] = "Booking updated" if @presenter.booking.update_attributes(params[:booking])
-    respond_with @presenter.booking, @presenter.exercises
+    respond_with @presenter.booking
   end
 
   def destroy

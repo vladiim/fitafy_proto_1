@@ -1,5 +1,5 @@
 class Bookings::RequestsController < ApplicationController
-  
+
   def index
     if current_user.booking_invites.empty?
       redirect_to new_booking_path
@@ -9,13 +9,13 @@ class Bookings::RequestsController < ApplicationController
       @title = "Booking Requests"
     end
   end
-  
+
   def new
     @booking = Booking.new
     @title = "Request Booking"
     @request_url = booking_requests_path
   end
-  
+
   def create
     @booking_request = Booking.new(params[:booking])
     if @booking_request.save
@@ -27,14 +27,14 @@ class Bookings::RequestsController < ApplicationController
       @booking = Booking.new
     end
   end
-  
+
   def edit
     @booking = find_booking_request_by_user
-    @title = "Suggest New Time"
+    @presenter = Bookings::Requests::EditPresenter.new(@booking)
+    @title = @presenter.title
     @request_url = booking_request_path(@booking)
-    @client = Client.new
   end
-  
+
   def update
     find_booking_request_by_user
     if @booking_request.update_attributes(params[:booking])
@@ -48,16 +48,16 @@ class Bookings::RequestsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     find_booking_request_by_user
     @booking_request.destroy
     redirect_to booking_requests_path
     flash[:success] = "Booking request has been declined"
   end
-  
+
   private 
-  
+
     def find_booking_request_by_user
       if current_user.role == "trainer_role"
         @booking_request = current_user.bookings.find(params[:id])

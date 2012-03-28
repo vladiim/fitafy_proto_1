@@ -80,21 +80,21 @@ describe "my profile" do
         click_link("14 clients")
         current_path.should eq(training_user_path(@trainer))
       end
-      
+
       it "should show my bookings" do
         click_link("12 bookings")
         current_path.should eq(user_reverse_bookings_path(@client))
       end
-      
+
       it "bookings should have link to booking" do
         click_link("06")
       end
-      
+
       it "bookings should have link to client" do
         click_link(@client.username)
         current_path.should eq(user_path(@client))
       end
-      
+
       it "go to my + admin's exercises" do
         integration_sign_in(@trainer)
         click_link("Profile")

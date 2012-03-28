@@ -32,6 +32,8 @@ describe "Bookings" do
       page.should have_content("Booking created")
     end
 
+    it "trainer can only create a booking for their clients"
+
     it "creates a booking for themself" do
       @trainer.train!(@client)
       sign_in_and_create_booking(@trainer, @trainer, @workout)

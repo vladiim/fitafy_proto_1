@@ -12,7 +12,7 @@
     %tbody
       - @presenter.exercises.each do |exercise|
         %tr
-          %td Order
+          %td= exercise.position
           %td= exercise.title.titleize
           %td= best_in_place exercise, :sets, type: :textarea
           %td= best_in_place exercise, :reps, type: :textarea

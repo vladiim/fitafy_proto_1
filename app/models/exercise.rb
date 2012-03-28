@@ -4,6 +4,7 @@ class Exercise < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :booking
+  acts_as_list scope: :booking
 
   has_and_belongs_to_many :workouts
 

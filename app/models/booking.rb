@@ -1,28 +1,28 @@
 class Booking < ActiveRecord::Base
-  
+
   attr_accessible :client_id, :wo_date, :wo_time, :message, :exercises, 
                   :trainer, :trainer_id, :client, :workout_id, :instructions, 
                   :status, :last_message_from, :booking_length
-  
+
   belongs_to :trainer, class_name: "User"
   belongs_to :client, class_name: "User"
   belongs_to :workout
-  
-  has_many :exercises
-  
+
+  has_many :exercises, order: "position"
+
   validates_presence_of :trainer_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
   validates_presence_of :client_id, message: "can't be blank", numericality: { :only_integer => true, :greater_than => 0 }
-  
+
   validates_presence_of :wo_date, :wo_time, :last_message_from, :booking_length
-  
+
   validates_presence_of :workout_id, :if => :created_by_trainer
-  
+
   validates_numericality_of :booking_length
-  
+
   validate :wo_date_cannot_be_in_the_past
-  
+
   after_create :create_exercises_and_instructions, :if => :created_by_trainer
-  
+
   default_scope order(:wo_time).order(:wo_date)
 
   STATUS = %w[ trainer_proposed client_proposed revised_time confirmed declined completed ]
@@ -30,11 +30,11 @@ class Booking < ActiveRecord::Base
   def booking_date
     self.wo_date.strftime("%A %e %b") 
   end
-  
+
   def booking_time
     self.wo_time.strftime("%I:%M %p")
-  end  
-  
+  end
+
   def add_exercises(exercise_ids)
     @trainer = User.find(self.trainer_id)
     @exercise_ids = exercise_ids.delete_if { |id| id == "" }
@@ -48,11 +48,11 @@ class Booking < ActiveRecord::Base
   def status_symbols
     [status.to_sym]
   end
-  
+
   def status?
     @status = self.status
   end
-  
+
   def workout_title
     workout = Workout.find(self.workout_id)
     @workout_title = workout.title

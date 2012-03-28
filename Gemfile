@@ -15,6 +15,7 @@ gem 'faker', '~> 1.0.0'
 gem 'resque', '~> 1.20.0', require: "resque/server"
 gem 'resque_mailer', '~> 2.0.0'
 gem 'best_in_place', '~> 1.0.0'
+gem 'acts_as_list', '~> 0.1.5'
 
 # Gems used only for assets and not required
 # in production environments by default.

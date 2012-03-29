@@ -31,7 +31,7 @@ class Bookings::MasterPresenter
   end
 
   def show_title
-    @title = "Booking for: #{@client.username}"
+    @title = "Booking for: #{@client.username.titleize}"
   end
 
   def edit_title

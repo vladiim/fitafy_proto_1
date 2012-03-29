@@ -1,9 +1,10 @@
 @import "bootstrap_and_overide" ;
 
 footer {
-	background: $off-white;
+//	background: -webkit-linear-gradient($off-white, $see_through);
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(1, $off-white), color-stop(0.009, $see_through));
 	display: block;
-	height: 200px;
+	height: 400px;
 	border-top: $fat_blue_border;
 	text-align: center;
 	margin: 20px auto 0 auto;

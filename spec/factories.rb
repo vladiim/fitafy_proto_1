@@ -57,7 +57,12 @@ FactoryGirl.define do
       admin     true
     end
   end
-  
+
+  factory :relationship do
+    trainer           { |trainer| trainer.association(:user) }
+    client            { |client| client.association(:client) }
+  end
+
   factory :exercise do
     title              { FactoryGirl.generate(:title) }
     description        { FactoryGirl.generate(:description) }

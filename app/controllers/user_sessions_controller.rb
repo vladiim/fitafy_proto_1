@@ -8,15 +8,19 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
 
-      if current_user.has_trainer_invites
-        flash[:notice] = "Welcome back! You have new invites from trainers who want you as a client"
-      elsif current_user.has_client_invites
-        flash[:notice] = "Welcome back! You have new invites from clients who want you to train them!"
-      elsif current_user.has_trainer_and_client_invites
-        flash[:notice] = 
-      else
-        flash[:notice] = "Welcome back!"
-      end
+      flash[:notice] = "Welcome back! You have new invites from trainers who want you as a client" if current_user.has_trainer_invites
+      # if current_user.has_trainer_and_client_invites
+      #   puts "Welcome back! Double invites yo"
+      # 
+      # elsif current_user.has_trainer_invites
+      #   flash[:notice] = "Welcome back! You have new invites from trainers who want you as a client"
+      # 
+      # elsif current_user.has_client_invites
+      #   flash[:notice] = "Welcome back! You have new invites from clients who want you to train them!"
+      # 
+      # else
+      #   flash[:notice] = "Welcome back!"
+      # end
 
     else
       flash[:error] = "Wrong email/password combination"

@@ -22,17 +22,17 @@ describe "Clients" do
       
       before(:each) do
         trains_client(@trainer, @client)
-        click_link "Sign Out"    
+        click_link "Sign Out"
+        integration_sign_in(@client)
       end
-      
+
       it "should send an invite to the client" do
         last_email.to.should include(@client.email)
         last_email.body.should include(@trainer.username.titleize)
         last_email.body.should include("#{invites_path}")  
       end
-      
+
       it "client visits /invites and accepts" do
-        integration_sign_in(@client)
         visit invites_path
         page.should have_css("h1", text: "Invites")
         page.should have_css("a", text: @trainer.username.titleize)
@@ -42,9 +42,8 @@ describe "Clients" do
         # with no invites it should redirect to the home page
         current_path.should eq(root_path)
       end
-      
+
       it "client visits /invites and declines" do
-        integration_sign_in(@client)
         visit invites_path
         check('relationship_declined')        
         click_button("Save")
@@ -69,35 +68,6 @@ describe "Clients" do
 
       it "should not show the trainer's flash message" do
         page.should_not have_content("You have new invites from clients who want you to train them!")
-      end
-    end
-
-    describe "client invites trainer" do
-
-      before(:each) do
-        @trainer2 = Factory(:trainer)
-        visit user_path(@trainer2)
-        click_button("Add Trainer")
-        click_link("Sign Out")
-        integration_sign_in(@trainer2)
-      end
-
-      it "sign in flash when client invites trainer" do
-        page.should have_content("You have new invites from clients who want you to train them!")
-      end
-
-      it "sign in flash shouldn't be there if there are no client invites" do
-        visit invites_path
-        check('relationship_accepted')
-        click_button("Save")
-        click_link("Sign Out")
-        integration_sign_in(@trainer2)
-
-        page.should_not have_content("You have new invites from clients who want you to train them!")
-      end
-
-      it "should not show the client flash message" do
-        page.should_not have_content("You have new invites from trainers who want you as a client")
       end
     end
   end

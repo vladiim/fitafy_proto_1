@@ -1,5 +1,5 @@
 class RelationshipsController < ApplicationController
-  
+
   def index
     flash.keep
     @title = "Invites"
@@ -8,7 +8,7 @@ class RelationshipsController < ApplicationController
       redirect_to root_path if @relationships.empty?
     end
   end
-  
+
   def create
     @user = User.find(params[:relationship][:client_id])
     current_user.train!(@user)

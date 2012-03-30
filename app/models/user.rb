@@ -84,7 +84,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_trainer_and_client_invites
+    has_trainer_invites && has_client_invites
+  end
 
+  def has_trainer_invites
+    reverse_relationships.where("trainer_id != ? AND accepted = false AND declined = false", self.id)
+  end
+
+  def has_client_invites
+    relationships.where("client_id != ? AND accepted = false AND declined = flase", self.id)
+  end
 
   private
 

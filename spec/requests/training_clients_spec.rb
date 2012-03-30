@@ -52,13 +52,58 @@ describe "Clients" do
         # with no invites it should redirect to the home page
         current_path.should eq(root_path)
       end
+
+      it "sign in flash when trainer invites client" do
+        page.should have_content("You have new invites from trainers who want you as a client")
+      end
+
+      it "sign in flash shouldn't be there if there are no invites" do
+        visit invites_path
+        check('relationship_accepted')
+        click_button("Save")
+        click_link("Sign Out")
+        integration_sign_in(@client)
+
+        page.should_not have_content("You have new invites from trainers who want you as a client")
+      end
+
+      it "should not show the trainer's flash message" do
+        page.should_not have_content("You have new invites from clients who want you to train them!")
+      end
     end
-    
-    it "remove and invite client should have the invite as a flash on the client's home page"
+
+    describe "client invites trainer" do
+
+      before(:each) do
+        @trainer2 = Factory(:trainer)
+        visit user_path(@trainer2)
+        click_button("Add Trainer")
+        click_link("Sign Out")
+        integration_sign_in(@trainer2)
+      end
+
+      it "sign in flash when client invites trainer" do
+        page.should have_content("You have new invites from clients who want you to train them!")
+      end
+
+      it "sign in flash shouldn't be there if there are no client invites" do
+        visit invites_path
+        check('relationship_accepted')
+        click_button("Save")
+        click_link("Sign Out")
+        integration_sign_in(@trainer2)
+
+        page.should_not have_content("You have new invites from clients who want you to train them!")
+      end
+
+      it "should not show the client flash message" do
+        page.should_not have_content("You have new invites from trainers who want you as a client")
+      end
+    end
   end
-  
+
   describe "index" do
-    
+
     it "redirects you if you have no clients" do
       integration_sign_in(@trainer)
       click_link("Clients: ")

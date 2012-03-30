@@ -84,6 +84,8 @@ class User < ActiveRecord::Base
     end
   end
 
+
+
   private
 
     def set_trainer_role

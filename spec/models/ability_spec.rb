@@ -61,22 +61,22 @@ describe Ability do
       it "shouldn't be able to manage another trainer's exercise" do
         @trainer_ability.should_not be_able_to(:manage, Factory(:exercise))
       end
-      
+
       it "shouldn't be able to manage an admin's exercise" do
         @trainer_ability.should_not be_able_to(:manage, @exercise)
       end
-      
+
       it "shouldn't be able to read another trainer's exercise" do
         @trainer_ability.should_not be_able_to(:read, Factory(:exercise))
       end
-      
+
       it "should be able to read an admin's exercise" do
         @trainer_ability.should be_able_to(:read, @exercise)
       end
     end
-    
+
     describe "workouts" do
-      
+
       it "should be able to manage workouts for themselves" do
         @trainer_ability.should be_able_to(:manage, Factory(:workout, user: @trainer))
       end
@@ -85,8 +85,23 @@ describe Ability do
         @trainer_ability.should_not be_able_to(:manage, @workout)
       end
     end
+
+    describe "relationships" do
+
+      it "should be able to manage relationships where the trainer is a trainer" do
+        @trainer_ability.should be_able_to(:manage, Factory(:relationship, trainer_id: @trainer.id))
+      end
+
+      it "should be able to manage relationships where they are a client" do
+        @trainer_ability.should be_able_to(:manage, Factory(:relationship, client_id: @trainer.id))
+      end
+
+      it "should no be able to manage relationships where they are neither client or trainer" do
+        @trainer_ability.should_not be_able_to(:manage, Factory(:relationship))
+      end
+    end
   end
-  
+
   describe "client_role" do
     
     before(:each) do
@@ -129,6 +144,17 @@ describe Ability do
 
       it "should not be able to destroy workout" do
         @client_ability.should_not be_able_to(:destroy, Workout)
+      end
+    end
+
+    describe "reverse relationships" do
+
+      it "should be able to manage relationships where they are a client" do
+        @client_ability.should be_able_to(:manage, Factory(:relationship, client_id: @client.id))
+      end
+
+      it "should no be able to manage relationships where they are neither client or trainer" do
+        @client_ability.should_not be_able_to(:manage, Factory(:relationship))
       end
     end
   end

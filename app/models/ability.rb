@@ -28,10 +28,13 @@ class Ability
     can :read, Exercise, admin: true
     can :manage, User, id: @user.id
     can :manage, [Exercise, Workout, Booking], user_id: @user.id
+    can :manage, Relationship, trainer_id: @user.id
+    can :manage, Relationship, client_id: @user.id
   end
   
   def client_rules
     can :read, :all
     can :manage, User, id: @user.id
+    can :manage, Relationship, client_id: @user.id
   end
 end

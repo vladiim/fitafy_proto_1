@@ -1,0 +1,21 @@
+%p Either accept or decline the invites below
+
+%table.table.span11
+
+  - @invitations.flatten.each do |invitation|
+
+    %tr
+      - if invitation.sent_from == current_user.id
+        %td
+          You asked
+          = link_to invitation.client.username, invitation.client
+          to be your client
+        %td= render partial: 'shared/train_form/uninvite', locals: { invitation: invitation }
+     
+      - else
+        = simple_form_for invitation do |f|
+          / = f.input :id, as: :hidden, html_input: { value: invitation.id }
+          %td= link_to "#{invitation.sender.username.titleize}", invitation.sender
+          %td= f.input :accepted, label: "Accept Invite", id: "relationship_accepted"
+          %td= f.input :declined, label: "Decline Invite", id: "relationship_declined"
+          %td= f.button :submit, "Save", :class => "btn btn-primary"

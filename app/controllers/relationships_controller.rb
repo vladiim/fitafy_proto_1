@@ -1,12 +1,12 @@
 class RelationshipsController < ApplicationController
 
   def index
-    flash.keep
-    @title = "Invites"
-    if current_user.role = "client_role"
-      @relationships = Relationship.unaccepted.where(client_id: current_user.id)
-      redirect_to root_path if @relationships.empty?
-    end
+    # flash.keep
+    # @title = "Invites"
+    # if current_user.role = "client_role"
+    #    @relationships = Relationship.unaccepted.where(client_id: current_user.id)
+    #   redirect_to root_path if @relationships.empty?
+    # end
   end
 
   def create
@@ -24,7 +24,7 @@ class RelationshipsController < ApplicationController
       else
         flash[:success] = "Invite declined."
       end
-      redirect_to invites_path
+      redirect_to invitations_path
     else
       render :index
     end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Relationship do
-  
+
   describe "trainer initiated relationships" do
 
     before(:each) do
@@ -9,25 +9,35 @@ describe Relationship do
       @client = Factory(:client)
       @relationship = @trainer.relationships.build(client_id: @client.id)
     end
-  
+
     it "should create a new relationship" do
       @relationship.save!
     end
-  
+
+    describe "trainer trains client" do
+
+      it "the relationship invitation should be from the trainer" do
+        @client2 = Factory(:client)
+        @trainer.train!(@client2)
+        rel = Relationship.find_by_client_id(@client2.id)
+        rel.sent_from.should eq(@trainer.id)
+      end
+    end
+
     describe "creating a relationship" do
-    
+
       before(:each) do
         @relationship.save
       end
-    
+
       it "should have the right trainer attribute" do
         @relationship.trainer.should eq(@trainer)
       end
-    
+
       it "should have the right client attribute" do
         @relationship.client.should eq(@client)
       end
-    
+
       it "should default :accepted to false" do
         @relationship.accepted.should eq(false)
       end

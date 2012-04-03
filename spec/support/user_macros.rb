@@ -36,4 +36,26 @@ module UserMacros
     fill_in "forgot_password_link_email", with: user.email
     click_button("Reset Password")
   end
+
+  def sign_in_accept_relationship(user)
+    integration_sign_in(user)
+    accept_relationship
+  end
+
+  def sign_in_decline_relationship(user)
+    integration_sign_in(user)
+    decline_relationship
+  end
+
+  def accept_relationship
+    visit invitations_path
+    check('relationship_accepted')
+    click_button("Save")
+  end
+
+  def decline_relationship
+    visit invitations_path
+    check('relationship_declined')
+    click_button("Save")
+  end
 end

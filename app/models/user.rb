@@ -25,53 +25,54 @@ class User < ActiveRecord::Base
     relationship = relationships.build(client_id: client.id)
     relationship.accepted = true if client.id == self.id
     relationship.save!
+    relationship.sent_from!(self.id)
     relationship.send_client_invite
   end
-  
+
   def get_trained!(trainer)
     relationship = reverse_relationships.build(trainer_id: trainer.id)
     relationship.save!
     relationship.send_trainer_invite
   end
-  
+
   def untrain!(client)
     relationships.find_by_client_id(client).destroy
   end
-  
+
   def training?(client)
     relationships.find_by_client_id(client)
   end
-  
+
   def trained_by?(trainer)
     reverse_relationships.find_by_trainer_id(trainer)
   end
-  
+
   def trainer?
     self.role == "trainer_role"
   end
-  
+
   def trainer
     trainer_id = self.trained_by.first.id
     @trainer = User.find(trainer_id)
   end
-  
+
   def deliver_password_reset_instructions!
     reset_perishable_token!
     UserMailer.password_reset(self).deliver
   end
-  
+
   def exercise_list
     Exercise.templates.where("admin = ? or user_id = ?", true, self.id)
   end
-  
+
   def alphabetical_workouts
     workouts.order("title")
   end
-  
+
   def role_symbols
     [role.to_sym]
   end
-  
+
   def completed_reverse_bookings
     self.reverse_bookings.where(status: "completed")
   end
@@ -84,16 +85,35 @@ class User < ActiveRecord::Base
     end
   end
 
-  def has_trainer_and_client_invites
-    has_trainer_invites && has_client_invites
+  def has_trainer_and_client_invitations?
+    has_trainer_invitations? && has_client_invitations?
   end
 
-  def has_trainer_invites
-    reverse_relationships.where("trainer_id != ? AND accepted = false AND declined = false", self.id)
+  def find_trainer_and_client_invitations
+    @invitations = find_trainer_invitations
+    @invitations << find_client_invitations
   end
 
-  def has_client_invites
-    relationships.where("client_id != ? AND accepted = false AND declined = flase", self.id)
+  def has_trainer_invitations?
+    trainer_invitations = reverse_relationships.where("trainer_id != ? AND accepted = false AND declined = false", self.id)
+    !trainer_invitations.empty?
+  end
+
+  def find_trainer_invitations
+    reverse_relationships.find(:all, conditions: ["trainer_id != ? AND accepted = false AND declined = false", self.id])
+  end
+
+  def has_client_invitations?
+    client_invitations = relationships.where("client_id != ? AND accepted = false AND declined = false", self.id)
+    !client_invitations.empty?
+  end
+
+  def find_client_invitations
+    relationships.find(:all, conditions: ["client_id != ? AND accepted = false AND declined = false", self.id])
+  end
+
+  def client_invite(client_id)
+    relationships.find_by_client_id(client_id)
   end
 
   private

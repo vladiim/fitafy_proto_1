@@ -45,6 +45,6 @@ class UserMailer < AsyncMailer
     def set_relationship_trainer_client_and_url(relationship)
       @trainer      = User.find(relationship.trainer_id)
       @client       = User.find(relationship.client_id)
-      @invites_url  = invites_url
+      @invites_url  = invitations_url
     end
 end

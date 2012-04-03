@@ -1,9 +1,10 @@
 @import "bootstrap_and_overide" ;
 
-//a#logo_small {
-//	visibility: hidden;
-//	border-left: -1000px;
-//}
+a#logo {
+	&:hover {
+		background: $see_through;
+	}
+}
 
 #navigation_bar {
 	width: 100%;
@@ -13,13 +14,6 @@
 	@include blue_gradient_lighter;
 	@include radius_6;
 	@include shadow_dark_gray_bottom_right;
-
-	a#logo {
-		margin: -15px auto 0 auto;
-		&:hover {
-			background: $see_through;
-		}
-	}
 	
 	li {
 		float: left;
